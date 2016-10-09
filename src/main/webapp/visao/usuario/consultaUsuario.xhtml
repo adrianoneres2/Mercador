@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+	<title>Cadastro de usuários.</title>
+</h:head>
+<f:view>
+	<h:body>
+
+			<h:form>
+				<rich:commandButton value="Consultar usuários" action="#{usuarioMBean.consultarUsuarios}" update="idDataTableUsuario"/>
+				<rich:dataTable id="idDataTableUsuario" var="usuario" value="#{usuarioMBean.usuarios}">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						<h:outputText value="#{usuario.nomeUsuario}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="E-mail" />
+						</f:facet>
+						<h:outputText value="#{usuario.email}" />
+					</rich:column>
+				</rich:dataTable>
+			</h:form>
+			
+		<br />
+		<rich:outputLabel value="#{objUsuario.nomeUsuario}" />
+
+	</h:body>
+</f:view>
+
+</html>

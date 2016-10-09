@@ -1,0 +1,74 @@
+html, body {
+	background-color: #ffffff;
+	height: 100%;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+#divPagina {
+	position: relative;
+	min-height: 100%;
+	width: 100%;
+	height: 100%;
+}
+
+#divBanner {
+	height: 120px;
+	background-color: #A3A4A4;
+	width: 100%;
+}
+
+#divMenu {
+	height: 40px;
+	background-color: #c4c4c4;
+	width: 100%;
+	font-size: 12pt;
+	color: #000000;	
+}
+
+#divLogin {
+	margin-left: 89%;
+	color: #000000;
+	font-family: serif;
+	font-size: 9px;
+	width: 190px;
+	height: 110px; 
+}
+
+#divConteudo {
+	width: 900px;	
+}
+
+#divRodape {
+	bottom: 0;
+	position: absolute;
+	height: 120px;
+	background-color: #A3A4A4;
+	width: 100%;
+}
+
+* html #divPagina {
+	height: 100%; /* hack para IE6 que trata height como min-height */
+}
+
+.ui-widget .ui-widget {
+	font-size: 9pt;
+}
+
+.mensagens {
+	font-family: serif;
+	font-size: 8px;
+	margin-top: 10%;
+	margin-left: 10%;
+	background-color: red;
+}
+
+/*Classes do richfaces*/
+
+
+.rf-p {
+    /* color: #c4c0b9;*/ original
+    font-size: 8px;
+}
