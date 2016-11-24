@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/visao/templates/principal.xhtml">
+
+	<ui:define name="login">
+		<h:form id="idFormLogin">
+		
+			<p:outputPanel id="idPanelLogin"
+				rendered="#{autenticadorVisao.logado == false}">
+				<h:outputLabel id="labelEmail" value="E-mail " />
+				<h:inputText id="inputEmail"
+					value="#{autenticadorVisao.usuario.email}" />
+				<br />
+				<h:outputLabel id="labelSenha" value="Senha " />
+				<h:inputText id="inputSenha"
+					value="#{autenticadorVisao.usuario.senha}" />
+				<br />
+				<h:commandButton id="buttonEntrar" value="Entrar"
+					action="#{autenticadorVisao.logar}" />
+					
+			</p:outputPanel>
+			
+			<div id="divLogOff">
+				<p:outputPanel id="idPanelSair"
+					rendered="#{autenticadorVisao.logado}">
+					
+					<h:outputLabel id="idLabelUsuarioLogado"
+						value="#{autenticadorVisao.usuario.nomeUsuario}" />
+					<br />
+					<h:commandButton id="buttonSair" value="Sair"
+						action="#{autenticadorVisao.sair}" />
+				</p:outputPanel>
+			</div>
+			
+		</h:form>
+	</ui:define>
+
+	<ui:define name="menu">
+		<p:outputPanel id="idPanelMenu" rendered="#{autenticadorVisao.logado}">
+			<h:form name="formMenu" id="idFormMenu">
+				<h:commandLink action="#{menuVisao.irCadastroUsuario}" value="Cadastro de usuário" actionListener="#{usuarioVisao.init()}" />
+			</h:form>
+		</p:outputPanel>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		<ui:insert name="conteudoAplicacao" />
+	</ui:define>
+
+
+</ui:composition>

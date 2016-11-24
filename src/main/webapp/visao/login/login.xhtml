@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<p:panel id= "idPanelLogin" rendered="#{autenticadorVisao.logado == false}" >
+	<h:form id="idFormLogin">
+		<h:outputLabel id="labelEmail" value="E-mail " />
+		<h:inputText id="inputEmail" value="#{autenticadorVisao.usuario.email}" />
+		<br/>
+		<h:outputLabel id="labelSenha" value="Senha " />
+		<h:inputText id="inputSenha" value="#{autenticadorVisao.usuario.senha}" />
+		<br/>
+		<h:commandButton id="buttonEntrar" value="Entrar" action="#{autenticadorVisao.logar}"  />
+	</h:form>
+	</p:panel>
+	
+	<p:panel id= "idPanelSair" rendered="#{autenticadorVisao.logado}">
+	<h:form id="idFormSair">
+		<h:outputLabel id="idLabelUsuarioLogado" value="#{autenticadorVisao.usuario.nomeUsuario}" />
+		<br/>
+		<h:commandButton id="buttonSair" value="Sair" action="#{autenticadorVisao.sair}"  />
+	</h:form>
+	</p:panel>
+	
+</ui:composition>
+</html>
