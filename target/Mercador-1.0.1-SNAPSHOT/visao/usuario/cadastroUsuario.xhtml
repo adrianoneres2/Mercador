@@ -7,9 +7,11 @@
 	<ui:define name="conteudoAplicacao">
 		<h:form id="idFormCadastroUsuario">
 			<br />
-			<h:outputLabel value="Cadastro de Usuários." />
 			<h:panelGrid id="panelPrincipal" columns="2" border="0"
-				cellpadding="2" cellspacing="2">
+				cellpadding="2" cellspacing="2" >
+				<f:facet name="header">
+					<h:outputLabel value="Cadastro de Usuários." />
+				</f:facet>
 				<h:panelGrid id="panelCadastroUsuario2" columns="2" border="0"
 					cellpadding="2" cellspacing="2" style="font-size: 9pt">
 
@@ -19,36 +21,6 @@
 					<h:outputLabel value="Senha" />
 					<h:inputText value="#{usuarioVisao.usuario.senha}" size="8"
 						maxlength="6" />
-
-					<h:outputLabel value="Referência:" />
-					<h:inputText value="#{usuarioVisao.usuario.referencia}" />
-
-					<h:outputLabel value="Complemento" />
-					<h:inputText value="#{usuarioVisao.usuario.complemento}" />
-
-					<h:outputLabel value="Telefone fixo" />
-					<h:inputText value="#{usuarioVisao.usuario.telefoneFixo}" size="15"
-						maxlength="15" />
-
-					<h:outputLabel value="Telefone celular" />
-					<h:inputText value="#{usuarioVisao.usuario.telefoneCelular}"
-						size="15" maxlength="15" />
-
-					<h:outputLabel value="Sexo" />
-					<h:panelGroup id="PainelGrupoSexo">
-						<h:selectOneRadio id="RadioSexo"
-							value="#{usuarioVisao.usuario.sexo}" layout="pageDirection">
-							<f:selectItem itemLabel="Masculino" itemValue="m" />
-							<f:selectItem itemLabel="Feminino" itemValue="f" />
-						</h:selectOneRadio>
-					</h:panelGroup>
-
-					<h:outputLabel value="RG" />
-					<h:inputText value="#{usuarioVisao.usuario.rg}" size="10"
-						maxlength="10" />
-
-					<h:outputLabel value="Data de nascimento" />
-					<p:calendar value="#{usuarioVisao.usuario.dataNascimento}" size="4"></p:calendar>
 
 					<h:outputLabel value="e-mail" />
 					<h:inputText value="#{usuarioVisao.usuario.email}" />
@@ -64,7 +36,7 @@
 				<h:panelGroup id="painelGrupoPerfil">
 					<h:outputLabel value="Perfil do usuário" for="idSelectPerfil" /><br/>
 					<h:selectOneListbox id="idSelectPerfil" label="Perfil" size="8" value="#{usuarioVisao.usuario.codigoPerfil}">
-						<f:selectItem value = "#{usuarioVisao.perfilUsuario}" var="itemPerfil" itemValue="#{itemPerfil.codigoPerfil}" itemLabel="#{itemPerfil.nomePerfil}" />
+						<f:selectItems value = "#{usuarioVisao.perfilUsuario}" var="itemPerfil" itemValue="#{itemPerfil.codigoPerfil}" itemLabel="#{itemPerfil.nomePerfil}" />
 					</h:selectOneListbox>
 				</h:panelGroup>
 

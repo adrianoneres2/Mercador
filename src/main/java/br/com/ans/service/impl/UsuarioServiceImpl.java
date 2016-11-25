@@ -54,37 +54,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 				validador = false;
 			}
 
-			if (usuario.getRg() == null || usuario.getRg() == 0) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo RG é obrigatório!"));
-				validador = false;
-			} else {
-				if (this.consultarRgUsuario(usuario.getRg())) {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "RG já cadastrado na base de dados!"));
-					validador = false;
-				}
-			}
-			
-			if (usuario.getTelefoneCelular() == null || usuario.getTelefoneCelular().equals("")) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo telefone celular é obrigatório!"));
-				validador = false;
-			}
-
-			if (usuario.getDataNascimento() == null) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo Data de nascimento é obrigatório!"));
-				validador = false;
-			} else {
-
-				if (new Date().before(usuario.getDataNascimento())) {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo Data de nascimento é maior que a data atual"));
-					validador = false;
-				}
-			}
-
-			if (usuario.getSexo() == null || usuario.getSexo().equals("")) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo sexo é obrigatório!"));
-				validador = false;
-			}
-
 			if (usuario.getEmail() == null || usuario.getEmail().equals("")) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo e-mail é obrigatório!"));
 				validador = false;
