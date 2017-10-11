@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/visao/templates/principal.xhtml">
+
+    <ui:define name="head">
+<!--           	<h:outputStylesheet library="css" name="estilo.css"/> -->
+          	    <link rel="stylesheet" type="text/css" href="resources/css/estilo.css" /> 
+    </ui:define>
+
+	<ui:define name="login">
+		<h:form id="idFormLogin">
+			<p:growl id="growlAplicacao" showDetail="true" sticky="true" escape="true" />
+		
+			<p:panelGrid id="idPanelLogin" rendered="#{autenticadorVisao.logado == false}" columns="2" styleClass="semBorda">
+				
+				<p:row>
+					<p:column><p:outputLabel id="labelEmail" value="E-mail " /></p:column>
+					<p:column><p:inputText id="inputEmail" value="#{autenticadorVisao.usuario.email}" /></p:column>
+				</p:row>
+				<br/>
+				<p:row>
+					<p:column><p:outputLabel id="labelSenha" value="Senha " /></p:column>
+					<p:column><p:inputText id="inputSenha" value="#{autenticadorVisao.usuario.senha}" /></p:column>
+				</p:row>
+				<br/>
+			    <p:column><p:commandButton id="buttonEntrar" value="Entrar" action="#{autenticadorVisao.logar}" update=":idFormLogin, :idFormMenu, :idLogOff" icon="ui-icon-disk" /></p:column>
+					
+			</p:panelGrid>
+			
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="logOff">
+		<h:form id="idLogOff">	
+				<div id="divLogOff">
+				<p:outputPanel id="idPanelSair" rendered="#{autenticadorVisao.logado}">
+					
+					<p:commandLink id="buttonSair" action="#{autenticadorVisao.sair}" update=":idFormLogin, :idFormMenu, :idLogOff">
+						<h:graphicImage name ="logoff.png" library="imagens" title="Sair"/>
+						<p:spacer width="5px" />
+						<p:outputLabel value="Sair"/>
+					</p:commandLink>
+					
+					<br/>
+					<h:graphicImage name ="usuario.png" library="imagens"/>
+					<p:spacer width="5px" />
+					<p:outputLabel id="idLabelUsuarioLogado" value="#{autenticadorVisao.usuario.nomeUsuario} " />
+					<br/>
+					<h:graphicImage name ="engrenagem.png" library="imagens"/>
+					<p:spacer width="5px" />
+					<p:outputLabel id="idLabelUsuarioPerfil" value="#{autenticadorVisao.usuario.getPerfil().getNomePerfil()}"/>
+
+				</p:outputPanel>
+			</div>
+	   </h:form>
+	</ui:define>
+	
+
+	<ui:define name="menu">
+	<h:form name="formMenu" id="idFormMenu">
+		<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}" style="background-color: #1d91d8; border: none; text-decoration: none;">
+				<p:commandLink action="#{menuVisao.irAplicacao}" style="color: #ffffff; font-size: 12pt" >
+					<p:graphicImage library="imagens" name="home.png" style="width: 32px; height:32px;"/>
+				</p:commandLink>
+				<p:spacer width="5px" />
+				
+				<p:commandLink action="#{menuVisao.irCadastroUsuario}" style="color: #ffffff; font-size: 12pt">
+					<p:graphicImage library="imagens" name="cadastro.png" style="width: 32px; height:32px;" />
+				</p:commandLink>
+
+				<p:commandLink action="#{menuVisao.irCadastroProduto}" style="color: #ffffff; font-size: 12pt" >
+					<p:graphicImage library="imagens" name="cadastro.png" style="width: 32px; height:32px;"/>
+				</p:commandLink>
+
+		</p:panel>
+		
+	</h:form>	
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		 	<ui:insert name="conteudoAplicacao" /> 
+	</ui:define>
+	
+
+
+</ui:composition>

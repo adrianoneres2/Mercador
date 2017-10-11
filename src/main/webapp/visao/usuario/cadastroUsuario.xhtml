@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/aplicacao.xhtml">
+
+	<ui:define name="conteudoAplicacao">
+	
+		<h:form id="idFormCadastroUsuario">
+			<p:growl id="growlCadastroUsuario" showDetail="true" sticky="true"
+				escape="true" />
+			<br />
+			<p:dialog header="Cadastro de usuário" widgetVar="modalCadastroUsuario" modal="true" width="500" height="290" visible="true" closable="false" resizable="false">
+			<p:panel id="idPanelUsuario" >
+				<h:panelGrid id="idPpanelPrincipal" columns="2" cellpadding="1"	cellspacing="1" border="0">
+
+						<h:outputLabel value="Nome" />
+						<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
+
+						<h:outputLabel value="e-mail" />
+						<p:inputText value="#{usuarioVisao.usuario.email}" />
+
+						<h:outputLabel value="Senha" />
+						<p:inputText value="#{usuarioVisao.usuario.senha}" maxlength="6" />
+
+						<h:outputLabel value="Repetir senha" />
+						<p:inputText value="#{usuarioVisao.usuario.senhaConfirmacao}"
+							maxlength="6" />
+
+						<h:outputLabel id="idLabelPerfil" value="Perfil do Usuario"
+							for="idSelectPerfil" />
+
+						<p:selectOneMenu id="idSelectPerfil" value="#{usuarioVisao.perfilSelecionado}" required="true">
+							<f:selectItem itemValue="0" itemLabel="Selecione" />
+							<f:selectItems value="#{usuarioVisao.listaPerfil.entrySet()}" 
+							               var="itemPerfil" 
+								itemValue="#{itemPerfil.key}"
+								itemLabel="#{itemPerfil.value}"	/>
+						</p:selectOneMenu>
+
+				</h:panelGrid>
+				<f:facet name="footer">
+					<p:commandButton value="Enviar"	action="#{usuarioVisao.inserirNovo()}" update=":idFormCadastroUsuario:idPanelUsuario growlCadastroUsuario" />
+					<p:commandButton value="Consultar"	action="#{menuVisao.irConsultaUsuario}" update=":idFormCadastroUsuario:idPanelUsuario growlCadastroUsuario"/>
+					<p:commandButton value="Voltar"	action="#{menuVisao.irAplicacao}" update=":idFormCadastroUsuario:idPanelUsuario growlCadastroUsuario" />
+				</f:facet>
+			</p:panel>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

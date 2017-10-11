@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/aplicacao.xhtml">
+
+	<ui:define name="conteudoAplicacao">
+	
+		<h:form id="idFormCadastroProduto">
+			<p:growl id="growlCadastroPruoduto" showDetail="true" sticky="true"
+				escape="true" />
+			<br />
+			
+			<p:dialog header="Cadastro de Produtos" widgetVar="modalCadastroProduto" modal="true" width="500" height="290" visible="true" closable="false" resizable="false">
+				<p:panel id="idPanelCadastroProduto">
+					<h:panelGrid id="idPanelGridProduto" border="0" columns="2" cellpadding="1"	cellspacing="1">
+						
+							<h:outputText value="Nome: " />
+							<h:inputText value="" id="inputNomeProduto" size="20"/>
+
+	
+							<h:outputText value="Quantidade: " />
+							<h:inputText value="" id="inputQuantidadeProduto"  size="5"/>
+	
+							<h:outputText value="Valor de Custo: " />
+							<h:inputText value="" id="inputValorCustoProduto"  size="5"/>
+	
+							<h:outputText value="Valor de Venda: " />
+							<h:inputText value="" id="inputValorVendaProduto"  size="5"/>
+	
+							<h:outputText value="Codigo Barra: " />
+							<h:inputText value="" id="inputCodigoBarraProduto"  size="30"/>
+						
+					</h:panelGrid>
+					
+				<f:facet name="footer">
+					<p:commandButton value="Enviar"	 />
+					<p:commandButton value="Consultar"	/>
+					<p:commandButton value="Voltar"	 />
+				</f:facet>
+					
+				  </p:panel>
+				</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
