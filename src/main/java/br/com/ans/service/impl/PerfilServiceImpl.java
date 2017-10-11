@@ -11,13 +11,17 @@ import br.com.ans.dominio.Perfil;
 
 @RequestScoped
 public class PerfilServiceImpl implements PerfilService {
-	
+
 	@Inject
 	private PerfilDao perfilDao;
-	
+
 	@Override
 	public List<Perfil> obterPerfil(){
 		return perfilDao.obterPerfil();
 	}
 
+	@Override
+	public Perfil obterPerfilPorCodigo(Long codigo){
+		return perfilDao.obterPerfilPorCodigo(codigo);
+	}
 }

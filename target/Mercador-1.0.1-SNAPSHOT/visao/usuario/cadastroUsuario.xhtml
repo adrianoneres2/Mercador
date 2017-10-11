@@ -2,45 +2,49 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" template="/aplicacao.xhtml">
+	xmlns:p="http://primefaces.org/ui" 
+	template="/aplicacao.xhtml">
 
 	<ui:define name="conteudoAplicacao">
+	
 		<h:form id="idFormCadastroUsuario">
+			<p:growl id="growlCadastroUsuario" showDetail="true" sticky="true"
+				escape="true" />
 			<br />
-			<h:panelGrid id="panelPrincipal" columns="2" border="0"
-				cellpadding="2" cellspacing="2" >
-				<f:facet name="header">
-					<h:outputLabel value="Cadastro de Usuários." />
-				</f:facet>
-				<h:panelGrid id="panelCadastroUsuario2" columns="2" border="0"
-					cellpadding="2" cellspacing="2" style="font-size: 9pt">
+			<p:panel id="idPanelUsuario" header="Cadastro de usuário." style="width:30%; height:290px; background-color: #ffffff; border: none; text-decoration: none;">
+				<h:panelGrid id="idPpanelPrincipal" columns="2" cellpadding="1"	cellspacing="1" border="0">
 
-					<h:outputLabel value="Nome" />
-					<h:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
+						<h:outputLabel value="Nome" />
+						<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
 
-					<h:outputLabel value="Senha" />
-					<h:inputText value="#{usuarioVisao.usuario.senha}" size="8"
-						maxlength="6" />
+						<h:outputLabel value="e-mail" />
+						<p:inputText value="#{usuarioVisao.usuario.email}" />
 
-					<h:outputLabel value="e-mail" />
-					<h:inputText value="#{usuarioVisao.usuario.email}" />
+						<h:outputLabel value="Senha" />
+						<p:inputText value="#{usuarioVisao.usuario.senha}" maxlength="6" />
 
-					<f:facet name="footer">
-						<h:panelGroup style="display:block; text-align:center">
-							<h:commandButton value="Enviar"
-								action="#{usuarioVisao.inserirNovo()}" />
-						</h:panelGroup>
-					</f:facet>
+						<h:outputLabel value="Repetir senha" />
+						<p:inputText value="#{usuarioVisao.usuario.senhaConfirmacao}"
+							maxlength="6" />
+
+						<h:outputLabel id="idLabelPerfil" value="Perfil do Usuario"
+							for="idSelectPerfil" />
+						<p:selectOneMenu id="idSelectPerfil"
+							value="#{usuarioVisao.perfilSelecionado}"
+							converter="#{omnifaces.SelectItemsConverter}" required="true">
+						
+							<f:selectItems value="#{usuarioVisao.perfis}" var="itemPerfil"
+								itemLabel="#{itemPerfil.nomePerfil}"
+								itemValue="#{itemPerfil.codigoPerfil}" />
+						</p:selectOneMenu>
+
 				</h:panelGrid>
-
-				<h:panelGroup id="painelGrupoPerfil">
-					<h:outputLabel value="Perfil do usuário" for="idSelectPerfil" /><br/>
-					<h:selectOneListbox id="idSelectPerfil" label="Perfil" size="8" value="#{usuarioVisao.usuario.codigoPerfil}">
-						<f:selectItems value = "#{usuarioVisao.perfilUsuario}" var="itemPerfil" itemValue="#{itemPerfil.codigoPerfil}" itemLabel="#{itemPerfil.nomePerfil}" />
-					</h:selectOneListbox>
-				</h:panelGroup>
-
-			</h:panelGrid>
+				<f:facet name="footer">
+					<p:commandButton value="Enviar"	action="#{usuarioVisao.inserirNovo()}" update=":idFormCadastroUsuario:idPanelUsuario growlCadastroUsuario" />
+					<p:commandButton value="Consultar"	action="#{menuVisao.irConsultaUsuario}" update=":idFormCadastroUsuario:idPanelUsuario growlCadastroUsuario"/>
+					<p:commandButton value="Voltar"	action="#{menuVisao.irAplicacao}" update=":idFormCadastroUsuario:idPanelUsuario growlCadastroUsuario" />
+				</f:facet>
+			</p:panel>
 		</h:form>
 	</ui:define>
 </ui:composition>

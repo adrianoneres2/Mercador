@@ -8,7 +8,7 @@
 	<ui:define name="login">
 		<p:outputPanel id="idPanelMenu" rendered="#{autenticadorVisao.logado}">
 			<h:form name="formMenu" id="idFormMenu">
-				<h:commandLink action="#{menuVisao.irCadastroUsuario}" value="Cdastro de usuário]" />
+				<p:commandButton action="#{menuVisao.irCadastroUsuario}" icon="fa fa-user" />
 			</h:form>
 		</p:outputPanel>
 	</ui:define>

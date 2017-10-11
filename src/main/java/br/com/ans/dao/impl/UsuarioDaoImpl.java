@@ -4,20 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import br.com.ans.dao.UsuarioDao;
 import br.com.ans.model.Usuario;
-import util.jpaUtil;
 
 @RequestScoped
 public class UsuarioDaoImpl extends GenericoDaoImpl<Usuario> implements UsuarioDao{
 	
-	//@PersistenceContext
-	private EntityManager entityManager = jpaUtil.getEntityManager();
-	int posicaoLinha;
+
+	private EntityManager entityManager;// = jpaUtil.getEntityManager();
+	
+	@Inject
+	public UsuarioDaoImpl(EntityManager em){
+		entityManager = em;
+	}
 	
 	@Override
 	public List<Usuario> bucarTodos(){
@@ -53,8 +57,6 @@ public class UsuarioDaoImpl extends GenericoDaoImpl<Usuario> implements UsuarioD
 
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally{
-			entityManager.close();
 		}
 		return null;
 	}
@@ -78,15 +80,37 @@ public class UsuarioDaoImpl extends GenericoDaoImpl<Usuario> implements UsuarioD
 
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally{
-			entityManager.close();
 		}
 		return retorno;
 	}
 	
 	@Override
 	public void salvarUsuario(Usuario usuario) throws Exception{
-		this.salvar(usuario); 
+		
+		System.out.println(usuario.getNomeUsuario());
+		System.out.println(usuario.getCodigoUsuario());
+		System.out.println(usuario.getSenha());
+		//System.out.println(usuario.getPerfil().getNomePerfil());
+		
+		this.salvar(usuario);
+		
+	}
+
+	@Override
+	public List<Usuario> consultarUsuarioPorNome(String nome) {
+		
+			String hql = "from Usuario where nomeUsuario like '%"+nome+"%'";
+			List<Usuario> listaUsuario = new ArrayList<Usuario>();
+			
+			try {
+				
+				TypedQuery<Usuario> query = entityManager.createQuery(hql, Usuario.class);
+				listaUsuario = query.getResultList();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return listaUsuario;
 	}
 
 }

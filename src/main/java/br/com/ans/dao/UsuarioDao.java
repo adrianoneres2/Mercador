@@ -10,5 +10,5 @@ public interface UsuarioDao {
 	public Usuario consultarUsuarioPorEmail(String email);
 	public List<Usuario> bucarTodos();
 	void salvarUsuario(Usuario usuario) throws Exception;
-
+	List<Usuario> consultarUsuarioPorNome(String nome);
 }

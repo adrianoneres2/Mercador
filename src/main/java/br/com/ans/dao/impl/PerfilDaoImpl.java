@@ -3,17 +3,23 @@ package br.com.ans.dao.impl;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.ans.dao.PerfilDao;
 import br.com.ans.dominio.Perfil;
-import util.jpaUtil;
 
 @RequestScoped
 public class PerfilDaoImpl implements PerfilDao {
 
-	private EntityManager entityManager = jpaUtil.getEntityManager();
+	
+	private EntityManager entityManager;// = jpaUtil.getEntityManager();
+	
+	@Inject
+	public PerfilDaoImpl(EntityManager em){
+		entityManager = em;
+	}
 	
 	@Override
 	public List<Perfil> obterPerfil(){
@@ -22,4 +28,10 @@ public class PerfilDaoImpl implements PerfilDao {
 		
 		return (List<Perfil>) query.getResultList();
 	}
+	
+	@Override
+	public Perfil obterPerfilPorCodigo(Long codigo){
+		return (Perfil) entityManager.find(Perfil.class, codigo);
+	}
+	
 }

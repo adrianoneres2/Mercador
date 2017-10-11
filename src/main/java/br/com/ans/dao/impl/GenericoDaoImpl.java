@@ -1,10 +1,10 @@
 package br.com.ans.dao.impl;
 
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.ans.model.EntidadeBase;
-import util.jpaUtil;
 
 public class GenericoDaoImpl<T extends EntidadeBase>{
 	  /**
@@ -12,11 +12,19 @@ public class GenericoDaoImpl<T extends EntidadeBase>{
 	   * @return
 	   * @throws java.lang.Exception
 	   */
+	
+	@Inject	
+	EntityManager entityManager;
+	
+	  public GenericoDaoImpl(){
+		  
+	  }
+	
 	  public T salvar(T t) throws Exception {
-	    EntityManager entityManager = jpaUtil.getEntityManager();
+		  //EntityManager entityManager ;//= jpaUtil.getEntityManager();
 	    try {
 	      // Inicia uma transação com o banco de dados.
-	      entityManager.getTransaction().begin();
+	    	entityManager.getTransaction().begin();
 	      // Verifica se o registro ainda não está salva no banco de dados.
 	      if(t.getId() == null) {
 	        //Salva os dados da pessoa.
@@ -28,7 +36,7 @@ public class GenericoDaoImpl<T extends EntidadeBase>{
 	      // Finaliza a transação.
 	      entityManager.getTransaction().commit();
 	    } finally {
-	      entityManager.close();
+	      //entityManager.close();
 	    }
 	    return t;
 	  }
@@ -38,7 +46,7 @@ public class GenericoDaoImpl<T extends EntidadeBase>{
 	   * @param id
 	   */
 	  public void excluir(Class<T> clazz, Long id) {
-	    EntityManager entityManager = jpaUtil.getEntityManager();
+	    //EntityManager entityManager = jpaUtil.getEntityManager();
 	    try {
 	      // Inicia uma transação.
 	      entityManager.getTransaction().begin();
@@ -50,7 +58,7 @@ public class GenericoDaoImpl<T extends EntidadeBase>{
 	      // Finaliza a transação.
 	      entityManager.getTransaction().commit();
 	    } finally {
-	      entityManager.close();
+	     // entityManager.close();
 	    }
 	  }
 
@@ -60,13 +68,13 @@ public class GenericoDaoImpl<T extends EntidadeBase>{
 	   * @return o objeto Pessoa.
 	   */
 	  public T consultarPorId(Class<T> clazz, Long id) {
-	    EntityManager entityManager = jpaUtil.getEntityManager();
+	   // EntityManager entityManager = jpaUtil.getEntityManager();
 	    T t = null;
 	    try {
 	      //Consulta uma pessoa pelo seu ID.
 	      t = entityManager.find(clazz, id);
 	    } finally {
-	      entityManager.close();
+	      //entityManager.close();
 	    }
 	    return t;
 	  }  

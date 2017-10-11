@@ -8,7 +8,8 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Loja virtual</title>
-	<h:outputStylesheet library="css" name="estilo.css" />
+	  <ui:insert name="head">
+      </ui:insert>
 </h:head>
 <h:body>
 
@@ -17,7 +18,8 @@
 	<div id="divPagina">
 		<div id="divBanner">
 			<div id="divLogin">
-				<ui:insert name="login" />
+			    <ui:insert name="logOff" />
+				<ui:insert name="login" />				
 			</div>
 		</div>
 		

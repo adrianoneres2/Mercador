@@ -7,9 +7,22 @@ html, body {
 	margin-left: 0px;
 }
 
-table, th, td {
-   border: 1px solid black;
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-state-default {
+    background: #cccccc;
+    border: 1px solid #9c9c9c;
+    color: #4f4f4f;
+    font-weight: bold;
 }
+
+.ui-widget-header {
+    background: #cccccc;
+    border: 1px solid #a8a8a8;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
 
 #divPagina {
 	position: relative;
@@ -18,44 +31,43 @@ table, th, td {
 	height: 100%;
 }
 
+
 #divBanner {
 	height: 120px;
-	background-color: #A3A4A4;
+	background-color: #ffffff;
 	width: 100%;
 }
+
 
 #divMenu {
 	height: 40px;
-	background-color: #c4c4c4;
-	width: 100%;
-	font-size: 12pt;
-	color: #000000;	
+	background-color: #1d91d8;
+	width: 100%;	
+	color: #ffffff;
 }
 
-#divLogin {
-	margin-left: 89%;
-	color: #000000;
-	font-family: serif;
-	font-size: 9px;
-	width: 190px;
-	height: 110px; 
+#divLogin {	
+	position:absolute;
+		left:50%;
+		top:50%;
+		margin-left:-110px;
+		margin-top:-40px;
 }
+
 
 #divLogOff {
-    color: #ffffff;
-    font-family: serif;
-    font-size: 12px;
-    height: 110px;
-    margin-left: 10%;
-    width: 190px;
+    margin-left: 799px;
+    margin-right: 5px;
+    margin-top: -420px;
+    position: absolute;
+    width: 200px;
 }
-
 
 #divRodape {
 	bottom: 0;
 	position: absolute;
 	height: 120px;
-	background-color: #A3A4A4;
+	background-color: #1d91d8;
 	width: 100%;
 }
 
@@ -63,13 +75,45 @@ table, th, td {
 	height: 100%; /* hack para IE6 que trata height como min-height */
 }
 
-.ui-widget .ui-widget {
-	font-size: 9pt;
+
+.ui-widget {
+	font-size: 10pt;
 }
 
+/*
+.ui-button {
+   height:30px;
+}
+*/
 #divMensagens {
 position:absolute;
     top:50%;
     left:50%;
     z-index:9999;
 }
+
+
+.semBorda tr, .semBorda td {
+	border: none !important;
+}
+
+.save{
+background-image: url("/resources/imagens/table_save.png") !important;
+} 
+
+.table_save{
+    background-image: url("#{resources['imagens/table_save.png']}") !important;
+}
+
+.icone_voltar{
+    background-image: url("#{resources['imagens/voltar.png']}") !important;
+}
+
+.icone_excluir{
+    background-image: url("#{resources['imagens/excluir.png']}") !important;
+}
+
+.icone_editar{
+    background-image: url("/resources/imagens/editar.png") !important;
+}
+

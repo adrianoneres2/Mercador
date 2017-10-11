@@ -1,4 +1,6 @@
+util/EntityManagerProducer.class
 br/com/ans/service/impl/UsuarioServiceImpl.class
+util/SimpleIndexConverter.class
 br/com/ans/dao/PerfilService.class
 teste/interfaceLixo.class
 br/com/ans/service/AutenticadorService.class
@@ -7,12 +9,10 @@ br/com/ans/visao/AutenticadorVisao.class
 br/com/ans/dao/UsuarioDao.class
 br/com/ans/dao/impl/AutenticadorDaoImpl.class
 br/com/ans/dao/AutenticadorDao.class
-util/jpaUtil.class
+br/com/ans/converter/PerfilConverter.class
 br/com/ans/dominio/Perfil.class
 br/com/ans/visao/ControleConteudoVisao.class
 br/com/ans/service/UsuarioService.class
-util/Eleito.class
-teste/teste.class
 br/com/ans/model/Usuario.class
 teste/CDILixo.class
 br/com/ans/model/Menu.class
@@ -25,3 +25,4 @@ br/com/ans/dao/impl/UsuarioDaoImpl.class
 br/com/ans/dao/impl/PerfilDaoImpl.class
 br/com/ans/service/impl/AutenticadorServiceImpl.class
 br/com/ans/dao/PerfilDao.class
+br/com/ans/converter/ExampleEntitySelectItemsConverter.class

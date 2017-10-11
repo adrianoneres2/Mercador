@@ -7,12 +7,13 @@ import javax.persistence.Query;
 
 import br.com.ans.dao.AutenticadorDao;
 import br.com.ans.model.Usuario;
-import util.jpaUtil;
 
 @RequestScoped
 public class AutenticadorDaoImpl implements AutenticadorDao {
 
-	private EntityManager entityManager = jpaUtil.getEntityManager();
+	@Inject
+	private EntityManager entityManager;// = jpaUtil.getEntityManager();
+	
 	@Inject
 	private Usuario usuario;
 	
@@ -35,8 +36,6 @@ public class AutenticadorDaoImpl implements AutenticadorDao {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally{
-			entityManager.close();
 		}
 		return null;
 	}

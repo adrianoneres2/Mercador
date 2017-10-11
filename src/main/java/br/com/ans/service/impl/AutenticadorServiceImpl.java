@@ -20,7 +20,13 @@ public class AutenticadorServiceImpl implements AutenticadorService {
 			if(!usuario.getEmail().trim().isEmpty() && !usuario.getSenha().trim().isEmpty()){
 				Usuario usuarioLogado = this.logar(usuario.getEmail(), usuario.getSenha());
 				if(usuarioLogado != null){
-					return usuarioLogado;
+					
+					if (usuarioLogado.getUsuarioAtivo().equals("N")){
+						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Usuário inativo!."));
+						return null;
+					}else{
+						return usuarioLogado;
+					}					
 				}else{
 						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Não foi possível efetuar o login!."));
 						return null;
