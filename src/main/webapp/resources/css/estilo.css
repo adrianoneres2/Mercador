@@ -9,16 +9,16 @@ html, body {
 
 
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-state-default {
-    background: #cccccc;
-    border: 1px solid #9c9c9c;
+    background: #D6D6D6;
+    border: 1px solid #A0A0A0;
     color: #4f4f4f;
     font-weight: bold;
 }
 
 .ui-widget-header {
-    background: #cccccc;
-    border: 1px solid #a8a8a8;
-    color: #333;
+    background: #D6D6D6;
+    border: 1px solid #A0A0A0;
+    color: #000000;
     font-weight: bold;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
@@ -34,14 +34,14 @@ html, body {
 
 #divBanner {
 	height: 120px;
-	background-color: #ffffff;
+	background-color: #D6D6D6;
 	width: 100%;
 }
 
 
 #divMenu {
 	height: 60px;
-	background-color: #1d91d8;
+	/*background-color: #1d91d8;*/
 	width: 100%;
 	border: 2px;
 }
@@ -67,7 +67,7 @@ html, body {
 	bottom: 0;
 	position: absolute;
 	height: 120px;
-	background-color: #1d91d8;
+	background-color: #D6D6D6;
 	width: 100%;
 }
 
@@ -77,7 +77,8 @@ html, body {
 
 
 .ui-widget {
-	font-size: 10pt;
+	font-size: 12pt;
+	border: none !important;
 }
 
 /*
@@ -85,6 +86,7 @@ html, body {
    height:30px;
 }
 */
+
 #divMensagens {
 position:absolute;
     top:50%;

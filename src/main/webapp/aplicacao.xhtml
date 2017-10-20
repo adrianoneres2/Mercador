@@ -61,17 +61,17 @@
 
 	<ui:define name="menu">
 	<h:form name="formMenu" id="idFormMenu">
-		<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}" style="background-color: #1d91d8; border: none; text-decoration: none;">
-				<p:commandLink action="#{menuVisao.irAplicacao}" style="color: #ffffff; font-size: 12pt" >
+		<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}">
+				<p:commandLink action="#{menuVisao.irAplicacao}">
 					<p:graphicImage library="imagens" name="home.png" style="width: 32px; height:32px;"/>
 				</p:commandLink>
 				<p:spacer width="5px" />
 				
-				<p:commandLink action="#{menuVisao.irCadastroUsuario}" style="color: #ffffff; font-size: 12pt">
+				<p:commandLink action="#{menuVisao.irCadastroUsuario}">
 					<p:graphicImage library="imagens" name="cadastro.png" style="width: 32px; height:32px;" />
 				</p:commandLink>
 
-				<p:commandLink action="#{menuVisao.irCadastroProduto}" style="color: #ffffff; font-size: 12pt" >
+				<p:commandLink action="#{menuVisao.irCadastroProduto}">
 					<p:graphicImage library="imagens" name="cadastro.png" style="width: 32px; height:32px;"/>
 				</p:commandLink>
 
