@@ -57,6 +57,9 @@ public class Usuario implements EntidadeBase, Serializable{
 		@Transient
 		private String senhaConfirmacao;
 		
+		@Transient
+		private String descricaoSituacao;
+		
 //		@Column(name = "id_perfil", nullable = false)
 //		private Long codigoPerfil;
 		
@@ -91,7 +94,7 @@ public class Usuario implements EntidadeBase, Serializable{
 			this.email = email;
 		}
 		public String getUsuarioAtivo() {
-			return usuarioAtivo;
+				return usuarioAtivo;
 		}
 		public void setUsuarioAtivo(String usuarioAtivo) {
 			this.usuarioAtivo = usuarioAtivo;
@@ -132,11 +135,23 @@ public class Usuario implements EntidadeBase, Serializable{
 		//		this.codigoPerfil = codigoPerfil;
 		//	}
 		
+		
+		
 		@Override
 		public String toString() {
 		    return String.format("%s[id=%d]", getClass().getSimpleName(), getCodigoUsuario());
 		}
 		
+		public String getDescricaoSituacao() {
+			
+			if(this.getUsuarioAtivo().equals("S")){
+				return "Ativo";
+			}else{
+				return "Inativo";
+			}
+			
+			
+		}
 		@Override
 		public int hashCode() {
 			final int prime = 31;

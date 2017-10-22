@@ -30,12 +30,12 @@ public class Categoria implements Serializable{
 		this.codigoCategoria = codigoCategoria;
 	}
 
-	public String getNomeCategoria() {
-		return descricaoCategoria;
-	}
-
 	public void setDescricaoCategoria(String nomeCategoria) {
 		this.descricaoCategoria = nomeCategoria;
+	}
+	
+	public String getDescricaoCategoria() {
+		return descricaoCategoria;
 	}
 
 	@Override

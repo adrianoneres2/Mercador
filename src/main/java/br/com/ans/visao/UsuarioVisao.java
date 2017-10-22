@@ -9,8 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.expression.impl.ThisExpressionResolver;
-
 import br.com.ans.dao.PerfilService;
 import br.com.ans.dominio.Perfil;
 import br.com.ans.model.Usuario;
