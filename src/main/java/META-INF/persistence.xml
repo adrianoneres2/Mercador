@@ -6,6 +6,7 @@
         
         <class>br.com.ans.model.Usuario</class>
         <class>br.com.ans.dominio.Perfil</class>
+        <class>br.com.ans.model.Categoria</class>
         
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />

@@ -13,6 +13,7 @@ import br.com.ans.dominio.Perfil;
 @RequestScoped
 public class PerfilDaoImpl implements PerfilDao {
 
+	public PerfilDaoImpl(){}
 	
 	private EntityManager entityManager;// = jpaUtil.getEntityManager();
 	

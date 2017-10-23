@@ -36,28 +36,12 @@
 							<p:selectOneMenu id="idSelectCategoria" value="#{produtoVisao.categoriaSelecionada}" required="true">
 								<f:selectItem itemValue="0" itemLabel="Selecione" />
 								<f:selectItems value="#{produtoVisao.listaCategoria.entrySet()}" 
-								               var="itemGenero" 
+								               var="itemCategoria" 
 									itemValue="#{itemCategoria.key}"
 									itemLabel="#{itemCategoria.value}"	/>
 							</p:selectOneMenu>
 
-						    <h:outputText value="Sub Categoria " />
-							<p:selectOneMenu id="idSelectSubCategoria" value="#{produtoVisao.subCategoriaSelecionada}" required="true">
-								<f:selectItem itemValue="0" itemLabel="Selecione" />
-								<f:selectItems value="#{produtoVisao.listaSubCategoria.entrySet()}" 
-								               var="itemGenero" 
-									itemValue="#{itemSubCategoria.key}"
-									itemLabel="#{itemSubCategoria.value}"	/>
-							</p:selectOneMenu>
-							
-							<h:outputText value="Genero " />
-							<p:selectOneMenu id="idSelectGenero" value="#{produtoVisao.generoSelecionado}" required="true">
-								<f:selectItem itemValue="0" itemLabel="Selecione" />
-								<f:selectItems value="#{produtoVisao.listaGenero.entrySet()}" 
-								               var="itemGenero" 
-									itemValue="#{itemGenero.key}"
-									itemLabel="#{itemGenero.value}"	/>
-							</p:selectOneMenu>
+
 						
 					</h:panelGrid>
 					

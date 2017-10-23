@@ -6,6 +6,6 @@ import br.com.ans.model.Categoria;
 
 public interface CategoriaService {
 
-	List<Categoria> todos();
+	public List<Categoria> todos();
 
 }

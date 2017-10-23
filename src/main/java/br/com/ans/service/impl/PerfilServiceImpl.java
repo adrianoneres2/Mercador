@@ -12,6 +12,8 @@ import br.com.ans.dominio.Perfil;
 @RequestScoped
 public class PerfilServiceImpl implements PerfilService {
 
+	public PerfilServiceImpl(){}
+	
 	@Inject
 	private PerfilDao perfilDao;
 
