@@ -12,7 +12,7 @@
 				escape="true" />
 			<br />
 			
-			<p:dialog header="Cadastro de Produtos" widgetVar="modalCadastroProduto" modal="true" width="550" height="290" visible="true" closable="false" resizable="false">
+			<p:dialog header="Cadastro de Produtos" widgetVar="modalCadastroProduto" modal="true" width="550" height="330" visible="true" closable="false" resizable="false">
 				<p:panel id="idPanelCadastroProduto">
 					<h:panelGrid id="idPanelGridProduto" border="0" columns="2" cellpadding="1"	cellspacing="1">
 						
@@ -31,6 +31,33 @@
 	
 							<h:outputText value="Codigo Barra: " />
 							<p:inputText value="" id="inputCodigoBarraProduto"  size="30"/>
+											
+						    <h:outputText value="Categoria " />
+							<p:selectOneMenu id="idSelectCategoria" value="#{produtoVisao.categoriaSelecionada}" required="true">
+								<f:selectItem itemValue="0" itemLabel="Selecione" />
+								<f:selectItems value="#{produtoVisao.listaCategoria.entrySet()}" 
+								               var="itemGenero" 
+									itemValue="#{itemCategoria.key}"
+									itemLabel="#{itemCategoria.value}"	/>
+							</p:selectOneMenu>
+
+						    <h:outputText value="Sub Categoria " />
+							<p:selectOneMenu id="idSelectSubCategoria" value="#{produtoVisao.subCategoriaSelecionada}" required="true">
+								<f:selectItem itemValue="0" itemLabel="Selecione" />
+								<f:selectItems value="#{produtoVisao.listaSubCategoria.entrySet()}" 
+								               var="itemGenero" 
+									itemValue="#{itemSubCategoria.key}"
+									itemLabel="#{itemSubCategoria.value}"	/>
+							</p:selectOneMenu>
+							
+							<h:outputText value="Genero " />
+							<p:selectOneMenu id="idSelectGenero" value="#{produtoVisao.generoSelecionado}" required="true">
+								<f:selectItem itemValue="0" itemLabel="Selecione" />
+								<f:selectItems value="#{produtoVisao.listaGenero.entrySet()}" 
+								               var="itemGenero" 
+									itemValue="#{itemGenero.key}"
+									itemLabel="#{itemGenero.value}"	/>
+							</p:selectOneMenu>
 						
 					</h:panelGrid>
 					
