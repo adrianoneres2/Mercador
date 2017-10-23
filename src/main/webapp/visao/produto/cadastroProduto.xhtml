@@ -38,7 +38,17 @@
 								<f:selectItems value="#{produtoVisao.listaCategoria.entrySet()}" 
 								               var="itemCategoria" 
 									itemValue="#{itemCategoria.key}"
-									itemLabel="#{itemCategoria.value}"	/>
+									itemLabel="#{itemCategoria.value}"/>
+							<f:ajax render="idSelectSubCategoria" event="change" listener="#{produtoVisao.carregarListaSubCategoria()}"/>
+							</p:selectOneMenu>
+
+						    <h:outputText value="Sub Categoria " />
+							<p:selectOneMenu id="idSelectSubCategoria" value="#{produtoVisao.subCategoriaSelecionada}" required="true">
+								<f:selectItem itemValue="0" itemLabel="Selecione" />
+								<f:selectItems value="#{produtoVisao.listaSubCategoria.entrySet()}" 
+								               var="itemSubCategoria" 
+									itemValue="#{itemSubCategoria.key}"
+									itemLabel="#{itemSubCategoria.value}"	/>
 							</p:selectOneMenu>
 
 

@@ -9,7 +9,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.ans.model.Categoria;
+import br.com.ans.model.SubCategoria;
 import br.com.ans.service.CategoriaService;
+import br.com.ans.service.SubCategoriaService;
 
 @javax.faces.view.ViewScoped
 @Named
@@ -19,12 +21,18 @@ public class produtoVisao implements Serializable{
 
 	HashMap<Long,String> listaCategoria;
 	
-	private List<Categoria> categorias;	
+	HashMap<Long,String> listaSubCategoria;
+	
+	private List<Categoria> categorias;
+	private List<SubCategoria> subCategorias;
 	
 	@Inject
 	private CategoriaService categoriaService;
 	
+	@Inject SubCategoriaService subCategoriaService;
+	
 	private Long categoriaSelecionada;
+	private Long subCategoriaSelecionada;
 	
 	
 	@PostConstruct
@@ -65,6 +73,38 @@ public class produtoVisao implements Serializable{
 	public void setCategoriaSelecionada(Long categoriaSelecionada) {
 		this.categoriaSelecionada = (Long)categoriaSelecionada;
 	}
+	
+	
+
+	public Long getSubCategoriaSelecionada() {
+		return subCategoriaSelecionada;
+	}
+
+
+	public void setSubCategoriaSelecionada(Long subCategoriaSelecionada) {
+		this.subCategoriaSelecionada = (Long) subCategoriaSelecionada;
+	}	
+
+	public HashMap<Long, String> getListaSubCategoria() {
+		return listaSubCategoria;
+	}
+
+
+	public void setListaSubCategoria(HashMap<Long, String> listaSubCategoria) {
+		this.listaSubCategoria = listaSubCategoria;
+	}
+
+	
+
+	public List<SubCategoria> getSubCategorias() {
+		return subCategorias;
+	}
+
+
+	public void setSubCategorias(List<SubCategoria> subCategorias) {
+		this.subCategorias = subCategorias;
+	}
+
 
 	public void carregarListaCategoria(){
 		
@@ -76,6 +116,18 @@ public class produtoVisao implements Serializable{
 		}
 		
 		this.setListaCategoria(mapaCategoria);
+	}
+	
+	public void carregarListaSubCategoria(){
+		
+		this.setSubCategorias(this.subCategoriaService.todos());
+		HashMap<Long, String> mapaSubCategoria = new HashMap<Long, String>();
+		
+		for(SubCategoria subCategoria : subCategorias){
+			mapaSubCategoria.put(subCategoria.getCodigoSubCategoria(), subCategoria.getDescricaoSubCategoria());
+		}
+		
+		this.setListaSubCategoria(mapaSubCategoria);
 	}
 	
 }

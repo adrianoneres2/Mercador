@@ -1,12 +1,13 @@
 package br.com.ans.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,13 +24,10 @@ public class SubCategoria implements Serializable{
 	@Column(name = "ds_sub_categoria", nullable = false)
 	private String descricaoSubCategoria;
 	
-	//@OneToMany(fetch = FetchType.LAZY)
-	//@JoinColumns(name = "id_categoria")
-	private ArrayList<Categoria> categoria; 
+	@ManyToOne
+	@JoinColumn(name = "id_categoria")
+	private Categoria categoria;
 	
-	//@OneToMany
-	//@JoinColumns(name = "id_genero")
-	private ArrayList<Genero> genero;
 
 	public Long getCodigoSubCategoria() {
 		return codigoSubCategoria;
@@ -47,20 +45,12 @@ public class SubCategoria implements Serializable{
 		this.descricaoSubCategoria = descricaoSubCategoria;
 	}
 
-	public ArrayList<Categoria> getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(ArrayList<Categoria> categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
-	}
-
-	public ArrayList<Genero> getGenero() {
-		return genero;
-	}
-
-	public void setGenero(ArrayList<Genero> genero) {
-		this.genero = genero;
 	}
 
 	@Override
@@ -77,7 +67,6 @@ public class SubCategoria implements Serializable{
 				* result
 				+ ((descricaoSubCategoria == null) ? 0 : descricaoSubCategoria
 						.hashCode());
-		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		return result;
 	}
 
@@ -105,12 +94,10 @@ public class SubCategoria implements Serializable{
 				return false;
 		} else if (!descricaoSubCategoria.equals(other.descricaoSubCategoria))
 			return false;
-		if (genero == null) {
-			if (other.genero != null)
-				return false;
-		} else if (!genero.equals(other.genero))
-			return false;
 		return true;
 	}
+
+	
+
 	
 }
