@@ -6,6 +6,8 @@ import br.com.ans.model.SubCategoria;
 
 public interface SubCategoriaService  {
 
-	public List<SubCategoria> todos();
+	public List<SubCategoria> todas();
+
+	public List<SubCategoria> porCategoria(Long idCategoria);
 
 }

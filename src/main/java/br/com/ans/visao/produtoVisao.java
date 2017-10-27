@@ -120,7 +120,7 @@ public class produtoVisao implements Serializable{
 	
 	public void carregarListaSubCategoria(){
 		
-		this.setSubCategorias(this.subCategoriaService.todos());
+		this.setSubCategorias(this.subCategoriaService.porCategoria(this.getCategoriaSelecionada()));
 		HashMap<Long, String> mapaSubCategoria = new HashMap<Long, String>();
 		
 		for(SubCategoria subCategoria : subCategorias){

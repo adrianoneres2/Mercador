@@ -29,5 +29,16 @@ public class SubCategoriaDaoImpl implements SubCategoriaDao {
 		
 		return (List<SubCategoria>) query.getResultList();
 	}
+
+	@Override
+	public List<SubCategoria> porCategoria(Long idCategoria) {
+		
+		TypedQuery<SubCategoria> query = entityManager.createQuery("from SubCategoria subCategoria where subCategoria.categoria.codigoCategoria = :parametroCategoria ", SubCategoria.class);		
+		
+		query.setParameter("parametroCategoria", idCategoria);
+		
+		return (List<SubCategoria>) query.getResultList();
+		
+	}
 	
 }

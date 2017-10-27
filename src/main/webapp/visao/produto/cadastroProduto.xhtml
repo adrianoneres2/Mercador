@@ -7,6 +7,37 @@
 
 	<ui:define name="conteudoAplicacao">
 	
+	
+	<script>
+            function mascara(o, f) {
+              v_obj = o;
+              v_fun = f;
+              setTimeout("execmascara()", 1);
+            }
+            function execmascara() {
+              v_obj.value = v_fun(v_obj.value);
+            }
+         function valor(v) {
+        v = v.replace(/\D/g, "");
+        v = v.replace(/[0-9]{15}/, "invÃ¡lido");
+        v = v.replace(/(\d{1})(\d{11})$/, "$1.$2"); // coloca ponto antes dos
+        // Ãºltimos 11 digitos
+        v = v.replace(/(\d{1})(\d{8})$/, "$1.$2"); // coloca ponto antes dos
+        // Ãºltimos 8 digitos
+        v = v.replace(/(\d{1})(\d{5})$/, "$1.$2"); // coloca ponto antes dos
+        // Ãºltimos 5 digitos
+        v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2"); // coloca virgula antes dos
+        // Ãºltimos 2 digitos
+        return v;
+        }
+
+        function valorInteiro(v) {
+            v = v.replace(/\D/g, "");
+            v = v.replace(/[0-9]{15}/, "invÃ¡lido");
+            return v;
+		}
+</script>
+	
 		<h:form id="idFormCadastroProduto">
 			<p:growl id="growlCadastroPruoduto" showDetail="true" sticky="true"
 				escape="true" />
@@ -17,20 +48,16 @@
 					<h:panelGrid id="idPanelGridProduto" border="0" columns="2" cellpadding="1"	cellspacing="1">
 						
 							<h:outputText value="Nome: " />
-							<p:inputText value="" id="inputNomeProduto" size="20"/>
+							<p:inputText value="" id="inputNomeProduto" size="20" maxlength="50"/>
 
-	
 							<h:outputText value="Quantidade: " />
-							<p:inputText value="" id="inputQuantidadeProduto"  size="5"/>
-	
-							<h:outputText value="Valor de Custo: " />
-							<p:inputText value="" id="inputValorCustoProduto"  size="5"/>
+							<p:inputText value="" id="inputQuantidadeProduto"  size="5" maxlength="4" onkeypress="mascara(this, valorInteiro);" />
 	
 							<h:outputText value="Valor de Venda: " />
-							<p:inputText value="" id="inputValorVendaProduto"  size="5"/>
+							<p:inputText value="" id="inputValorVendaProduto"  size="12" maxlength="12" onkeypress="mascara(this, valor);" />
 	
 							<h:outputText value="Codigo Barra: " />
-							<p:inputText value="" id="inputCodigoBarraProduto"  size="30"/>
+							<p:inputText value="" id="inputCodigoBarraProduto"  size="30" maxlength="30"/>
 											
 						    <h:outputText value="Categoria " />
 							<p:selectOneMenu id="idSelectCategoria" value="#{produtoVisao.categoriaSelecionada}" required="true">
@@ -50,15 +77,12 @@
 									itemValue="#{itemSubCategoria.key}"
 									itemLabel="#{itemSubCategoria.value}"	/>
 							</p:selectOneMenu>
-
-
-						
 					</h:panelGrid>
 					
 				<f:facet name="footer">
-					<p:commandButton value="Enviar"	 />
-					<p:commandButton value="Consultar"	/>
-					<p:commandButton value="Voltar"	 />
+					<p:commandButton value="Cadastrar"/>
+					<p:commandButton value="Consultar"/>
+					<p:commandButton value="Sair"/>
 				</f:facet>
 					
 				  </p:panel>

@@ -18,8 +18,13 @@ public class SubCategoriaServiceImpl implements SubCategoriaService {
 	private SubCategoriaDao subCategoriaDao;
 	
 	@Override
-	public List<SubCategoria> todos(){
+	public List<SubCategoria> todas(){
 		return subCategoriaDao.todas();
+	}
+
+	@Override
+	public List<SubCategoria> porCategoria(Long idCategoria){
+		return subCategoriaDao.porCategoria(idCategoria);
 	}
 	
 }
