@@ -48,16 +48,16 @@
 					<h:panelGrid id="idPanelGridProduto" border="0" columns="2" cellpadding="1"	cellspacing="1">
 						
 							<h:outputText value="Nome: " />
-							<p:inputText value="" id="inputNomeProduto" size="20" maxlength="50"/>
+							<p:inputText value="#{produtoVisao.produto.nomeProduto}" id="inputNomeProduto" size="20" maxlength="50"/>
 
 							<h:outputText value="Quantidade: " />
-							<p:inputText value="" id="inputQuantidadeProduto"  size="5" maxlength="4" onkeypress="mascara(this, valorInteiro);" />
+							<p:inputText value="#{produtoVisao.produto.quantidadeProduto}" id="inputQuantidadeProduto"  size="5" maxlength="4" onkeypress="mascara(this, valorInteiro);" />
 	
 							<h:outputText value="Valor de Venda: " />
-							<p:inputText value="" id="inputValorVendaProduto"  size="12" maxlength="12" onkeypress="mascara(this, valor);" />
+							<p:inputText value="#{produtoVisao.produto.valorProduto}" id="inputValorVendaProduto"  size="12" maxlength="12" onkeypress="mascara(this, valor);" />
 	
 							<h:outputText value="Codigo Barra: " />
-							<p:inputText value="" id="inputCodigoBarraProduto"  size="30" maxlength="30"/>
+							<p:inputText value="#{produtoVisao.produto.codigoBarra}" id="inputCodigoBarraProduto"  size="30" maxlength="30"/>
 											
 						    <h:outputText value="Categoria " />
 							<p:selectOneMenu id="idSelectCategoria" value="#{produtoVisao.categoriaSelecionada}" required="true">
@@ -80,9 +80,9 @@
 					</h:panelGrid>
 					
 				<f:facet name="footer">
-					<p:commandButton value="Cadastrar"/>
+					<p:commandButton value="Cadastrar" action="produtoVisao.novo()"/>
 					<p:commandButton value="Consultar"/>
-					<p:commandButton value="Sair"/>
+					<p:commandButton value="Sair" action="#{menuVisao.irAplicacao()}"/>
 				</f:facet>
 					
 				  </p:panel>

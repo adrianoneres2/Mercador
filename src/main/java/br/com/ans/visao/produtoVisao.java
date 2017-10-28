@@ -9,8 +9,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.ans.model.Categoria;
+import br.com.ans.model.Produto;
 import br.com.ans.model.SubCategoria;
 import br.com.ans.service.CategoriaService;
+import br.com.ans.service.ProdutoService;
 import br.com.ans.service.SubCategoriaService;
 
 @javax.faces.view.ViewScoped
@@ -33,6 +35,11 @@ public class produtoVisao implements Serializable{
 	
 	private Long categoriaSelecionada;
 	private Long subCategoriaSelecionada;
+	
+	@Inject
+	private Produto produto;
+	
+	@Inject ProdutoService produtoService;
 	
 	
 	@PostConstruct
@@ -99,6 +106,15 @@ public class produtoVisao implements Serializable{
 	public List<SubCategoria> getSubCategorias() {
 		return subCategorias;
 	}
+	
+	public Produto getProduto() {
+		return produto;
+	}
+
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 
 
 	public void setSubCategorias(List<SubCategoria> subCategorias) {
@@ -128,6 +144,19 @@ public class produtoVisao implements Serializable{
 		}
 		
 		this.setListaSubCategoria(mapaSubCategoria);
+	}
+	
+	public void novo(){
+		
+		for(SubCategoria subcategoria : subCategorias){
+			
+			if (subcategoria.getCodigoSubCategoria().equals(this.getSubCategoriaSelecionada())){
+				produto.setSubCategoria(subcategoria);
+			}
+		}
+		
+		produtoService.novo(produto);
+		
 	}
 	
 }

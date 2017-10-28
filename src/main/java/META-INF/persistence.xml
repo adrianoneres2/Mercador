@@ -9,6 +9,7 @@
         <class>br.com.ans.model.Categoria</class>
         <class>br.com.ans.model.SubCategoria</class>
         <class>br.com.ans.model.Genero</class>
+        <class>br.com.ans.model.Produto</class>
         
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />

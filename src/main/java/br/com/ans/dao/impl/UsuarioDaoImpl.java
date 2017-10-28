@@ -86,14 +86,7 @@ public class UsuarioDaoImpl extends GenericoDaoImpl<Usuario> implements UsuarioD
 	
 	@Override
 	public void salvarUsuario(Usuario usuario) throws Exception{
-		
-		System.out.println(usuario.getNomeUsuario());
-		System.out.println(usuario.getCodigoUsuario());
-		System.out.println(usuario.getSenha());
-		//System.out.println(usuario.getPerfil().getNomePerfil());
-		
 		this.salvar(usuario);
-		
 	}
 
 	@Override
