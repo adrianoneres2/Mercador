@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.ans.dao.PerfilService;
-import br.com.ans.dominio.Perfil;
+import br.com.ans.model.Perfil;
 import br.com.ans.model.Usuario;
 import br.com.ans.service.UsuarioService;
 

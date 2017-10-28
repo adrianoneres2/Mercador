@@ -2,7 +2,7 @@ package br.com.ans.dao;
 
 import java.util.List;
 
-import br.com.ans.dominio.Perfil;
+import br.com.ans.model.Perfil;
 
 public interface PerfilDao {
 

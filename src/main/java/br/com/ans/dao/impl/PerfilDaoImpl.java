@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.ans.dao.PerfilDao;
-import br.com.ans.dominio.Perfil;
+import br.com.ans.model.Perfil;
 
 @RequestScoped
 public class PerfilDaoImpl implements PerfilDao {

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import br.com.ans.dao.PerfilDao;
 import br.com.ans.dao.PerfilService;
-import br.com.ans.dominio.Perfil;
+import br.com.ans.model.Perfil;
 
 @RequestScoped
 public class PerfilServiceImpl implements PerfilService {

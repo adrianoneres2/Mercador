@@ -1,4 +1,4 @@
-package br.com.ans.dominio;
+package br.com.ans.model;
 
 import java.io.Serializable;
 
@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import br.com.ans.model.EntidadeBase;
 
 @Entity
 @Table(name="tb_perfil", schema="loja")

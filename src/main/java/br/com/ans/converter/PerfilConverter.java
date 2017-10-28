@@ -7,7 +7,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import br.com.ans.dao.impl.PerfilDaoImpl;
-import br.com.ans.dominio.Perfil;
+import br.com.ans.model.Perfil;
 
 //@FacesConverter(forClass = Perfil.class, value="perfilConverter")
 @FacesConverter("perfilConverter")

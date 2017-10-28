@@ -6,7 +6,7 @@ import javax.faces.convert.FacesConverter;
 
 import org.omnifaces.converter.SelectItemsConverter;
 
-import br.com.ans.dominio.Perfil;
+import br.com.ans.model.Perfil;
 
 @FacesConverter("exampleEntitySelectItemsConverter")
 public class ExampleEntitySelectItemsConverter extends SelectItemsConverter {
