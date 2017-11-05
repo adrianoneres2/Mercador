@@ -38,12 +38,12 @@ public class ProdutoServiceImpl implements ProdutoService {
 			validador = false;
 		}
 
-		if(produto.getQuantidadeProduto().equals("")|| produto.getQuantidadeProduto() == null){
+		if(produto.getQuantidadeProduto() == null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo Quantidade é obrigatório!"));
 			validador = false;
 		}
 
-		if(produto.getValorProduto().equals("")|| produto.getValorProduto() == null){
+		if(produto.getValorVenda() == null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo Valor é obrigatório!"));
 			validador = false;
 		}

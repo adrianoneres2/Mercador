@@ -51,10 +51,14 @@
 							<p:inputText value="#{produtoVisao.produto.nomeProduto}" id="inputNomeProduto" size="20" maxlength="50"/>
 
 							<h:outputText value="Quantidade: " />
-							<p:inputText value="#{produtoVisao.produto.quantidadeProduto}" id="inputQuantidadeProduto"  size="5" maxlength="4" onkeypress="mascara(this, valorInteiro);" />
+							<p:inputText value="#{produtoVisao.produto.quantidadeProduto}" id="inputQuantidadeProduto"  size="5" maxlength="4" onkeypress="mascara(this, valorInteiro);" >
+								<f:convertNumber minFractionDigits="2" />
+							</p:inputText>
 	
 							<h:outputText value="Valor de Venda: " />
-							<p:inputText value="#{produtoVisao.produto.valorProduto}" id="inputValorVendaProduto"  size="12" maxlength="12" onkeypress="mascara(this, valor);" />
+							<p:inputText value="#{produtoVisao.produto.valorVenda}" id="inputValorVendaProduto"  size="12" maxlength="12" onkeypress="mascara(this, valor);" >
+							<f:convertNumber minFractionDigits="2" />
+							</p:inputText>
 	
 							<h:outputText value="Codigo Barra: " />
 							<p:inputText value="#{produtoVisao.produto.codigoBarra}" id="inputCodigoBarraProduto"  size="30" maxlength="30"/>
@@ -80,7 +84,7 @@
 					</h:panelGrid>
 					
 				<f:facet name="footer">
-					<p:commandButton value="Cadastrar" action="produtoVisao.novo()"/>
+					<p:commandButton value="Cadastrar" action="#{produtoVisao.novo()}" update="@all"/>
 					<p:commandButton value="Consultar"/>
 					<p:commandButton value="Sair" action="#{menuVisao.irAplicacao()}"/>
 				</f:facet>

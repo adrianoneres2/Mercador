@@ -1,6 +1,7 @@
 package br.com.ans.visao;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -148,13 +149,16 @@ public class produtoVisao implements Serializable{
 	
 	public void novo(){
 		
-		for(SubCategoria subcategoria : subCategorias){
-			
-			if (subcategoria.getCodigoSubCategoria().equals(this.getSubCategoriaSelecionada())){
-				produto.setSubCategoria(subcategoria);
+		if (this.getSubCategoriaSelecionada() != 0L){
+			for(SubCategoria subcategoria : subCategorias){
+				
+				if (subcategoria.getCodigoSubCategoria().equals(this.getSubCategoriaSelecionada())){
+					produto.setSubCategoria(subcategoria);
+				}
 			}
 		}
 		
+		this.getProduto().setDataProduto(new Date());
 		produtoService.novo(produto);
 		
 	}

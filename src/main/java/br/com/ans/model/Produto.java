@@ -26,7 +26,7 @@ public class Produto implements EntidadeBase, Serializable {
 	public Produto(){}
 
 	@Id
-	@SequenceGenerator(name="sq_idproduto", sequenceName="loja.sq_produto", allocationSize = 1, initialValue = 1) /*, schema = "loja"*/
+	@SequenceGenerator(name="sq_idproduto", sequenceName="loja.sq_idproduto", allocationSize = 1, initialValue = 1) /*, schema = "loja"*/
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="sq_idproduto")
 	@Column(name ="id_produto", nullable = false)
 	private Long codigoProduto;
@@ -41,14 +41,14 @@ public class Produto implements EntidadeBase, Serializable {
 	@Column(name = "qt_produto", nullable = false)
 	private Long quantidadeProduto;
 	
-	@Column(name = "vl_produto", nullable = false)
-	private Long valorProduto;
+	@Column(name = "vl_venda", nullable = false)
+	private Long valorVenda;
 	
 	@Column(name = "nu_codigo_barra")
 	private String codigoBarra;
 	
 	@Column(name = "im_produto")
-	private Byte imagemProduto;
+	private Byte[] imagemProduto;
 	
 	@Column(name = "dt_produto")
 	private Date dataProduto;
@@ -100,13 +100,13 @@ public class Produto implements EntidadeBase, Serializable {
 	}
 
 
-	public Long getValorProduto() {
-		return valorProduto;
+	public Long getValorVenda() {
+		return valorVenda;
 	}
 
 
-	public void setValorProduto(Long valorProduto) {
-		this.valorProduto = valorProduto;
+	public void setValorVenda(Long valorProduto) {
+		this.valorVenda = valorProduto;
 	}
 
 
@@ -120,12 +120,12 @@ public class Produto implements EntidadeBase, Serializable {
 	}
 
 
-	public Byte getImagemProduto() {
+	public Byte[] getImagemProduto() {
 		return imagemProduto;
 	}
 
 
-	public void setImagemProduto(Byte imagemProduto) {
+	public void setImagemProduto(Byte[] imagemProduto) {
 		this.imagemProduto = imagemProduto;
 	}
 
@@ -161,7 +161,7 @@ public class Produto implements EntidadeBase, Serializable {
 		result = prime * result
 				+ ((subCategoria == null) ? 0 : subCategoria.hashCode());
 		result = prime * result
-				+ ((valorProduto == null) ? 0 : valorProduto.hashCode());
+				+ ((valorVenda == null) ? 0 : valorVenda.hashCode());
 		return result;
 	}
 
@@ -210,10 +210,10 @@ public class Produto implements EntidadeBase, Serializable {
 				return false;
 		} else if (!subCategoria.equals(other.subCategoria))
 			return false;
-		if (valorProduto == null) {
-			if (other.valorProduto != null)
+		if (valorVenda == null) {
+			if (other.valorVenda != null)
 				return false;
-		} else if (!valorProduto.equals(other.valorProduto))
+		} else if (!valorVenda.equals(other.valorVenda))
 			return false;
 		return true;
 	}	
