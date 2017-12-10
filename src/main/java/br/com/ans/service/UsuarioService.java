@@ -12,4 +12,5 @@ public interface UsuarioService{
 	public boolean validarCamposCadastro(Usuario usuario);
 	public List<Usuario> obterUsuarioPorNome(String nome);
 	public void excluir(Usuario usuario);
+	public Usuario obterUsuarioPorCodigo(Long codigoUsuarioAlteracao);
 }

@@ -5,121 +5,71 @@
 	xmlns:p="http://primefaces.org/ui" template="/aplicacao.xhtml">
 
 	<ui:define name="conteudoAplicacao">
-	
+
 		<h:form id="idFormConsultaUsuario">
 
-			<p:growl id="growlConsultaUsuario" showDetail="true" sticky="true"
-				escape="true" />
+			<p:messages id="growlConsultarUsuario" showDetail="true"
+				escape="true" closable="true" styleClass="messages" />
 			<br />
-			<p:dialog header="Consultar Usuário" widgetVar="modalConsultarUsuario" modal="true" width="1500" height="590" visible="#{usuarioVisao.mostrarModalAlteraUsuario}" closable="false" resizable="false">
-			<p:panel id="idPanelConsultaUsuario" style="width:99%;  border=1px solid black; position:relative;"
-			rendered="#{!usuarioVisao.alterarRegistro}">
+			<p:panel id="idPanelConsultaUsuario" >
 				<h:panelGrid id="idPpanelPrincipal" columns="2" cellpadding="1"
 					cellspacing="1">
 
-						<h:outputLabel value="Nome do usuário " />
-						<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
-				
-				</h:panelGrid>
-					<br/>
-					<p:dataTable var="usuario" value="#{usuarioVisao.usuarios}" rows="10" lazy="true" paginator="true" >
-
-					    <p:column headerText="Codigo" width="70">
-					        <h:outputText value="#{usuario.codigoUsuario}"  />
-					    </p:column>
-
-					    <p:column headerText="Nome">
-					        <h:outputText value="#{usuario.nomeUsuario}" />
-					    </p:column>
-					 
-					    <p:column headerText="E-mail">
-					        <h:outputText value="#{usuario.email}" />
-					    </p:column>
-					 
-					    <p:column headerText="Data de cadastro" width="170" >
-					        <h:outputText value="#{usuario.dataCadastro}" >
-					        	<f:convertDateTime pattern="dd/mm/yyyy"/>
-					        </h:outputText>
-					    </p:column>
-					 
-					    <p:column headerText="Situação" width="70">
-					        <h:outputText value="#{usuario.descricaoSituacao}" />
-					    </p:column>
-					
-					    <p:column headerText="Perfil" width="110">
-					        <h:outputText value="#{usuario.perfil.nomePerfil}" />
-					    </p:column>
-
-					    <p:column headerText="Ações" width="70">
-					        <p:commandLink action="#{usuarioVisao.alterar(usuario)}" update="@all">
-					        	<f:setPropertyActionListener value="true" target="#{usuarioVisao.alterarRegistro}" />
-					        	<f:setPropertyActionListener value="false" target="#{usuarioVisao.mostrarModalAlteraUsuario}" />
-					        	<p:graphicImage  library="imagens" name="editar.png"/>
-					        </p:commandLink>
-							
-							<p:spacer width="20" />
-							
-					        <p:commandLink action="#{usuarioVisao.excluir(usuario)}" update=":idFormConsultaUsuario:idPanelConsultaUsuario :idFormAlterarUsuario:growlAlterarUsuario">
-					        	<p:graphicImage library="imagens" name="excluir.png"/>
-					        </p:commandLink>
-					    </p:column>
-					
-					</p:dataTable>
-
-				<f:facet name="footer">
-					<p:commandButton value="Consultar"	action="#{usuarioVisao.consultarUsuarioPorNome()}" update=":idFormConsultaUsuario:idPanelConsultaUsuario growlConsultaUsuario" />
-					<p:commandButton value="Voltar"	action="#{menuVisao.irCadastroUsuario}" update=":idFormConsultaUsuario:idPanelConsultaUsuario growlConsultaUsuario" />
-				</f:facet>
-			</p:panel>
-			</p:dialog>
-		</h:form>
-		
-		
-		
-	
-		<h:form id="idFormAlterarUsuario">
-			<p:growl id="growlAlterarUsuario" showDetail="true" sticky="true"
-				escape="true" />
-			<br />
-			
-			<p:dialog header="Alteração de usuário" widgetVar="modalAlteracaoUsuario" modal="true" visible="#{!usuarioVisao.mostrarModalAlteraUsuario}" width="600" height="290" closable="false" resizable="false">
-			<p:panel id="idPanelAlterarUsuario" style="width:60%; height:290px; background-color: #ffffff; border: none; text-decoration: none;"
-			rendered="#{usuarioVisao.alterarRegistro}">
-				<h:panelGrid id="idPpanelPrincipalAlterar" columns="2" cellpadding="1"	cellspacing="1" border="0">
-
-						<h:outputLabel value="Codigo" />
-						<p:inputText value="#{usuarioVisao.usuario.codigoUsuario}" disabled="true" />
-
-						<h:outputLabel value="Situação" />
-						<p:inputText value="#{usuarioVisao.descricaoSituacao}" disabled="true"  />
-
-						<h:outputLabel value="Nome" />
-						<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
-
-						<h:outputLabel value="e-mail" />
-						<p:inputText value="#{usuarioVisao.usuario.email}" />
-
-						<h:outputLabel id="idLabelPerfil" value="Perfil do Usuario"
-							for="idSelectPerfil" />
-						<p:selectOneMenu id="idSelectPerfil" value="#{usuarioVisao.perfilSelecionado}" required="true">
-						    <f:selectItem itemValue="0" itemLabel="Selecione" />
-							<f:selectItems value="#{usuarioVisao.listaPerfil.entrySet()}" 
-							               var="itemPerfil" 
-								itemValue="#{itemPerfil.key}"
-								itemLabel="#{itemPerfil.value}"	/>
-						</p:selectOneMenu>
+					<h:outputLabel value="Nome do usuário "/>
+					<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
 
 				</h:panelGrid>
+				<br />
+				<p:dataTable var="usuario" value="#{usuarioVisao.usuarios}"
+					rows="10" lazy="true" paginator="true">
+
+					<p:column headerText="Codigo" width="70">
+						<h:outputText value="#{usuario.codigoUsuario}"/>
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{usuario.nomeUsuario}" />
+					</p:column>
+
+					<p:column headerText="E-mail">
+						<h:outputText value="#{usuario.email}" />
+					</p:column>
+
+					<p:column headerText="Data de cadastro" width="170">
+						<h:outputText value="#{usuario.dataCadastro}">
+							<f:convertDateTime pattern="dd/mm/yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Situação" width="70">
+						<h:outputText value="#{usuario.descricaoSituacao}" />
+					</p:column>
+
+					<p:column headerText="Perfil" width="110">
+						<h:outputText value="#{usuario.perfil.nomePerfil}" />
+					</p:column>
+
+					<p:column headerText="Ações" width="70">
+						
+						<p:commandLink action="#{usuarioVisao.alterar()}">
+							<f:setPropertyActionListener value="#{usuario.codigoUsuario}" target="#{usuarioVisao.usuarioLogado.codigoAuxiliar}" /> 
+							<p:graphicImage library="imagens" name="editar.png" />
+						</p:commandLink>
+
+						<p:spacer width="20" />
+
+						<p:commandLink action="#{usuarioVisao.excluir(usuario)}" update=":idFormConsultaUsuario:idPanelConsultaUsuario">
+							<p:graphicImage library="imagens" name="excluir.png" />
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+
 				<f:facet name="footer">
-					<p:commandButton value="Enviar"	action="#{usuarioVisao.alterarUsuario()}" update="@all" />
-					<p:commandButton value="Voltar"	action="#{menuVisao.irConsultaUsuario}" update="@all" />
-					<p:commandButton value="Sair"	action="#{menuVisao.irAplicacao}" update="@all" />
+					<p:commandButton value="Consultar" action="#{usuarioVisao.consultarUsuarioPorNome()}" update=":idFormConsultaUsuario:idPanelConsultaUsuario growlConsultarUsuario" />
+					<p:commandButton value="Voltar" action="#{menuVisao.irCadastroUsuario}" update=":idFormConsultaUsuario:idPanelConsultaUsuario growlConsultarUsuario" />
 				</f:facet>
 			</p:panel>
-			</p:dialog>
 		</h:form>
-		
-		
-		
 	</ui:define>
 </ui:composition>

@@ -43,13 +43,14 @@ public class UsuarioVisao implements Serializable{
 	
 	private Long perfilSelecionado;
 	
-	boolean alterarRegistro;
-	
 	String descricaoSituacao;
+	
+	private String email;
 	
 	HashMap<Long,String> listaPerfil;
 	
-	boolean mostrarModalAlteraUsuario = true;
+	@Inject
+	MenuVisao menuVisao;
 	
 	public UsuarioVisao() {
 		this.setUsuarios(new ArrayList<Usuario>());
@@ -58,8 +59,12 @@ public class UsuarioVisao implements Serializable{
 	@PostConstruct
 	public void init(){
 		this.carregarListaPerfis();
-		//this.setPerfis(getPerfilService().obterPerfil());
-		System.out.println("NOme "+this.usuario.getNomeUsuario());
+		
+		///Entra quando a opção for alterar usuário
+		if(usuarioLogado.getCodigoAuxiliar()!= null){
+			this.setUsuario(getUsuarioService().obterUsuarioPorCodigo(usuarioLogado.getCodigoAuxiliar()));
+			usuarioLogado.setCodigoAuxiliar(null);
+		}
 	}
 	
 	public List<Usuario> getUsuarios() {
@@ -166,8 +171,8 @@ public class UsuarioVisao implements Serializable{
 		
 	}
 	
-	public void alterar(Usuario usuario){
-		this.setUsuario(usuario);	 
+	public String alterar(){
+		return menuVisao.irAlterarUsuario();
 	}
 
 	
@@ -181,14 +186,6 @@ public class UsuarioVisao implements Serializable{
 		   //this.getUsuario().setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
 		   getUsuarioService().cadastrarUsuario(this.getUsuario());
 		}
-	}
-	
-	public boolean isAlterarRegistro() {
-		return alterarRegistro;
-	}
-
-	public void setAlterarRegistro(boolean alterarRegistro) {
-		this.alterarRegistro = alterarRegistro;
 	}
 
 	public String getDescricaoSituacao() {
@@ -214,14 +211,11 @@ public class UsuarioVisao implements Serializable{
 		this.listaPerfil = listaPerfil;
 	}
 
-	public boolean isMostrarModalAlteraUsuario() {
-		return mostrarModalAlteraUsuario;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setMostrarModalAlteraUsuario(boolean mostrarModalAlteraUsuario) {
-		this.mostrarModalAlteraUsuario = mostrarModalAlteraUsuario;
-	}
-	
-	
-	
+	public void setEmail(String email) {
+		this.email = email;
+	}	
 }

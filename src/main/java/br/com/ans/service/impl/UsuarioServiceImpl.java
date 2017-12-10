@@ -111,6 +111,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         	e.printStackTrace();
         }
 	}
+
+	@Override
+	public Usuario obterUsuarioPorCodigo(Long codigoUsuarioAlteracao) {
+		
+		return usuarioDao.obterUsuarioPorCodigo(codigoUsuarioAlteracao);
+	}
 	
 	
 }

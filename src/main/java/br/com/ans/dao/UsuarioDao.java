@@ -11,4 +11,5 @@ public interface UsuarioDao {
 	public List<Usuario> bucarTodos();
 	void salvarUsuario(Usuario usuario) throws Exception;
 	List<Usuario> consultarUsuarioPorNome(String nome);
+	Usuario obterUsuarioPorCodigo(Long codigo);
 }

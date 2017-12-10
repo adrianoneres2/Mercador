@@ -39,12 +39,15 @@
 </script>
 	
 		<h:form id="idFormCadastroProduto">
-			<p:growl id="growlCadastroPruoduto" showDetail="true" sticky="true"
-				escape="true" />
+			<p:messages id="growlCadastroPruoduto" showDetail="true" escape="true" closable="true" styleClass="messages"/>
 			<br />
 			
-			<p:dialog header="Cadastro de Produtos" widgetVar="modalCadastroProduto" modal="true" width="550" height="330" visible="true" closable="false" resizable="false">
-				<p:panel id="idPanelCadastroProduto">
+				<p:panel id="idPanelCadastroProduto" styleClass="divTelaPequena">
+				
+				<f:facet name="header">
+					<h:outputLabel value="Cadastro de Produtos" />
+				</f:facet>
+				
 					<h:panelGrid id="idPanelGridProduto" border="0" columns="2" cellpadding="1"	cellspacing="1">
 						
 							<h:outputText value="Nome: " />
@@ -84,13 +87,13 @@
 					</h:panelGrid>
 					
 				<f:facet name="footer">
-					<p:commandButton value="Cadastrar" action="#{produtoVisao.novo()}" update="@all"/>
-					<p:commandButton value="Consultar"/>
-					<p:commandButton value="Sair" action="#{menuVisao.irAplicacao()}"/>
+					<p:commandButton type="submit" value="Cadastrar" action="#{produtoVisao.novo()}" update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto"/>
+					<p:commandButton type="submit" value="Consultar" update="@all"/>
+					<p:commandButton type="submit" value="Sair" update="@all" action="#{menuVisao.irAplicacao()}"/>
 				</f:facet>
 					
-				  </p:panel>
-				</p:dialog>
+			</p:panel>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

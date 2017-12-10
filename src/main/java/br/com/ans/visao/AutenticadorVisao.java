@@ -22,13 +22,13 @@ public class AutenticadorVisao implements Serializable {
 	@Inject
 	private Usuario usuario;
 	
+	private Long codigoAuxiliar;
+	
 	
     private final String APLICACAO = "/aplicacao";
     private boolean logado = false;
 	
     public AutenticadorVisao(){
-    	//this.usuario = new Usuario();
-    	//this.autenticadorService = new AutenticadorServiceImpl();
     }
     
 	public Usuario getUsuario() {
@@ -77,5 +77,13 @@ public class AutenticadorVisao implements Serializable {
 		}else{
 			return null;
 		}
+	}
+
+	public Long getCodigoAuxiliar() {
+		return codigoAuxiliar;
+	}
+
+	public void setCodigoAuxiliar(Long codigoAuxiliar) {
+		this.codigoAuxiliar = codigoAuxiliar;
 	}
 }

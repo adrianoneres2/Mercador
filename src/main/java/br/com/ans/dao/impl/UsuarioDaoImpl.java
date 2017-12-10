@@ -105,5 +105,27 @@ public class UsuarioDaoImpl extends GenericoDaoImpl<Usuario> implements UsuarioD
 			}
 			return listaUsuario;
 	}
+	
+	@Override
+	public Usuario obterUsuarioPorCodigo(Long codigo){
+
+		String hql = "from Usuario where codigoUsuario = :codigo";
+
+		try{
+
+			//entityManager = jpaUtil.getEntityManager();
+			Query query =  entityManager.createQuery(hql);
+			query.setParameter("codigo", codigo);
+
+			if(!query.getResultList().isEmpty()){
+				Usuario usuario = (Usuario) query.getResultList().get(0);
+				return usuario;
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}	
 
 }

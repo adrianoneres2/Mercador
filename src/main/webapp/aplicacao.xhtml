@@ -7,7 +7,7 @@
 
     <ui:define name="head">
 <!--           	<h:outputStylesheet library="css" name="estilo.css"/> -->
-          	    <link rel="stylesheet" type="text/css" href="resources/css/estilo.css" /> 
+          	    <link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />  
     </ui:define>
 
 	<ui:define name="login">
@@ -62,16 +62,16 @@
 	<ui:define name="menu">
 	<h:form name="formMenu" id="idFormMenu">
 		<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}">
-				<p:commandLink action="#{menuVisao.irAplicacao}">
+				<p:commandLink type="submit" action="#{menuVisao.irAplicacao}" update="@all">
 					<p:graphicImage library="imagens" name="home.png" style="width: 32px; height:32px;"/>
 				</p:commandLink>
 				<p:spacer width="5px" />
 				
-				<p:commandLink action="#{menuVisao.irCadastroUsuario}">
+				<p:commandLink type="submit" action="#{menuVisao.irCadastroUsuario}" update="@all">
 					<p:graphicImage library="imagens" name="cadastro.png" style="width: 32px; height:32px;" />
 				</p:commandLink>
 
-				<p:commandLink action="#{menuVisao.irCadastroProduto}">
+				<p:commandLink type="submit" action="#{menuVisao.irCadastroProduto}"  update="@all">
 					<p:graphicImage library="imagens" name="cadastro.png" style="width: 32px; height:32px;"/>
 				</p:commandLink>
 

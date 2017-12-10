@@ -38,6 +38,14 @@ html, body {
 	width: 100%;
 }
 
+.divTelaPequena {
+	height: 300px;
+	width: 500px;
+}
+
+.messages {
+	width: 500px;
+}
 
 #divMenu {
 	height: 60px;
