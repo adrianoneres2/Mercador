@@ -1,11 +1,13 @@
 package br.com.ans.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +25,9 @@ public class Perfil implements EntidadeBase, Serializable{
 	
 	@Column(name="nm_perfil", nullable=false)
 	private String nomePerfil;
+	
+	@OneToMany(mappedBy = "perfil")
+	private Collection<PerfilFuncionalidade> perfilFuncionalidade;
 	
 	public Long getCodigoPerfil() {
 		return codigoPerfil;
@@ -42,18 +47,30 @@ public class Perfil implements EntidadeBase, Serializable{
 		return codigoPerfil;
 	}
 	
+	public Collection<PerfilFuncionalidade> getPerfilFuncionalidade() {
+		return perfilFuncionalidade;
+	}
+	public void setPerfilFuncionalidade(
+			Collection<PerfilFuncionalidade> perfilFuncionalidade) {
+		this.perfilFuncionalidade = perfilFuncionalidade;
+	}
 	// Método responsavel por retornar o código como string para o converter omnifaces.SelectItemsConverter
 	@Override
 	public String toString() {
 	    return String.format("%s[codigoPerfil=%d]", getClass().getSimpleName(), getCodigoPerfil());
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigoPerfil == null) ? 0 : codigoPerfil.hashCode());
-		result = prime * result + ((nomePerfil == null) ? 0 : nomePerfil.hashCode());
+		result = prime * result
+				+ ((codigoPerfil == null) ? 0 : codigoPerfil.hashCode());
+		result = prime * result
+				+ ((nomePerfil == null) ? 0 : nomePerfil.hashCode());
+		result = prime
+				* result
+				+ ((perfilFuncionalidade == null) ? 0 : perfilFuncionalidade
+						.hashCode());
 		return result;
 	}
 	@Override
@@ -74,6 +91,11 @@ public class Perfil implements EntidadeBase, Serializable{
 			if (other.nomePerfil != null)
 				return false;
 		} else if (!nomePerfil.equals(other.nomePerfil))
+			return false;
+		if (perfilFuncionalidade == null) {
+			if (other.perfilFuncionalidade != null)
+				return false;
+		} else if (!perfilFuncionalidade.equals(other.perfilFuncionalidade))
 			return false;
 		return true;
 	}
