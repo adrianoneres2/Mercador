@@ -57,7 +57,19 @@ public class AutenticadorVisao implements Serializable {
 
 	public String logar(){
 		
-		usuario = getAutenticadorService().validarLogin(this.getUsuario());
+		usuario = getAutenticadorService().validarLogin(this.getUsuario()) ;
+
+		/*
+		Collection <PerfilFuncionalidade> pfs;
+		
+		pfs = usuario.getPerfil().getPerfilFuncionalidade();
+		
+		for(PerfilFuncionalidade pf : pfs){
+			System.out.println(pf.getFuncionalidade().getNomeFuncionalidade());
+			System.out.println(pf.getFuncionalidade().getCodigoFuncionalidade());
+			
+		}
+*/
 		
 		if(usuario != null){
 			this.setLogado(true);

@@ -27,6 +27,7 @@ public class Perfil implements EntidadeBase, Serializable{
 	private String nomePerfil;
 	
 	@OneToMany(mappedBy = "perfil")
+	//@JoinColumn(name = "id_perfil")
 	private Collection<PerfilFuncionalidade> perfilFuncionalidade;
 	
 	public Long getCodigoPerfil() {
