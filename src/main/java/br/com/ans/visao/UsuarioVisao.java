@@ -172,7 +172,7 @@ public class UsuarioVisao implements Serializable{
 	}
 	
 	public String alterar(){
-		return menuVisao.irAlterarUsuario();
+			return menuVisao.irAlterarUsuario(usuarioLogado.getUsuario());		
 	}
 
 	

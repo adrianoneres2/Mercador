@@ -1,7 +1,7 @@
 package br.com.ans.model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
@@ -27,8 +27,8 @@ public class Perfil implements EntidadeBase, Serializable{
 	private String nomePerfil;
 	
 	@OneToMany(mappedBy = "perfil")
-	//@JoinColumn(name = "id_perfil")
-	private Collection<PerfilFuncionalidade> perfilFuncionalidade;
+	///@JoinColumn(name = "id_perfil")
+	private List<PerfilFuncionalidade> perfilFuncionalidade;
 	
 	public Long getCodigoPerfil() {
 		return codigoPerfil;
@@ -48,11 +48,11 @@ public class Perfil implements EntidadeBase, Serializable{
 		return codigoPerfil;
 	}
 	
-	public Collection<PerfilFuncionalidade> getPerfilFuncionalidade() {
+	public List<PerfilFuncionalidade> getPerfilFuncionalidade() {
 		return perfilFuncionalidade;
 	}
 	public void setPerfilFuncionalidade(
-			Collection<PerfilFuncionalidade> perfilFuncionalidade) {
+			List<PerfilFuncionalidade> perfilFuncionalidade) {
 		this.perfilFuncionalidade = perfilFuncionalidade;
 	}
 	// Método responsavel por retornar o código como string para o converter omnifaces.SelectItemsConverter

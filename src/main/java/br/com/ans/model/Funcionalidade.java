@@ -1,7 +1,7 @@
 package br.com.ans.model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
@@ -27,7 +27,7 @@ public class Funcionalidade implements EntidadeBase, Serializable{
 	private String nomeFuncionalidade;
 	
 	@OneToMany(mappedBy = "perfil")
-	private Collection<PerfilFuncionalidade> perfilFuncionalidade;
+	private List<PerfilFuncionalidade> perfilFuncionalidade;
 	
 	@Override
 	public Long getId() {

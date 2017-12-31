@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,7 +29,7 @@ public class PerfilFuncionalidade implements EntidadeBase, Serializable{
 		return codigoPerfilFuncionalidade;
 	}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "id_perfil", insertable = false, updatable = false)
 	private Perfil perfil;
 

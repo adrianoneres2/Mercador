@@ -51,8 +51,8 @@
 
 					<p:column headerText="Ações" width="70">
 						
-						<p:commandLink action="#{usuarioVisao.alterar()}">
-							<f:setPropertyActionListener value="#{usuario.codigoUsuario}" target="#{usuarioVisao.usuarioLogado.codigoAuxiliar}" /> 
+						<p:commandLink action="#{usuarioVisao.alterar()}" update=":idFormConsultaUsuario:growlConsultarUsuario">
+							<f:setPropertyActionListener value="#{usuario.codigoUsuario}" target="#{usuarioVisao.usuarioLogado.codigoAuxiliar}"/> 
 							<p:graphicImage library="imagens" name="editar.png" />
 						</p:commandLink>
 
