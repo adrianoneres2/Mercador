@@ -129,7 +129,7 @@ public class produtoVisao implements Serializable{
 		HashMap<Long, String> mapaCategoria = new HashMap<Long, String>();
 		
 		for(Categoria categoria : categorias){
-			mapaCategoria.put(categoria.getCodigoCategoria(), categoria.getDescricaoCategoria());
+			mapaCategoria.put(categoria.getCodigoCategoria(), categoria.getNomeCategoria());
 		}
 		
 		this.setListaCategoria(mapaCategoria);
@@ -141,7 +141,7 @@ public class produtoVisao implements Serializable{
 		HashMap<Long, String> mapaSubCategoria = new HashMap<Long, String>();
 		
 		for(SubCategoria subCategoria : subCategorias){
-			mapaSubCategoria.put(subCategoria.getCodigoSubCategoria(), subCategoria.getDescricaoSubCategoria());
+			mapaSubCategoria.put(subCategoria.getCodigoSubCategoria(), subCategoria.getNomeSubCategoria());
 		}
 		
 		this.setListaSubCategoria(mapaSubCategoria);

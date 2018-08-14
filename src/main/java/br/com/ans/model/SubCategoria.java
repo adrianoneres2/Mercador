@@ -21,8 +21,8 @@ public class SubCategoria implements Serializable{
 	@Column(name = "id_sub_categoria", nullable = false)
 	private Long codigoSubCategoria; 
 	
-	@Column(name = "ds_sub_categoria", nullable = false)
-	private String descricaoSubCategoria;
+	@Column(name = "nm_sub_categoria", nullable = false)
+	private String nomeSubCategoria;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
@@ -37,12 +37,12 @@ public class SubCategoria implements Serializable{
 		this.codigoSubCategoria = codigoSubCategoria;
 	}
 
-	public String getDescricaoSubCategoria() {
-		return descricaoSubCategoria;
+	public String getNomeSubCategoria() {
+		return nomeSubCategoria;
 	}
 
-	public void setDescricaoSubCategoria(String descricaoSubCategoria) {
-		this.descricaoSubCategoria = descricaoSubCategoria;
+	public void setNomeSubCategoria(String nomeSubCategoria) {
+		this.nomeSubCategoria = nomeSubCategoria;
 	}
 
 	public Categoria getCategoria() {
@@ -65,7 +65,7 @@ public class SubCategoria implements Serializable{
 						.hashCode());
 		result = prime
 				* result
-				+ ((descricaoSubCategoria == null) ? 0 : descricaoSubCategoria
+				+ ((nomeSubCategoria == null) ? 0 : nomeSubCategoria
 						.hashCode());
 		return result;
 	}
@@ -89,10 +89,10 @@ public class SubCategoria implements Serializable{
 				return false;
 		} else if (!codigoSubCategoria.equals(other.codigoSubCategoria))
 			return false;
-		if (descricaoSubCategoria == null) {
-			if (other.descricaoSubCategoria != null)
+		if (nomeSubCategoria == null) {
+			if (other.nomeSubCategoria != null)
 				return false;
-		} else if (!descricaoSubCategoria.equals(other.descricaoSubCategoria))
+		} else if (!nomeSubCategoria.equals(other.nomeSubCategoria))
 			return false;
 		return true;
 	}

@@ -19,8 +19,8 @@ public class Categoria implements Serializable{
 	@Column(name = "id_categoria", nullable = false)
 	private Long codigoCategoria;
 	
-	@Column(name = "ds_categoria", nullable = false)
-	private String descricaoCategoria;
+	@Column(name = "nm_categoria", nullable = false)
+	private String nomeCategoria;
 
 	public Long getCodigoCategoria() {
 		return codigoCategoria;
@@ -30,12 +30,12 @@ public class Categoria implements Serializable{
 		this.codigoCategoria = codigoCategoria;
 	}
 
-	public void setDescricaoCategoria(String nomeCategoria) {
-		this.descricaoCategoria = nomeCategoria;
+	public void setNomeCategoria(String nomeCategoria) {
+		this.nomeCategoria = nomeCategoria;
 	}
 	
-	public String getDescricaoCategoria() {
-		return descricaoCategoria;
+	public String getNomeCategoria() {
+		return nomeCategoria;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class Categoria implements Serializable{
 				+ ((codigoCategoria == null) ? 0 : codigoCategoria.hashCode());
 		result = prime
 				* result
-				+ ((descricaoCategoria == null) ? 0 : descricaoCategoria
+				+ ((nomeCategoria == null) ? 0 : nomeCategoria
 						.hashCode());
 		return result;
 	}
@@ -65,10 +65,10 @@ public class Categoria implements Serializable{
 				return false;
 		} else if (!codigoCategoria.equals(other.codigoCategoria))
 			return false;
-		if (descricaoCategoria == null) {
-			if (other.descricaoCategoria != null)
+		if (nomeCategoria == null) {
+			if (other.nomeCategoria != null)
 				return false;
-		} else if (!descricaoCategoria.equals(other.descricaoCategoria))
+		} else if (!nomeCategoria.equals(other.nomeCategoria))
 			return false;
 		return true;
 	}
