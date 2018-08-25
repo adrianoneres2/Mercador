@@ -61,22 +61,19 @@
 
 	<ui:define name="menu">
 	<h:form name="formMenu" id="idFormMenu">
-		<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}">
-				<p:commandLink type="submit" action="#{menuVisao.irAplicacao}" update="@all">
-					<p:graphicImage library="imagens" name="home.png" style="width: 32px; height:32px;"/>
-				</p:commandLink>
-				<p:spacer width="5px" />
-				
-				<p:commandLink type="submit" action="#{menuVisao.irCadastroUsuario}" update="@all">
-					<p:graphicImage library="imagens" name="cadastro.png" style="width: 32px; height:32px;" />
-				</p:commandLink>
-
-				<p:commandLink type="submit" action="#{menuVisao.irCadastroProduto}"  update="@all">
-					<p:graphicImage library="imagens" name="cadastro.png" style="width: 32px; height:32px;"/>
-				</p:commandLink>
-
+		<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}" >
+			<p:menubar>
+			        <p:menuitem value="Página Principal" action="#{menuVisao.irAplicacao}"/>
+			
+			        <p:submenu label="Produto" icon="ui-icon-document">
+			                <p:menuitem value="Cadastro" action="#{menuVisao.irCadastroProduto}"/>
+			        </p:submenu>
+			        <p:submenu label="Usuário" icon="ui-icon-document">
+			                <p:menuitem value="Cadastro" action="#{menuVisao.irCadastroUsuario}"/>
+			                <p:menuitem value="Consulta" action="#{menuVisao.irConsultaUsuario}"/>
+			        </p:submenu>
+			</p:menubar>
 		</p:panel>
-		
 	</h:form>	
 	</ui:define>
 	

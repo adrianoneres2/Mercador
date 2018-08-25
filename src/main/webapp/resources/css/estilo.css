@@ -4,23 +4,7 @@ html, body {
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
-	margin-left: 0px;
-}
-
-
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-state-default {
-    background: #D6D6D6;
-    border: 1px solid #A0A0A0;
-    color: #4f4f4f;
-    font-weight: bold;
-}
-
-.ui-widget-header {
-    background: #D6D6D6;
-    border: 1px solid #A0A0A0;
-    color: #000000;
-    font-weight: bold;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+	margin-left: 0px;  
 }
 
 
@@ -34,13 +18,12 @@ html, body {
 
 #divBanner {
 	height: 120px;
-	background-color: #D6D6D6;
 	width: 100%;
+    background-color: #D6D6D6;
 }
 
 .divTelaPequena {
-	height: 300px;
-	width: 500px;
+	width: 800px;
 }
 
 .messages {
@@ -49,17 +32,14 @@ html, body {
 
 #divMenu {
 	height: 60px;
-	/*background-color: #1d91d8;*/
 	width: 100%;
 	border: 2px;
 }
 
 #divLogin {	
 	position:absolute;
-		left:50%;
-		top:50%;
-		margin-left:-110px;
-		margin-top:-40px;
+		left:45%;
+		top:40%;
 }
 
 
