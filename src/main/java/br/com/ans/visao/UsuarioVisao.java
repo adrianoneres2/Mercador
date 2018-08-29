@@ -13,6 +13,7 @@ import br.com.ans.dao.PerfilService;
 import br.com.ans.model.Perfil;
 import br.com.ans.model.Usuario;
 import br.com.ans.service.UsuarioService;
+import enumerations.FuncionalidadeEnum;
 
 //@RequestScoped
 //@SessionScoped
@@ -54,7 +55,8 @@ public class UsuarioVisao implements Serializable{
 	
 	public UsuarioVisao() {
 		this.setUsuarios(new ArrayList<Usuario>());
-	}	
+	}
+
 	
 	@PostConstruct
 	public void init(){
@@ -147,12 +149,10 @@ public class UsuarioVisao implements Serializable{
 		setUsuarios(usuarioService.obterUsuarioPorNome(usuario.getNomeUsuario()));
 	}
 	
-	public String inserirNovo() throws Exception {
-
+	public String cadastrar() throws Exception {
 		this.getUsuario().setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
 		
-		if (getUsuarioService().validarCamposCadastro(this.getUsuario())){			
-			
+		if (getUsuarioService().validarCamposCadastro(this.getUsuario())){
 		   //Atribui usuário logado!!!	
 		   this.getUsuario().setCodigoUsuarioCadastro(this.getUsuarioLogado().getUsuario().getCodigoUsuario());	
 		   this.getUsuario().setDataCadastro(new Date());
@@ -174,7 +174,7 @@ public class UsuarioVisao implements Serializable{
 	public String alterar(){
 		String retorno;
 		
-		retorno = menuVisao.irAlterarUsuario(usuarioLogado.getUsuario());
+		retorno = menuVisao.acessar(usuarioLogado.getUsuario(), FuncionalidadeEnum.ALTERAUSUARIO);
 		
 		if (retorno != ""){
 			return retorno;
@@ -184,11 +184,14 @@ public class UsuarioVisao implements Serializable{
 		}
 	}
 
+	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
+		return menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
+	}
 	
 	public void alterarUsuario() throws Exception {
-		
-		/*Seta o novo perfil da tela de alteração antes da validação dos campos. 
-		 * Obs: isso foi necessário para que o perfil já cadastrado não seja validado e sim o da alteração. */
+		/***Seta o novo perfil da tela de alteração antes da validação dos campos. 
+		 *** Obs: isso foi necessário para que o perfil já cadastrado não seja validado e sim o da alteração. 
+		 ***/
 		this.getUsuario().setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
 		
 		if (getUsuarioService().validarCamposCadastro(this.getUsuario())){			

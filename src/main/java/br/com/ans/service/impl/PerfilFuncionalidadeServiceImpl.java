@@ -16,8 +16,13 @@ public class PerfilFuncionalidadeServiceImpl implements PerfilFuncionalidadeServ
 	PerfilFuncionalidadeDao perfilFuncionalidadeDao;
 	
 	@Override
-	public List<PerfilFuncionalidade> porPerfil(Long codigoPerfil){
-		return perfilFuncionalidadeDao.porPerfil(codigoPerfil);
+	public List<PerfilFuncionalidade> listarPerfil(Long codigoPerfil){
+		return perfilFuncionalidadeDao.listarPerfil(codigoPerfil);
+	}
+	
+	@Override
+	public boolean perfilFuncionalidade(Long codigoPerfil, Long codFuncionalidade){
+		return perfilFuncionalidadeDao.perfilFuncionalidade(codigoPerfil, codFuncionalidade);
 	}
 	
 }

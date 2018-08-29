@@ -39,7 +39,7 @@
 </script>
 	
 		<h:form id="idFormCadastroProduto">
-			<p:messages id="growlCadastroPruoduto" showDetail="true" escape="true" closable="true" styleClass="messages"/>
+			<p:growl id="growlCadastroPruoduto" showDetail="true" escape="true" closable="true" styleClass="messages"/>
 			<br />
 			
 				<p:panel id="idPanelCadastroProduto" styleClass="divTelaPequena">
@@ -89,7 +89,7 @@
 				<f:facet name="footer">
 					<p:commandButton type="submit" value="Cadastrar" action="#{produtoVisao.novo()}" update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto"/>
 					<p:commandButton type="submit" value="Consultar" update="@all"/>
-					<p:commandButton type="submit" value="Sair" update="@all" action="#{menuVisao.irAplicacao()}"/>
+					<p:commandButton value="Voltar"    type="submit" action="#{usuarioVisao.acessarFuncionalidade('APLICACAO')}"       update="idFormCadastroProduto" />
 				</f:facet>
 					
 			</p:panel>

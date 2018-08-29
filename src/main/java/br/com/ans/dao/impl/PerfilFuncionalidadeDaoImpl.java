@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -22,7 +24,7 @@ public class PerfilFuncionalidadeDaoImpl extends GenericoDaoImpl<PerfilFuncional
 	}
 	
 	@Override
-	public List<PerfilFuncionalidade> porPerfil(Long codigoPerfil){
+	public List<PerfilFuncionalidade> listarPerfil(Long codigoPerfil){
 		
 		String hql = "from PerfilFuncionalidade pf where pf.perfil.codigoPerfil = "+codigoPerfil;
 		
@@ -38,5 +40,26 @@ public class PerfilFuncionalidadeDaoImpl extends GenericoDaoImpl<PerfilFuncional
 		}
 		return listaPerfilFuncionalidade;
 	}
+	
+	@Override
+	public boolean perfilFuncionalidade(Long codigoPerfil, Long codFuncionalidade){
+		String hql = "from PerfilFuncionalidade pf where pf.perfil.codigoPerfil = "+codigoPerfil+" and pf.funcionalidade.codigoFuncionalidade = "+codFuncionalidade; 
+		
+		try {
+			TypedQuery<PerfilFuncionalidade> query = entityManager.createQuery(hql, PerfilFuncionalidade.class);
+			
+			if (query.getResultList().isEmpty()){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Usuário sem permissão de acesso!"));
+				return false;
+			}
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Erro desconhecido!"));
+			return false;
+		}
+	}
+	
 	
 }

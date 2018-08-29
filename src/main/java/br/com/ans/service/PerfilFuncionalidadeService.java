@@ -7,6 +7,8 @@ import br.com.ans.model.PerfilFuncionalidade;
 
 public interface PerfilFuncionalidadeService {
 
-	public List<PerfilFuncionalidade> porPerfil(Long codigoPerfil);
+	public List<PerfilFuncionalidade> listarPerfil(Long codigoPerfil);
+
+	boolean perfilFuncionalidade(Long codigoPerfil, Long codFuncionalidade);
 
 }

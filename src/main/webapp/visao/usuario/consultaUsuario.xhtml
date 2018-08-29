@@ -8,7 +8,7 @@
 
 		<h:form id="idFormConsultaUsuario">
 
-			<p:messages id="growlConsultarUsuario" showDetail="true"
+			<p:growl id="growlConsultarUsuario" showDetail="true"
 				escape="true" closable="true" styleClass="messages" />
 			<br />
 			<p:panel id="idPanelConsultaUsuario" >
@@ -66,7 +66,7 @@
 
 				<f:facet name="footer">
 					<p:commandButton value="Consultar" action="#{usuarioVisao.consultarUsuarioPorNome()}" update=":idFormConsultaUsuario:idPanelConsultaUsuario growlConsultarUsuario" />
-					<p:commandButton value="Voltar" action="#{menuVisao.irCadastroUsuario}" update=":idFormConsultaUsuario:idPanelConsultaUsuario growlConsultarUsuario" />
+					<p:commandButton value="Voltar"    type="submit" action="#{usuarioVisao.acessarFuncionalidade('CADASTROUSUARIO')}"       update="idFormConsultaUsuario" />
 				</f:facet>
 			</p:panel>
 		</h:form>

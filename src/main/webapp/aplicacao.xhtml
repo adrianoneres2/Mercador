@@ -61,16 +61,17 @@
 
 	<ui:define name="menu">
 	<h:form name="formMenu" id="idFormMenu">
+	  <p:growl id="growlMenu" showDetail="true" sticky="true" escape="true" />
 		<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}" >
 			<p:menubar>
-			        <p:menuitem value="Página Principal" action="#{menuVisao.irAplicacao}"/>
+			        <p:menuitem value="Página Principal" action="#{usuarioVisao.acessarFuncionalidade('APLICACAO')}" update="growlMenu"/>
 			
 			        <p:submenu label="Produto" icon="ui-icon-document">
-			                <p:menuitem value="Cadastro" action="#{menuVisao.irCadastroProduto}"/>
+			        	<p:menuitem value="Cadastro" action="#{usuarioVisao.acessarFuncionalidade('CADASTROPRODUTO')}" update="growlMenu"/>
 			        </p:submenu>
 			        <p:submenu label="Usuário" icon="ui-icon-document">
-			                <p:menuitem value="Cadastro" action="#{menuVisao.irCadastroUsuario}"/>
-			                <p:menuitem value="Consulta" action="#{menuVisao.irConsultaUsuario}"/>
+			                <p:menuitem value="Cadastro" action="#{usuarioVisao.acessarFuncionalidade('CADASTROUSUARIO')}" update="growlMenu"/>
+			                <p:menuitem value="Consulta" action="#{usuarioVisao.acessarFuncionalidade('CONSULTAUSUARIO')}" update="growlMenu"/>
 			        </p:submenu>
 			</p:menubar>
 		</p:panel>
