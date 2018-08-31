@@ -8,7 +8,8 @@ public enum FuncionalidadeEnum {
 	CADASTROPRODUTO(4, "/visao/produto/cadastroProduto"),
 	CADASTROCLIENTE(5, ""),
 	CONSULTAUSUARIO(6, "/visao/usuario/consultaUsuario"),
-	ALTERAUSUARIO(7, "/visao/usuario/alterarUsuario");
+	ALTERAUSUARIO(7, "/visao/usuario/alterarUsuario"),
+	ATIVARINATIVARUSUARIO(8, "");
 
 	private int codigo;
 	private String url;

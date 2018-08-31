@@ -35,6 +35,7 @@ public class MenuVisao implements Serializable{
 					case VENDA            :return FuncionalidadeEnum.VENDA.getUrl();
 					case COMPRA           :return FuncionalidadeEnum.COMPRA.getUrl();
 					case CADASTROCLIENTE  :return FuncionalidadeEnum.CADASTROCLIENTE.getUrl();
+					case ATIVARINATIVARUSUARIO :return FuncionalidadeEnum.ATIVARINATIVARUSUARIO.getUrl(); 
 				}
 			}
 		}

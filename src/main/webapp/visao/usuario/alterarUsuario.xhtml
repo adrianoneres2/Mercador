@@ -6,11 +6,9 @@
 
 	<ui:define name="conteudoAplicacao">
 
-			<p:messages id="growlAlterarUsuario" showDetail="true"
-				escape="true" closable="true" styleClass="messages" />
 			<br />
 				<h:form id="idFormAlterarUsuario">
-					<p:messages id="growlAlterarUsuario" showDetail="true"
+					<p:growl id="growlAlterarUsuario" showDetail="true"
 						escape="true" closable="true" styleClass="messages" />
 					<br />
 
@@ -34,10 +32,10 @@
 							<h:outputLabel value="Nome" />
 							<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
 
-							<h:outputLabel value="e-mail" />
+							<h:outputLabel value="E-Mail" />
 							<p:inputText value="#{usuarioVisao.usuario.email}" />
 
-							<h:outputLabel id="idLabelPerfil" value="Perfil do Usuario"
+							<h:outputLabel id="idLabelPerfil" value="Perfil"
 								for="idSelectPerfil" />
 							<p:selectOneMenu id="idSelectPerfil"
 								value="#{usuarioVisao.perfilSelecionado}" required="true">
@@ -50,8 +48,7 @@
 						</h:panelGrid>
 						<f:facet name="footer">
 							<p:commandButton type="submit" value="Enviar" action="#{usuarioVisao.alterarUsuario()}"	update=":idFormAlterarUsuario:idPanelAlterarUsuario growlAlterarUsuario" />
-							<p:commandButton type="submit" value="Voltar" action="#{menuVisao.irCadastroUsuario}" update="@all" />
-							<p:commandButton type="submit" value="Sair"  action="#{menuVisao.irAplicacao}" update="@all" />
+							<p:commandButton type="submit" value="Sair"  action="#{usuarioVisao.acessarFuncionalidade('APLICACAO')}" update="@all" />
 						</f:facet>
 					</p:panel>
 				</h:form>

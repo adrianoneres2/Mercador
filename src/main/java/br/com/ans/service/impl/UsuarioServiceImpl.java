@@ -95,7 +95,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	
 	@Override
-	public void excluir(Usuario usuario){
+	public void ativarInativar(Usuario usuario){
 		
 		if(usuario.getUsuarioAtivo().equals("S")){
 			usuario.setUsuarioAtivo("N");	
@@ -105,7 +105,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
         try{
         	usuarioDao.salvarUsuario(usuario);
-           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Atualizado com sucesso!"));
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Situação atualizada com sucesso!"));
         }catch(Exception e){
         	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fatal", "Erro ao tentar atualizar usuário!"));
         	e.printStackTrace();

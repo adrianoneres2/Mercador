@@ -11,6 +11,6 @@ public interface UsuarioService{
 	public boolean consultarRgUsuario(Integer rg);
 	public boolean validarCamposCadastro(Usuario usuario);
 	public List<Usuario> obterUsuarioPorNome(String nome);
-	public void excluir(Usuario usuario);
+	public void ativarInativar(Usuario usuario);
 	public Usuario obterUsuarioPorCodigo(Long codigoUsuarioAlteracao);
 }

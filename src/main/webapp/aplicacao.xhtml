@@ -26,7 +26,7 @@
 					<p:column><p:inputText id="inputSenha" value="#{autenticadorVisao.usuario.senha}" /></p:column>
 				</p:row>
 				<br/>
-			    <p:column><p:commandButton id="buttonEntrar" value="Entrar" action="#{autenticadorVisao.logar}" update=":idFormLogin, :idFormMenu, :idLogOff" icon="ui-icon-disk" /></p:column>
+			    <p:column><p:commandButton id="buttonEntrar" value="Entrar" action="#{autenticadorVisao.logar}" update=":idFormLogin, :idFormMenu, :idLogOff"/></p:column>
 					
 			</p:panelGrid>
 			
@@ -64,14 +64,19 @@
 	  <p:growl id="growlMenu" showDetail="true" sticky="true" escape="true" />
 		<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}" >
 			<p:menubar>
-			        <p:menuitem value="Página Principal" action="#{usuarioVisao.acessarFuncionalidade('APLICACAO')}" update="growlMenu"/>
+			        <p:menuitem value="Principal"  action="#{usuarioVisao.acessarFuncionalidade('APLICACAO')}" update="growlMenu"/>
 			
-			        <p:submenu label="Produto" icon="ui-icon-document">
+			        <p:submenu label="Produto">
 			        	<p:menuitem value="Cadastro" action="#{usuarioVisao.acessarFuncionalidade('CADASTROPRODUTO')}" update="growlMenu"/>
 			        </p:submenu>
-			        <p:submenu label="Usuário" icon="ui-icon-document">
+			        
+			        <p:submenu label="Usuário">
 			                <p:menuitem value="Cadastro" action="#{usuarioVisao.acessarFuncionalidade('CADASTROUSUARIO')}" update="growlMenu"/>
 			                <p:menuitem value="Consulta" action="#{usuarioVisao.acessarFuncionalidade('CONSULTAUSUARIO')}" update="growlMenu"/>
+			        </p:submenu>
+			        
+			        <p:submenu label="Configurações">
+			                <p:menuitem value="Perfil" action="#{usuarioVisao.acessarFuncionalidade('CONSULTAUSUARIO')}" update="growlMenu"/>
 			        </p:submenu>
 			</p:menubar>
 		</p:panel>

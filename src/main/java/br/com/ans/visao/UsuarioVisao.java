@@ -53,6 +53,8 @@ public class UsuarioVisao implements Serializable{
 	@Inject
 	MenuVisao menuVisao;
 	
+	private String retorno;
+	
 	public UsuarioVisao() {
 		this.setUsuarios(new ArrayList<Usuario>());
 	}
@@ -163,16 +165,17 @@ public class UsuarioVisao implements Serializable{
 		return null;
 	}
 	
-	public void excluir(Usuario usuario){
+	public void ativarInativar(Usuario usuario){
 		
-		System.out.println(usuario.getNomeUsuario());
-		usuarioService.excluir(usuario);
-		this.consultarUsuarioPorNome();
+		retorno = acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARUSUARIO); 
 		
+		if(retorno != null){
+			usuarioService.ativarInativar(usuario);
+			this.consultarUsuarioPorNome();
+		}		
 	}
 	
 	public String alterar(){
-		String retorno;
 		
 		retorno = menuVisao.acessar(usuarioLogado.getUsuario(), FuncionalidadeEnum.ALTERAUSUARIO);
 		
