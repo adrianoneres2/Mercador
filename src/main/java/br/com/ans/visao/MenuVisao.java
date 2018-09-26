@@ -27,15 +27,17 @@ public class MenuVisao implements Serializable{
 			if (perfilFuncionalidadeService.perfilFuncionalidade(UsuarioLogado.getPerfil().getCodigoPerfil(), codigoFuncionalidade)){
 			
 			switch(funcionalidadeEnum){
-					case ALTERAUSUARIO    :return FuncionalidadeEnum.ALTERAUSUARIO.getUrl();
-					case CADASTROUSUARIO  :return FuncionalidadeEnum.CADASTROUSUARIO.getUrl();
-					case CONSULTAUSUARIO  :return FuncionalidadeEnum.CONSULTAUSUARIO.getUrl();
-					case APLICACAO        :return FuncionalidadeEnum.APLICACAO.getUrl();
-					case CADASTROPRODUTO :return FuncionalidadeEnum.CADASTROPRODUTO.getUrl();
-					case VENDA            :return FuncionalidadeEnum.VENDA.getUrl();
-					case COMPRA           :return FuncionalidadeEnum.COMPRA.getUrl();
-					case CADASTROCLIENTE  :return FuncionalidadeEnum.CADASTROCLIENTE.getUrl();
-					case ATIVARINATIVARUSUARIO :return FuncionalidadeEnum.ATIVARINATIVARUSUARIO.getUrl(); 
+					case ALTERAUSUARIO         :return FuncionalidadeEnum.ALTERAUSUARIO.getUrl();
+					case CADASTROUSUARIO       :return FuncionalidadeEnum.CADASTROUSUARIO.getUrl();
+					case CONSULTAUSUARIO       :return FuncionalidadeEnum.CONSULTAUSUARIO.getUrl();
+					case APLICACAO             :return FuncionalidadeEnum.APLICACAO.getUrl();
+					case CADASTROPRODUTO       :return FuncionalidadeEnum.CADASTROPRODUTO.getUrl();
+					case VENDA                 :return FuncionalidadeEnum.VENDA.getUrl();
+					case COMPRA                :return FuncionalidadeEnum.COMPRA.getUrl();
+					case CADASTROCLIENTE       :return FuncionalidadeEnum.CADASTROCLIENTE.getUrl();
+					case ATIVARINATIVARUSUARIO :return FuncionalidadeEnum.ATIVARINATIVARUSUARIO.getUrl();
+					case CADASTROPERFIL        :return FuncionalidadeEnum.CADASTROPERFIL.getUrl();
+					case MANTERPERFIL          :return FuncionalidadeEnum.MANTERPERFIL.getUrl();
 				}
 			}
 		}

@@ -9,7 +9,9 @@ public enum FuncionalidadeEnum {
 	CADASTROCLIENTE(5, ""),
 	CONSULTAUSUARIO(6, "/visao/usuario/consultaUsuario"),
 	ALTERAUSUARIO(7, "/visao/usuario/alterarUsuario"),
-	ATIVARINATIVARUSUARIO(8, "");
+	ATIVARINATIVARUSUARIO(8, ""),
+	CADASTROPERFIL(9, "/visao/perfil/cadastroPerfil"),
+	MANTERPERFIL(10, "/visao/perfil/manterPerfil");
 
 	private int codigo;
 	private String url;

@@ -222,7 +222,6 @@ public class UsuarioVisao implements Serializable{
 	}
 
 	public void setListaPerfil(HashMap<Long, String> listaPerfil) {		
-			
 		this.listaPerfil = listaPerfil;
 	}
 

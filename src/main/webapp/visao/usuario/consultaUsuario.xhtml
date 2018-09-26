@@ -8,13 +8,13 @@
 
 		<h:form id="idFormConsultaUsuario">
 
-			<p:growl id="growlConsultarUsuario" showDetail="true"
-				escape="true" closable="true" styleClass="messages" />
+			<p:growl id="growlConsultarUsuario" showDetail="true" escape="true"
+				closable="true" styleClass="messages" />
 			<br />
-			<p:panel id="idPanelConsultaUsuario" >
+			<p:panel id="idPanelConsultaUsuario">
 				<h:panelGrid id="idPpanelPrincipal">
 
-					<h:outputLabel value="Nome do usuário "/>
+					<h:outputLabel value="Nome do usuário " />
 					<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
 
 				</h:panelGrid>
@@ -23,7 +23,7 @@
 					rows="10" lazy="true" paginator="true">
 
 					<p:column headerText="Codigo" width="70">
-						<h:outputText value="#{usuario.codigoUsuario}"/>
+						<h:outputText value="#{usuario.codigoUsuario}" />
 					</p:column>
 
 					<p:column headerText="Nome">
@@ -49,15 +49,19 @@
 					</p:column>
 
 					<p:column headerText="Ações" width="70">
-						
-						<p:commandLink action="#{usuarioVisao.acessarFuncionalidade('ALTERAUSUARIO')}" update=":idFormConsultaUsuario">
-							<f:setPropertyActionListener value="#{usuario.codigoUsuario}" target="#{usuarioVisao.usuarioLogado.codigoAuxiliar}"/> 
+
+						<p:commandLink
+							action="#{usuarioVisao.acessarFuncionalidade('ALTERAUSUARIO')}"
+							update=":idFormConsultaUsuario">
+							<f:setPropertyActionListener value="#{usuario.codigoUsuario}"
+								target="#{usuarioVisao.usuarioLogado.codigoAuxiliar}" />
 							<p:graphicImage library="imagens" name="editar.png" />
 						</p:commandLink>
 
 						<p:spacer width="20" />
 
-						<p:commandLink action="#{usuarioVisao.ativarInativar(usuario)}" update=":idFormConsultaUsuario" >
+						<p:commandLink action="#{usuarioVisao.ativarInativar(usuario)}"
+							update=":idFormConsultaUsuario">
 							<p:graphicImage library="imagens" name="excluir.png" />
 						</p:commandLink>
 					</p:column>
@@ -65,8 +69,12 @@
 				</p:dataTable>
 
 				<f:facet name="footer">
-					<p:commandButton value="Consultar" action="#{usuarioVisao.consultarUsuarioPorNome()}" update=":idFormConsultaUsuario" />
-					<p:commandButton value="Voltar"    type="submit" action="#{usuarioVisao.acessarFuncionalidade('CADASTROUSUARIO')}" update=":idFormConsultaUsuario"  />
+					<p:commandButton value="Consultar"
+						action="#{usuarioVisao.consultarUsuarioPorNome()}"
+						update=":idFormConsultaUsuario" />
+					<p:commandButton value="Voltar" type="submit"
+						action="#{usuarioVisao.acessarFuncionalidade('CADASTROUSUARIO')}"
+						update=":idFormConsultaUsuario" />
 				</f:facet>
 			</p:panel>
 		</h:form>
