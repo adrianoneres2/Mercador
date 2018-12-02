@@ -71,7 +71,8 @@
 				<f:facet name="footer">
 					<p:commandButton value="Consultar"
 						action="#{usuarioVisao.consultarUsuarioPorNome()}"
-						update=":idFormConsultaUsuario" />
+						update=":idFormConsultaUsuario" >
+					</p:commandButton>
 					<p:commandButton value="Voltar" type="submit"
 						action="#{usuarioVisao.acessarFuncionalidade('CADASTROUSUARIO')}"
 						update=":idFormConsultaUsuario" />
