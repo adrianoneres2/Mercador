@@ -54,12 +54,10 @@ public class UsuarioVisao implements Serializable{
 	@Inject
 	MenuVisao menuVisao;
 	
-	private String retorno;
+	private ObjetoSessao objetoSessao = new ObjetoSessao();
 	
-	private ObjetoSessao objetoSessao;
-	
-	Long identificador;
-	
+	private Long identificador;
+
 	public UsuarioVisao() {
 		this.setUsuarios(new ArrayList<Usuario>());
 	}
@@ -69,24 +67,17 @@ public class UsuarioVisao implements Serializable{
 	public void init(){
 		this.carregarListaPerfis();
 		
-		//Se existir usuário informado, guardar o identificador na sessão.
-		if(identificador != null){
-			objetoSessao.setAtributo(this.getUsuario().getCodigoUsuario(), "codigoUsuario");
-		}
-		
+		///Entra quando um atributo foi passado como parametro exemplo: codigo do usuário para alteração usuário.
 		if(objetoSessao != null){
 			this.setUsuario(getUsuarioService().obterUsuarioPorCodigo(objetoSessao.getAtributo("codigoUsuario")));
 			objetoSessao.removeAtributo("codigoUsuario");
+			identificador = null;
 		}
-		
-		///Entra quando a opção for alterar usuário
-	/*	if(usuario.getCodigoAuxiliar()!= null){
-			this.setUsuario(getUsuarioService().obterUsuarioPorCodigo(usuarioLogado.getCodigoAuxiliar()));
-			usuarioLogado.setCodigoAuxiliar(null);
-		}*/
-		
-		
-		
+	}
+	
+	public void setIdentificador(Long identificador) {
+		this.identificador = identificador;
+		objetoSessao.setAtributo(identificador, "codigoUsuario");
 	}
 	
 	public List<Usuario> getUsuarios() {
@@ -96,7 +87,11 @@ public class UsuarioVisao implements Serializable{
 		this.usuarios = usuarios;
 	}
 	public Usuario getUsuario() {
+		if(usuario == null){
+			return new Usuario();
+		}
 		return usuario;
+		
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
@@ -166,7 +161,11 @@ public class UsuarioVisao implements Serializable{
 	}
 
 	public void consultarUsuarioPorNome(){
-		setUsuarios(usuarioService.obterUsuarioPorNome(usuario.getNomeUsuario()));
+		if(usuario == null){
+			setUsuarios(usuarioService.obterUsuarioPorNome(""));
+		}else{
+			setUsuarios(usuarioService.obterUsuarioPorNome(usuario.getNomeUsuario()));
+		}
 	}
 	
 	public String cadastrar() throws Exception {
