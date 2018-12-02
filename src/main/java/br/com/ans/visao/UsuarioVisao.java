@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import util.ObjetoSessao;
 import br.com.ans.dao.PerfilService;
 import br.com.ans.model.Perfil;
 import br.com.ans.model.Usuario;
@@ -44,7 +45,7 @@ public class UsuarioVisao implements Serializable{
 	
 	private Long perfilSelecionado;
 	
-	String descricaoSituacao;
+	///String descricaoSituacao;
 	
 	private String email;
 	
@@ -55,6 +56,10 @@ public class UsuarioVisao implements Serializable{
 	
 	private String retorno;
 	
+	private ObjetoSessao objetoSessao;
+	
+	Long identificador;
+	
 	public UsuarioVisao() {
 		this.setUsuarios(new ArrayList<Usuario>());
 	}
@@ -64,11 +69,24 @@ public class UsuarioVisao implements Serializable{
 	public void init(){
 		this.carregarListaPerfis();
 		
+		//Se existir usuário informado, guardar o identificador na sessão.
+		if(identificador != null){
+			objetoSessao.setAtributo(this.getUsuario().getCodigoUsuario(), "codigoUsuario");
+		}
+		
+		if(objetoSessao != null){
+			this.setUsuario(getUsuarioService().obterUsuarioPorCodigo(objetoSessao.getAtributo("codigoUsuario")));
+			objetoSessao.removeAtributo("codigoUsuario");
+		}
+		
 		///Entra quando a opção for alterar usuário
-		if(usuarioLogado.getCodigoAuxiliar()!= null){
+	/*	if(usuario.getCodigoAuxiliar()!= null){
 			this.setUsuario(getUsuarioService().obterUsuarioPorCodigo(usuarioLogado.getCodigoAuxiliar()));
 			usuarioLogado.setCodigoAuxiliar(null);
-		}
+		}*/
+		
+		
+		
 	}
 	
 	public List<Usuario> getUsuarios() {
@@ -165,27 +183,16 @@ public class UsuarioVisao implements Serializable{
 		return null;
 	}
 	
-	public void ativarInativar(Usuario usuario){
-		
-		retorno = acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARUSUARIO); 
-		
-		if(retorno != null){
+	public void ativarInativar(Usuario usuario){ 
+		if(acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARUSUARIO) != null){
 			usuarioService.ativarInativar(usuario);
 			this.consultarUsuarioPorNome();
 		}		
 	}
 	
-	public String alterar(){
-		
-		retorno = menuVisao.acessar(usuarioLogado.getUsuario(), FuncionalidadeEnum.ALTERAUSUARIO);
-		
-		if (retorno != ""){
-			return retorno;
-		}else{
-			usuarioLogado.setCodigoAuxiliar(null);
-			return "";
-		}
-	}
+/*	public String alterar(){
+		return menuVisao.acessar(usuarioLogado.getUsuario(), FuncionalidadeEnum.ALTERAUSUARIO);
+	}*/
 
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		return menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
@@ -198,12 +205,11 @@ public class UsuarioVisao implements Serializable{
 		this.getUsuario().setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
 		
 		if (getUsuarioService().validarCamposCadastro(this.getUsuario())){			
-		   //this.getUsuario().setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
 		   getUsuarioService().cadastrarUsuario(this.getUsuario());
 		}
 	}
 
-	public String getDescricaoSituacao() {
+/*	public String getDescricaoSituacao() {
 		
 		if (this.usuario.getUsuarioAtivo().equals("S")){
 			this.setDescricaoSituacao("Ativo");
@@ -212,10 +218,12 @@ public class UsuarioVisao implements Serializable{
 		};
 		return descricaoSituacao;
 	}
+	*/
 
-	public void setDescricaoSituacao(String descricaoSituacao) {
+/*	public void setDescricaoSituacao(String descricaoSituacao) {
 		this.descricaoSituacao = descricaoSituacao;
 	}
+	*/
 
 	public HashMap<Long, String> getListaPerfil() {
 		return listaPerfil;

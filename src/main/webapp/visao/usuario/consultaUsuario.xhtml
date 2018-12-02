@@ -41,7 +41,7 @@
 					</p:column>
 
 					<p:column headerText="Situação" width="70">
-						<h:outputText value="#{usuario.descricaoSituacao}" />
+						<h:outputText value="#{usuario.usuarioAtivo}" />
 					</p:column>
 
 					<p:column headerText="Perfil" width="110">
@@ -54,7 +54,7 @@
 							action="#{usuarioVisao.acessarFuncionalidade('ALTERAUSUARIO')}"
 							update=":idFormConsultaUsuario">
 							<f:setPropertyActionListener value="#{usuario.codigoUsuario}"
-								target="#{usuarioVisao.usuarioLogado.codigoAuxiliar}" />
+								target="#{usuarioVisao.identificador}" />
 							<p:graphicImage library="imagens" name="editar.png" />
 						</p:commandLink>
 
