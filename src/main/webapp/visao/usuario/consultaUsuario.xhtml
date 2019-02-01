@@ -51,10 +51,7 @@
 					<p:column headerText="Ações" width="70">
 
 						<p:commandLink
-							action="#{usuarioVisao.acessarFuncionalidade('ALTERAUSUARIO')}"
-							update=":idFormConsultaUsuario">
-							<f:setPropertyActionListener value="#{usuario.codigoUsuario}"
-								target="#{usuarioVisao.identificador}" />
+							action="#{usuarioVisao.editarUsuario(usuario)}" pdate=":idFormConsultaUsuario">
 							<p:graphicImage library="imagens" name="editar.png" />
 						</p:commandLink>
 

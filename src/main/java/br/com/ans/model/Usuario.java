@@ -124,15 +124,6 @@ public class Usuario implements EntidadeBase, Serializable{
 		public void setSenhaConfirmacao(String senhaConfirmacao) {
 			this.senhaConfirmacao = senhaConfirmacao;
 		}
-		// Método responsavel por retornar o código como string para o converter omnifaces.SelectItemsConverter
-
-		//		public Long getCodigoPerfil() {
-		//		return codigoPerfil;
-		//	}
-		//	public void setCodigoPerfil(Long codigoPerfil) {
-		//		this.codigoPerfil = codigoPerfil;
-		//	}
-		
 		
 		
 		@Override
@@ -154,15 +145,30 @@ public class Usuario implements EntidadeBase, Serializable{
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((codigoUsuario == null) ? 0 : codigoUsuario.hashCode());
-			result = prime * result + ((codigoUsuarioCadastro == null) ? 0 : codigoUsuarioCadastro.hashCode());
-			result = prime * result + ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
+			result = prime * result
+					+ ((codigoUsuario == null) ? 0 : codigoUsuario.hashCode());
+			result = prime
+					* result
+					+ ((codigoUsuarioCadastro == null) ? 0
+							: codigoUsuarioCadastro.hashCode());
+			result = prime * result
+					+ ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
+			result = prime
+					* result
+					+ ((descricaoSituacao == null) ? 0 : descricaoSituacao
+							.hashCode());
 			result = prime * result + ((email == null) ? 0 : email.hashCode());
-			result = prime * result + ((nomeUsuario == null) ? 0 : nomeUsuario.hashCode());
-			result = prime * result + ((perfil == null) ? 0 : perfil.hashCode());
+			result = prime * result
+					+ ((nomeUsuario == null) ? 0 : nomeUsuario.hashCode());
+			result = prime * result
+					+ ((perfil == null) ? 0 : perfil.hashCode());
 			result = prime * result + ((senha == null) ? 0 : senha.hashCode());
-			result = prime * result + ((senhaConfirmacao == null) ? 0 : senhaConfirmacao.hashCode());
-			result = prime * result + ((usuarioAtivo == null) ? 0 : usuarioAtivo.hashCode());
+			result = prime
+					* result
+					+ ((senhaConfirmacao == null) ? 0 : senhaConfirmacao
+							.hashCode());
+			result = prime * result
+					+ ((usuarioAtivo == null) ? 0 : usuarioAtivo.hashCode());
 			return result;
 		}
 		@Override
@@ -182,12 +188,18 @@ public class Usuario implements EntidadeBase, Serializable{
 			if (codigoUsuarioCadastro == null) {
 				if (other.codigoUsuarioCadastro != null)
 					return false;
-			} else if (!codigoUsuarioCadastro.equals(other.codigoUsuarioCadastro))
+			} else if (!codigoUsuarioCadastro
+					.equals(other.codigoUsuarioCadastro))
 				return false;
 			if (dataCadastro == null) {
 				if (other.dataCadastro != null)
 					return false;
 			} else if (!dataCadastro.equals(other.dataCadastro))
+				return false;
+			if (descricaoSituacao == null) {
+				if (other.descricaoSituacao != null)
+					return false;
+			} else if (!descricaoSituacao.equals(other.descricaoSituacao))
 				return false;
 			if (email == null) {
 				if (other.email != null)
@@ -220,6 +232,7 @@ public class Usuario implements EntidadeBase, Serializable{
 			} else if (!usuarioAtivo.equals(other.usuarioAtivo))
 				return false;
 			return true;
-		}		
+		}
+	
 		
 }

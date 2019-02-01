@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import util.ObjetoSessao;
 import br.com.ans.dao.PerfilService;
 import br.com.ans.model.Perfil;
 import br.com.ans.model.Usuario;
@@ -53,13 +53,10 @@ public class UsuarioVisao implements Serializable{
 	
 	@Inject
 	MenuVisao menuVisao;
-	
-	private ObjetoSessao objetoSessao = new ObjetoSessao();
-	
-	private Long identificador;
 
 	public UsuarioVisao() {
 		this.setUsuarios(new ArrayList<Usuario>());
+		this.setUsuario(usuario);
 	}
 
 	
@@ -67,17 +64,12 @@ public class UsuarioVisao implements Serializable{
 	public void init(){
 		this.carregarListaPerfis();
 		
-		///Entra quando um atributo foi passado como parametro exemplo: codigo do usuário para alteração usuário.
-		if(objetoSessao != null){
-			this.setUsuario(getUsuarioService().obterUsuarioPorCodigo(objetoSessao.getAtributo("codigoUsuario")));
-			objetoSessao.removeAtributo("codigoUsuario");
-			identificador = null;
+		Usuario usuarioAlteracao = new Usuario();
+		usuarioAlteracao = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("usuario");
+		
+		if (usuarioAlteracao != null){
+			this.usuario = usuarioAlteracao;
 		}
-	}
-	
-	public void setIdentificador(Long identificador) {
-		this.identificador = identificador;
-		objetoSessao.setAtributo(identificador, "codigoUsuario");
 	}
 	
 	public List<Usuario> getUsuarios() {
@@ -131,6 +123,12 @@ public class UsuarioVisao implements Serializable{
 		this.perfis = perfis;
 	}
 	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 	public void carregarListaPerfis(){
 		
 		this.setPerfis(getPerfilService().obterPerfil());
@@ -169,14 +167,14 @@ public class UsuarioVisao implements Serializable{
 	}
 	
 	public String cadastrar() throws Exception {
-		this.getUsuario().setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
+		usuario.setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
 		
-		if (getUsuarioService().validarCamposCadastro(this.getUsuario())){
+		if (getUsuarioService().validarCamposCadastro(usuario)){
 		   //Atribui usuário logado!!!	
 		   this.getUsuario().setCodigoUsuarioCadastro(this.getUsuarioLogado().getUsuario().getCodigoUsuario());	
 		   this.getUsuario().setDataCadastro(new Date());
 		   this.getUsuario().setUsuarioAtivo("S");
-		   getUsuarioService().cadastrarUsuario(this.getUsuario());
+		   getUsuarioService().cadastrarUsuario(usuario);
 		   //this.setPerfis(getPerfilService().obterPerfil());
 		}
 		return null;
@@ -189,18 +187,19 @@ public class UsuarioVisao implements Serializable{
 		}		
 	}
 	
-/*	public String alterar(){
-		return menuVisao.acessar(usuarioLogado.getUsuario(), FuncionalidadeEnum.ALTERAUSUARIO);
-	}*/
-
+	public String editarUsuario(Usuario usuarioEdicao) {
+		//Guarda o objeto usuário na sesão flash.
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("usuario", usuarioEdicao);
+		return "/visao/usuario/alterarUsuario";
+	}
+	
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		return menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
 	}
 	
-	public void alterarUsuario() throws Exception {
-		/***Seta o novo perfil da tela de alteração antes da validação dos campos. 
-		 *** Obs: isso foi necessário para que o perfil já cadastrado não seja validado e sim o da alteração. 
-		 ***/
+	public void alterar() throws Exception {
+		
+		//Seta o novo perfil da tela de alteração antes da validação dos campos. Obs: isso foi necessário para que o perfil já cadastrado não seja validado e sim o da alteração. 
 		this.getUsuario().setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
 		
 		if (getUsuarioService().validarCamposCadastro(this.getUsuario())){			

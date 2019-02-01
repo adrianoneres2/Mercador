@@ -22,8 +22,13 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public void novo(Produto produto) {
 		if(this.validarCampos(produto)){
-			produtoDao.novo(produto);
-		}
+		  try {
+		    produtoDao.novo(produto);
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Protuto cadastrado com sucesso!"));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Erro ao tentar cadastrar o produto!"));
+		}	
+	  }
 	}	
 	
 	public boolean validarCampos(Produto produto){

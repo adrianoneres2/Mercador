@@ -160,6 +160,7 @@ public class produtoVisao implements Serializable{
 		
 		this.getProduto().setDataProduto(new Date());
 		produtoService.novo(produto);
+		produto = new Produto();
 		
 	}
 	
