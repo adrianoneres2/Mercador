@@ -193,6 +193,10 @@ public class UsuarioVisao implements Serializable{
 		return "/visao/usuario/alterarUsuario";
 	}
 	
+	public String aplicacao(){ 
+		 return acessarFuncionalidade(FuncionalidadeEnum.APLICACAO);
+	}
+	
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		return menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
 	}
