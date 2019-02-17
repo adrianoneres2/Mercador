@@ -30,7 +30,7 @@ public class UsuarioDaoImpl extends GenericoDaoImpl<Usuario> implements UsuarioD
 		
 		try {
 		
-			TypedQuery<Usuario> query = entityManager.createQuery("from Usuario", Usuario.class);
+			TypedQuery<Usuario> query = entityManager.createQuery("from Usuario u ORDER BY nomeUsuario asc", Usuario.class);
 			listaUsuario = query.getResultList();
 
 		} catch (Exception e) {

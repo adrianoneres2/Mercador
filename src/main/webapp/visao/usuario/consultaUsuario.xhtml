@@ -36,12 +36,8 @@
 
 					<p:column headerText="Data de cadastro" width="170">
 						<h:outputText value="#{usuario.dataCadastro}">
-							<f:convertDateTime pattern="dd/mm/yyyy" />
+							<f:convertDateTime pattern="dd-MM-yyyy HH:MM" ttimeZone="America/Sao_Paulo"/>
 						</h:outputText>
-					</p:column>
-
-					<p:column headerText="Situação" width="70">
-						<h:outputText value="#{usuario.usuarioAtivo}" />
 					</p:column>
 
 					<p:column headerText="Perfil" width="110">
@@ -51,7 +47,7 @@
 					<p:column headerText="Ações" width="70">
 
 						<p:commandLink
-							action="#{usuarioVisao.editarUsuario(usuario)}" pdate=":idFormConsultaUsuario">
+							action="#{usuarioVisao.editarUsuario(usuario)}" update=":idFormConsultaUsuario">
 							<p:graphicImage library="imagens" name="editar.png" />
 						</p:commandLink>
 
@@ -59,7 +55,8 @@
 
 						<p:commandLink action="#{usuarioVisao.ativarInativar(usuario)}"
 							update=":idFormConsultaUsuario">
-							<p:graphicImage library="imagens" name="excluir.png" />
+							<p:graphicImage library="imagens" name="usuario_ativo.png" rendered="#{usuario.usuarioAtivo == 'S'}"/>
+							<p:graphicImage library="imagens" name="usuario_inativo.png" rendered="#{usuario.usuarioAtivo == 'N'}" />
 						</p:commandLink>
 					</p:column>
 
@@ -71,7 +68,7 @@
 						update=":idFormConsultaUsuario" >
 					</p:commandButton>
 					<p:commandButton value="Voltar" type="submit"
-						action="#{usuarioVisao.acessarFuncionalidade('CADASTROUSUARIO')}"
+						action="#{usuarioVisao.aplicacao()}"
 						update=":idFormConsultaUsuario" />
 				</f:facet>
 			</p:panel>

@@ -167,6 +167,8 @@ public class UsuarioVisao implements Serializable{
 	}
 	
 	public String cadastrar() throws Exception {
+	
+	  if (acessarFuncionalidade(FuncionalidadeEnum.CADASTROUSUARIO) != null){	
 		usuario.setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
 		
 		if (getUsuarioService().validarCamposCadastro(usuario)){
@@ -178,6 +180,9 @@ public class UsuarioVisao implements Serializable{
 		   //this.setPerfis(getPerfilService().obterPerfil());
 		}
 		return null;
+	  }else{
+		return null;
+	  }
 	}
 	
 	public void ativarInativar(Usuario usuario){ 
@@ -188,9 +193,15 @@ public class UsuarioVisao implements Serializable{
 	}
 	
 	public String editarUsuario(Usuario usuarioEdicao) {
-		//Guarda o objeto usuário na sesão flash.
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("usuario", usuarioEdicao);
-		return "/visao/usuario/alterarUsuario";
+		String permissao = acessarFuncionalidade(FuncionalidadeEnum.ALTERAUSUARIO);
+		
+		if(permissao != null){
+			  /*Guarda o objeto usuário na sessão flash.*/
+			  FacesContext.getCurrentInstance().getExternalContext().getFlash().put("usuario", usuarioEdicao);
+			  return permissao;
+	  }else{
+        return null;
+	  }
 	}
 	
 	public String aplicacao(){ 

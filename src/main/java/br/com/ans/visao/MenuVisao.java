@@ -24,8 +24,11 @@ public class MenuVisao implements Serializable{
 		   return funcionalidadeEnum.APLICACAO.getUrl().toString();
 		}else{
 			Long codigoFuncionalidade = (long) funcionalidadeEnum.getCodigo();
+			
+			/*Verifica se o usuário passado como parâmetro tem permissão de acesso a funcionalidade solicitada.*/
 			if (perfilFuncionalidadeService.perfilFuncionalidade(UsuarioLogado.getPerfil().getCodigoPerfil(), codigoFuncionalidade)){
 			
+				/*Se sim, devolve a url solicitada!*/
 			switch(funcionalidadeEnum){
 					case ALTERAUSUARIO         :return FuncionalidadeEnum.ALTERAUSUARIO.getUrl();
 					case CADASTROUSUARIO       :return FuncionalidadeEnum.CADASTROUSUARIO.getUrl();
