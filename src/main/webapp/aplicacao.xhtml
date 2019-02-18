@@ -47,12 +47,16 @@
 					<br/>
 					<h:graphicImage name ="usuario.png" library="imagens"/>
 					<p:spacer width="5px" />
-					<p:outputLabel id="idLabelUsuarioLogado" value="#{autenticadorVisao.usuario.nomeUsuario} " />
+					<p:outputLabel id="idLabelUsuarioLogado" value="#{autenticadorVisao.usuario.nomeUsuario}" />
 					<br/>
 					<h:graphicImage name ="engrenagem.png" library="imagens"/>
 					<p:spacer width="5px" />
 					<p:outputLabel id="idLabelUsuarioPerfil" value="#{autenticadorVisao.usuario.getPerfil().getNomePerfil()}"/>
-
+					<br/>
+					<h:graphicImage name ="ajuda.png" library="imagens"/>
+					<p:spacer width="5px" />
+					<p:outputLabel id="idLabelAjuda"/>
+					<p:outputLabel value="Ajuda"/>
 				</p:outputPanel>
 			</div>
 	   </h:form>
@@ -68,6 +72,7 @@
 			
 			        <p:submenu label="Produto">
 			        	<p:menuitem value="Cadastro" action="#{usuarioVisao.acessarFuncionalidade('CADASTROPRODUTO')}" update="growlMenu"/>
+			        	<p:menuitem value="Consulta" action="#{usuarioVisao.acessarFuncionalidade('CONSULTAPRODUTO')}" update="growlMenu"/>
 			        </p:submenu>
 			        
 			        <p:submenu label="Usuário">

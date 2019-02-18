@@ -29,6 +29,8 @@ public class produtoVisao implements Serializable{
 	private List<Categoria> categorias;
 	private List<SubCategoria> subCategorias;
 	
+	private List<Produto> produtos;
+	
 	@Inject
 	private CategoriaService categoriaService;
 	
@@ -120,6 +122,15 @@ public class produtoVisao implements Serializable{
 
 	public void setSubCategorias(List<SubCategoria> subCategorias) {
 		this.subCategorias = subCategorias;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 
 
