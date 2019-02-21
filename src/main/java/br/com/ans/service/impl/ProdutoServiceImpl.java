@@ -1,5 +1,7 @@
 package br.com.ans.service.impl;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -7,6 +9,7 @@ import javax.inject.Inject;
 
 import br.com.ans.dao.ProdutoDao;
 import br.com.ans.model.Produto;
+import br.com.ans.model.Usuario;
 import br.com.ans.service.ProdutoService;
 
 @RequestScoped
@@ -22,13 +25,12 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public void novo(Produto produto) {
 		if(this.validarCampos(produto)){
-		  try {
-		    produtoDao.novo(produto);
-		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Protuto cadastrado com sucesso!"));
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Erro ao tentar cadastrar o produto!"));
-		}	
-	  }
+		    if(produtoDao.novo(produto)){
+		    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Protuto cadastrado com sucesso!"));	
+		    }else{
+		    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Erro ao tentar cadastrar o produto!"));
+		    }
+	     }
 	}	
 	
 	public boolean validarCampos(Produto produto){
@@ -54,4 +56,15 @@ public class ProdutoServiceImpl implements ProdutoService {
 		}
 		return validador;
 	}
+	
+	@Override
+	public List<Produto> obterProdutoPorNome(String nome) {
+		
+		if (!"".equals(nome)){
+			return produtoDao.consultarProdutoPorNome(nome);	
+		}else{
+			return produtoDao.bucarTodos();	
+		}
+	}
+	
 }

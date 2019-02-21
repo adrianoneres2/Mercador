@@ -1,6 +1,7 @@
 package br.com.ans.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.enterprise.context.Dependent;
@@ -52,7 +53,9 @@ public class Produto implements EntidadeBase, Serializable {
 	
 	@Column(name = "dt_produto")
 	private Date dataProduto;
-	
+
+	@Column(name = "st_produto")
+	private Integer situacaoProduto;
 	
 	@Override
 	public Long getId() {
@@ -140,6 +143,16 @@ public class Produto implements EntidadeBase, Serializable {
 	}
 
 
+	public Integer getSituacaoProduto() {
+		return situacaoProduto;
+	}
+
+
+	public void setSituacaoProduto(Integer situacaoProduto) {
+		this.situacaoProduto = situacaoProduto;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -150,14 +163,15 @@ public class Produto implements EntidadeBase, Serializable {
 				+ ((codigoProduto == null) ? 0 : codigoProduto.hashCode());
 		result = prime * result
 				+ ((dataProduto == null) ? 0 : dataProduto.hashCode());
-		result = prime * result
-				+ ((imagemProduto == null) ? 0 : imagemProduto.hashCode());
+		result = prime * result + Arrays.hashCode(imagemProduto);
 		result = prime * result
 				+ ((nomeProduto == null) ? 0 : nomeProduto.hashCode());
 		result = prime
 				* result
 				+ ((quantidadeProduto == null) ? 0 : quantidadeProduto
 						.hashCode());
+		result = prime * result
+				+ ((situacaoProduto == null) ? 0 : situacaoProduto.hashCode());
 		result = prime * result
 				+ ((subCategoria == null) ? 0 : subCategoria.hashCode());
 		result = prime * result
@@ -190,10 +204,7 @@ public class Produto implements EntidadeBase, Serializable {
 				return false;
 		} else if (!dataProduto.equals(other.dataProduto))
 			return false;
-		if (imagemProduto == null) {
-			if (other.imagemProduto != null)
-				return false;
-		} else if (!imagemProduto.equals(other.imagemProduto))
+		if (!Arrays.equals(imagemProduto, other.imagemProduto))
 			return false;
 		if (nomeProduto == null) {
 			if (other.nomeProduto != null)
@@ -204,6 +215,11 @@ public class Produto implements EntidadeBase, Serializable {
 			if (other.quantidadeProduto != null)
 				return false;
 		} else if (!quantidadeProduto.equals(other.quantidadeProduto))
+			return false;
+		if (situacaoProduto == null) {
+			if (other.situacaoProduto != null)
+				return false;
+		} else if (!situacaoProduto.equals(other.situacaoProduto))
 			return false;
 		if (subCategoria == null) {
 			if (other.subCategoria != null)
@@ -216,6 +232,7 @@ public class Produto implements EntidadeBase, Serializable {
 		} else if (!valorVenda.equals(other.valorVenda))
 			return false;
 		return true;
-	}	
+	}
+
 	
 }

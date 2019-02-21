@@ -22,37 +22,43 @@
 				<p:dataTable var="produto" value="#{produtoVisao.produtos}"
 					rows="10" lazy="true" paginator="true">
 
-					<p:column headerText="Codigo" width="70">
+					<p:column headerText="Código" width="70">
 						<h:outputText value="#{produto.codigoProduto}" />
 					</p:column>
 
-					<p:column headerText="Nome">
+					<p:column headerText="Nome" width="320">
 						<h:outputText value="#{produto.nomeProduto}" />
 					</p:column>
 
-					<p:column headerText="Quantidade">
+					<p:column headerText="Sub Categoria" width="80">
+						<h:outputText value="#{produto.subCategoria.nomeSubCategoria}" />
+					</p:column>
+
+					<p:column headerText="Quantidade" width="70">
 						<h:outputText value="#{produto.quantidadeProduto}" />
 					</p:column>
 
-					<p:column headerText="Valor">
-						<h:outputText value="#{produto.valorVenda}" />
-					</p:column>
-
-					<p:column headerText="Código de barras">
-						<h:outputText value="#{produto.quantidadeProduto}" />
-					</p:column>
-
-					<p:column headerText="Imagem">
-						<h:outputText value="#{produto.imagemProduto}" />
-					</p:column>
-
-					<p:column headerText="Data de cadastro" width="170">
-						<h:outputText value="#{produto.dataProduto}">
-							<f:convertDateTime pattern="dd/mm/yyyy" />
+					<p:column headerText="Valor" width="70">
+						<h:outputText value="#{produto.valorVenda}" >
+						   <f:convertNumber type="currency" />
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Ações" width="70">
+					<p:column headerText="Código de barras" width="170">
+						<h:outputText value="#{produto.codigoBarra}" />
+					</p:column>
+
+					<p:column headerText="Imagem" width="70">
+						<h:outputText value="#{produto.imagemProduto}" />
+					</p:column>
+
+					<p:column headerText="Data de cadastro" width="110">
+						<h:outputText value="#{produto.dataProduto}">
+							<f:convertDateTime pattern="dd-MM-yyyy HH:MM" ttimeZone="America/Sao_Paulo"/>
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Ações" width="50">
 
 						<p:commandLink
 							action="#{produtoVisao.editarProduto(produto)}" pdate=":idFormConsultaProduto">
@@ -63,7 +69,8 @@
 
 						<p:commandLink action="#{produtoVisao.ativarInativar(produto)}"
 							update=":idFormConsultaProduto">
-							<p:graphicImage library="imagens" name="excluir.png" />
+							<p:graphicImage library="imagens" name="ativo.png" rendered="#{produto.situacaoProduto == '1'}"/>
+							<p:graphicImage library="imagens" name="excluido.png" rendered="#{produto.situacaoProduto == '0'}" />
 						</p:commandLink>
 					</p:column>
 
@@ -71,11 +78,11 @@
 
 				<f:facet name="footer">
 					<p:commandButton value="Consultar"
-						action="#{ProdutoVisao.consultarProdutoPorNome()}"
+						action="#{produtoVisao.consultarProdutoPorNome()}"
 						update=":idFormConsultaProduto" >
 					</p:commandButton>
 					<p:commandButton value="Voltar" type="submit"
-						action="#"
+						action="#{usuarioVisao.aplicacao()}"
 						update=":idFormConsultaProduto" />
 				</f:facet>
 			</p:panel>

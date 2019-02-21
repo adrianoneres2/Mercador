@@ -170,9 +170,18 @@ public class produtoVisao implements Serializable{
 		}
 		
 		this.getProduto().setDataProduto(new Date());
+		this.getProduto().setSituacaoProduto(1);
 		produtoService.novo(produto);
 		produto = new Produto();
 		
+	}
+	
+	public void consultarProdutoPorNome(){
+		if(produto == null){
+			setProdutos(produtoService.obterProdutoPorNome(""));
+		}else{
+			setProdutos(produtoService.obterProdutoPorNome(produto.getNomeProduto()));
+		}
 	}
 	
 }
