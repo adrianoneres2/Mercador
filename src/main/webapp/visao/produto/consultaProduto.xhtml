@@ -77,13 +77,8 @@
 				</p:dataTable>
 
 				<f:facet name="footer">
-					<p:commandButton value="Consultar"
-						action="#{produtoVisao.consultarProdutoPorNome()}"
-						update=":idFormConsultaProduto" >
-					</p:commandButton>
-					<p:commandButton value="Voltar" type="submit"
-						action="#{usuarioVisao.aplicacao()}"
-						update=":idFormConsultaProduto" />
+					<p:commandButton value="Consultar" action="#{produtoVisao.consultarProdutoPorNome()}" update=":idFormConsultaProduto" />
+					<p:commandButton value="Voltar" type="submit" action="#{usuarioVisao.aplicacao()}" update=":idFormConsultaProduto" />
 				</f:facet>
 			</p:panel>
 		</h:form>

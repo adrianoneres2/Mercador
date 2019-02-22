@@ -15,6 +15,7 @@ import br.com.ans.model.SubCategoria;
 import br.com.ans.service.CategoriaService;
 import br.com.ans.service.ProdutoService;
 import br.com.ans.service.SubCategoriaService;
+import enumerations.FuncionalidadeEnum;
 
 @javax.faces.view.ViewScoped
 @Named
@@ -43,6 +44,12 @@ public class produtoVisao implements Serializable{
 	private Produto produto;
 	
 	@Inject ProdutoService produtoService;
+	
+	@Inject
+	private AutenticadorVisao usuarioLogado;
+	
+	@Inject
+	MenuVisao menuVisao;
 	
 	
 	@PostConstruct
@@ -176,12 +183,33 @@ public class produtoVisao implements Serializable{
 		
 	}
 	
-	public void consultarProdutoPorNome(){
-		if(produto == null){
-			setProdutos(produtoService.obterProdutoPorNome(""));
-		}else{
-			setProdutos(produtoService.obterProdutoPorNome(produto.getNomeProduto()));
-		}
+	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
+		return menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
 	}
 	
+	public String consultarProduto(){
+		String consulta = acessarFuncionalidade(FuncionalidadeEnum.CONSULTAPRODUTO);
+		
+		if(consulta != null){
+			consultarProdutoPorNome();
+			return consulta;
+		}
+	  return null;
+	}
+	
+	public void consultarProdutoPorNome(){
+			
+			if(produto == null){
+				setProdutos(produtoService.obterProdutoPorNome(""));
+			}else{
+				setProdutos(produtoService.obterProdutoPorNome(produto.getNomeProduto()));
+			}
+	}
+	
+	public void ativarInativar(Produto produto){ 
+		if(acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARPRODUTO) != null){
+			produtoService.ativarInativar(produto);
+			this.consultarProdutoPorNome();
+		}		
+	}
 }

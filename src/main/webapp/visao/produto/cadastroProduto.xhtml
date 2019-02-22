@@ -88,7 +88,7 @@
 					
 				<f:facet name="footer">
 					<p:commandButton type="submit" value="Cadastrar" action="#{produtoVisao.novo()}" update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto"/>
-					<p:commandButton type="submit" value="Consultar" action="#{produtoVisao.consultarProdutoPorNome()}" update="@all"/>
+					<p:commandButton type="submit" value="Consultar" action="#{produtoVisao.consultarProduto()}" update="idFormCadastroProduto"/>
 					<p:commandButton value="Voltar"    type="submit" action="#{usuarioVisao.aplicacao()}" update="idFormCadastroProduto" />
 				</f:facet>
 					

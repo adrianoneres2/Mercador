@@ -42,6 +42,7 @@ public class MenuVisao implements Serializable{
 					case CADASTROPERFIL        :return FuncionalidadeEnum.CADASTROPERFIL.getUrl();
 					case MANTERPERFIL          :return FuncionalidadeEnum.MANTERPERFIL.getUrl();
 					case CONSULTAPRODUTO       :return FuncionalidadeEnum.CONSULTAPRODUTO.getUrl();
+					case ATIVARINATIVARPRODUTO :return FuncionalidadeEnum.ATIVARINATIVARPRODUTO.getUrl();
 				}
 			}
 		}

@@ -67,4 +67,22 @@ public class ProdutoServiceImpl implements ProdutoService {
 		}
 	}
 	
+	@Override
+	public void ativarInativar(Produto produto){
+		
+		if(produto.getSituacaoProduto()==1){
+			produto.setSituacaoProduto(0);	
+		}else{
+			produto.setSituacaoProduto(1);
+		}
+		
+        try{
+        	produtoDao.novo(produto);
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Situação atualizada com sucesso!"));
+        }catch(Exception e){
+        	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fatal", "Erro ao tentar atualizar o produto!"));
+        	e.printStackTrace();
+        }
+	}
+	
 }

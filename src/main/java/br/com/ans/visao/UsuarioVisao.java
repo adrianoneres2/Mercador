@@ -157,6 +157,18 @@ public class UsuarioVisao implements Serializable{
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
+	
+	
+	public String consultarUsuario(){
+		String consulta = acessarFuncionalidade(FuncionalidadeEnum.CONSULTAUSUARIO);
+		
+		if(consulta != null){
+			consultarUsuarioPorNome();
+			return consulta;
+		}		
+	 return null;			
+	}
+	
 
 	public void consultarUsuarioPorNome(){
 		if(usuario == null){

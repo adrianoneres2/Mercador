@@ -10,4 +10,6 @@ public interface ProdutoService {
 
 	List<Produto> obterProdutoPorNome(String nome);
 
+	void ativarInativar(Produto produto);
+
 }
