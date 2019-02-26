@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -49,12 +50,19 @@ public class produtoVisao implements Serializable{
 	private AutenticadorVisao usuarioLogado;
 	
 	@Inject
-	MenuVisao menuVisao;
-	
+	MenuVisao menuVisao;  
 	
 	@PostConstruct
 	public void init(){
 		this.carregarListaCategoria();
+		
+		Produto produtoAlteracao = new Produto();
+		produtoAlteracao = (Produto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("produto");
+		
+		if (produtoAlteracao != null){
+			this.produto = produtoAlteracao;
+		}
+		
 	}
 	
 	
@@ -211,5 +219,23 @@ public class produtoVisao implements Serializable{
 			produtoService.ativarInativar(produto);
 			this.consultarProdutoPorNome();
 		}		
+	}
+	
+	public String editarProduto(Produto produtoEdicao) {
+		String permissao = acessarFuncionalidade(FuncionalidadeEnum.ALTERAPRODUTO);
+		
+		if(permissao != null){
+			  /*Guarda o objeto usuário na sessão flash.*/
+			  FacesContext.getCurrentInstance().getExternalContext().getFlash().put("produto", produtoEdicao);
+			  return permissao;
+	  }else{
+        return null;
+	  }
+	}
+	
+	public void alterar() throws Exception {
+		//Seta o novo perfil da tela de alteração antes da validação dos campos. Obs: isso foi necessário para que o perfil já cadastrado não seja validado e sim o da alteração. 
+		//this.getUsuario().setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
+			produtoService.novo(produto);
 	}
 }

@@ -22,7 +22,7 @@
 				<p:dataTable var="produto" value="#{produtoVisao.produtos}"
 					rows="10" lazy="true" paginator="true">
 
-					<p:column headerText="Código" width="70">
+					<p:column headerText="Código" width="30">
 						<h:outputText value="#{produto.codigoProduto}" />
 					</p:column>
 
@@ -34,11 +34,11 @@
 						<h:outputText value="#{produto.subCategoria.nomeSubCategoria}" />
 					</p:column>
 
-					<p:column headerText="Quantidade" width="70">
+					<p:column headerText="Quantidade" width="50">
 						<h:outputText value="#{produto.quantidadeProduto}" />
 					</p:column>
 
-					<p:column headerText="Valor" width="70">
+					<p:column headerText="Valor" width="50">
 						<h:outputText value="#{produto.valorVenda}" >
 						   <f:convertNumber type="currency" />
 						</h:outputText>
@@ -54,7 +54,7 @@
 
 					<p:column headerText="Data de cadastro" width="110">
 						<h:outputText value="#{produto.dataProduto}">
-							<f:convertDateTime pattern="dd-MM-yyyy HH:MM" ttimeZone="America/Sao_Paulo"/>
+							<f:convertDateTime pattern="dd/MM/yyyy" ttimeZone="America/Sao_Paulo"/>
 						</h:outputText>
 					</p:column>
 

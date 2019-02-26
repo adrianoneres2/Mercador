@@ -2,58 +2,105 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" template="/aplicacao.xhtml">
+	xmlns:p="http://primefaces.org/ui" 
+	template="/aplicacao.xhtml">
 
 	<ui:define name="conteudoAplicacao">
-		<br />
-		<h:form id="idFormAlterarUsuario">
-			<p:growl id="growlAlterarUsuario" showDetail="true" escape="true"
-				closable="true" styleClass="messages" />
+	
+	
+	<script>
+            function mascara(o, f) {
+              v_obj = o;
+              v_fun = f;
+              setTimeout("execmascara()", 1);
+            }
+            function execmascara() {
+              v_obj.value = v_fun(v_obj.value);
+            }
+         function valor(v) {
+        v = v.replace(/\D/g, "");
+        v = v.replace(/[0-9]{15}/, "invÃ¡lido");
+        v = v.replace(/(\d{1})(\d{11})$/, "$1.$2"); // coloca ponto antes dos
+        // Ãºltimos 11 digitos
+        v = v.replace(/(\d{1})(\d{8})$/, "$1.$2"); // coloca ponto antes dos
+        // Ãºltimos 8 digitos
+        v = v.replace(/(\d{1})(\d{5})$/, "$1.$2"); // coloca ponto antes dos
+        // Ãºltimos 5 digitos
+        v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2"); // coloca virgula antes dos
+        // Ãºltimos 2 digitos
+        return v;
+        }
+
+        function valorInteiro(v) {
+            v = v.replace(/\D/g, "");
+            v = v.replace(/[0-9]{15}/, "invÃ¡lido");
+            return v;
+		}
+</script>
+	
+		<h:form id="idFormAlteraProduto">
+			<p:growl id="growlAlteraProduto" showDetail="true" escape="true" closable="true" styleClass="messages"/>
 			<br />
-
-			<p:panel id="idPanelAlterarUsuario" styleClass="divTelaPequena">
-
+			
+				<p:panel id="idPanelAlteraProduto" styleClass="divTelaPequena">
+				
 				<f:facet name="header">
-					<h:outputLabel value="Alteração de usuário" />
+					<h:outputLabel value="Alteração de Produtos" />
 				</f:facet>
+				
+					<h:panelGrid id="idPanelGridProduto" border="0" columns="2" cellpadding="1"	cellspacing="1">
 
-				<h:panelGrid id="idPpanelPrincipalAlterar" columns="2"
-					cellpadding="1" cellspacing="1" border="0">
+							<h:outputText value="Código: " />
+							<p:inputText value="#{produtoVisao.produto.codigoProduto}" id="inputCodigoProduto" size="20" maxlength="50" disabled="true"/>
 
-					<h:outputLabel value="Codigo" />
-					<p:inputText value="#{usuarioVisao.usuario.codigoUsuario}"
-						disabled="true" />
+							<h:outputText value="Situação" />
+							<p:inputText value="Ativo" id="inputSituacaoProdutoAtivo" size="20" maxlength="50" disabled="true" rendered="#{produtoVisao.produto.situacaoProduto == 1}"/>
+							<p:inputText value="Inativo" id="inputSituacaoProdutoInativo" size="20" maxlength="50" disabled="true" rendered="#{produtoVisao.produto.situacaoProduto == 0}"/>
+							<p:inputText value="" id="inputSituacaoProdutoNull" size="20" maxlength="50" disabled="true" rendered="#{produtoVisao.produto.situacaoProduto == null}"/>
+						    
+							<h:outputText value="Nome: " />
+							<p:inputText value="#{produtoVisao.produto.nomeProduto}" id="inputNomeProduto" size="20" maxlength="50"/>
 
-					<h:outputLabel value="Situação" />
-					<p:inputText value="#{usuarioVisao.usuario.usuarioAtivo}"
-						disabled="true" />
+							<h:outputText value="Quantidade: " />
+							<p:inputText value="#{produtoVisao.produto.quantidadeProduto}" id="inputQuantidadeProduto"  size="5" maxlength="4" onkeypress="mascara(this, valorInteiro);" >
+								<f:convertNumber minFractionDigits="2" />
+							</p:inputText>
+	
+							<h:outputText value="Valor de Venda: " />
+							<p:inputText value="#{produtoVisao.produto.valorVenda}" id="inputValorVendaProduto"  size="12" maxlength="12" onkeypress="mascara(this, valor);" >
+							<f:convertNumber minFractionDigits="2" />
+							</p:inputText>
+	
+							<h:outputText value="Codigo Barra: " />
+							<p:inputText value="#{produtoVisao.produto.codigoBarra}" id="inputCodigoBarraProduto"  size="30" maxlength="30"/>
+											
+						    <h:outputText value="Categoria " />
+							<p:selectOneMenu id="idSelectCategoria" value="#{produtoVisao.categoriaSelecionada}" required="true">
+								<f:selectItem itemValue="0" itemLabel="Selecione" />
+								<f:selectItems value="#{produtoVisao.listaCategoria.entrySet()}" 
+								               var="itemCategoria" 
+									itemValue="#{itemCategoria.key}"
+									itemLabel="#{itemCategoria.value}"/>
+							<f:ajax render="idSelectSubCategoria" event="change" listener="#{produtoVisao.carregarListaSubCategoria()}"/>
+							</p:selectOneMenu>
 
-					<h:outputLabel value="Nome" />
-					<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
-
-					<h:outputLabel value="E-Mail" />
-					<p:inputText value="#{usuarioVisao.usuario.email}" />
-
-					<h:outputLabel id="idLabelPerfil" value="Perfil"
-						for="idSelectPerfil" />
-					<p:selectOneMenu id="idSelectPerfil"
-						value="#{usuarioVisao.perfilSelecionado}" required="true">
-						<f:selectItem itemValue="0" itemLabel="Selecione" />
-						<f:selectItems value="#{usuarioVisao.listaPerfil.entrySet()}"
-							var="itemPerfil" itemValue="#{itemPerfil.key}"
-							itemLabel="#{itemPerfil.value}" />
-					</p:selectOneMenu>
-
-				</h:panelGrid>
+						    <h:outputText value="Sub Categoria " />
+							<p:selectOneMenu id="idSelectSubCategoria" value="#{produtoVisao.subCategoriaSelecionada}" required="true">
+								<f:selectItem itemValue="0" itemLabel="Selecione" />
+								<f:selectItems value="#{produtoVisao.listaSubCategoria.entrySet()}" 
+								               var="itemSubCategoria" 
+									itemValue="#{itemSubCategoria.key}"
+									itemLabel="#{itemSubCategoria.value}"	/>
+							</p:selectOneMenu>
+					</h:panelGrid>
+					
 				<f:facet name="footer">
-					<p:commandButton type="submit" value="Enviar"
-						action="#{usuarioVisao.alterar()}"
-						update=":idFormAlterarUsuario:idPanelAlterarUsuario growlAlterarUsuario" />
-					<p:commandButton type="submit" value="Sair"
-						action="#{usuarioVisao.acessarFuncionalidade('APLICACAO')}"
-						update="@all" />
+					<p:commandButton type="submit" value="Enviar" action="#{produtoVisao.alterar()}" update=":idFormAlteraProduto:idPanelAlteraProduto growlAlteraProduto"/>
+					<p:commandButton value="Voltar"    type="submit" action="#{usuarioVisao.aplicacao()}" update="idFormAlteraProduto" />
 				</f:facet>
+					
 			</p:panel>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

@@ -25,8 +25,14 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public void novo(Produto produto) {
 		if(this.validarCampos(produto)){
+			Long codigoProduto = produto.getCodigoProduto();
 		    if(produtoDao.novo(produto)){
-		    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Protuto cadastrado com sucesso!"));	
+		    	if(codigoProduto != null){
+		    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Protuto alterado com sucesso!"));
+		    	}else{
+		    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Protuto cadastrado com sucesso! Código = "+produto.getCodigoProduto()));
+		    	}
+		    		
 		    }else{
 		    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Erro ao tentar cadastrar o produto!"));
 		    }
@@ -54,6 +60,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo Valor é obrigatório!"));
 			validador = false;
 		}
+		
 		return validador;
 	}
 	

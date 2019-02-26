@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import br.com.ans.dao.PerfilService;
 import br.com.ans.model.Perfil;
+import br.com.ans.model.Produto;
 import br.com.ans.model.Usuario;
 import br.com.ans.service.UsuarioService;
 import enumerations.FuncionalidadeEnum;
@@ -189,6 +190,7 @@ public class UsuarioVisao implements Serializable{
 		   this.getUsuario().setDataCadastro(new Date());
 		   this.getUsuario().setUsuarioAtivo("S");
 		   getUsuarioService().cadastrarUsuario(usuario);
+		   usuario = new Usuario();
 		   //this.setPerfis(getPerfilService().obterPerfil());
 		}
 		return null;

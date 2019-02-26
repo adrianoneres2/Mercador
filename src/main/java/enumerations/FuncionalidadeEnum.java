@@ -13,7 +13,9 @@ public enum FuncionalidadeEnum {
 	CADASTROPERFIL(9, "/visao/perfil/cadastroPerfil"),
 	MANTERPERFIL(10, "/visao/perfil/manterPerfil"),
 	CONSULTAPRODUTO(11, "/visao/produto/consultaProduto"),
-	ATIVARINATIVARPRODUTO(12, "");
+	ATIVARINATIVARPRODUTO(12, ""),
+	ALTERAPRODUTO(13, "/visao/produto/alteraProduto");
+	
 
 	private int codigo;
 	private String url;

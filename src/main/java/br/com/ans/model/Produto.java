@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -43,7 +44,7 @@ public class Produto implements EntidadeBase, Serializable {
 	private Long quantidadeProduto;
 	
 	@Column(name = "vl_venda", nullable = false)
-	private Long valorVenda;
+	private Float valorVenda;
 	
 	@Column(name = "nu_codigo_barra")
 	private String codigoBarra;
@@ -56,6 +57,9 @@ public class Produto implements EntidadeBase, Serializable {
 
 	@Column(name = "st_produto")
 	private Integer situacaoProduto;
+	
+	@Transient
+	private String  nomeSituacao;
 	
 	@Override
 	public Long getId() {
@@ -103,12 +107,12 @@ public class Produto implements EntidadeBase, Serializable {
 	}
 
 
-	public Long getValorVenda() {
+	public Float getValorVenda() {
 		return valorVenda;
 	}
 
 
-	public void setValorVenda(Long valorProduto) {
+	public void setValorVenda(Float valorProduto) {
 		this.valorVenda = valorProduto;
 	}
 
@@ -151,6 +155,15 @@ public class Produto implements EntidadeBase, Serializable {
 	public void setSituacaoProduto(Integer situacaoProduto) {
 		this.situacaoProduto = situacaoProduto;
 	}
+	
+
+	public String getNomeSituacao() {
+		
+		if(getSituacaoProduto() == 1){
+			return nomeSituacao = "Ativo";
+		}
+			return nomeSituacao = "Inativo";
+	}
 
 
 	@Override
@@ -166,6 +179,8 @@ public class Produto implements EntidadeBase, Serializable {
 		result = prime * result + Arrays.hashCode(imagemProduto);
 		result = prime * result
 				+ ((nomeProduto == null) ? 0 : nomeProduto.hashCode());
+		result = prime * result
+				+ ((nomeSituacao == null) ? 0 : nomeSituacao.hashCode());
 		result = prime
 				* result
 				+ ((quantidadeProduto == null) ? 0 : quantidadeProduto
@@ -211,6 +226,11 @@ public class Produto implements EntidadeBase, Serializable {
 				return false;
 		} else if (!nomeProduto.equals(other.nomeProduto))
 			return false;
+		if (nomeSituacao == null) {
+			if (other.nomeSituacao != null)
+				return false;
+		} else if (!nomeSituacao.equals(other.nomeSituacao))
+			return false;
 		if (quantidadeProduto == null) {
 			if (other.quantidadeProduto != null)
 				return false;
@@ -233,6 +253,7 @@ public class Produto implements EntidadeBase, Serializable {
 			return false;
 		return true;
 	}
+
 
 	
 }

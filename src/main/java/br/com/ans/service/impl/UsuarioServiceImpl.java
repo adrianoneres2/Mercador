@@ -30,11 +30,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	public void cadastrarUsuario(Usuario usuario){
+		Long codigoUsuario = usuario.getCodigoUsuario();
         try{
         	
         	usuarioDao.salvarUsuario(usuario);
-        	
-        		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cadastrado com sucesso!"));
+        	if(codigoUsuario != null){
+        		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Alterado com sucesso!"));	
+        	}else{
+        		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cadastrado com sucesso! Código = "+usuario.getCodigoUsuario()));
+        	}
         }catch(Exception e){
         	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fatal", "Erro ao tentar cadastrar usuário!"));
         	e.printStackTrace();
