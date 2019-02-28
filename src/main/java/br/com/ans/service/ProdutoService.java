@@ -12,4 +12,8 @@ public interface ProdutoService {
 
 	void ativarInativar(Produto produto);
 
+	Produto porCodigo(Long codigo);
+
+	Produto porCodigoBarra(String codigoBarras);
+
 }

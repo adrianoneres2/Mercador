@@ -9,7 +9,6 @@ import javax.inject.Inject;
 
 import br.com.ans.dao.ProdutoDao;
 import br.com.ans.model.Produto;
-import br.com.ans.model.Usuario;
 import br.com.ans.service.ProdutoService;
 
 @RequestScoped
@@ -30,9 +29,8 @@ public class ProdutoServiceImpl implements ProdutoService {
 		    	if(codigoProduto != null){
 		    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Protuto alterado com sucesso!"));
 		    	}else{
-		    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Protuto cadastrado com sucesso! Código = "+produto.getCodigoProduto()));
+		    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Protuto cadastrado com sucesso! Código = "+produto.getCodigoProduto()));		    		
 		    	}
-		    		
 		    }else{
 		    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Erro ao tentar cadastrar o produto!"));
 		    }
@@ -61,6 +59,13 @@ public class ProdutoServiceImpl implements ProdutoService {
 			validador = false;
 		}
 		
+		if(produto.getCodigoProduto() == null){
+			if(produtoDao.porCodigoBarra(produto.getCodigoBarra()) != null){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Código de barras já existe cadastrado!"));
+				validador = false;
+			};
+		}
+		
 		return validador;
 	}
 	
@@ -72,6 +77,16 @@ public class ProdutoServiceImpl implements ProdutoService {
 		}else{
 			return produtoDao.bucarTodos();	
 		}
+	}
+
+	@Override
+	public Produto porCodigoBarra(String codigoBarras) {
+	  return produtoDao.porCodigoBarra(codigoBarras);
+	}
+
+	@Override
+	public Produto porCodigo(Long codigo) {
+	  return produtoDao.porCodigo(codigo);
 	}
 	
 	@Override

@@ -61,6 +61,10 @@ public class produtoVisao implements Serializable{
 		
 		if (produtoAlteracao != null){
 			this.produto = produtoAlteracao;
+			this.categoriaSelecionada    = this.produto.getSubCategoria().getCategoria().getCodigoCategoria();
+			this.subCategoriaSelecionada = this.produto.getSubCategoria().getCodigoSubCategoria();
+			/*Necessário para carregar no componente comboBox a subcategoria com o valor setado acima, funciona como um refresh na página!!!0,.*/
+			this.carregarListaSubCategoria();
 		}
 		
 	}
@@ -234,8 +238,8 @@ public class produtoVisao implements Serializable{
 	}
 	
 	public void alterar() throws Exception {
-		//Seta o novo perfil da tela de alteração antes da validação dos campos. Obs: isso foi necessário para que o perfil já cadastrado não seja validado e sim o da alteração. 
-		//this.getUsuario().setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
-			produtoService.novo(produto);
+		/*Seta a categoria selecionada na tela de alteração ou cadastro*/ 
+		produto.getSubCategoria().setCodigoSubCategoria(this.getSubCategoriaSelecionada());
+		produtoService.novo(produto);
 	}
 }

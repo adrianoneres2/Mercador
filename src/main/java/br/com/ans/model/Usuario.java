@@ -42,8 +42,8 @@ public class Usuario implements EntidadeBase, Serializable{
 		@Column(name = "nm_email", nullable = false)
 		private String   email;
 		
-		@Column(name = "in_usuario_ativo", nullable = true)
-		private String   usuarioAtivo;
+		@Column(name = "st_usuario", nullable = true)
+		private Long   situacaoUsuario;
 		
 		@Column(name = "id_usuario_cadastro	", nullable = false)
 		private Long  codigoUsuarioCadastro;
@@ -91,13 +91,13 @@ public class Usuario implements EntidadeBase, Serializable{
 		public void setEmail(String email) {
 			this.email = email;
 		}
-		public String getUsuarioAtivo() {
-				return usuarioAtivo;
-		}
-		public void setUsuarioAtivo(String usuarioAtivo) {
-			this.usuarioAtivo = usuarioAtivo;
-		}
 		
+		public Long getSituacaoUsuario() {
+			return situacaoUsuario;
+		}
+		public void setSituacaoUsuario(Long situacaoUsuario) {
+			this.situacaoUsuario = situacaoUsuario;
+		}
 		@Override
 		public Long getId() {
 			return codigoUsuario;
@@ -130,17 +130,6 @@ public class Usuario implements EntidadeBase, Serializable{
 		public String toString() {
 		    return String.format("%s[id=%d]", getClass().getSimpleName(), getCodigoUsuario());
 		}
-		
-		public String getDescricaoSituacao() {
-			
-			if(this.getUsuarioAtivo().equals("S")){
-				return "Ativo";
-			}else{
-				return "Inativo";
-			}
-			
-			
-		}
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -167,8 +156,10 @@ public class Usuario implements EntidadeBase, Serializable{
 					* result
 					+ ((senhaConfirmacao == null) ? 0 : senhaConfirmacao
 							.hashCode());
-			result = prime * result
-					+ ((usuarioAtivo == null) ? 0 : usuarioAtivo.hashCode());
+			result = prime
+					* result
+					+ ((situacaoUsuario == null) ? 0 : situacaoUsuario
+							.hashCode());
 			return result;
 		}
 		@Override
@@ -226,13 +217,13 @@ public class Usuario implements EntidadeBase, Serializable{
 					return false;
 			} else if (!senhaConfirmacao.equals(other.senhaConfirmacao))
 				return false;
-			if (usuarioAtivo == null) {
-				if (other.usuarioAtivo != null)
+			if (situacaoUsuario == null) {
+				if (other.situacaoUsuario != null)
 					return false;
-			} else if (!usuarioAtivo.equals(other.usuarioAtivo))
+			} else if (!situacaoUsuario.equals(other.situacaoUsuario))
 				return false;
 			return true;
 		}
-	
+
 		
 }

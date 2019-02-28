@@ -25,8 +25,8 @@
 						disabled="true" />
 
 					<h:outputLabel value="Situação" />
-					<p:inputText value="#{usuarioVisao.usuario.usuarioAtivo}"
-						disabled="true" />
+					<p:inputText value="Ativo" disabled="true" rendered="#{usuarioVisao.usuario.situacaoUsuario == 1}" />
+					<p:inputText value="Inativo" disabled="true" rendered="#{usuarioVisao.usuario.situacaoUsuario == 0}" />
 
 					<h:outputLabel value="Nome" />
 					<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />

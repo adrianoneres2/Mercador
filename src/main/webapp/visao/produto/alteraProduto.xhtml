@@ -74,7 +74,7 @@
 							<h:outputText value="Codigo Barra: " />
 							<p:inputText value="#{produtoVisao.produto.codigoBarra}" id="inputCodigoBarraProduto"  size="30" maxlength="30"/>
 											
-						    <h:outputText value="Categoria " />
+						    <h:outputText value="Categoria" id="outPutTextCategoria" />
 							<p:selectOneMenu id="idSelectCategoria" value="#{produtoVisao.categoriaSelecionada}" required="true">
 								<f:selectItem itemValue="0" itemLabel="Selecione" />
 								<f:selectItems value="#{produtoVisao.listaCategoria.entrySet()}" 
@@ -84,13 +84,13 @@
 							<f:ajax render="idSelectSubCategoria" event="change" listener="#{produtoVisao.carregarListaSubCategoria()}"/>
 							</p:selectOneMenu>
 
-						    <h:outputText value="Sub Categoria " />
+						    <h:outputText value="Sub Categoria" id="outPutTextSubCategoria"/>
 							<p:selectOneMenu id="idSelectSubCategoria" value="#{produtoVisao.subCategoriaSelecionada}" required="true">
 								<f:selectItem itemValue="0" itemLabel="Selecione" />
 								<f:selectItems value="#{produtoVisao.listaSubCategoria.entrySet()}" 
 								               var="itemSubCategoria" 
 									itemValue="#{itemSubCategoria.key}"
-									itemLabel="#{itemSubCategoria.value}"	/>
+									itemLabel="#{itemSubCategoria.value}"/>
 							</p:selectOneMenu>
 					</h:panelGrid>
 					

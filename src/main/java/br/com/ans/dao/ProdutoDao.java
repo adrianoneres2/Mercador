@@ -12,4 +12,8 @@ public interface ProdutoDao {
 
 	List<Produto> bucarTodos();
 
+	public Produto porCodigoBarra(String codigoBarras);
+
+	Produto porCodigo(Long codigo);
+
 }

@@ -101,10 +101,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void ativarInativar(Usuario usuario){
 		
-		if(usuario.getUsuarioAtivo().equals("S")){
-			usuario.setUsuarioAtivo("N");	
+		if(usuario.getSituacaoUsuario()==1L){
+			usuario.setSituacaoUsuario(0L);	
 		}else{
-			usuario.setUsuarioAtivo("S");
+			usuario.setSituacaoUsuario(1L);
 		}
 		
         try{

@@ -12,7 +12,6 @@ import javax.inject.Named;
 
 import br.com.ans.dao.PerfilService;
 import br.com.ans.model.Perfil;
-import br.com.ans.model.Produto;
 import br.com.ans.model.Usuario;
 import br.com.ans.service.UsuarioService;
 import enumerations.FuncionalidadeEnum;
@@ -70,6 +69,7 @@ public class UsuarioVisao implements Serializable{
 		
 		if (usuarioAlteracao != null){
 			this.usuario = usuarioAlteracao;
+			this.setPerfilSelecionado(this.usuario.getPerfil().getCodigoPerfil());
 		}
 	}
 	
@@ -188,7 +188,7 @@ public class UsuarioVisao implements Serializable{
 		   //Atribui usuário logado!!!	
 		   this.getUsuario().setCodigoUsuarioCadastro(this.getUsuarioLogado().getUsuario().getCodigoUsuario());	
 		   this.getUsuario().setDataCadastro(new Date());
-		   this.getUsuario().setUsuarioAtivo("S");
+		   this.getUsuario().setSituacaoUsuario(1L);
 		   getUsuarioService().cadastrarUsuario(usuario);
 		   usuario = new Usuario();
 		   //this.setPerfis(getPerfilService().obterPerfil());

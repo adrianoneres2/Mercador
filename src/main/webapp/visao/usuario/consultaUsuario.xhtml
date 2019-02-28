@@ -55,8 +55,8 @@
 
 						<p:commandLink action="#{usuarioVisao.ativarInativar(usuario)}"
 							update=":idFormConsultaUsuario">
-							<p:graphicImage library="imagens" name="usuario_ativo.png" rendered="#{usuario.usuarioAtivo == 'S'}"/>
-							<p:graphicImage library="imagens" name="usuario_inativo.png" rendered="#{usuario.usuarioAtivo == 'N'}" />
+							<p:graphicImage library="imagens" name="usuario_ativo.png" rendered="#{usuario.situacaoUsuario == 1}"/>
+							<p:graphicImage library="imagens" name="usuario_inativo.png" rendered="#{usuario.situacaoUsuario == 0}" />
 						</p:commandLink>
 					</p:column>
 
