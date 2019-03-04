@@ -10,7 +10,7 @@ public enum FuncionalidadeEnum {
 	CONSULTAUSUARIO(6, "/visao/usuario/consultaUsuario"),
 	ALTERAUSUARIO(7, "/visao/usuario/alterarUsuario"),
 	ATIVARINATIVARUSUARIO(8, ""),
-	CADASTROPERFIL(9, "/visao/perfil/cadastroPerfil"),
+	GERENCIARPERFIL(9, "/visao/perfil/gerenciarPerfil"),
 	MANTERPERFIL(10, "/visao/perfil/manterPerfil"),
 	CONSULTAPRODUTO(11, "/visao/produto/consultaProduto"),
 	ATIVARINATIVARPRODUTO(12, ""),

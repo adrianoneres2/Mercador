@@ -39,7 +39,7 @@ public class MenuVisao implements Serializable{
 					case COMPRA                :return FuncionalidadeEnum.COMPRA.getUrl();
 					case CADASTROCLIENTE       :return FuncionalidadeEnum.CADASTROCLIENTE.getUrl();
 					case ATIVARINATIVARUSUARIO :return FuncionalidadeEnum.ATIVARINATIVARUSUARIO.getUrl();
-					case CADASTROPERFIL        :return FuncionalidadeEnum.CADASTROPERFIL.getUrl();
+					case GERENCIARPERFIL        :return FuncionalidadeEnum.GERENCIARPERFIL.getUrl();
 					case MANTERPERFIL          :return FuncionalidadeEnum.MANTERPERFIL.getUrl();
 					case CONSULTAPRODUTO       :return FuncionalidadeEnum.CONSULTAPRODUTO.getUrl();
 					case ATIVARINATIVARPRODUTO :return FuncionalidadeEnum.ATIVARINATIVARPRODUTO.getUrl();
