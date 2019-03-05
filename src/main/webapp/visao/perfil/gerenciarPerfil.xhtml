@@ -29,14 +29,14 @@
 							<h:outputText value="#{perfil.nomePerfil}" />
 						</p:column>
 					    <p:column headerText="Ação" width="70">
-						<p:commandLink
-							 update="">
-							<p:graphicImage library="imagens" name="editar.png" />
+						<p:commandLink action="#{perfilVisao.editarPermissaoPerfil(perfil)}" update=":idFormGerenciarPerfil">
+							<p:graphicImage library="imagens" name="perfil.png" />
 						</p:commandLink>
 						<p:spacer width="20" />
-						<p:commandLink
-							 update="">
-							<p:graphicImage library="imagens" name="ativo.png" />
+						
+						<p:commandLink action="#{perfilVisao.ativarInativar(perfil)}" update=":idFormGerenciarPerfil">
+							<p:graphicImage library="imagens" name="ativo.png" rendered="#{perfil.situacaoPerfil == 1}"/>
+							<p:graphicImage library="imagens" name="excluido.png" rendered="#{perfil.situacaoPerfil == 0}" />
 						</p:commandLink>
 
 						</p:column>
@@ -45,7 +45,7 @@
 
 				<f:facet name="footer">
 					<p:commandButton value="Consultar" type="submit" action="#{perfilVisao.perfis()}" update=":idFormGerenciarPerfil:idPanelPerfil growlGerenciarPerfil" />
-					<p:commandButton value="Voltar" type="submit" action="#{usuarioVisao.acessarFuncionalidade('APLICACAO')}" update="idFormGerenciarPerfil" />
+					<p:commandButton value="Voltar" type="submit" action="#{usuarioVisao.acessarFuncionalidade('APLICACAO')}" update=":idFormGerenciarPerfil" />
 				</f:facet>
 
 			</p:panel>

@@ -8,5 +8,6 @@ public interface PerfilDao {
 
 	public List<Perfil> obterPerfil();
 	public Perfil obterPerfilPorCodigo(Long codigo);
+	public void salvarPerfil(Perfil perfil) throws Exception;
 	
 }

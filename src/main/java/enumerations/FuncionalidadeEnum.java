@@ -11,11 +11,11 @@ public enum FuncionalidadeEnum {
 	ALTERAUSUARIO(7, "/visao/usuario/alterarUsuario"),
 	ATIVARINATIVARUSUARIO(8, ""),
 	GERENCIARPERFIL(9, "/visao/perfil/gerenciarPerfil"),
-	MANTERPERFIL(10, "/visao/perfil/manterPerfil"),
+	ATIVARINATIVARPERFIL(10, ""),
 	CONSULTAPRODUTO(11, "/visao/produto/consultaProduto"),
 	ATIVARINATIVARPRODUTO(12, ""),
-	ALTERAPRODUTO(13, "/visao/produto/alteraProduto");
-	
+	ALTERAPRODUTO(13, "/visao/produto/alteraProduto"),
+	EDITARPERMISSAOUSUARIO(14, "/visao/perfil/gerenciarPerfilFuncionalidade.xhtml");
 
 	private int codigo;
 	private String url;

@@ -9,5 +9,6 @@ public interface PerfilService {
 
 	public List<Perfil> obterPerfil();
 	public Perfil obterPerfilPorCodigo(Long codigo);
+	public void ativarInativar(Perfil perfil);
 	
 }

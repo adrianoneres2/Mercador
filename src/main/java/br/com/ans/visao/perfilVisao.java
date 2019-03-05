@@ -8,7 +8,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.ans.dao.PerfilService;
+import br.com.ans.model.Funcionalidade;
 import br.com.ans.model.Perfil;
+import enumerations.FuncionalidadeEnum;
 
 @javax.faces.view.ViewScoped
 @Named
@@ -23,6 +25,14 @@ public class perfilVisao implements Serializable{
 	
 	@Inject
 	private Perfil perfil;
+	
+	@Inject
+	MenuVisao menuVisao;
+	
+	@Inject
+	private AutenticadorVisao usuarioLogado;
+
+	private List<Funcionalidade> funcionalidades;
 	
 	@PostConstruct
 	public void init(){
@@ -52,8 +62,48 @@ public class perfilVisao implements Serializable{
 		this.perfilService = perfilService;
 	}
 
+	public List<Funcionalidade> getFuncionalidades() {
+		return funcionalidades;
+	}
+
+	public void setFuncionalidades(List<Funcionalidade> funcionalidades) {
+		this.funcionalidades = funcionalidades;
+	}
+
 	public void perfis(){
 		this.setPerfis(getPerfilService().obterPerfil());
+	}
+	
+	public void funcionalidades(){
+	  ///implementar
+	}
+	
+	public void ativarInativar(Perfil perfil){
+		if(acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARPERFIL) != null){
+			perfilService.ativarInativar(perfil);
+			this.setPerfis(getPerfilService().obterPerfil());
+		}	
+	}
+	
+	public String aplicacao(){ 
+		 return acessarFuncionalidade(FuncionalidadeEnum.APLICACAO);
+	}
+	
+	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
+		return menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
+	}
+	
+	public String editarPermissaoPerfil(Perfil perfil) {
+		String permissao = acessarFuncionalidade(FuncionalidadeEnum.EDITARPERMISSAOUSUARIO);
+/*		
+		if(permissao != null){
+			  FacesContext.getCurrentInstance().getExternalContext().getFlash().put("usuario", usuarioEdicao);
+			  return permissao;
+	  }else{
+        return null;
+	  }*/
+		
+		return permissao;
 	}
 	
 }

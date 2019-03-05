@@ -11,7 +11,7 @@ import br.com.ans.dao.PerfilDao;
 import br.com.ans.model.Perfil;
 
 @RequestScoped
-public class PerfilDaoImpl implements PerfilDao {
+public class PerfilDaoImpl extends GenericoDaoImpl<Perfil> implements PerfilDao {
 
 	public PerfilDaoImpl(){}
 	
@@ -25,7 +25,7 @@ public class PerfilDaoImpl implements PerfilDao {
 	@Override
 	public List<Perfil> obterPerfil(){
 		
-		TypedQuery<Perfil> query = entityManager.createQuery("from Perfil", Perfil.class);		
+		TypedQuery<Perfil> query = entityManager.createQuery("from Perfil order by 1", Perfil.class);		
 		
 		return (List<Perfil>) query.getResultList();
 	}
@@ -33,6 +33,12 @@ public class PerfilDaoImpl implements PerfilDao {
 	@Override
 	public Perfil obterPerfilPorCodigo(Long codigo){
 		return (Perfil) entityManager.find(Perfil.class, codigo);
+	}
+
+	@Override
+	public void salvarPerfil(Perfil perfil)  throws Exception{
+		this.salvar(perfil);
+		
 	}
 	
 }

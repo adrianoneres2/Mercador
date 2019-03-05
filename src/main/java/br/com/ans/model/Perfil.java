@@ -29,6 +29,9 @@ public class Perfil implements EntidadeBase, Serializable{
 	@OneToMany(mappedBy = "perfil")
 	///@JoinColumn(name = "id_perfil")
 	private List<PerfilFuncionalidade> perfilFuncionalidade;
+
+	@Column(name="st_perfil", nullable=false)
+	private Long situacaoPerfil;
 	
 	public Long getCodigoPerfil() {
 		return codigoPerfil;
@@ -43,6 +46,12 @@ public class Perfil implements EntidadeBase, Serializable{
 		this.nomePerfil = nomePerfil;
 	}
 	
+	public Long getSituacaoPerfil() {
+		return situacaoPerfil;
+	}
+	public void setSituacaoPerfil(Long situacaoPerfil) {
+		this.situacaoPerfil = situacaoPerfil;
+	}
 	@Override
 	public Long getId() {
 		return codigoPerfil;
@@ -72,6 +81,8 @@ public class Perfil implements EntidadeBase, Serializable{
 				* result
 				+ ((perfilFuncionalidade == null) ? 0 : perfilFuncionalidade
 						.hashCode());
+		result = prime * result
+				+ ((situacaoPerfil == null) ? 0 : situacaoPerfil.hashCode());
 		return result;
 	}
 	@Override
@@ -97,6 +108,11 @@ public class Perfil implements EntidadeBase, Serializable{
 			if (other.perfilFuncionalidade != null)
 				return false;
 		} else if (!perfilFuncionalidade.equals(other.perfilFuncionalidade))
+			return false;
+		if (situacaoPerfil == null) {
+			if (other.situacaoPerfil != null)
+				return false;
+		} else if (!situacaoPerfil.equals(other.situacaoPerfil))
 			return false;
 		return true;
 	}
