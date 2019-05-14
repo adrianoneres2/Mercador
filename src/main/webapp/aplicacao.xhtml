@@ -35,33 +35,31 @@
 	
 	<ui:define name="logOff">
 		<h:form id="idLogOff">	
-				<div id="divLogOff">
+		  <div id="divLogOff">
 				<p:outputPanel id="idPanelSair" rendered="#{autenticadorVisao.logado}">
 					
+					<h:graphicImage name ="usuario.png" library="imagens"/>
+					<p:spacer width="5px" />
+					<p:outputLabel id="idLabelUsuarioLogado" value="#{autenticadorVisao.usuario.nomeUsuario}"/>
+					
+					<p:outputLabel value=" - "/>
+
+					<p:outputLabel id="idLabelUsuarioPerfil" value="#{autenticadorVisao.usuario.getPerfil().getNomePerfil()}"/>
+					
+                    <br/>
+					<h:graphicImage name ="ajuda.png" library="imagens"/>
+					<p:spacer width="5px" />
+					<p:outputLabel value="Ajuda"/>
+					<br/>
 					<p:commandLink id="buttonSair" action="#{autenticadorVisao.sair}" update=":idFormLogin, :idFormMenu, :idLogOff">
 						<h:graphicImage name ="logoff.png" library="imagens" title="Sair"/>
 						<p:spacer width="5px" />
 						<p:outputLabel value="Sair"/>
 					</p:commandLink>
-					
-					<br/>
-					<h:graphicImage name ="usuario.png" library="imagens"/>
-					<p:spacer width="5px" />
-					<p:outputLabel id="idLabelUsuarioLogado" value="#{autenticadorVisao.usuario.nomeUsuario}" />
-					<br/>
-					<h:graphicImage name ="engrenagem.png" library="imagens"/>
-					<p:spacer width="5px" />
-					<p:outputLabel id="idLabelUsuarioPerfil" value="#{autenticadorVisao.usuario.getPerfil().getNomePerfil()}"/>
-					<br/>
-					<h:graphicImage name ="ajuda.png" library="imagens"/>
-					<p:spacer width="5px" />
-					<p:outputLabel id="idLabelAjuda"/>
-					<p:outputLabel value="Ajuda"/>
 				</p:outputPanel>
-			</div>
+		</div>
 	   </h:form>
-	</ui:define>
-	
+	</ui:define>	
 
 	<ui:define name="menu">
 	<h:form name="formMenu" id="idFormMenu">
@@ -78,6 +76,11 @@
 			        <p:submenu label="Usuário">
 			                <p:menuitem value="Cadastro" action="#{usuarioVisao.acessarFuncionalidade('CADASTROUSUARIO')}" update="growlMenu"/>
 			                <p:menuitem value="Consulta" action="#{usuarioVisao.acessarFuncionalidade('CONSULTAUSUARIO')}" update="growlMenu"/>
+			        </p:submenu>
+
+			        <p:submenu label="Caixa">
+			                <p:menuitem value="Abertura" action="#{usuarioVisao.acessarFuncionalidade('CADASTROUSUARIO')}" update="growlMenu"/>
+			                <p:menuitem value="Fechamento" action="#{usuarioVisao.acessarFuncionalidade('CONSULTAUSUARIO')}" update="growlMenu"/>
 			        </p:submenu>
 			        
 			        <p:submenu label="Configurações">

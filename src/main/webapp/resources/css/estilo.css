@@ -17,10 +17,19 @@ html, body {
 
 
 #divBanner {
-	height: 120px;
+	height: 100px;
 	width: 100%;
     /*background-color: #D6D6D6;*/
-    background-color: #FFF7D5;
+    background-color: #e3e3e3;
+}
+
+#divRodape {
+	bottom: 0;
+	position: absolute;
+	height: 100px;
+	/*background-color: #FFF7D5;*/
+	background-color: #e3e3e3;
+	width: 100%;
 }
 
 .divTelaPequena {
@@ -45,37 +54,19 @@ html, body {
 
 
 #divLogOff {
-	margin-top:-350px;
+	margin-top:-365px;
 	left: 35px;
     position: fixed;
-   
-	 
-}
-
-#divRodape {
-	bottom: 0;
-	position: absolute;
-	height: 120px;
-	/*background-color: #D6D6D6;*/
-	background-color: #FFF7D5;
-	width: 100%;
 }
 
 * html #divPagina {
 	height: 100%; /* hack para IE6 que trata height como min-height */
 }
 
-
 .ui-widget {
-	font-size: 12pt;
-	border: none !important;
+  font-size: 13px !important;
+  border: 0px;
 }
-
-/*
-.ui-button {
-   height:30px;
-}
-*/
 
 #divMensagens {
 position:absolute;

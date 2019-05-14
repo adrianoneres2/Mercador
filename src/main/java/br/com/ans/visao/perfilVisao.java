@@ -1,11 +1,14 @@
 package br.com.ans.visao;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.model.DualListModel;
 
 import br.com.ans.dao.PerfilService;
 import br.com.ans.model.Funcionalidade;
@@ -19,6 +22,8 @@ public class perfilVisao implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private List<Perfil> perfis;
+	
+	private List<Perfil> perfisDestino;
 	
 	@Inject
 	private PerfilService perfilService;
@@ -34,8 +39,17 @@ public class perfilVisao implements Serializable{
 
 	private List<Funcionalidade> funcionalidades;
 	
+	HashMap<Long,String> listaPerfil;
+	
+	DualListModel<Perfil> perfisPcikList;
+	
 	@PostConstruct
 	public void init(){
+		this.carregarListaPerfis();
+	 perfisPcikList = new DualListModel<Perfil>(perfis, perfisDestino);
+		
+		perfisPcikList.getSource();
+		perfisPcikList.getTarget();
 	}
 	
 	public Perfil getPerfil() {
@@ -78,6 +92,22 @@ public class perfilVisao implements Serializable{
 	  ///implementar
 	}
 	
+	public List<Perfil> getPerfisDestino() {
+		return perfisDestino;
+	}
+	
+	public DualListModel<Perfil> getPerfisPcikList() {
+		return perfisPcikList;
+	}
+
+	public void setPerfisPcikList(DualListModel<Perfil> perfisPcikList) {
+		this.perfisPcikList = perfisPcikList;
+	}
+
+	public void setPerfisDestino(List<Perfil> perfisDestino) {
+		this.perfisDestino = perfisDestino;
+	}
+
 	public void ativarInativar(Perfil perfil){
 		if(acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARPERFIL) != null){
 			perfilService.ativarInativar(perfil);
@@ -104,6 +134,27 @@ public class perfilVisao implements Serializable{
 	  }*/
 		
 		return permissao;
+	}
+	
+	public HashMap<Long, String> getListaPerfil() {
+		return listaPerfil;
+	}
+
+	public void setListaPerfil(HashMap<Long, String> listaPerfil) {		
+		this.listaPerfil = listaPerfil;
+	}
+	
+	public void carregarListaPerfis(){
+		
+		this.setPerfis(getPerfilService().obterPerfil());
+			
+			HashMap<Long, String> mapaPerfil = new HashMap<Long, String>();
+			///mapaPerfil.put(0L, "Selecionar");
+			
+			for (Perfil perfil : perfis) {
+				mapaPerfil.put(perfil.getCodigoPerfil(), perfil.getNomePerfil());
+			}
+			this.setListaPerfil(mapaPerfil);
 	}
 	
 }
