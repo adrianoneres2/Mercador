@@ -8,35 +8,14 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Loja virtual</title>
-	<ui:insert name="head" />
+	<h:outputStylesheet library="css" name="estilo.css"/>
 </h:head>
 <h:body>
-
 	<p:growl id="growl" showDetail="true" sticky="true" escape="true" />
-
-	<div id="divPagina">
-		<div id="divBanner">
-			<div id="divLogin">
-				<ui:insert name="logOff" />
-				<ui:insert name="login" />
-			</div>
-		</div>
-
-		<div id="divMenu" align="center">
-			<ui:insert name="menu" />
-		</div>
-
 		<center>
 			<div id="divConteudo">
-				<ui:insert name="conteudo" />
 				<ui:insert name="conteudoModal" />
 			</div>
 		</center>
-		<div id="divRodape">
-			<p:panel id="basic" header="Soux"
-				style="margin-bottom:20px">asdfasdf</p:panel>
-		</div>
-	</div>
-
 </h:body>
 </html>

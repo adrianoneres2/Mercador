@@ -7,7 +7,6 @@
 	<ui:define name="conteudoAplicacao">
 
 		<h:form id="idFormConsultaProduto">
-
 			<p:growl id="growlConsultarProduto" showDetail="true" escape="true"
 				closable="true" styleClass="messages" />
 			<br />
@@ -39,8 +38,8 @@
 					</p:column>
 
 					<p:column headerText="Valor" width="50">
-						<h:outputText value="#{produto.valorVenda}" >
-						   <f:convertNumber type="currency" />
+						<h:outputText value="#{produto.valorVenda}">
+							<f:convertNumber type="currency" />
 						</h:outputText>
 					</p:column>
 
@@ -54,14 +53,15 @@
 
 					<p:column headerText="Data de cadastro" width="110">
 						<h:outputText value="#{produto.dataProduto}">
-							<f:convertDateTime pattern="dd/MM/yyyy" ttimeZone="America/Sao_Paulo"/>
+							<f:convertDateTime pattern="dd/MM/yyyy"
+								ttimeZone="America/Sao_Paulo" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Ações" width="50">
 
-						<p:commandLink
-							action="#{produtoVisao.editarProduto(produto)}" pdate=":idFormConsultaProduto">
+						<p:commandLink action="#{produtoVisao.editarProduto(produto)}"
+							pdate=":idFormConsultaProduto">
 							<p:graphicImage library="imagens" name="editar.png" />
 						</p:commandLink>
 
@@ -69,15 +69,21 @@
 
 						<p:commandLink action="#{produtoVisao.ativarInativar(produto)}"
 							update=":idFormConsultaProduto">
-							<p:graphicImage library="imagens" name="ativo.png" rendered="#{produto.situacaoProduto == '1'}"/>
-							<p:graphicImage library="imagens" name="excluido.png" rendered="#{produto.situacaoProduto == '0'}" />
+							<p:graphicImage library="imagens" name="ativo.png"
+								rendered="#{produto.situacaoProduto == '1'}" />
+							<p:graphicImage library="imagens" name="excluido.png"
+								rendered="#{produto.situacaoProduto == '0'}" />
 						</p:commandLink>
 					</p:column>
 				</p:dataTable>
 
 				<f:facet name="footer">
-					<p:commandButton value="Consultar" action="#{produtoVisao.consultarProdutoPorNome()}" update=":idFormConsultaProduto" />
-					<p:commandButton value="Voltar" type="submit" action="#{usuarioVisao.aplicacao()}" update=":idFormConsultaProduto" />
+					<p:commandButton value="Consultar"
+						action="#{produtoVisao.consultarProdutoPorNome()}"
+						update=":idFormConsultaProduto" />
+					<p:commandButton value="Voltar" type="submit"
+						action="#{usuarioVisao.aplicacao()}"
+						update=":idFormConsultaProduto" />
 				</f:facet>
 			</p:panel>
 		</h:form>

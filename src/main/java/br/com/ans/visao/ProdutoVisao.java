@@ -20,7 +20,7 @@ import enumerations.FuncionalidadeEnum;
 
 @javax.faces.view.ViewScoped
 @Named
-public class produtoVisao implements Serializable{
+public class ProdutoVisao implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 

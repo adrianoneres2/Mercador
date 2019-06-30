@@ -17,7 +17,7 @@ import enumerations.FuncionalidadeEnum;
 
 @javax.faces.view.ViewScoped
 @Named
-public class perfilVisao implements Serializable{
+public class PerfilVisao implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 

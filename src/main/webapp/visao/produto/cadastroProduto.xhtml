@@ -2,13 +2,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" 
-	template="/aplicacao.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/aplicacao.xhtml">
 
 	<ui:define name="conteudoAplicacao">
-	
-	
-	<script>
+
+
+		<script>
             function mascara(o, f) {
               v_obj = o;
               v_fun = f;
@@ -37,63 +36,78 @@
             return v;
 		}
 </script>
-	
+
 		<h:form id="idFormCadastroProduto">
-			<p:growl id="growlCadastroPruoduto" showDetail="true" escape="true" closable="true" styleClass="messages"/>
+			<p:growl id="growlCadastroPruoduto" showDetail="true" escape="true"
+				closable="true" styleClass="messages" />
 			<br />
-			
-				<p:panel id="idPanelCadastroProduto" styleClass="divTelaPequena">
-				
+
+			<p:panel id="idPanelCadastroProduto" styleClass="divTelaPequena">
+
 				<f:facet name="header">
 					<h:outputLabel value="Cadastro de Produtos" />
 				</f:facet>
-				
-					<h:panelGrid id="idPanelGridProduto" border="0" columns="2" cellpadding="1"	cellspacing="1">
-						
-							<h:outputText value="Nome: " />
-							<p:inputText value="#{produtoVisao.produto.nomeProduto}" id="inputNomeProduto" size="20" maxlength="50"/>
 
-							<h:outputText value="Quantidade: " />
-							<p:inputText value="#{produtoVisao.produto.quantidadeProduto}" id="inputQuantidadeProduto"  size="5" maxlength="4" onkeypress="mascara(this, valorInteiro);" >
-								<f:convertNumber minFractionDigits="2" />
-							</p:inputText>
-	
-							<h:outputText value="Valor de Venda: " />
-							<p:inputText value="#{produtoVisao.produto.valorVenda}" id="inputValorVendaProduto"  size="12" maxlength="12" onkeypress="mascara(this, valor);" >
-							<f:convertNumber minFractionDigits="2" />
-							</p:inputText>
-	
-							<h:outputText value="Codigo Barra: " />
-							<p:inputText value="#{produtoVisao.produto.codigoBarra}" id="inputCodigoBarraProduto"  size="30" maxlength="30"/>
-											
-						    <h:outputText value="Categoria " />
-							<p:selectOneMenu id="idSelectCategoria" value="#{produtoVisao.categoriaSelecionada}" required="true">
-								<f:selectItem itemValue="0" itemLabel="Selecione" />
-								<f:selectItems value="#{produtoVisao.listaCategoria.entrySet()}" 
-								               var="itemCategoria" 
-									itemValue="#{itemCategoria.key}"
-									itemLabel="#{itemCategoria.value}"/>
-							<f:ajax render="idSelectSubCategoria" event="change" listener="#{produtoVisao.carregarListaSubCategoria()}"/>
-							</p:selectOneMenu>
+				<h:panelGrid id="idPanelGridProduto" border="0" columns="2"
+					cellpadding="1" cellspacing="1">
 
-						    <h:outputText value="Sub Categoria " />
-							<p:selectOneMenu id="idSelectSubCategoria" value="#{produtoVisao.subCategoriaSelecionada}" required="true">
-								<f:selectItem itemValue="0" itemLabel="Selecione" />
-								<f:selectItems value="#{produtoVisao.listaSubCategoria.entrySet()}" 
-								               var="itemSubCategoria" 
-									itemValue="#{itemSubCategoria.key}"
-									itemLabel="#{itemSubCategoria.value}"	/>
-							</p:selectOneMenu>
-					</h:panelGrid>
-					
+					<h:outputText value="Nome: " />
+					<p:inputText value="#{produtoVisao.produto.nomeProduto}"
+						id="inputNomeProduto" size="20" maxlength="50" />
+
+					<h:outputText value="Quantidade: " />
+					<p:inputText value="#{produtoVisao.produto.quantidadeProduto}"
+						id="inputQuantidadeProduto" size="5" maxlength="4"
+						onkeypress="mascara(this, valorInteiro);">
+						<f:convertNumber minFractionDigits="2" />
+					</p:inputText>
+
+					<h:outputText value="Valor de Venda: " />
+					<p:inputText value="#{produtoVisao.produto.valorVenda}"
+						id="inputValorVendaProduto" size="12" maxlength="12"
+						onkeypress="mascara(this, valor);">
+						<f:convertNumber minFractionDigits="2" />
+					</p:inputText>
+
+					<h:outputText value="Codigo Barra: " />
+					<p:inputText value="#{produtoVisao.produto.codigoBarra}"
+						id="inputCodigoBarraProduto" size="30" maxlength="30" />
+
+					<h:outputText value="Categoria " />
+					<p:selectOneMenu id="idSelectCategoria"
+						value="#{produtoVisao.categoriaSelecionada}" required="true">
+						<f:selectItem itemValue="0" itemLabel="Selecione" />
+						<f:selectItems value="#{produtoVisao.listaCategoria.entrySet()}"
+							var="itemCategoria" itemValue="#{itemCategoria.key}"
+							itemLabel="#{itemCategoria.value}" />
+						<f:ajax render="idSelectSubCategoria" event="change"
+							listener="#{produtoVisao.carregarListaSubCategoria()}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Sub Categoria " />
+					<p:selectOneMenu id="idSelectSubCategoria"
+						value="#{produtoVisao.subCategoriaSelecionada}" required="true">
+						<f:selectItem itemValue="0" itemLabel="Selecione" />
+						<f:selectItems
+							value="#{produtoVisao.listaSubCategoria.entrySet()}"
+							var="itemSubCategoria" itemValue="#{itemSubCategoria.key}"
+							itemLabel="#{itemSubCategoria.value}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+
 				<f:facet name="footer">
-					<p:commandButton type="submit" value="Cadastrar" action="#{produtoVisao.novo()}" update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto"/>
-					<p:commandButton type="submit" value="Consultar" action="#{produtoVisao.consultarProduto()}" update="idFormCadastroProduto"/>
-					<p:commandButton value="Voltar"    type="submit" action="#{usuarioVisao.aplicacao()}" update="idFormCadastroProduto" />
+					<p:commandButton type="submit" value="Cadastrar"
+						action="#{produtoVisao.novo()}"
+						update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto" />
+					<p:commandButton type="submit" value="Consultar"
+						action="#{produtoVisao.consultarProduto()}"
+						update="idFormCadastroProduto" />
+					<p:commandButton value="Voltar" type="submit"
+						action="#{usuarioVisao.aplicacao()}"
+						update="idFormCadastroProduto" />
 				</f:facet>
-					
+
 			</p:panel>
-			
 		</h:form>
 	</ui:define>
 </ui:composition>
