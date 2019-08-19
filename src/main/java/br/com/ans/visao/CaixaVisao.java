@@ -1,6 +1,7 @@
 package br.com.ans.visao;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,8 +12,8 @@ import javax.inject.Named;
 import util.Janela;
 import br.com.ans.model.Caixa;
 import br.com.ans.model.Usuario;
-import br.com.ans.service.AutenticadorService;
 import br.com.ans.service.CaixaService;
+import br.com.ans.service.UsuarioService;
 
 //@RequestScoped
 //@SessionScoped
@@ -32,9 +33,13 @@ public class CaixaVisao implements Serializable {
 	private Usuario usuarioAutorizador;
 	
 	@Inject
-	private AutenticadorService autenticadorService;
+	private AutenticadorVisao usuarioAutenticado;
 	
+	@Inject
 	private CaixaService caixaService;
+	
+	@Inject
+	private UsuarioService usuarioService;
 	
 	public CaixaVisao() {
 	}
@@ -62,14 +67,19 @@ public class CaixaVisao implements Serializable {
 		Janela janela = new Janela();
 		janela.abrirJanela(opcoes, aberturaCaixa);
 	}
-
-	public String logarAutorizacao(){
-		usuarioAutorizador = autenticadorService.validarLogin(usuarioAutorizador) ;
-		return aberturaCaixa;
-	}
 	
 	public void abrirCaixa() {
-		caixaService.abrirCaixa(caixa);
+		
+		caixa.setUsuarioOperador(usuarioAutenticado.getUsuario());
+		caixa.setUsuarioAbertura(usuarioService.obterUsuarioPorEmail(usuarioAutorizador.getEmail()));
+		caixa.setDataAbertura(new Date());
+		
+		try {
+			caixaService.abrirCaixa(caixa);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

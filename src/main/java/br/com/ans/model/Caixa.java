@@ -1,17 +1,21 @@
 package br.com.ans.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_perfil", schema="loja")
+@Table(name="tb_caixa", schema="loja")
 @Dependent
 public class Caixa implements EntidadeBase, Serializable{
 	
@@ -20,14 +24,16 @@ public class Caixa implements EntidadeBase, Serializable{
 	public Caixa(){}
 	
 	@Id
+	@SequenceGenerator(name="sq_idcaixa", sequenceName="loja.sq_idcaixa", allocationSize = 1, initialValue = 1) /*, schema = "loja"*/
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="sq_idcaixa")
 	@Column(name="id_caixa", nullable=false)
 	private Long codigoCaixa;
 	
 	@Column(name="dt_abertura", nullable=false)
-	private String dataAbertura;
+	private Date dataAbertura;
 
 	@Column(name="dt_fechamento", nullable=false)
-	private String dataFechamento;
+	private Date dataFechamento;
 
 	@OneToOne
 	@JoinColumn(name = "id_usuario_operador")
@@ -53,25 +59,25 @@ public class Caixa implements EntidadeBase, Serializable{
 
 
 
-	public String getDataAbertura() {
+	public Date getDataAbertura() {
 		return dataAbertura;
 	}
 
 
 
-	public void setDataAbertura(String dataAbertura) {
+	public void setDataAbertura(Date dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
 
 
-	public String getDataFechamento() {
+	public Date getDataFechamento() {
 		return dataFechamento;
 	}
 
 
 
-	public void setDataFechamento(String dataFechamento) {
+	public void setDataFechamento(Date dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
 

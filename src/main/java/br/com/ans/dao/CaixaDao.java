@@ -5,6 +5,6 @@ import br.com.ans.model.Caixa;
 
 public interface CaixaDao {
 
-	void abrirCaixa(Caixa caixa);
+	void abrirCaixa(Caixa caixa) throws Exception;
 
 }

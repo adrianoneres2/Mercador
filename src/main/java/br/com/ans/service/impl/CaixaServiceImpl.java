@@ -14,7 +14,7 @@ public class CaixaServiceImpl implements CaixaService {
 	private CaixaDao caixaDao;
 	
 	@Override
-	public void abrirCaixa(Caixa caixa) {
+	public void abrirCaixa(Caixa caixa) throws Exception {
 		caixaDao.abrirCaixa(caixa);
 	}	
 }
