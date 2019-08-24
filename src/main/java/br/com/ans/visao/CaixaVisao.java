@@ -12,6 +12,7 @@ import javax.inject.Named;
 import util.Janela;
 import br.com.ans.model.Caixa;
 import br.com.ans.model.Usuario;
+import br.com.ans.service.AutenticadorService;
 import br.com.ans.service.CaixaService;
 import br.com.ans.service.UsuarioService;
 
@@ -41,6 +42,11 @@ public class CaixaVisao implements Serializable {
 	@Inject
 	private UsuarioService usuarioService;
 	
+	@Inject
+	private AutenticadorService autenticadorService;
+
+	private Usuario usuario;
+	
 	public CaixaVisao() {
 	}
 
@@ -69,17 +75,27 @@ public class CaixaVisao implements Serializable {
 	}
 	
 	public void abrirCaixa() {
-		
-		caixa.setUsuarioOperador(usuarioAutenticado.getUsuario());
-		caixa.setUsuarioAbertura(usuarioService.obterUsuarioPorEmail(usuarioAutorizador.getEmail()));
-		caixa.setDataAbertura(new Date());
-		
-		try {
-			caixaService.abrirCaixa(caixa);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				
+		    Usuario usuarioAut = new Usuario();
+		    usuarioAut = autenticadorService.validarLogin(usuarioAutorizador);
+		    
+		    if (usuarioAut != null){
+				caixa.setUsuarioOperador(usuarioAutenticado.getUsuario());
+				caixa.setUsuarioAbertura(usuarioAut);
+				caixa.setDataAbertura(new Date());		
+				
+				Caixa caixaAberto = new Caixa();
+				try {
+					caixaAberto = caixaService.abrirCaixa(caixa);
+					if (caixaAberto != null){
+						Janela janela = new Janela();
+						janela.fecharJanela(aberturaCaixa);	
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    } 
 		}
-	}
 
 }

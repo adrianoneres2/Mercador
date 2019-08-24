@@ -17,6 +17,11 @@ public class AutenticadorServiceImpl implements AutenticadorService {
 	
 	@Override
 	public Usuario validarLogin(Usuario usuario) {
+		
+		if (usuario == null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Parâmetros inválidos!."));
+			return null;
+		}
 			if(!usuario.getEmail().trim().isEmpty() && !usuario.getSenha().trim().isEmpty()){
 				Usuario usuarioLogado = this.logar(usuario.getEmail(), usuario.getSenha());
 				if(usuarioLogado != null){

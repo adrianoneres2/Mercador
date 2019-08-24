@@ -7,6 +7,10 @@ import org.primefaces.context.RequestContext;
 public class Janela {
 	
 	 public void abrirJanela(Map<String, Object> opcoes, String url){
-		 RequestContext.getCurrentInstance().openDialog("/visao/caixa/aberturaCaixa", opcoes, null);
+		 RequestContext.getCurrentInstance().openDialog(url, opcoes, null);
+	 }
+	 
+	 public void fecharJanela(String url){
+		 RequestContext.getCurrentInstance().closeDialog(url);
 	 }
 }
