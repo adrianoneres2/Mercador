@@ -15,7 +15,10 @@ public enum FuncionalidadeEnum {
 	CONSULTAPRODUTO(11, "/visao/produto/consultaProduto"),
 	ATIVARINATIVARPRODUTO(12, ""),
 	ALTERAPRODUTO(13, "/visao/produto/alteraProduto"),
-	EDITARPERMISSAOUSUARIO(14, "/visao/perfil/gerenciarPerfilFuncionalidade.xhtml");
+	EDITARPERMISSAOUSUARIO(14, "/visao/perfil/gerenciarPerfilFuncionalidade.xhtml"),
+	ABRIRCAIXA(15, "/visao/caixa/aberturaCaixa"),
+	FECHARCAIXA(16, "/visao/caixa/fechamentoCaixa");
+	
 
 	private int codigo;
 	private String url;

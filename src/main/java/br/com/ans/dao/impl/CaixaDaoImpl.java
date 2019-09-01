@@ -1,5 +1,7 @@
 package br.com.ans.dao.impl;
 
+import java.util.Date;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -23,7 +25,12 @@ public class CaixaDaoImpl extends GenericoDaoImpl<Caixa> implements CaixaDao {
 	public void abrirCaixa(Caixa caixa) throws Exception {
 		this.salvar(caixa);
 	}
-	
+
+	@Override
+	public void fecharCaixa(Caixa caixa) throws Exception{
+		caixa.setDataFechamento(new Date());
+		this.salvar(caixa);
+	}
 	
 	@Override
 	public Caixa getCaixaAberto(Usuario usuarioOperador){

@@ -10,4 +10,6 @@ public interface CaixaDao {
 
 	Caixa getCaixaAberto(Usuario usuarioOperador);
 
+	void fecharCaixa(Caixa caixa) throws Exception;
+
 }

@@ -4,13 +4,16 @@ import java.util.Map;
 
 import org.primefaces.context.RequestContext;
 
+import enumerations.FuncionalidadeEnum;
+
 public class Janela {
 	
 	 public void abrirJanela(Map<String, Object> opcoes, String url){
 		 RequestContext.getCurrentInstance().openDialog(url, opcoes, null);
 	 }
 	 
-	 public void fecharJanela(String url){
-		 RequestContext.getCurrentInstance().closeDialog(url);
+	 public void fecharJanela(String urlTela){
+		 RequestContext.getCurrentInstance().closeDialog(urlTela);
 	 }
+	 
 }
