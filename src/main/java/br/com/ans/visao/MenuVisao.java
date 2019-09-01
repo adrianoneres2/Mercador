@@ -3,6 +3,8 @@ package br.com.ans.visao;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -44,10 +46,13 @@ public class MenuVisao implements Serializable{
 					case CONSULTAPRODUTO        :return FuncionalidadeEnum.CONSULTAPRODUTO.getUrl();
 					case ATIVARINATIVARPRODUTO  :return FuncionalidadeEnum.ATIVARINATIVARPRODUTO.getUrl();
 					case ALTERAPRODUTO          :return FuncionalidadeEnum.ALTERAPRODUTO.getUrl();
-					case EDITARPERMISSAOUSUARIO :return FuncionalidadeEnum.EDITARPERMISSAOUSUARIO.getUrl(); 
+					case EDITARPERMISSAOUSUARIO :return FuncionalidadeEnum.EDITARPERMISSAOUSUARIO.getUrl();
+					case ABRIRCAIXA             :return FuncionalidadeEnum.ABRIRCAIXA.getUrl();
+					case FECHARCAIXA            :return FuncionalidadeEnum.FECHARCAIXA.getUrl();
 				}
 			}
 		}
+		///FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Sem permissão de acesso!"));
 		return null;
 	}
 	

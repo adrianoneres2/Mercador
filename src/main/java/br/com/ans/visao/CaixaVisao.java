@@ -24,7 +24,7 @@ import enumerations.FuncionalidadeEnum;
 public class CaixaVisao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private Caixa caixa;
 
@@ -44,6 +44,9 @@ public class CaixaVisao implements Serializable {
 	private AutenticadorService autenticadorService;
 
 	private Usuario usuario;
+
+	@Inject
+	private MenuVisao menuvisao;
 
 	public CaixaVisao() {
 	}
@@ -83,7 +86,7 @@ public class CaixaVisao implements Serializable {
 		Janela janela = new Janela();
 		janela.abrirJanela(opcoes, FuncionalidadeEnum.FECHARCAIXA.getUrl());
 	}
-	
+
 	public void abrirCaixa() {
 		Usuario usuarioAut = new Usuario();
 		usuarioAut = autenticadorService.validarLogin(usuarioAutorizador);
@@ -92,11 +95,16 @@ public class CaixaVisao implements Serializable {
 			caixa.setUsuarioOperador(usuarioAutenticado.getUsuario());
 			caixa.setUsuarioAbertura(usuarioAut);
 
-			Caixa caixaAberto = new Caixa();
-			caixaAberto = caixaService.abrirCaixa(caixa);
-			if (caixaAberto != null) {
-				Janela janela = new Janela();
-				janela.fecharJanela(FuncionalidadeEnum.ABRIRCAIXA.getUrl());
+			String url = menuvisao.acessar(usuarioAut,
+					FuncionalidadeEnum.ABRIRCAIXA);
+
+			if (url != null) {
+				Caixa caixaAberto = new Caixa();
+				caixaAberto = caixaService.abrirCaixa(caixa);
+				if (caixaAberto != null) {
+					Janela janela = new Janela();
+					janela.fecharJanela(FuncionalidadeEnum.ABRIRCAIXA.getUrl());
+				}
 			}
 		}
 	}
@@ -106,15 +114,20 @@ public class CaixaVisao implements Serializable {
 		usuarioAut = autenticadorService.validarLogin(usuarioAutorizador);
 
 		if (usuarioAut != null) {
-			
+
 			caixa.setUsuarioOperador(usuarioAutenticado.getUsuario());
 			caixa.setUsuarioFechamento(usuarioAut);
 
-			Caixa caixaAberto = new Caixa();
-			caixaAberto = caixaService.fecharCaixa(caixa);
-			if (caixaAberto != null) {
-				Janela janela = new Janela();
-				janela.fecharJanela(FuncionalidadeEnum.FECHARCAIXA.getUrl());
+			String url = menuvisao.acessar(usuarioAut,
+					FuncionalidadeEnum.FECHARCAIXA);
+
+			if (url != null) {
+				Caixa caixaAberto = new Caixa();
+				caixaAberto = caixaService.fecharCaixa(caixa);
+				if (caixaAberto != null) {
+					Janela janela = new Janela();
+					janela.fecharJanela(url);
+				}
 			}
 		}
 	}
