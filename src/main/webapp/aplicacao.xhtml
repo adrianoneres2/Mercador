@@ -56,7 +56,7 @@
 					rendered="#{autenticadorVisao.logado}">
 
 <!-- 					<h:graphicImage name="usuario.png" library="imagens" /> -->
-					<p:spacer width="5px" />
+					<p:spacer width="4px" />
 					<p:outputLabel id="idLabelUsuarioLogado"
 						value="#{autenticadorVisao.usuario.nomeUsuario}" style="font-size: 15px !important;"/>
 
@@ -105,6 +105,15 @@
 							update="growlMenu" />
 					</p:submenu>
 
+					<p:submenu label="Venda">
+						<p:menuitem value="Nova"
+							action="#{caixaVisao.abrirJanelaAberturaCaixa()}" process="@this"
+							update="@all" />
+						<p:menuitem value="Consultar"
+							action="#{caixaVisao.abrirJanelaFechamentoCaixa()}" process="@this"
+							update="growlMenu" />
+					</p:submenu>
+
 					<p:submenu label="Configurações">
 						<p:submenu label="Gerenciar">
 							<p:menuitem value="Perfil"
@@ -129,8 +138,8 @@
 		</h:form>
 	</ui:define>
 
-	<ui:define name="conteudo">
-		<ui:insert name="conteudoAplicacao" />
-		<p:outputLabel>Caixa aberto</p:outputLabel>
-	</ui:define>
+	  <ui:define name="conteudo">
+	  	<ui:insert name="conteudoAplicacao" />
+	  </ui:define>
+	  
 </ui:composition>
