@@ -36,6 +36,7 @@ public class UsuarioDaoImpl extends GenericoDaoImpl<Usuario> implements UsuarioD
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return listaUsuario;
 	}
 

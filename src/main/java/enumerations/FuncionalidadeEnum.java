@@ -3,7 +3,7 @@ package enumerations;
 public enum FuncionalidadeEnum {
 	APLICACAO(0, "/aplicacao"),
 	COMPRA(1, ""),
-	VENDA(2, ""),
+	VENDA(2, "/visao/venda/venda"),
 	CADASTROUSUARIO(3, "/visao/usuario/cadastroUsuario"),
 	CADASTROPRODUTO(4, "/visao/produto/cadastroProduto"),
 	CADASTROCLIENTE(5, ""),

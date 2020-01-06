@@ -107,10 +107,10 @@
 
 					<p:submenu label="Venda">
 						<p:menuitem value="Nova"
-							action="#{caixaVisao.abrirJanelaAberturaCaixa()}" process="@this"
+							action="#{vendaVisao.acessarFuncionalidade('VENDA')}"
 							update="@all" />
 						<p:menuitem value="Consultar"
-							action="#{caixaVisao.abrirJanelaFechamentoCaixa()}" process="@this"
+							action="#{vendaVisao.abrirJanelaFechamentoCaixa()}" process="@this"
 							update="growlMenu" />
 					</p:submenu>
 

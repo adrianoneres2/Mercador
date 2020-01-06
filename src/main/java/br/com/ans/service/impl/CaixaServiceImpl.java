@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import br.com.ans.dao.CaixaDao;
 import br.com.ans.model.Caixa;
+import br.com.ans.model.Usuario;
 import br.com.ans.service.CaixaService;
 
 @RequestScoped
@@ -71,6 +72,17 @@ public class CaixaServiceImpl implements CaixaService {
 		  /*Retorna o caixa que acabou de ser criado.*/
 		  return caixaAberto;
 	  }
+	}
+
+	@Override
+	public Caixa getCaixaAberto(Usuario usuarioLogado) {
+		Caixa caixa = new Caixa();
+		caixa = caixaDao.getCaixaAberto(usuarioLogado);
+		if(caixa != null){
+			return caixa;
+		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Não existe caixa aberto para este operador!"));
+		return null;
 	}
 	
 }

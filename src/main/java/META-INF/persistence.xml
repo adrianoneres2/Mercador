@@ -13,6 +13,8 @@
         <class>br.com.ans.model.PerfilFuncionalidade</class>
         <class>br.com.ans.model.Funcionalidade</class>
         <class>br.com.ans.model.Caixa</class>
+        <class>br.com.ans.model.FormaPagamento</class>
+        <class>br.com.ans.model.SituacaoVenda</class>
         
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />

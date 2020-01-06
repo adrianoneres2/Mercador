@@ -36,7 +36,7 @@ public class GenericoDaoImpl<T extends EntidadeBase>{
 	      // Finaliza a transação.
 	      entityManager.getTransaction().commit();
 	    } finally {
-	      //entityManager.close();
+	    //  entityManager.close();
 	    }
 	    return t;
 	  }
@@ -58,7 +58,7 @@ public class GenericoDaoImpl<T extends EntidadeBase>{
 	      // Finaliza a transação.
 	      entityManager.getTransaction().commit();
 	    } finally {
-	     // entityManager.close();
+	    //  entityManager.close();
 	    }
 	  }
 
@@ -74,7 +74,7 @@ public class GenericoDaoImpl<T extends EntidadeBase>{
 	      //Consulta uma pessoa pelo seu ID.
 	      t = entityManager.find(clazz, id);
 	    } finally {
-	      //entityManager.close();
+	     // entityManager.close();
 	    }
 	    return t;
 	  }  
