@@ -25,18 +25,16 @@ public class ProdutoVisao implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	HashMap<Long,String> listaCategoria;
-	
 	HashMap<Long,String> listaSubCategoria;
-	
 	private List<Categoria> categorias;
 	private List<SubCategoria> subCategorias;
-	
 	private List<Produto> produtos;
 	
 	@Inject
 	private CategoriaService categoriaService;
 	
-	@Inject SubCategoriaService subCategoriaService;
+	@Inject 
+	SubCategoriaService subCategoriaService;
 	
 	private Long categoriaSelecionada;
 	private Long subCategoriaSelecionada;
@@ -69,7 +67,6 @@ public class ProdutoVisao implements Serializable{
 		
 	}
 	
-	
 	public HashMap<Long, String> getListaCategoria() {
 		return listaCategoria;
 	}
@@ -81,7 +78,6 @@ public class ProdutoVisao implements Serializable{
 	public List<Categoria> getCategorias() {
 		return categorias;
 	}
-
 
 	public CategoriaService getCategoriaService() {
 		return categoriaService;
@@ -103,12 +99,9 @@ public class ProdutoVisao implements Serializable{
 		this.categoriaSelecionada = (Long)categoriaSelecionada;
 	}
 	
-	
-
 	public Long getSubCategoriaSelecionada() {
 		return subCategoriaSelecionada;
 	}
-
 
 	public void setSubCategoriaSelecionada(Long subCategoriaSelecionada) {
 		this.subCategoriaSelecionada = (Long) subCategoriaSelecionada;
@@ -123,8 +116,6 @@ public class ProdutoVisao implements Serializable{
 		this.listaSubCategoria = listaSubCategoria;
 	}
 
-	
-
 	public List<SubCategoria> getSubCategorias() {
 		return subCategorias;
 	}
@@ -133,11 +124,9 @@ public class ProdutoVisao implements Serializable{
 		return produto;
 	}
 
-
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-
 
 	public void setSubCategorias(List<SubCategoria> subCategorias) {
 		this.subCategorias = subCategorias;
@@ -147,11 +136,9 @@ public class ProdutoVisao implements Serializable{
 		return produtos;
 	}
 
-
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
-
 
 	public void carregarListaCategoria(){
 		

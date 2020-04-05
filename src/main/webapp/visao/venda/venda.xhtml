@@ -36,20 +36,61 @@
             return v;
 		}
 </script>
-
 		<h:form id="idFormVenda">
 			<p:growl id="growlvenda" showDetail="true" escape="true"
 				closable="true" styleClass="messages" />
 			<br />
 			<p:layout>
-				<p:layoutUnit position="west" resizable="true" size="500"
-					minSize="100" maxSize="500">
-					<p:panel id="idPanelVenda">
-
+				<p:layoutUnit position="west" resizable="true" size="300"
+					minSize="200" maxSize="500">
+					<p:panel id="idPanelVenda" style="text-align:left">
 						<f:facet name="header">
-							<h:outputLabel value="Venda" />
+							<h:outputLabel value="Dados da Venda" />
 						</f:facet>
-						<p:outputLabel value="Código do caixa: #{vendaVisao.caixa.codigoCaixa}" />
+						<p:outputLabel
+							value="Código do Caixa: #{vendaVisao.caixa.codigoCaixa}"
+							styleClass="ui-widgetGrande" />
+						<br />
+						<p:inputText styleClass="ui-widgetGrande" disabled="true"></p:inputText>
+						<br />
+						<br />
+						<p:outputLabel
+							value="Código da Venda: #{vendaVisao.caixa.codigoCaixa}"
+							styleClass="ui-widgetGrande" />
+						<br />
+						<p:inputText styleClass="ui-widgetGrande" disabled="true"></p:inputText>
+						<br />
+						<br />
+						<p:outputLabel styleClass="ui-widgetGrande"
+							value="Valor Total: #{vendaVisao.caixa.codigoCaixa}" />
+						<br />
+						<br />
+						<p:inputText styleClass="ui-widgetGrande"
+							value="R$: #{vendaVisao.caixa.codigoCaixa}" disabled="true"></p:inputText>
+						<br />
+						<br />
+						<p:outputLabel styleClass="ui-widgetGrande"
+							value="Forma de pagamento: #{vendaVisao.caixa.codigoCaixa}" />
+						<br />
+						<br />
+						<p:selectOneMenu id="idSelectSubCategoria"
+						    styleClass="ui-widgetGrande"
+							value="" required="true">
+							<f:selectItem itemValue="0" itemLabel="Selecione" />
+							<f:selectItems
+								value="#{vendaVisao.listaFormasPagamento.entrySet()}"
+								var="itemFormasPagamento" itemValue="#{itemFormasPagamento.key}"
+								itemLabel="#{itemFormasPagamento.value}" />
+						</p:selectOneMenu>
+
+						<br />
+						<br />
+					</p:panel>
+					<p:panel>
+						<p:commandButton value="Finalizar Venda"
+							style="background: green !important;  color: white !important;"></p:commandButton>
+						<p:commandButton value="Cancelar Venda"
+							style="background: #cc0000 !important; color: white !important;"></p:commandButton>
 					</p:panel>
 				</p:layoutUnit>
 
@@ -58,19 +99,48 @@
 						<f:facet name="header">
 							<h:outputLabel value="Itens da Venda" />
 						</f:facet>
+						<p:outputLabel
+							value="Código do Produto: #{vendaVisao.caixa.codigoCaixa}" />
+						<br />
+						<p:inputText styleClass="ui-widgetGrande"></p:inputText>
+						<br />
+						<br />
+						<p:dataTable var="produto" value="#{produtoVisao.produtos}"
+							rows="10" lazy="true" paginator="false">
+
+							<p:column headerText="Código" width="70">
+								<h:outputText value="#{produto.codigoProduto}" />
+							</p:column>
+
+							<p:column headerText="Nome" width="200">
+								<h:outputText value="#{produto.nomeProduto}" />
+							</p:column>
+
+							<p:column headerText="Quantidade" width="30">
+								<h:outputText value="#{produto.quantidadeProduto}" />
+							</p:column>
+
+							<p:column headerText="Valor" width="50">
+								<h:outputText value="#{produto.valorVenda}">
+									<f:convertNumber type="currency" />
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="Total" width="50">
+								<h:outputText value="#{produto.valorVenda}">
+									<f:convertNumber type="currency" />
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="Ações" width="50">
+							</p:column>
+						</p:dataTable>
+
 					</p:panel>
 				</p:layoutUnit>
 			</p:layout>
 			<p:spacer />
-			<p:panel id="idPanelBotoes">
-				<f:facet name="footer">
-					<p:commandButton type="submit" value="Cadastrar"
-						action="#{vendaVisao.novo()}"
-						update=":idFormVenda:idPanelVenda growlvenda" />
-					<p:commandButton value="Voltar" type="submit"
-						action="#{usuarioVisao.aplicacao()}" update="idFormVenda" />
-				</f:facet>
-			</p:panel>
+			<br />
 		</h:form>
 	</ui:define>
 </ui:composition>
