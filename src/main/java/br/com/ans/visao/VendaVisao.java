@@ -99,10 +99,10 @@ public class VendaVisao implements Serializable {
 
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		String retorno = menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
-		this.caixa = caixaService.getCaixaAberto(usuarioLogado.getUsuario());
-		if(retorno == null || caixa == null){
+		if(retorno == null){
 			return null;
 		}
+		this.caixa = caixaService.getCaixaAberto(usuarioLogado.getUsuario());
 		return retorno;
 	}	
 
