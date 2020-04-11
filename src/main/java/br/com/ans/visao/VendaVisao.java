@@ -5,21 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.ans.model.Caixa;
 import br.com.ans.model.FormaPagamento;
 import br.com.ans.model.Usuario;
-import br.com.ans.service.CaixaService;
+import br.com.ans.model.Venda;
 import br.com.ans.service.FormaPagamentoService;
-import br.com.ans.service.UsuarioService;
+import br.com.ans.service.VendaService;
 import enumerations.FuncionalidadeEnum;
 
 //@RequestScoped
 //@SessionScoped
 
-@javax.faces.view.ViewScoped
+@RequestScoped
 @Named
 public class VendaVisao implements Serializable {
 
@@ -27,17 +28,12 @@ public class VendaVisao implements Serializable {
 
 	@Inject
 	private Caixa caixa;
-	
-	@Inject
-	private CaixaService caixaService;
-
-	@Inject
-	private UsuarioService usuarioService;
 
 	private Usuario usuarioCliente;
 
 	@Inject
-	MenuVisao menuVisao;	
+	MenuVisao menuVisao;
+	
 	@Inject
 	private AutenticadorVisao usuarioLogado;
 	
@@ -48,9 +44,13 @@ public class VendaVisao implements Serializable {
 	
 	HashMap<Long,String> listaFormasPagamento;
 	
+	private Venda venda;
+	
+	@Inject
+	VendaService vendaService;
+	
 	public VendaVisao() {
 	}
-
 
 	@PostConstruct
 	public void init() {
@@ -96,13 +96,24 @@ public class VendaVisao implements Serializable {
 	public void setListaFormasPagamento(HashMap<Long, String> listaFormasPagamento) {
 		this.listaFormasPagamento = listaFormasPagamento;
 	}
+	
+	public Venda getVenda() {
+		return venda;
+	}
+
+
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
+
 
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		String retorno = menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
 		if(retorno == null){
 			return null;
 		}
-		this.caixa = caixaService.getCaixaAberto(usuarioLogado.getUsuario());
+		setCaixa(vendaService.buscarVenda(usuarioLogado.getUsuario()).getCaixa());
+		setVenda(vendaService.buscarVenda(usuarioLogado.getUsuario()));
 		return retorno;
 	}	
 

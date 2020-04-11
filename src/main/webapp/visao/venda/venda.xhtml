@@ -48,21 +48,21 @@
 							<h:outputLabel value="Dados da Venda" />
 						</f:facet>
 						<p:outputLabel
-							value="Código do Caixa: #{vendaVisao.caixa.codigoCaixa}"
+							value="Código do Caixa: "
 							styleClass="ui-widgetGrande" />
 						<br />
-						<p:inputText styleClass="ui-widgetGrande" disabled="true"></p:inputText>
+						<p:inputText styleClass="ui-widgetGrande" disabled="true" value="#{vendaVisao.caixa.codigoCaixa}"/>
 						<br />
 						<br />
 						<p:outputLabel
-							value="Código da Venda: #{vendaVisao.caixa.codigoCaixa}"
+							value="Código da Venda :"
 							styleClass="ui-widgetGrande" />
 						<br />
-						<p:inputText styleClass="ui-widgetGrande" disabled="true"></p:inputText>
+						<p:inputText styleClass="ui-widgetGrande" disabled="true" value="#{vendaVisao.venda.codigoVenda}" />
 						<br />
 						<br />
 						<p:outputLabel styleClass="ui-widgetGrande"
-							value="Valor Total: #{vendaVisao.caixa.codigoCaixa}" />
+							value="Valor Total: " />
 						<br />
 						<br />
 						<p:inputText styleClass="ui-widgetGrande"
@@ -70,7 +70,7 @@
 						<br />
 						<br />
 						<p:outputLabel styleClass="ui-widgetGrande"
-							value="Forma de pagamento: #{vendaVisao.caixa.codigoCaixa}" />
+							value="Forma de pagamento: " />
 						<br />
 						<br />
 						<p:selectOneMenu id="idSelectSubCategoria"
@@ -100,7 +100,7 @@
 							<h:outputLabel value="Itens da Venda" />
 						</f:facet>
 						<p:outputLabel
-							value="Código do Produto: #{vendaVisao.caixa.codigoCaixa}" />
+							value="Código do Produto: " />
 						<br />
 						<p:inputText styleClass="ui-widgetGrande"></p:inputText>
 						<br />
