@@ -11,9 +11,7 @@ import javax.persistence.TypedQuery;
 
 import br.com.ans.dao.ProdutoDao;
 import br.com.ans.model.Produto;
-import br.com.ans.model.Usuario;
 
-@SuppressWarnings("cdi-ambiguous-dependency")
 @RequestScoped
 public class produtoDaoImpl extends GenericoDaoImpl<Produto> implements ProdutoDao {
 

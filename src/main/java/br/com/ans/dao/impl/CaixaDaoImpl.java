@@ -11,7 +11,6 @@ import br.com.ans.dao.CaixaDao;
 import br.com.ans.model.Caixa;
 import br.com.ans.model.Usuario;
 
-@SuppressWarnings("cdi-ambiguous-dependency")
 @RequestScoped
 public class CaixaDaoImpl extends GenericoDaoImpl<Caixa> implements CaixaDao {
 

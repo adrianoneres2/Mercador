@@ -13,7 +13,6 @@ import javax.persistence.TypedQuery;
 import br.com.ans.dao.PerfilFuncionalidadeDao;
 import br.com.ans.model.PerfilFuncionalidade;
 
-@SuppressWarnings("cdi-ambiguous-dependency")
 @RequestScoped
 public class PerfilFuncionalidadeDaoImpl extends GenericoDaoImpl<PerfilFuncionalidade> implements PerfilFuncionalidadeDao{
 

@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 import br.com.ans.dao.UsuarioDao;
 import br.com.ans.model.Usuario;
 
-@SuppressWarnings("cdi-ambiguous-dependency")
 @RequestScoped
 public class UsuarioDaoImpl extends GenericoDaoImpl<Usuario> implements UsuarioDao{
 	
