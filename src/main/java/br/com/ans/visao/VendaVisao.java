@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -112,9 +114,12 @@ public class VendaVisao implements Serializable {
 		if(retorno == null){
 			return null;
 		}
-		setCaixa(vendaService.buscarVenda(usuarioLogado.getUsuario()).getCaixa());
 		setVenda(vendaService.buscarVenda(usuarioLogado.getUsuario()));
-		return retorno;
+		setCaixa(getVenda().getCaixa());
+		if (getVenda().getCaixa()!= null){
+			return retorno;
+		}
+		return null;
 	}	
 
 	public void carregarListaFormaPagamento(){

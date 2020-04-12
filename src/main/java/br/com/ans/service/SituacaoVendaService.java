@@ -6,6 +6,7 @@ import br.com.ans.model.SituacaoVenda;
 
 public interface SituacaoVendaService {
 
-	public List<SituacaoVenda> todas();
+	public List<SituacaoVenda> todas();	
+	public SituacaoVenda porCodigo(Long codigoSituacao);
 
 }

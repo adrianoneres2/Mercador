@@ -14,32 +14,25 @@
 
 	<p:growl id="growl" showDetail="true" sticky="true" escape="true" />
 
-	<div id="divPagina">
-		<div id="divBanner">
-			<div id="divLogin">
-			<p:panel id="Banner" style="margin-bottom:20px">
-				<ui:insert name="logOff" />
-				<ui:insert name="login" />
-			</p:panel>
-			</div>
-		</div>
+	<p:layout fullPage="true">
 
-		<div id="divMenu" align="center">
+		<p:layoutUnit position="north">
+			<ui:insert name="logOff" />
 			<ui:insert name="menu" />
-		</div>
-
+		</p:layoutUnit>
 		<center>
-			<div id="divConteudo">
+			<p:layoutUnit position="center">
+				<ui:insert name="login" />
 				<ui:insert name="conteudo" />
 				<ui:insert name="conteudoModal" />
-			</div>
+			</p:layoutUnit>
 		</center>
-		<div id="divRodape">
-			<p:panel id="basic" header="Soux - Consultoria em informática."
-				style="margin-bottom:20px">Contato: (61)99992-0909
-			</p:panel>
-		</div>
-	</div>
+		<p:layoutUnit position="south" size="0"
+			header="Soux - Consultoria em informática.  -  Contato: (61)99992-0909"
+			resizable="false" closable="false" collapsible="false">
+		</p:layoutUnit>
+
+	</p:layout>
 
 </h:body>
 </html>

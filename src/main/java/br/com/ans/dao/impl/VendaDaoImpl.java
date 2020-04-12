@@ -2,6 +2,8 @@ package br.com.ans.dao.impl;
 
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -27,17 +29,11 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 
 		//String hql = "from Venda v where 1=1";
 		
-		
+		/* Retorna a venda quando a situação for "(2) Em aberto" para um determinado usuário.*/
 		String hql = "select venda from Venda as venda " 
 				+ " where 1=1"
 				+ " and venda.UsuarioCliente.codigoUsuario = :idUsuario "
-				+ " and venda.situacaoVenda = 2 "; 	
-				
-		/*
-											 * Quando a situação da venda for
-											 * "2-em aberto" para um determinado
-											 * usuário.
-											 */
+				+ " and venda.situacaoVenda = 2 ";
 		try {
 
 			Long idUsuario = usuarioLogado.getCodigoUsuario();
@@ -61,8 +57,12 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 
 	@Override
 	public Venda novaVenda(Venda venda) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+		 venda = this.salvar(venda);
+		} catch (Exception e) {
+			return null;
+		}
+		return venda;
 	}
 
 }

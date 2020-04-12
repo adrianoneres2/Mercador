@@ -10,7 +10,7 @@
 
 			<p:growl id="growlConsultarUsuario" showDetail="true" escape="true"
 				closable="true" styleClass="messages" />
-			<br />
+
 			<p:panel id="idPanelConsultaUsuario">
 				<h:panelGrid id="idPpanelPrincipal">
 
@@ -18,9 +18,8 @@
 					<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
 
 				</h:panelGrid>
-				<br />
 				<p:dataTable var="usuario" value="#{usuarioVisao.usuarios}"
-					rows="10" lazy="true" paginator="true">
+					rows="10" lazy="true" paginator="true" paginatorPosition="bottom">
 
 					<p:column headerText="Código" width="70">
 						<h:outputText value="#{usuario.codigoUsuario}" />

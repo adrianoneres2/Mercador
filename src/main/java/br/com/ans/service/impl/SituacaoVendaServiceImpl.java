@@ -24,4 +24,9 @@ public class SituacaoVendaServiceImpl implements SituacaoVendaService{
 	public List<SituacaoVenda> todas(){
 		return situacaoVendaDao.todas();
 	}
+
+	@Override
+	public SituacaoVenda porCodigo(Long codigoSituacao) {
+		return situacaoVendaDao.porCodigo(codigoSituacao);
+	}
 }

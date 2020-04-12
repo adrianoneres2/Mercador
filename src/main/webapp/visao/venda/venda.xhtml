@@ -41,40 +41,38 @@
 				closable="true" styleClass="messages" />
 			<br />
 			<p:layout>
-				<p:layoutUnit position="west" resizable="true" size="300"
+				<p:layoutUnit position="west" resizable="true" 
 					minSize="200" maxSize="500">
 					<p:panel id="idPanelVenda" style="text-align:left">
-						<f:facet name="header">
-							<h:outputLabel value="Dados da Venda" />
-						</f:facet>
+
 						<p:outputLabel
 							value="Código do Caixa: "
-							styleClass="ui-widgetGrande" />
+							 />
 						<br />
-						<p:inputText styleClass="ui-widgetGrande" disabled="true" value="#{vendaVisao.caixa.codigoCaixa}"/>
+						<p:inputText  disabled="true" value="#{vendaVisao.caixa.codigoCaixa}"/>
 						<br />
 						<br />
 						<p:outputLabel
 							value="Código da Venda :"
-							styleClass="ui-widgetGrande" />
+							 />
 						<br />
-						<p:inputText styleClass="ui-widgetGrande" disabled="true" value="#{vendaVisao.venda.codigoVenda}" />
+						<p:inputText  disabled="true" value="#{vendaVisao.venda.codigoVenda}" />
 						<br />
 						<br />
-						<p:outputLabel styleClass="ui-widgetGrande"
+						<p:outputLabel 
 							value="Valor Total: " />
 						<br />
 						<br />
-						<p:inputText styleClass="ui-widgetGrande"
-							value="R$: #{vendaVisao.caixa.codigoCaixa}" disabled="true"></p:inputText>
+						<p:inputText 
+							value="R$: " disabled="true"></p:inputText>
 						<br />
 						<br />
-						<p:outputLabel styleClass="ui-widgetGrande"
+						<p:outputLabel 
 							value="Forma de pagamento: " />
 						<br />
 						<br />
 						<p:selectOneMenu id="idSelectSubCategoria"
-						    styleClass="ui-widgetGrande"
+						    
 							value="" required="true">
 							<f:selectItem itemValue="0" itemLabel="Selecione" />
 							<f:selectItems
@@ -96,13 +94,11 @@
 
 				<p:layoutUnit position="center">
 					<p:panel id="idPanelItensVenda">
-						<f:facet name="header">
-							<h:outputLabel value="Itens da Venda" />
-						</f:facet>
+
 						<p:outputLabel
 							value="Código do Produto: " />
 						<br />
-						<p:inputText styleClass="ui-widgetGrande"></p:inputText>
+						<p:inputText ></p:inputText>
 						<br />
 						<br />
 						<p:dataTable var="produto" value="#{produtoVisao.produtos}"

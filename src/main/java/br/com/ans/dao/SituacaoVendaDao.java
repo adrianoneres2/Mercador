@@ -7,5 +7,5 @@ import br.com.ans.model.SituacaoVenda;
 public interface SituacaoVendaDao {
 
 	List<SituacaoVenda> todas();
-
+	SituacaoVenda porCodigo(Long codigoSituacao);
 }

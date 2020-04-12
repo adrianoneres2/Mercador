@@ -7,5 +7,6 @@ import br.com.ans.model.TipoVenda;
 public interface TipoVendaService {
 
 	public List<TipoVenda> todas();
+	public TipoVenda porCodigo(Long codigoTipoVenda);
 
 }
