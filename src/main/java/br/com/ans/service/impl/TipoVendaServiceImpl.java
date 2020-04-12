@@ -24,4 +24,9 @@ public class TipoVendaServiceImpl implements TipoVendaService{
 	public List<TipoVenda> todas(){
 		return tipoVendaDao.todas();
 	}
+
+	@Override
+	public TipoVenda porCodigo(Long codigoTipoVenda) {
+		return tipoVendaDao.porCodigo(codigoTipoVenda);
+	}
 }

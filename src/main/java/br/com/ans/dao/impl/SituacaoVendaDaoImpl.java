@@ -3,6 +3,8 @@ package br.com.ans.dao.impl;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -29,8 +31,22 @@ public class SituacaoVendaDaoImpl implements SituacaoVendaDao{
 			return (List<SituacaoVenda>) query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao tentar consulta situação de venda!"));	
 			return null;
 		}
 	}
+
+	@Override
+	public SituacaoVenda porCodigo(Long codigoSituacao) {
+		try {
+			SituacaoVenda situacaoVenda = entityManager.find(SituacaoVenda.class, codigoSituacao);
+			return situacaoVenda;
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao tentar consulta situação de venda por código!"));
+			return null;
+		}
+	}
+
 
 }
