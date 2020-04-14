@@ -60,6 +60,7 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 		try {
 		 venda = this.salvar(venda);
 		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao tentar gravar o registro	!"));
 			return null;
 		}
 		return venda;
