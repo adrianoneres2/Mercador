@@ -4,8 +4,6 @@ import java.util.Map;
 
 import org.primefaces.context.RequestContext;
 
-import enumerations.FuncionalidadeEnum;
-
 public class Janela {
 	
 	 public void abrirJanela(Map<String, Object> opcoes, String url){

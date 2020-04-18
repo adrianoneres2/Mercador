@@ -124,10 +124,18 @@ public class CaixaVisao implements Serializable {
 			if (url != null) {
 				Caixa caixaAberto = new Caixa();
 				caixaAberto = caixaService.fecharCaixa(caixa);
+				Janela janela = new Janela();
 				if (caixaAberto != null) {
-					Janela janela = new Janela();
 					janela.fecharJanela(url);
 				}
+				//else{
+					//FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("idFormFechamentoCaixa");
+					//RequestContext.getCurrentInstance().update("idFormFechamentoCaixa");
+					//janela.recarregarJanela(FuncionalidadeEnum.FECHARCAIXA.getUrl());
+					//RequestContext requestContext = RequestContext.getCurrentInstance();
+				    //requestContext.update(":idFormFechamentoCaixa");
+					///janela.fecharJanela(FuncionalidadeEnum.ABRIRCAIXA.getUrl());
+				//}
 			}
 		}
 	}

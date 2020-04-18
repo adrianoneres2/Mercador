@@ -33,6 +33,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="/mnt/Dados/Projeto/Ferramentas/Drive/Postgresql/postgresql-9.4-1200.jdbc41.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Dados/Projeto/Ferramentas/Drive/Postgresql/postgresql-9.4-1200.jdbc41.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

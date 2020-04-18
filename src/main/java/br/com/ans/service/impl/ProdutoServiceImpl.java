@@ -59,12 +59,12 @@ public class ProdutoServiceImpl implements ProdutoService {
 			validador = false;
 		}
 		
-		if(produto.getCodigoProduto() == null){
+		//if(produto.getCodigoProduto() == null){
 			if(produtoDao.porCodigoBarra(produto.getCodigoBarra()) != null){
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Código de barras já existe cadastrado!"));
 				validador = false;
-			};
-		}
+			}
+		//}
 		
 		return validador;
 	}
