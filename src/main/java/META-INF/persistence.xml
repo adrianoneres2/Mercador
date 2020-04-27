@@ -17,6 +17,8 @@
         <class>br.com.ans.model.SituacaoVenda</class>
         <class>br.com.ans.model.Venda</class>
         <class>br.com.ans.model.TipoVenda</class>
+        <class>br.com.ans.model.Autorizacao</class>
+        <class>br.com.ans.model.ItemVenda</class>
         
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />

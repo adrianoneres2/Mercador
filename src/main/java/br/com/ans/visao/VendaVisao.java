@@ -1,28 +1,28 @@
 package br.com.ans.visao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.ans.model.Caixa;
 import br.com.ans.model.FormaPagamento;
+import br.com.ans.model.Produto;
 import br.com.ans.model.Usuario;
 import br.com.ans.model.Venda;
 import br.com.ans.service.FormaPagamentoService;
+import br.com.ans.service.ProdutoService;
 import br.com.ans.service.VendaService;
 import enumerations.FuncionalidadeEnum;
 
-//@RequestScoped
+@RequestScoped
 //@SessionScoped
 
-@RequestScoped
 @Named
 public class VendaVisao implements Serializable {
 
@@ -49,7 +49,17 @@ public class VendaVisao implements Serializable {
 	private Venda venda;
 	
 	@Inject
+	private Produto produto;
+	
+	@Inject
 	VendaService vendaService;
+	
+	List<Produto> produtos;
+	
+	@Inject
+	private ProdutoService produtoService;
+	
+	private String codigoBarras;
 	
 	public VendaVisao() {
 	}
@@ -57,6 +67,8 @@ public class VendaVisao implements Serializable {
 	@PostConstruct
 	public void init() {
 		this.carregarListaFormaPagamento();
+	//	this.setCodigoBarras("784456321546645");
+	//	consultarProduto();
 	}
 
 	public Caixa getCaixa() {
@@ -103,11 +115,36 @@ public class VendaVisao implements Serializable {
 		return venda;
 	}
 
-
 	public void setVenda(Venda venda) {
 		this.venda = venda;
 	}
 
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+	
+
+	public String getCodigoBarras() {
+		return codigoBarras;
+	}
+
+	public void setCodigoBarras(String codigoBarras) {
+		this.codigoBarras = codigoBarras;
+	}
+
+	
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		String retorno = menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
@@ -130,6 +167,23 @@ public class VendaVisao implements Serializable {
 				mapaFormaPagamento.put(formaPagamento.getCodigoFormaPagamento(), formaPagamento.getNomeFormaPagamento());
 			}
 			this.setListaFormasPagamento(mapaFormaPagamento);
-	}	
+	}
+
+	public void adicionarProduto(Produto produto){
+		setProduto(produto);
+		if(produto != null){
+			if(this.getProdutos() == null){
+				List<Produto> listaProdutos = new ArrayList<Produto>();
+				listaProdutos.add(produto);
+				this.setProdutos(listaProdutos);
+			}
+		}
+	}
+	
+	public void consultarProduto(){
+		if(codigoBarras != null){
+			adicionarProduto(this.produtoService.porCodigoBarra(codigoBarras));
+		}
+	}
 	
 }

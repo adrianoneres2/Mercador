@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -79,6 +81,8 @@ public class produtoDaoImpl extends GenericoDaoImpl<Produto> implements ProdutoD
 				if(!query.getResultList().isEmpty()){
 					Produto produto = (Produto) query.getResultList().get(0);
 					return produto;
+				}else{
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Produto não encontrado!"));
 				}
 			}catch(Exception e){
 				e.printStackTrace();
