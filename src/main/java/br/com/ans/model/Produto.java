@@ -61,6 +61,9 @@ public class Produto implements EntidadeBase, Serializable {
 	@Transient
 	private String  nomeSituacao;
 	
+	@Transient
+	private Number valorTotal;
+	
 	@Override
 	public Long getId() {
 		return codigoProduto;
@@ -165,6 +168,15 @@ public class Produto implements EntidadeBase, Serializable {
 			return nomeSituacao = "Inativo";
 	}
 
+	public Number getValorTotal() {
+		return valorTotal;
+	}
+
+
+	public void setValorTotal(Number valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -253,7 +265,5 @@ public class Produto implements EntidadeBase, Serializable {
 			return false;
 		return true;
 	}
-
-
 	
 }

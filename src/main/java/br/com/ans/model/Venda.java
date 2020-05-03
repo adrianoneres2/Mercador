@@ -29,9 +29,11 @@ public class Venda implements EntidadeBase, Serializable  {
 	@Column(name ="id_venda", nullable = false)
 	private Long codigoVenda;
 	
+	/*
 	@ManyToOne
 	@JoinColumn(name = "id_forma_pagamento")
 	private FormaPagamento formaPagamento;
+*/
 
 	@ManyToOne
 	@JoinColumn(name = "id_usuario_cliente")
@@ -70,14 +72,6 @@ public class Venda implements EntidadeBase, Serializable  {
 
 	public void setCodigoVenda(Long codigoVenda) {
 		this.codigoVenda = codigoVenda;
-	}
-
-	public FormaPagamento getFormaPagamento() {
-		return formaPagamento;
-	}
-
-	public void setFormaPagamento(FormaPagamento formaPagamento) {
-		this.formaPagamento = formaPagamento;
 	}
 
 	public Usuario getUsuarioCliente() {
@@ -154,8 +148,6 @@ public class Venda implements EntidadeBase, Serializable  {
 				+ ((dataVendaFinalizada == null) ? 0 : dataVendaFinalizada
 						.hashCode());
 		result = prime * result
-				+ ((formaPagamento == null) ? 0 : formaPagamento.hashCode());
-		result = prime * result
 				+ ((situacaoVenda == null) ? 0 : situacaoVenda.hashCode());
 		result = prime * result
 				+ ((tipoVenda == null) ? 0 : tipoVenda.hashCode());
@@ -201,11 +193,6 @@ public class Venda implements EntidadeBase, Serializable  {
 				return false;
 		} else if (!dataVendaFinalizada.equals(other.dataVendaFinalizada))
 			return false;
-		if (formaPagamento == null) {
-			if (other.formaPagamento != null)
-				return false;
-		} else if (!formaPagamento.equals(other.formaPagamento))
-			return false;
 		if (situacaoVenda == null) {
 			if (other.situacaoVenda != null)
 				return false;
@@ -218,6 +205,5 @@ public class Venda implements EntidadeBase, Serializable  {
 			return false;
 		return true;
 	}
-
 	
 }

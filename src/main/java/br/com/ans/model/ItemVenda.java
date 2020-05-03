@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "ta_item_venda", schema = "loja")
@@ -53,7 +54,7 @@ public class ItemVenda implements EntidadeBase, Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_autorizacao")
 	private Autorizacao autorizacao;
-		
+
 	@Override
 	public Long getId() {
 		return codigoItemVenda;
@@ -197,5 +198,4 @@ public class ItemVenda implements EntidadeBase, Serializable {
 			return false;
 		return true;
 	}
-
 }

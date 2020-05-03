@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/aplicacao.xhtml">
+
+	<ui:define name="conteudoAplicacao">
+
+		<h:form id="idFormConsultaUsuario">
+
+			<p:growl id="growlConsultarUsuario" showDetail="true" escape="true"
+				closable="true" styleClass="messages" />
+
+			<p:panel id="idPanelConsultaUsuario">
+				<h:panelGrid id="idPpanelPrincipal">
+
+					<h:outputLabel value="Nome do usuário " />
+					<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
+
+				</h:panelGrid>
+				<p:dataTable var="usuario" value="#{usuarioVisao.usuarios}"
+					rows="10" lazy="true" paginator="true" paginatorPosition="bottom">
+
+					<p:column headerText="Código" width="70">
+						<h:outputText value="#{usuario.codigoUsuario}" />
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{usuario.nomeUsuario}" />
+					</p:column>
+
+					<p:column headerText="E-mail">
+						<h:outputText value="#{usuario.email}" />
+					</p:column>
+
+					<p:column headerText="Data de cadastro" width="170">
+						<h:outputText value="#{usuario.dataCadastro}">
+							<f:convertDateTime pattern="dd-MM-yyyy HH:MM" ttimeZone="America/Sao_Paulo"/>
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Perfil" width="110">
+						<h:outputText value="#{usuario.perfil.nomePerfil}" />
+					</p:column>
+
+					<p:column headerText="Ações" width="70">
+
+						<p:commandLink
+							action="#{usuarioVisao.editarUsuario(usuario)}" update=":idFormConsultaUsuario">
+							<p:graphicImage library="imagens" name="editar.png" />
+						</p:commandLink>
+
+						<p:spacer width="20" />
+
+						<p:commandLink action="#{usuarioVisao.ativarInativar(usuario)}"
+							update=":idFormConsultaUsuario">
+							<p:graphicImage library="imagens" name="usuario_ativo.png" rendered="#{usuario.situacaoUsuario == 1}"/>
+							<p:graphicImage library="imagens" name="usuario_inativo.png" rendered="#{usuario.situacaoUsuario == 0}" />
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+
+				<f:facet name="footer">
+					<p:commandButton value="Consultar"
+						action="#{usuarioVisao.consultarUsuarioPorNome()}"
+						update=":idFormConsultaUsuario" >
+					</p:commandButton>
+					<p:commandButton value="Voltar" type="submit"
+						action="#{usuarioVisao.aplicacao()}"
+						update=":idFormConsultaUsuario" />
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

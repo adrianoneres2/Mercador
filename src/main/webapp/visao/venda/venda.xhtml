@@ -6,80 +6,45 @@
 
 	<ui:define name="conteudoAplicacao">
 
-
-		<script>
-            function mascara(o, f) {
-              v_obj = o;
-              v_fun = f;
-              setTimeout("execmascara()", 1);
-            }
-            function execmascara() {
-              v_obj.value = v_fun(v_obj.value);
-            }
-         function valor(v) {
-        v = v.replace(/\D/g, "");
-        v = v.replace(/[0-9]{15}/, "inválido");
-        v = v.replace(/(\d{1})(\d{11})$/, "$1.$2"); // coloca ponto antes dos
-        // Ãºltimos 11 digitos
-        v = v.replace(/(\d{1})(\d{8})$/, "$1.$2"); // coloca ponto antes dos
-        // Ãºltimos 8 digitos
-        v = v.replace(/(\d{1})(\d{5})$/, "$1.$2"); // coloca ponto antes dos
-        // Ãºltimos 5 digitos
-        v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2"); // coloca virgula antes dos
-        // Ãºltimos 2 digitos
-        return v;
-        }
-
-        function valorInteiro(v) {
-            v = v.replace(/\D/g, "");
-            v = v.replace(/[0-9]{15}/, "inválido");
-            return v;
-		}
-</script>
 		<h:form id="idFormVenda">
-			<p:growl id="growlvenda" showDetail="true" escape="true"
+			<p:growl id="growlVenda" showDetail="true" escape="true"
 				closable="true" styleClass="messages" />
 			<br />
 			<p:layout>
-				<p:layoutUnit position="west" resizable="true" 
-					minSize="200" maxSize="500">
-					<p:panel id="idPanelVenda" style="text-align:left">
+				<p:layoutUnit position="west" resizable="true" minSize="200"
+					maxSize="500">
+					<p:panel id="idPanelVendaInfo">
 
-						<p:outputLabel
-							value="Código do Caixa: "
-							 />
+						<p:outputLabel value="Código do Caixa: " />
 						<br />
-						<p:inputText  disabled="true" value="#{vendaVisao.caixa.codigoCaixa}"/>
-						<br />
-						<br />
-						<p:outputLabel
-							value="Código da Venda :"
-							 />
-						<br />
-						<p:inputText  disabled="true" value="#{vendaVisao.venda.codigoVenda}" />
+						<p:inputText disabled="true"
+							value="#{vendaVisao.caixa.codigoCaixa}" />
 						<br />
 						<br />
-						<p:outputLabel 
-							value="Valor Total: " />
+						<p:outputLabel value="Código da Venda :" />
+						<br />
+						<p:inputText disabled="true"
+							value="#{vendaVisao.venda.codigoVenda}" />
 						<br />
 						<br />
-						<p:inputText 
-							value="R$: " disabled="true"></p:inputText>
+						<p:outputLabel value="Valor Total: " />
 						<br />
 						<br />
-						<p:outputLabel 
-							value="Forma de pagamento: " />
+						<p:inputText value="R$: " disabled="true"></p:inputText>
 						<br />
 						<br />
-						
-<!-- 						<p:selectOneMenu id="idSelectSubCategoria" -->
-<!-- 							value="" required="true"> -->
-<!-- 							<f:selectItem itemValue="0" itemLabel="Selecione" /> -->
-<!-- 							<f:selectItems -->
-<!-- 								value="#{vendaVisao.listaFormasPagamento.entrySet()}" -->
-<!-- 								var="itemFormasPagamento" itemValue="#{itemFormasPagamento.key}" -->
-<!-- 								itemLabel="#{itemFormasPagamento.value}" /> -->
-<!-- 						</p:selectOneMenu> -->
+						<p:outputLabel value="Forma de pagamento: " />
+						<br />
+						<br />
+
+						<!-- 						<p:selectOneMenu id="idSelectSubCategoria" -->
+						<!-- 							value="" required="true"> -->
+						<!-- 							<f:selectItem itemValue="0" itemLabel="Selecione" /> -->
+						<!-- 							<f:selectItems -->
+						<!-- 								value="#{vendaVisao.listaFormasPagamento.entrySet()}" -->
+						<!-- 								var="itemFormasPagamento" itemValue="#{itemFormasPagamento.key}" -->
+						<!-- 								itemLabel="#{itemFormasPagamento.value}" /> -->
+						<!-- 						</p:selectOneMenu> -->
 
 						<br />
 						<br />
@@ -87,75 +52,74 @@
 					<p:panel>
 						<p:commandButton value="Finalizar Venda"
 							style="background: green !important;  color: white !important;"></p:commandButton>
-						<br/>
+						<br />
 						<p:commandButton value="Cancelar Venda"
 							style="background: #cc0000 !important; color: white !important;"></p:commandButton>
 					</p:panel>
 				</p:layoutUnit>
 
 				<p:layoutUnit position="center">
-					<p:panel id="idPanelItensVenda">
+					<p:panel id="idPanelVenda">
+						<h:panelGrid id="idPanelGridPrincipalVenda" columns="9">
 
-						<p:outputLabel
-							value="Produto: " />
-						<p:inputText name = "inputCodigoBarras" 
-						             value = "#{vendaVisao.codigoBarras}" />
-						<p:spacer width="10"/>
-						<p:outputLabel
-							value="Quantidade: " />
-						<p:inputText ></p:inputText>
-						<p:spacer width="10"/>
-						<p:commandButton 
-						    id = "btVendaVisaConsultarProduto"
-						    value="Ok" 
-						    actionListener ="#{vendaVisao.consultarProduto()}" 
-						    style="background: #cc0000 !important; color: white !important;" 
-							update="growlvenda :idFormVenda:dataTableItens teste2"
-						    process = "@form"
-						    oncomplete="PF('dataTableItens').show()">  
-						 </p:commandButton>
-						<br />
-						<br />
-						<p:outputLabel id="teste2" value="#{vendaVisao.produto.nomeProduto}" />
-						<p:dataTable var="varProduto" 
-						             value="#{produtoVisao.produtos}"
-							         lazy="true" 
-							         paginator="false"
-							         id="dataTableItens">
+							<p:outputLabel id="labelVendaProduto" value="Produto" />
+							<br />
+							<p:inputText value="#{vendaVisao.codigoBarras}"
+								label="labelVendaProduto" />
 
-							<p:column headerText="Código" width="70">
-								<h:outputText value="#{varProduto.codigoProduto}" />
-							</p:column>
+							<p:spacer />
 
-							<p:column headerText="Nome" width="200">
-								<h:outputText value="#{varProduto.nomeProduto}" />
-							</p:column>
+							<p:outputLabel id="labelQuantidadeProduto" value="Quantidade" />
+							<br />
+							<p:inputText value="#{vendaVisao.quantidade}" label="labelQuantidadeProduto" />
+							<p:spacer />
+							<p:commandButton id="botaoVendaConsultar" value="Consultar"
+								action="#{vendaVisao.consultarProduto()}"
+								update="dataTableProduto growlVenda" ajax="true" />
 
-							<p:column headerText="Quantidade" width="30">
-								<h:outputText value="#{varProduto.quantidadeProduto}" />
-							</p:column>
+						</h:panelGrid>
+					<p:spacer />
+					<p:dataTable id="dataTableProduto" 
+					    var="produto"
+						value="#{vendaVisao.produtos}" lazy="true" 
+						paginator="false"
+						scrollable="true" scrollWidth="90%" scrollHeight="295">
 
-							<p:column headerText="Valor" width="50">
-								<h:outputText value="#{varProduto.valorVenda}">
-									<f:convertNumber type="currency" />
-								</h:outputText>
-							</p:column>
+						<p:column headerText="Código" width="5">
+							<h:outputText value="#{produto.codigoProduto}" />
+						</p:column>
 
-							<p:column headerText="Total" width="50">
-								<h:outputText value="#{varProduto.valorVenda}">
-									<f:convertNumber type="currency" />
-								</h:outputText>
-							</p:column>
+						<p:column headerText="Nome" width="120">
+							<h:outputText value="#{produto.nomeProduto}" />
+						</p:column>
 
-							<p:column headerText="Ações" width="50">
-							</p:column>
-						</p:dataTable>
+						<p:column headerText="Quantidade" width="20">
+							<h:outputText value="#{produto.quantidadeProduto}" />
+						</p:column>
 
-					</p:panel>
+						<p:column headerText="Valor" width="50">
+							<h:outputText value="#{produto.valorVenda}">
+								<f:convertNumber type="currency" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Total" width="50">
+							<h:outputText value="#{produto.valorTotal}">
+								<f:convertNumber type="currency" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Ações" width="20">
+						<p:commandLink>
+							<p:graphicImage library="imagens" name="excluido.png"/>
+							<p:graphicImage library="imagens" name="excluido.png"/>
+						</p:commandLink>
+						</p:column>
+
+					</p:dataTable>
+                  </p:panel>
 				</p:layoutUnit>
 			</p:layout>
-			<p:spacer />
-			<br />
 		</h:form>
 	</ui:define>
 </ui:composition>

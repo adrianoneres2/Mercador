@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Loja virtual</title>
+	<ui:insert name="head" />
+</h:head>
+<h:body>
+
+<!-- 	<p:growl id="growl" showDetail="true" sticky="true" escape="true" /> -->
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north">
+			<ui:insert name="logOff" />
+			<ui:insert name="menu" />
+		</p:layoutUnit>
+		<center>
+			<p:layoutUnit position="center">
+				<ui:insert name="login" />
+				<ui:insert name="conteudo" />
+				<ui:insert name="conteudoModal" />
+			</p:layoutUnit>
+		</center>
+		<p:layoutUnit position="south" size="0"
+			header="Soux - Consultoria em informática.  -  Contato: (61)99992-0909"
+			resizable="false" closable="false" collapsible="false">
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+</html>

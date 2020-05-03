@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,15 +20,15 @@ import br.com.ans.service.ProdutoService;
 import br.com.ans.service.VendaService;
 import enumerations.FuncionalidadeEnum;
 
-@RequestScoped
+//@Dependent
 //@SessionScoped
-
+//@RequestScoped
+@ViewScoped
 @Named
 public class VendaVisao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Inject
 	private Caixa caixa;
 
 	private Usuario usuarioCliente;
@@ -48,8 +48,7 @@ public class VendaVisao implements Serializable {
 	
 	private Venda venda;
 	
-	@Inject
-	private Produto produto;
+    private Produto produto;
 	
 	@Inject
 	VendaService vendaService;
@@ -61,14 +60,19 @@ public class VendaVisao implements Serializable {
 	
 	private String codigoBarras;
 	
+	private Long quantidade;
+	
 	public VendaVisao() {
 	}
 
 	@PostConstruct
 	public void init() {
-		this.carregarListaFormaPagamento();
-	//	this.setCodigoBarras("784456321546645");
-	//	consultarProduto();
+		///Inicia a variável Produtos
+		produtos = new ArrayList<Produto>();
+		
+		//Inicia objeto de venda e caixa 
+		setVenda(vendaService.buscarVenda(usuarioLogado.getUsuario()));
+		setCaixa(getVenda().getCaixa());
 	}
 
 	public Caixa getCaixa() {
@@ -137,7 +141,6 @@ public class VendaVisao implements Serializable {
 		this.codigoBarras = codigoBarras;
 	}
 
-	
 	public Produto getProduto() {
 		return produto;
 	}
@@ -145,14 +148,21 @@ public class VendaVisao implements Serializable {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+	
+	public Long getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Long quantidade) {
+		this.quantidade = quantidade;
+	}
 
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		String retorno = menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
 		if(retorno == null){
 			return null;
 		}
-		setVenda(vendaService.buscarVenda(usuarioLogado.getUsuario()));
-		setCaixa(getVenda().getCaixa());
+
 		if (getVenda().getCaixa()!= null){
 			return retorno;
 		}
@@ -170,19 +180,19 @@ public class VendaVisao implements Serializable {
 	}
 
 	public void adicionarProduto(Produto produto){
-		setProduto(produto);
 		if(produto != null){
-			if(this.getProdutos() == null){
-				List<Produto> listaProdutos = new ArrayList<Produto>();
-				listaProdutos.add(produto);
-				this.setProdutos(listaProdutos);
-			}
+		  this.produto = produto; 
+		  this.produto.setQuantidadeProduto(this.getQuantidade());	
+		  this.produto.setValorTotal(getQuantidade()*produto.getValorVenda());
+				produtos.add(produto);
+			//}
 		}
-	}
+	}	
 	
 	public void consultarProduto(){
 		if(codigoBarras != null){
 			adicionarProduto(this.produtoService.porCodigoBarra(codigoBarras));
+			
 		}
 	}
 	
