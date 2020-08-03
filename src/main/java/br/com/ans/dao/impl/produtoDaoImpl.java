@@ -81,9 +81,9 @@ public class produtoDaoImpl extends GenericoDaoImpl<Produto> implements ProdutoD
 				if(!query.getResultList().isEmpty()){
 					Produto produto = (Produto) query.getResultList().get(0);
 					return produto;
-				}else{
+				}/*else{
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Produto não encontrado!"));
-				}
+				}*/
 			}catch(Exception e){
 				e.printStackTrace();
 			}

@@ -85,11 +85,11 @@
 						paginator="false"
 						scrollable="true" scrollWidth="90%" scrollHeight="295">
 
-						<p:column headerText="Código" width="30">
+						<p:column headerText="Código" width="5">
 							<h:outputText value="#{produto.codigoProduto}" />
 						</p:column>
 
-						<p:column headerText="Nome" width="150">
+						<p:column headerText="Nome" width="120">
 							<h:outputText value="#{produto.nomeProduto}" />
 						</p:column>
 
@@ -104,9 +104,16 @@
 						</p:column>
 
 						<p:column headerText="Total" width="50">
-							<h:outputText value="#{varProduto.valorVenda}">
+							<h:outputText value="#{produto.valorTotal}">
 								<f:convertNumber type="currency" />
 							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Ações" width="20">
+						<p:commandLink>
+							<p:graphicImage library="imagens" name="excluido.png"/>
+							<p:graphicImage library="imagens" name="excluido.png"/>
+						</p:commandLink>
 						</p:column>
 
 					</p:dataTable>

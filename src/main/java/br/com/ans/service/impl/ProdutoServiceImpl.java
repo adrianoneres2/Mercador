@@ -58,14 +58,16 @@ public class ProdutoServiceImpl implements ProdutoService {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo Valor é obrigatório!"));
 			validador = false;
 		}
-		
-		//if(produto.getCodigoProduto() == null){
-			if(produtoDao.porCodigoBarra(produto.getCodigoBarra()) != null){
+		 
+		Produto produtoValidacao = new Produto(); 
+		produtoValidacao = produtoDao.porCodigoBarra(produto.getCodigoBarra());
+		if(produtoValidacao != null){
+			if(produtoValidacao.getCodigoBarra() != null && produto.getCodigoProduto() != produtoValidacao.getCodigoProduto()){
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Código de barras já existe cadastrado!"));
 				validador = false;
 			}
-		//}
-		
+		}
+			
 		return validador;
 	}
 	
@@ -81,7 +83,12 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 	@Override
 	public Produto porCodigoBarra(String codigoBarras) {
-	  return produtoDao.porCodigoBarra(codigoBarras);
+	  Produto produto = new Produto();
+	  produto = produtoDao.porCodigoBarra(codigoBarras);
+	  if(produto == null){
+		  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Produto não encontrado!"));
+	  }
+	  return produto;
 	}
 
 	@Override
