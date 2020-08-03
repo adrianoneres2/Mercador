@@ -3,6 +3,7 @@ package br.com.ans.visao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -184,15 +185,23 @@ public class VendaVisao implements Serializable {
 		  this.produto = produto; 
 		  this.produto.setQuantidadeProduto(this.getQuantidade());	
 		  this.produto.setValorTotal(getQuantidade()*produto.getValorVenda());
-				produtos.add(produto);
-			//}
-		}
-	}	
-	
+		  
+		  Iterator<Produto> produtoLista = produtos.iterator();
+
+		  while(produtoLista.hasNext()){
+		              Produto prod = produtoLista.next();
+		              if(prod.getCodigoProduto() == produto.getCodigoProduto()){
+		            	  produto.setQuantidadeProduto(produto.getQuantidadeProduto()+prod.getQuantidadeProduto());
+		            	  produtoLista.remove();
+		              }
+		          }
+		  this.produtos.add(produto);
+	  }
+   }
+
 	public void consultarProduto(){
-		if(codigoBarras != null){
+		if(getCodigoBarras().equals(null) || getQuantidade() != null){
 			adicionarProduto(this.produtoService.porCodigoBarra(codigoBarras));
-			
 		}
 	}
 	
