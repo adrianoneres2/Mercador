@@ -16,10 +16,11 @@
 
 					<h:outputLabel value="Nome do usuário " />
 					<p:inputText value="#{usuarioVisao.usuario.nomeUsuario}" />
-
 				</h:panelGrid>
+				
 				<p:dataTable var="usuario" value="#{usuarioVisao.usuarios}"
-					rows="10" lazy="true" paginator="true" paginatorPosition="bottom">
+					rows="8" lazy="true" paginator="true" paginatorPosition="bottom"
+					style="margin-top: 15pt">
 
 					<p:column headerText="Código" width="70">
 						<h:outputText value="#{usuario.codigoUsuario}" />

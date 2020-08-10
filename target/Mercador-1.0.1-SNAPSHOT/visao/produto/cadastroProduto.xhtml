@@ -36,20 +36,17 @@
             return v;
 		}
 </script>
-
 		<h:form id="idFormCadastroProduto">
 			<p:growl id="growlCadastroPruoduto" showDetail="true" escape="true"
 				closable="true" styleClass="messages" />
-			<br />
-
-			<p:panel id="idPanelCadastroProduto" styleClass="divTelaPequena" >
-
+			<p:panel id="idPanelCadastroProduto" styleClass="divTelaPequena">
 				<f:facet name="header">
-					<h:outputLabel value="Cadastro de Produtos" />
+					<h:outputLabel value="CADASTRO DE PRODUTO" />
 				</f:facet>
 
 				<h:panelGrid id="idPanelGridProduto" border="0" columns="2"
-					cellpadding="1" cellspacing="1">
+					cellpadding="1" cellspacing="1"
+					style="margin-top: 15pt">
 
 					<h:outputText value="Nome: " />
 					<p:inputText value="#{produtoVisao.produto.nomeProduto}"

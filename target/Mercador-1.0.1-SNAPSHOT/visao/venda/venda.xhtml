@@ -64,14 +64,14 @@
 
 							<p:outputLabel id="labelVendaProduto" value="Produto" />
 							<br />
-							<p:inputText value="#{vendaVisao.codigoBarras}"
-								label="labelVendaProduto" />
+							<p:inputText id="idInputCodigoBarras" value="#{vendaVisao.codigoBarras}"
+								label="labelVendaProduto" required="true" requiredMessage="Campo produto obrigarório!" />
 
 							<p:spacer />
 
 							<p:outputLabel id="labelQuantidadeProduto" value="Quantidade" />
 							<br />
-							<p:inputText value="#{vendaVisao.quantidade}" label="labelQuantidadeProduto" />
+							<p:inputText value="#{vendaVisao.quantidade}" label="labelQuantidadeProduto" required="true" requiredMessage="Campo quantidade obrigarório!"/>
 							<p:spacer />
 							<p:commandButton id="botaoVendaConsultar" value="Consultar"
 								action="#{vendaVisao.consultarProduto()}"
@@ -94,7 +94,7 @@
 						</p:column>
 
 						<p:column headerText="Quantidade" width="20">
-							<h:outputText value="#{produto.quantidadeProduto}" />
+							<h:outputText value="#{produto.quantidadeProduto}"  />
 						</p:column>
 
 						<p:column headerText="Valor" width="50">

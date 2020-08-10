@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+			<h:form id="idFormLogin">
+				<h:graphicImage id="idGraphicImage" library="imagens"
+					name="fundo_login.jpg" width="500px" height="200px"
+					rendered="#{autenticadorVisao.logado == false}">
+					<p:panelGrid id="idPanelLogin" columns="1"
+						styleClass="ui-widgetGrande divLogin semBorda">
+						<p:row>
+							<p:column>
+								<p:outputLabel id="labelEmail" value="E-mail " />
+							</p:column>
+
+							<p:column>
+								<p:inputText id="inputEmail"
+									value="#{autenticadorVisao.usuario.email}" />
+							</p:column>
+						</p:row>
+
+						<p:row>
+							<p:column>
+								<p:outputLabel id="labelSenha" value="Senha " />
+							</p:column>
+							<p:column>
+								<p:inputText id="inputSenha"
+									value="#{autenticadorVisao.usuario.senha}" />
+							</p:column>
+						</p:row>
+						<p:column>
+							<p:commandButton id="buttonEntrar" value="Entrar"
+								action="#{autenticadorVisao.logar}" update="@all" process="@all" />
+						</p:column>
+
+					</p:panelGrid>
+				</h:graphicImage>
+			</h:form>
+
+</ui:composition>

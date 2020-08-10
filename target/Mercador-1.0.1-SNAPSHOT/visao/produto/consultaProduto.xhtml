@@ -12,18 +12,19 @@
 
 			<p:panel id="idPanelConsultaProduto">
 				<h:panelGrid id="idPpanelPrincipal">
-				    <p:outputLabel value="Nome do produto" />
+					<p:outputLabel value="Nome do produto" title="asdfas" />
 					<p:inputText value="#{produtoVisao.produto.nomeProduto}" />
-
 				</h:panelGrid>
-				<p:dataTable var="produto" value="#{produtoVisao.produtos}"
-					rows="10" lazy="true" paginator="true" paginatorPosition="bottom">
+				
+				<p:dataTable var="produto" value="#{produtoVisao.produtos}" rows="8"
+					lazy="true" paginator="true" paginatorPosition="bottom"
+					style="margin-top: 15pt">
 
 					<p:column headerText="Código" width="30">
 						<h:outputText value="#{produto.codigoProduto}" />
 					</p:column>
 
-					<p:column headerText="Nome" width="320">
+					<p:column headerText="Nome" width="300">
 						<h:outputText value="#{produto.nomeProduto}" />
 					</p:column>
 
@@ -35,21 +36,21 @@
 						<h:outputText value="#{produto.quantidadeProduto}" />
 					</p:column>
 
-					<p:column headerText="Valor" width="50">
+					<p:column headerText="Valor" width="100">
 						<h:outputText value="#{produto.valorVenda}">
 							<f:convertNumber type="currency" />
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Código de barras" width="170">
+					<p:column headerText="Código de barras" width="110">
 						<h:outputText value="#{produto.codigoBarra}" />
 					</p:column>
 
-					<p:column headerText="Imagem" width="70">
-						<h:outputText value="#{produto.imagemProduto}" />
-					</p:column>
+					<!-- 					<p:column headerText="Imagem" width="30"> -->
+					<!-- 						<h:outputText value="#{produto.imagemProduto}" /> -->
+					<!-- 					</p:column> -->
 
-					<p:column headerText="Data de cadastro" width="110">
+					<p:column headerText="Data de cadastro" width="90">
 						<h:outputText value="#{produto.dataProduto}">
 							<f:convertDateTime pattern="dd/MM/yyyy"
 								ttimeZone="America/Sao_Paulo" />

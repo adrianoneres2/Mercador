@@ -8,21 +8,29 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Loja virtual</title>
-	<ui:insert name="head" />
+	<!-- 	<ui:insert name="head" /> -->
+	<h:outputStylesheet library="css" name="estilo.css" />
 </h:head>
 <h:body>
 
-<!-- 	<p:growl id="growl" showDetail="true" sticky="true" escape="true" /> -->
+	<!-- 	<p:growl id="growl" showDetail="true" sticky="true" escape="true" /> -->
 
 	<p:layout fullPage="true">
-
-		<p:layoutUnit position="north">
-			<ui:insert name="logOff" />
-			<ui:insert name="menu" />
+		<p:layoutUnit position="north" size="0"
+			header="Soux-Consultoria em informática." resizable="false"
+			closable="false" collapsible="false">
+		</p:layoutUnit>
+		<p:layoutUnit position="west" resizable="false" size="180"
+			minSize="40" maxSize="200">
+			<!-- 			<ui:insert name="logOff" /> -->
+			<ui:include page="/logoff.xhtml" />
+			<!-- 			<ui:insert name="menu" /> -->
+			<ui:include page="/menu.xhtml" />
 		</p:layoutUnit>
 		<center>
 			<p:layoutUnit position="center">
-				<ui:insert name="login" />
+				<!-- 				<ui:insert name="login" /> -->
+				<ui:include page="/login.xhtml" />
 				<ui:insert name="conteudo" />
 				<ui:insert name="conteudoModal" />
 			</p:layoutUnit>
@@ -31,8 +39,6 @@
 			header="Soux - Consultoria em informática.  -  Contato: (61)99992-0909"
 			resizable="false" closable="false" collapsible="false">
 		</p:layoutUnit>
-
 	</p:layout>
-
 </h:body>
 </html>

@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form name="formMenu" id="idFormMenu">
+		<p:growl id="growlMenu" showDetail="true" sticky="true" escape="true" />
+		<!-- 			<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}"> -->
+		<p:menu toggleable="true" 
+		rendered="#{autenticadorVisao.logado}">
+			<p:submenu label="Principal"
+				action="#{usuarioVisao.acessarFuncionalidade('APLICACAO')}"
+				update="growlMenu" 
+				process="@this"/>
+
+			<p:submenu label="Produto">
+				<p:menuitem value="Cadastro"
+					action="#{usuarioVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
+					update="growlMenu" 
+					process="@this"
+					ajax="true"/>
+
+				<p:menuitem value="Consulta"
+					action="#{usuarioVisao.acessarFuncionalidade('CONSULTAPRODUTO')}"
+					update="growlMenu" 
+					process="@this"/>
+			</p:submenu>
+
+			<p:submenu label="Usuário">
+				<p:menuitem value="Cadastro"
+					action="#{usuarioVisao.acessarFuncionalidade('CADASTROUSUARIO')}"
+					update="growlMenu" 
+					process="@this"/>
+					
+				<p:menuitem value="Consulta"
+					action="#{usuarioVisao.acessarFuncionalidade('CONSULTAUSUARIO')}"
+					update="growlMenu" 
+					process="@this"/>
+			</p:submenu>
+
+			<p:submenu label="Caixa">
+				<p:menuitem value="Abertura"
+					action="#{caixaVisao.abrirJanelaAberturaCaixa()}" 
+					process="@this"
+					update="growlMenu" />
+					
+				<p:menuitem value="Fechamento"
+					action="#{caixaVisao.abrirJanelaFechamentoCaixa()}" 
+					process="@this"
+					update="growlMenu" />
+			</p:submenu>
+
+			<p:submenu label="Venda">
+				<p:menuitem value="Nova"
+					action="#{vendaVisao.acessarFuncionalidade('VENDA')}" 
+					update="growlMenu" 
+					process="@this"/>
+					
+				<p:menuitem value="Consultar"
+					action="#{vendaVisao.abrirJanelaFechamentoCaixa()}" 
+					process="@this"
+					update="growlMenu" />
+			</p:submenu>
+
+			<p:submenu label="Configurações">
+				<p:menuitem value="Perfil"
+					action="#{usuarioVisao.acessarFuncionalidade('GERENCIARPERFIL')}"
+					update="growlMenu" 
+					process="@this"/>
+					
+				<p:menuitem value="Categoria"
+					action="#{usuarioVisao.acessarFuncionalidade('GERENCIARPERFIL')}"
+					update="growlMenu" 
+					process="@this"/>
+			</p:submenu>
+		</p:menu>
+		<!-- 			</p:panel> -->
+		<p:commandButton value="Ajuda" action="#{autenticadorVisao.sair}"
+			update="growlMenu" />
+
+		<p:commandButton value="Sair" action="#{autenticadorVisao.sair}"
+			update=":idFormMenu, :idPerfilUsuario" />
+	</h:form>
+	
+</ui:composition>

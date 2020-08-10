@@ -4,7 +4,7 @@ html, body {
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
-	margin-left: 0px;  
+	margin-left: 0px;
 }
 
 #divPagina {
@@ -17,15 +17,17 @@ html, body {
 #divConteudo {
 	height: 100%;
 	width: 100%;
-    /*background-color: #D6D6D6;*/
-    /*background-color: #e3e3e3;*/''
+	/*background-color: #D6D6D6;*/
+	/*background-color: #e3e3e3;*/
+	''
 }
 
 #divBanner {
 	height: 32px;
 	width: 100%;
-    /*background-color: #D6D6D6;*/
-    /*background-color: #e3e3e3;*/''
+	/*background-color: #D6D6D6;*/
+	/*background-color: #e3e3e3;*/
+	''
 }
 
 #divRodape {
@@ -38,6 +40,11 @@ html, body {
 
 .divTelaPequena {
 	width: 800px;
+}
+
+.divTituloPadrao {
+	font-size: 15pt;
+	font-family:sans-serif;
 }
 
 .divTelaCheia {
@@ -54,114 +61,156 @@ html, body {
 	border: 2px;
 }
 
-#divLogin {	
-	position:absolute;
-		left:45%;
-		top:40%;
+.divLogin {
+	position: relative;
+	top: 150px;
+	color: white !important;
 }
 
+.imgLogin {
+	width: 500px; /*width of your image*/
+	height: 200px; /*height of your image*/
+	background-image: url("#{resources['imagens/fundo_login.png']}")
+		!important;
+}
 
 #divLogOff {
-	margin-top:5px;
+	margin-top: 5px;
 	left: 15px;
-    position: fixed;
+	position: fixed;
 }
 
 * html #divPagina {
 	height: 100%; /* hack para IE6 que trata height como min-height */
 }
 
-
 .ui-layout-north {
-z-index: 20!important;
-overflow: visible!important;
+	z-index: 20 !important;
+	overflow: visible !important;
 }
 
 .ui-layout-north .ui-layout-unit-content {
-overflow: visible!important;
+	overflow: visible !important;
 }
 
 .ui-widget {
-  font-size: 12px !important;
-  border: 5px;
-  background: #ffffff!important;
-  
+	font-size: 12px;
+	border: 5px;
 }
 
 .ui-widgetGrande {
-    font-size: 20px !important;
-    border: 5px;
-    background: #ffffff !important;
-    width:250px; 
+	font-size: 15px !important;
+	border: 0px;
+	width: 250px;
 }
 
-.ui-menu.ui-menubar{
-    background: #f5f5f5!important;
-    padding: 10px 14px !important;
-    border-radius: 6px !important;
-    color: white !important;
+.ui-menu.ui-menubar {
+	background: #f5f5f5 !important;
+	padding: 10px 14px !important;
+	border-radius: 6px !important;
+	color: white;
 }
 
 .ui-menu.ui-widget .ui-menuitem-link {
-    background: #f5f5f5!important;
-    color: black !important;
+	background: #ffffff !important;
+	color: black;
 }
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-    background: #f5f5f5!important;
-    color: black !important;
+.ui-corner-all {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 0px;
 }
+
+.ui-layout-unit .ui-layout-unit-content {
+    padding: 0.0em 0em !important;
+    border: 0px none;
+    overflow: auto;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default {
+	background: #f5f5f5 !important;
+	color: black !important;
+}
+
 .ui-button {
-    background: #1e94d2 !important;
-    padding: 3px 8px !important;
-    border-radius: 6px !important;
-    color: white !important;
+	background: #1e94d2 !important;
+	padding: 3px 8px !important;
+	border-radius: 6px !important;
 }
 
 #divMensagens {
-position:absolute;
-    top:50%;
-    left:50%;
-    z-index:9999;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 9999;
 }
-
 
 .semBorda tr, .semBorda td {
 	border: none !important;
+	background: transparent !important;
 }
 
+.ui-outputlabel3 {
+	color: white !important;
+}
+
+.ui-panelgrid {
+	border-collapse: collapse;
+	background: transparent !important;
+	background-color: transparent;
+	background-position-x: 0%;
+	background-position-y: 0%;
+	background-repeat: repeat;
+	background-attachment: scroll;
+	background-image: none;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+}
+/*
+.ui-widget-header {
+    border: 1px solid #f5f5f5;
+    background: #f5f5f5;
+    color: #000000;
+    font-weight: bold;
+}
+*/
+
 .esquerda {
-    float: left;
-    padding: 10px;
-    height: 100px;
-    border-right: 1px solid #000;
-    text-align: center;
+	float: left;
+	padding: 10px;
+	height: 100px;
+	border-right: 1px solid #000;
+	text-align: center;
 }
 
 .direita {
-    float: left;
-    padding: 10px;
-    height: 100px;
-    width: 100px;
-    text-align: center;
+	float: left;
+	padding: 10px;
+	height: 100px;
+	width: 100px;
+	text-align: center;
 }
 
-.save{
-background-image: url("/resources/imagens/table_save.png") !important;
-} 
-
-.table_save{
-    background-image: url("#{resources['imagens/table_save.png']}") !important;
+.save {
+	background-image: url("/resources/imagens/table_save.png") !important;
 }
 
-.icone_voltar{
-    background-image: url("#{resources['imagens/voltar.png']}") !important;
+.table_save {
+	background-image: url("#{resources['imagens/table_save.png']}")
+		!important;
 }
 
-.icone_excluir{
-    background-image: url("#{resources['imagens/excluir.png']}") !important;
+.icone_voltar {
+	background-image: url("#{resources['imagens/voltar.png']}") !important;
 }
 
-.icone_editar{
-	background-image: url('../imagens/editar.png') !important;	
+.icone_excluir {
+	background-image: url("#{resources['imagens/excluir.png']}") !important;
+}
+
+.icone_editar {
+	background-image: url('../imagens/editar.png') !important;
 }
