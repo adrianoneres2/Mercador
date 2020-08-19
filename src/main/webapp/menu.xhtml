@@ -16,10 +16,9 @@
 
 			<p:submenu label="Produto">
 				<p:menuitem value="Cadastro"
-					action="#{usuarioVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
-					update="growlMenu" 
-					process="@this"
-					ajax="true"/>
+					actionListener="#{usuarioVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
+					update=":idOutPutPanelConteudo">
+				</p:menuitem>
 
 				<p:menuitem value="Consulta"
 					action="#{usuarioVisao.acessarFuncionalidade('CONSULTAPRODUTO')}"

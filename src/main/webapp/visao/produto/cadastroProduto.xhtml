@@ -2,40 +2,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" template="/aplicacao.xhtml">
+	xmlns:p="http://primefaces.org/ui"> 
+<!-- 	template="/aplicacao.xhtml"> -->
 
-	<ui:define name="conteudoAplicacao">
+<!-- 	<ui:define name="conteudoAplicacao"> -->
 
 
-		<script>
-            function mascara(o, f) {
-              v_obj = o;
-              v_fun = f;
-              setTimeout("execmascara()", 1);
-            }
-            function execmascara() {
-              v_obj.value = v_fun(v_obj.value);
-            }
-         function valor(v) {
-        v = v.replace(/\D/g, "");
-        v = v.replace(/[0-9]{15}/, "invÃ¡lido");
-        v = v.replace(/(\d{1})(\d{11})$/, "$1.$2"); // coloca ponto antes dos
-        // Ãºltimos 11 digitos
-        v = v.replace(/(\d{1})(\d{8})$/, "$1.$2"); // coloca ponto antes dos
-        // Ãºltimos 8 digitos
-        v = v.replace(/(\d{1})(\d{5})$/, "$1.$2"); // coloca ponto antes dos
-        // Ãºltimos 5 digitos
-        v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2"); // coloca virgula antes dos
-        // Ãºltimos 2 digitos
-        return v;
-        }
-
-        function valorInteiro(v) {
-            v = v.replace(/\D/g, "");
-            v = v.replace(/[0-9]{15}/, "invÃ¡lido");
-            return v;
-		}
-</script>
 		<h:form id="idFormCadastroProduto">
 			<p:growl id="growlCadastroPruoduto" showDetail="true" escape="true"
 				closable="true" styleClass="messages" />
@@ -106,5 +78,5 @@
 
 			</p:panel>
 		</h:form>
-	</ui:define>
+<!-- 	</ui:define> -->
 </ui:composition>

@@ -47,6 +47,8 @@ public class UsuarioVisao implements Serializable{
 	
 	///String descricaoSituacao;
 	
+	private String paginaAtual;/// = "/index2.xhtml";
+	
 	private String email;
 	
 	HashMap<Long,String> listaPerfil;
@@ -223,8 +225,19 @@ public class UsuarioVisao implements Serializable{
 	}
 	
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
-		return menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
+		
+		String pagina = menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
+		setPaginaAtual(pagina);
+		
+		return pagina;
 	}
+	
+	public void acessarFuncionalidade2(FuncionalidadeEnum funcionalidadeEnum){
+		String pagina = menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
+		setPaginaAtual(pagina);
+		//setPaginaAtual("/index3.xhtml");
+	}
+	
 	
 	public void alterar() throws Exception {
 		
@@ -266,5 +279,17 @@ public class UsuarioVisao implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+	public String getPaginaAtual() {
+		return paginaAtual;
+	}
+
+
+	public void setPaginaAtual(String paginaAtual) {
+		this.paginaAtual = paginaAtual;
 	}	
+	
 }
+
