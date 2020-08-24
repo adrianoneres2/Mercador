@@ -5,7 +5,7 @@ public enum FuncionalidadeEnum {
 	COMPRA(1, ""),
 	VENDA(2, "/visao/venda/venda"),
 	CADASTROUSUARIO(3, "/visao/usuario/cadastroUsuario"),
-	CADASTROPRODUTO(4, "/visao/produto/cadastroProduto.xhtml"),
+	CADASTROPRODUTO(4, "/visao/produto/cadastroProduto"),
 	CADASTROCLIENTE(5, ""),
 	CONSULTAUSUARIO(6, "/visao/usuario/consultaUsuario"),
 	ALTERAUSUARIO(7, "/visao/usuario/alterarUsuario"),
