@@ -60,7 +60,7 @@ public class AutenticadorVisao implements Serializable {
 		
 		if(usuario != null){
 			this.setLogado(true);
-			return APLICACAO;
+			return "/aplicacao.xhtml";
 		}else{
 			//Limpa a instancia de usuário atual.
 			usuario = new Usuario();
@@ -72,10 +72,8 @@ public class AutenticadorVisao implements Serializable {
 		if(this.isLogado()){
 			this.setLogado(false);
 			usuario = new Usuario();
-			return APLICACAO;
-		}else{
-			return null;
 		}
+		return "/aplicacao.xhtml";
 	}
 
 	public Long getCodigoAuxiliar() {

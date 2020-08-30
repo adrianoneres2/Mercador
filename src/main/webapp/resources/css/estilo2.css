@@ -5,14 +5,6 @@ html, body {
 	margin-right: 0px;
 	margin-bottom: 0px;
 	margin-left: 0px;
-	font-size: 9pt;
-	font-family:cursive;
-}
-
-.bgLayoutNorth{
-	background-color: #2e3436;
-	width: 130pt;
-	height: 100%;	
 }
 
 #divPagina {
@@ -27,6 +19,7 @@ html, body {
 	width: 100%;
 	/*background-color: #D6D6D6;*/
 	/*background-color: #e3e3e3;*/
+	''
 }
 
 #divBanner {
@@ -68,10 +61,9 @@ html, body {
 }
 
 .divLogin {
-	position: relative !important;
-	top: 40%;
-	border: 10px;
-	color: black;
+	position: relative;
+	top: 150px;
+	color: white !important;
 }
 
 .imgLogin {
@@ -91,47 +83,100 @@ html, body {
 	height: 100%; /* hack para IE6 que trata height como min-height */
 }
 
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+.ui-widget {
+	font-size: 10px;
+	border: 5px;
+	font-family: cursive !important;
+}
+
+.ui-widgetGrande {
+	font-size: 15px !important;
+	border: 0px;
+	width: 250px;
+}
+
+.ui-menu.ui-menubar {
+	background: #f5f5f5 !important;
+	padding: 10px 14px !important;
+	border-radius: 6px !important;
+	color: white;
+}
+
+.ui-menu.ui-widget .ui-menuitem-link {
+	background: #ffffff !important;
+	color: black;
+}
+
+.ui-corner-all {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 0px;
+}
+
+.ui-layout-unit .ui-layout-unit-content {
+    padding: 0.0em 0em !important;
+    border: 0px none;
+    overflow: auto;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default {
+	background: #f5f5f5 !important;
+	color: black !important;
+}
+
+.ui-button {
+	background: #1e94d2 !important;
+	padding: 3px 8px !important;
+	border-radius: 6px !important;
+}
+
 #divMensagens {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	z-index: 9999;
 }
+
+.semBorda tr, .semBorda td {
+	border: none !important;
+	background: transparent !important;
+}
+
+.ui-outputlabel3 {
+	color: white !important;
+}
+
+.ui-panelgrid {
+	border-collapse: collapse;
+	background: transparent !important;
+	background-color: transparent;
+	background-position-x: 0%;
+	background-position-y: 0%;
+	background-repeat: repeat;
+	background-attachment: scroll;
+	background-image: none;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+}
 /*
-.ui-datatable table {
-    border-collapse: collapse;
-    width: 100%;
+.ui-widget-header {
+    border: 1px solid #f5f5f5;
+    background: #f5f5f5;
+    color: #000000;
+    font-weight: bold;
 }
 */
-
-/* ************* Formatação do datatable****************** */
-thead{
-	background-color: #ca450e;
-	color: white;
-}
-.sXdatatable{
-	background-color: #555753;
-	color: white;
-	border: 1px white !important;
-	font-weight: bold;
-}
-/* ************* Formatação do datatable****************** */
-
-.semBorda{
-	border: none !important;
-}
-
-
-.ui-datatable table {
-    border-collapse: collapse;
-    width: 100%;
-    table-layout: auto !important;
-}
-
-tr td{
-	border: none;
-}
-
 
 .esquerda {
 	float: left;
@@ -168,35 +213,4 @@ tr td{
 
 .icone_editar {
 	background-image: url('../imagens/editar.png') !important;
-}
-/*CLASSES DO PRIMEFACES*/
-
-li.ui-widget-header {
-    position: relative;
-    min-height: 0;
-    background-color: #555753;
-}
-.ui-menu {
-    width: 14.2em !important;
-    padding: 0.1em;
-    padding-left: 0.09em !important;
-    position: relative;
-    outline: 0 none;
-    color: #ffffff;
-    
-}
-
-.ui-menu .ui-menuitem-link {
-    display: block;
-    width: 92%;
-    outline: none;
-    text-decoration: none;
-    font-weight: 400;
-    border: solid 1px transparent;
-    float: left;
-    line-height: 16px;
-    padding: 0.1em;
-    cursor: pointer;
-    background: #ffffff;
-    color: #000000;
 }

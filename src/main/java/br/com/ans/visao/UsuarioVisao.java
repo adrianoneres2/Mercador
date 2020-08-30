@@ -39,16 +39,12 @@ public class UsuarioVisao implements Serializable {
 	@Inject
 	private UsuarioService usuarioService;
 
-	@Inject
-	private AutenticadorVisao usuarioLogado;
-
 	private Perfil perfil;
 
 	private Long perfilSelecionado;
 
-	/// String descricaoSituacao;
-
-	private String paginaAtual;/// = "/index2.xhtml";
+	@Inject
+	private AutenticadorVisao usuarioLogado;
 
 	private String email;
 
@@ -161,11 +157,11 @@ public class UsuarioVisao implements Serializable {
 	}
 
 	public String consultarUsuario() {
-	    acessar(FuncionalidadeEnum.CONSULTAUSUARIO);
+		menuVisao.acessarFuncionalidade(FuncionalidadeEnum.CONSULTAUSUARIO);
 
-		if (getPaginaAtual() != null) {
+		if (menuVisao.getPaginaAtual() != null) {
 			consultarUsuarioPorNome();
-			return getPaginaAtual();
+			return menuVisao.getPaginaAtual();
 		}
 		return null;
 	}
@@ -179,8 +175,8 @@ public class UsuarioVisao implements Serializable {
 	}
 
 	public String cadastrar() throws Exception {
-		acessar(FuncionalidadeEnum.CADASTROUSUARIO);
-		if (getPaginaAtual() != null) {
+		menuVisao.acessarFuncionalidade(FuncionalidadeEnum.CADASTROUSUARIO);
+		if (menuVisao.getPaginaAtual() != null) {
 			usuario.setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
 
 			if (getUsuarioService().validarCamposCadastro(usuario)) {
@@ -199,38 +195,38 @@ public class UsuarioVisao implements Serializable {
 	}
 
 	public void ativarInativar(Usuario usuario) {
-		acessar(FuncionalidadeEnum.ATIVARINATIVARUSUARIO);
-		if (getPaginaAtual() != null) {
+		menuVisao.acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARUSUARIO);
+		if (menuVisao.getPaginaAtual() != null) {
 			usuarioService.ativarInativar(usuario);
 			this.consultarUsuarioPorNome();
 		}
 	}
 
 	public String editarUsuario(Usuario usuarioEdicao) {
-		acessar(FuncionalidadeEnum.ALTERAUSUARIO);
+		menuVisao.acessarFuncionalidade(FuncionalidadeEnum.ALTERAUSUARIO);
 
-		if (getPaginaAtual() != null) {
+		if (menuVisao.getPaginaAtual() != null) {
 			/* Guarda o objeto usuário na sessão flash. */
 			FacesContext.getCurrentInstance().getExternalContext().getFlash().put("usuario", usuarioEdicao);
-			return getPaginaAtual();
+			return menuVisao.getPaginaAtual();
 		} else {
 			return null;
 		}
 	}
 
-	public void aplicacao() {
-		acessar(FuncionalidadeEnum.APLICACAO);
-		//return getPaginaAtual();
-	}
+//	public void aplicacao() {
+//		acessar(FuncionalidadeEnum.APLICACAO);
+//		//return getPaginaAtual();
+//	}
 
 //	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum) {
 //		return menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
 //	}
 
-	public void acessar(FuncionalidadeEnum funcionalidadeEnum) {
-		setPaginaAtual(menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum).concat(".xhtml"));
-		getPaginaAtual();
-	}
+//	public void acessar(FuncionalidadeEnum funcionalidadeEnum) {
+//		setPaginaAtual(menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum).concat(".xhtml"));
+//		getPaginaAtual();
+//	}
 
 	public void alterar() throws Exception {
 
@@ -271,14 +267,6 @@ public class UsuarioVisao implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPaginaAtual() {
-		return paginaAtual;
-	}
-
-	public void setPaginaAtual(String paginaAtual) {
-		this.paginaAtual = paginaAtual;
 	}
 
 }

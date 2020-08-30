@@ -14,20 +14,27 @@
 <h:body>
 
 	<!-- 	<p:growl id="growl" showDetail="true" sticky="true" escape="true" /> -->
-
-	<p:layout fullPage="true">
+	<p:layout fullPage="true"> 
+	<div class="bgLayoutNorth">
 		<p:layoutUnit position="north" size="0"
-			header="Soux-Consultoria em informática." resizable="false"
-			closable="false" collapsible="false">
+			header="Soux-Consultoria em informática." 
+			resizable="false"
+			closable="false" 
+			collapsible="false"
+			visible="false">
 		</p:layoutUnit>
-		<p:layoutUnit position="west" resizable="false" size="180"
-			minSize="40" maxSize="200">
+	 </div>
+		<p:layoutUnit position="west" 
+		    resizable="false" 
+		    size="180"
+			minSize="40" 
+			maxSize="200">
 			<ui:include page="/perfilUsuario.xhtml" />
 			<ui:insert name="menu" />
 		</p:layoutUnit>
 		<center>
 			<p:layoutUnit position="center">
-				<ui:include page="/login.xhtml" />
+<!-- 				<ui:include page="/login.xhtml" /> -->
 				<ui:insert name="conteudo" />
 				<ui:insert name="conteudoModal" />
 			</p:layoutUnit>

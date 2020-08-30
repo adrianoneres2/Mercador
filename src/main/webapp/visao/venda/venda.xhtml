@@ -3,35 +3,34 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<!-- 	 template="/aplicacao.xhtml"> -->
-
-<!-- 	<ui:define name="conteudoAplicacao"> -->
 
 		<h:form id="idFormVenda">
 			<p:growl id="growlVenda" showDetail="true" escape="true"
 				closable="true" styleClass="messages" />
 			<br />
 			<p:layout>
-				<p:layoutUnit position="west" resizable="true" minSize="200"
-					maxSize="500">
+				<p:layoutUnit 
+				  position="west" 
+				  resizable="true" 
+				  minSize="65"
+				  maxSize="800">
 					<p:panel id="idPanelVendaInfo">
-
 						<p:outputLabel value="Código do Caixa: " />
 						<br />
 						<p:inputText disabled="true"
-							value="#{vendaVisao.caixa.codigoCaixa}" />
+							value="#{vendaVisao.caixa.codigoCaixa}" size="10"/>
 						<br />
 						<br />
 						<p:outputLabel value="Código da Venda :" />
 						<br />
 						<p:inputText disabled="true"
-							value="#{vendaVisao.venda.codigoVenda}" />
+							value="#{vendaVisao.venda.codigoVenda}" size="10"/>
 						<br />
 						<br />
 						<p:outputLabel value="Valor Total: " />
 						<br />
 						<br />
-						<p:inputText value="R$: " disabled="true"></p:inputText>
+						<p:inputText value="R$: " disabled="true" size="10"/>
 						<br />
 						<br />
 						<p:outputLabel value="Forma de pagamento: " />
@@ -84,33 +83,36 @@
 					    var="produto"
 						value="#{vendaVisao.produtos}" lazy="true" 
 						paginator="false"
-						scrollable="true" scrollWidth="90%" scrollHeight="295">
+						scrollable="true" 
+						scrollWidth="90%" 
+						scrollHeight="90%"
+						styleClass="sXdatatable">
 
-						<p:column headerText="Código" width="5">
+						<p:column headerText="Código" >
 							<h:outputText value="#{produto.codigoProduto}" />
 						</p:column>
 
-						<p:column headerText="Nome" width="120">
+						<p:column headerText="Nome" >
 							<h:outputText value="#{produto.nomeProduto}" />
 						</p:column>
 
-						<p:column headerText="Quantidade" width="20">
+						<p:column headerText="Quantidade" >
 							<h:outputText value="#{produto.quantidadeProduto}"  />
 						</p:column>
 
-						<p:column headerText="Valor" width="50">
+						<p:column headerText="Valor" >
 							<h:outputText value="#{produto.valorVenda}">
 								<f:convertNumber type="currency" />
 							</h:outputText>
 						</p:column>
 
-						<p:column headerText="Total" width="50">
+						<p:column headerText="Total" >
 							<h:outputText value="#{produto.valorTotal}">
 								<f:convertNumber type="currency" />
 							</h:outputText>
 						</p:column>
 
-						<p:column headerText="Ações" width="20">
+						<p:column headerText="Ações">
 						<p:commandLink>
 							<p:graphicImage library="imagens" name="excluido.png"/>
 							<p:graphicImage library="imagens" name="excluido.png"/>
@@ -122,5 +124,4 @@
 				</p:layoutUnit>
 			</p:layout>
 		</h:form>
-<!-- 	</ui:define> -->
 </ui:composition>

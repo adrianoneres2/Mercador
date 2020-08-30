@@ -11,27 +11,27 @@
 			<!-- 			<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}"> -->
 			<p:menu toggleable="true" rendered="#{autenticadorVisao.logado}">
 				<p:submenu label="Principal"
-					action="#{usuarioVisao.acessar('APLICACAO')}"
+					action="#{menuVisao.acessarFuncionalidade('APLICACAO')}"
 					update="growlMenu, :outputPanelConteudo" process="@this" />
 
 				<p:submenu label="Produto">
 					<p:menuitem value="Cadastro"
-						action="#{usuarioVisao.acessar('CADASTROPRODUTO')}"
+						action="#{menuVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
 						update="growlMenu, :outputPanelConteudo">
 					</p:menuitem>
 
 					<p:menuitem value="Consulta"
-						action="#{usuarioVisao.acessar('CONSULTAPRODUTO')}"
+						action="#{menuVisao.acessarFuncionalidade('CONSULTAPRODUTO')}"
 						update="growlMenu, :outputPanelConteudo" process="@this" />
 				</p:submenu>
 
 				<p:submenu label="Usuário">
 					<p:menuitem value="Cadastro"
-						action="#{usuarioVisao.acessar('CADASTROUSUARIO')}"
+						action="#{menuVisao.acessarFuncionalidade('CADASTROUSUARIO')}"
 						update="growlMenu, :outputPanelConteudo" process="@this" />
 
 					<p:menuitem value="Consulta"
-						action="#{usuarioVisao.acessar('CONSULTAUSUARIO')}"
+						action="#{menuVisao.acessarFuncionalidade('CONSULTAUSUARIO')}"
 						update="growlMenu, :outputPanelConteudo" process="@this" />
 				</p:submenu>
 
@@ -47,7 +47,7 @@
 
 				<p:submenu label="Venda">
 					<p:menuitem value="Nova"
-						action="#{vendaVisao.acessar('VENDA')}"
+						action="#{menuVisao.acessarFuncionalidade('VENDA')}"
 						update="growlMenu, :outputPanelConteudo" process="@this" />
 
 					<p:menuitem value="Consultar"
@@ -57,20 +57,22 @@
 
 				<p:submenu label="Configurações">
 					<p:menuitem value="Perfil"
-						action="#{usuarioVisao.acessar('GERENCIARPERFIL')}"
+						action="#{menuVisao.acessarFuncionalidade('GERENCIARPERFIL')}"
 						update="growlMenu, :outputPanelConteudo" process="@this" />
 
 					<p:menuitem value="Categoria"
-						action="#{usuarioVisao.acessar('GERENCIARPERFIL')}"
+						action="#{menuVisao.acessarFuncionalidade('GERENCIARPERFIL')}"
 						update="growlMenu, :outputPanelConteudo" process="@this" />
 				</p:submenu>
 			</p:menu>
 			<!-- 			</p:panel> -->
 			<p:commandButton value="Ajuda" action="#{autenticadorVisao.sair}"
-				update="growlMenu, :outputPanelConteudo" />
+				update="growlMenu, :outputPanelConteudo" 
+				rendered="#{autenticadorVisao.logado}"/>
 
 			<p:commandButton value="Sair" action="#{autenticadorVisao.sair}"
-				update="growlMenu, :outputPanelConteudo, :idFormMenu, :idPerfilUsuario" />
+				update="growlMenu, :outputPanelConteudo, :idFormMenu, :idPerfilUsuario" 
+				rendered="#{autenticadorVisao.logado}"/>
 		</h:form>
 	</ui:define>
 
@@ -81,7 +83,7 @@
 	<ui:define name="conteudo">
 		<h:panelGrid columns="1" width="100%">
 			<p:outputPanel id="outputPanelConteudo">
-				<ui:include page="#{usuarioVisao.getPaginaAtual()}" />
+				<ui:include page="#{menuVisao.getPaginaAtual()}" />
 			</p:outputPanel>
 		</h:panelGrid>
 	</ui:define>

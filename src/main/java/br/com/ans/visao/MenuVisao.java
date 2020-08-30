@@ -2,8 +2,7 @@ package br.com.ans.visao;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,13 +12,30 @@ import br.com.ans.service.PerfilFuncionalidadeService;
 import enumerations.FuncionalidadeEnum;
 
 @Named
-@RequestScoped
+//@RequestScoped
+@javax.faces.view.ViewScoped
 public class MenuVisao implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
 	private PerfilFuncionalidadeService perfilFuncionalidadeService;
+	
+	@Inject
+	private AutenticadorVisao usuarioLogado;
+	
+	private String paginaAtual = "/login.xhtml";
+	
+	@PostConstruct
+	public void init() {
+		if(usuarioLogado.getUsuario().getCodigoUsuario() == null) {
+			login();
+		}else {
+			if(getPaginaAtual() == "/login.xhtml") {
+				apresentacao();
+			}
+		}
+	}
 	
 	public String acessar(Usuario UsuarioLogado, FuncionalidadeEnum funcionalidadeEnum){		
 		if(FuncionalidadeEnum.APLICACAO.equals(funcionalidadeEnum) ){
@@ -54,6 +70,31 @@ public class MenuVisao implements Serializable{
 		}
 		///FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Sem permissão de acesso!"));
 		return null;
+	}
+
+	public void acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum) {
+		setPaginaAtual(acessar(usuarioLogado.getUsuario(), funcionalidadeEnum).concat(".xhtml"));
+		getPaginaAtual();
+	}
+
+	public void aplicacao() {
+		acessarFuncionalidade(FuncionalidadeEnum.APLICACAO);
+	}
+
+	public void apresentacao() {
+		setPaginaAtual("/apresentacao.xhtml");
+	}
+	
+	public void login() {
+		setPaginaAtual("/login.xhtml");
+	}
+	
+	public String getPaginaAtual() {
+		return paginaAtual;
+	}
+
+	public void setPaginaAtual(String paginaAtual) {
+		this.paginaAtual = paginaAtual;
 	}
 	
 }

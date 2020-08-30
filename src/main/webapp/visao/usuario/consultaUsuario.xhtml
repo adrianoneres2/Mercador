@@ -21,7 +21,8 @@
 				
 				<p:dataTable var="usuario" value="#{usuarioVisao.usuarios}"
 					rows="8" lazy="true" paginator="true" paginatorPosition="bottom"
-					style="margin-top: 15pt">
+					style="margin-top: 15pt"
+					styleClass="sXdatatable">
 
 					<p:column headerText="Código" width="70">
 						<h:outputText value="#{usuario.codigoUsuario}" />
@@ -69,7 +70,7 @@
 						update=":idFormConsultaUsuario" >
 					</p:commandButton>
 					<p:commandButton value="Voltar" type="submit"
-						action="#{usuarioVisao.aplicacao()}"
+						action="#{menuVisao.aplicacao()}"
 						update=":idFormConsultaUsuario" />
 				</f:facet>
 			</p:panel>

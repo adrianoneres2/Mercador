@@ -19,9 +19,10 @@
 				
 				<p:dataTable var="produto" value="#{produtoVisao.produtos}" rows="8"
 					lazy="true" paginator="true" paginatorPosition="bottom"
-					style="margin-top: 15pt">
+					style="margin-top: 15pt;"
+					styleClass="sXdatatable">
 
-					<p:column headerText="Código" width="30">
+					<p:column headerText="Código" width="30" >
 						<h:outputText value="#{produto.codigoProduto}" />
 					</p:column>
 

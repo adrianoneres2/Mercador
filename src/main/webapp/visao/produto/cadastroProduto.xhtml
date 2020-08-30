@@ -70,10 +70,11 @@
 						update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto" />
 					<p:commandButton type="submit" value="Consultar"
 						action="#{produtoVisao.consultarProduto()}"
-						update="idFormCadastroProduto" />
+						update="idFormCadastroProduto, growlCadastroPruoduto"
+						process="@this" />
 					<p:commandButton value="Voltar" type="submit"
-						action="#{usuarioVisao.aplicacao()}"
-						update="idFormCadastroProduto" />
+						action="#{menuVisao.aplicacao()}"
+						update="idFormCadastroProduto, :outputPanelConteudo" />
 				</f:facet>
 
 			</p:panel>
