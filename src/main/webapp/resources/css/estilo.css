@@ -10,7 +10,7 @@ html, body {
 }
 
 .bgLayoutNorth{
-	background-color: #2e3436;
+	/*background-color: #eeeeec;*/
 	width: 130pt;
 	height: 100%;	
 }
@@ -64,13 +64,13 @@ html, body {
 #divMenu {
 	height: 45px;
 	width: 100%;
-	border: 2px;
+	border: 0px;
 }
 
 .divLogin {
 	position: relative !important;
 	top: 40%;
-	border: 10px;
+	border: 0px;
 	color: black;
 }
 
@@ -105,16 +105,19 @@ html, body {
 */
 
 /* ************* Formatação do datatable****************** */
+/*
 thead{
 	background-color: #ca450e;
 	color: white;
 }
+
 .sXdatatable{
 	background-color: #555753;
 	color: white;
 	border: 1px white !important;
 	font-weight: bold;
 }
+*/
 /* ************* Formatação do datatable****************** */
 
 .semBorda{
@@ -122,14 +125,8 @@ thead{
 }
 
 
-.ui-datatable table {
-    border-collapse: collapse;
-    width: 100%;
-    table-layout: auto !important;
-}
-
 tr td{
-	border: none;
+	border: 0px;
 }
 
 
@@ -169,34 +166,21 @@ tr td{
 .icone_editar {
 	background-image: url('../imagens/editar.png') !important;
 }
-/*CLASSES DO PRIMEFACES*/
 
-li.ui-widget-header {
-    position: relative;
-    min-height: 0;
-    background-color: #555753;
-}
-.ui-menu {
-    width: 14.2em !important;
-    padding: 0.1em;
-    padding-left: 0.09em !important;
-    position: relative;
-    outline: 0 none;
-    color: #ffffff;
-    
-}
 
-.ui-menu .ui-menuitem-link {
-    display: block;
-    width: 92%;
-    outline: none;
-    text-decoration: none;
-    font-weight: 400;
-    border: solid 1px transparent;
-    float: left;
-    line-height: 16px;
-    padding: 0.1em;
-    cursor: pointer;
+.ui-widget-content {
+    border: 0px solid #dddddd;
     background: #ffffff;
-    color: #000000;
+    color: #333333;
 }
+
+.ui-menu.ui-widget {
+    min-width: 160px;
+    padding: 5px 0;
+    background-color: #ffffff;
+    border: 0px solid #ccc;
+    border: 0px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    background-clip: padding-box;
+}
+

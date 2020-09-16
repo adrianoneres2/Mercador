@@ -8,7 +8,6 @@
 	<ui:define name="menu">
 		<h:form name="formMenu" id="idFormMenu">
 			<p:growl id="growlMenu" showDetail="true" sticky="true" escape="true" />
-			<!-- 			<p:panel id="MenuTeste" rendered="#{autenticadorVisao.logado}"> -->
 			<p:menu toggleable="true" rendered="#{autenticadorVisao.logado}">
 				<p:submenu label="Principal"
 					action="#{menuVisao.acessarFuncionalidade('APLICACAO')}"
@@ -75,10 +74,6 @@
 				rendered="#{autenticadorVisao.logado}"/>
 		</h:form>
 	</ui:define>
-
-	<!-- 	<ui:define name="conteudo"> -->
-	<!-- 		<ui:insert name="conteudoAplicacao" /> -->
-	<!-- 	</ui:define> -->
 
 	<ui:define name="conteudo">
 		<h:panelGrid columns="1" width="100%">

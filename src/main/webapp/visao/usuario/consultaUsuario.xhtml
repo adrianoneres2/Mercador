@@ -20,9 +20,7 @@
 				</h:panelGrid>
 				
 				<p:dataTable var="usuario" value="#{usuarioVisao.usuarios}"
-					rows="8" lazy="true" paginator="true" paginatorPosition="bottom"
-					style="margin-top: 15pt"
-					styleClass="sXdatatable">
+					rows="8" lazy="true" paginator="true" paginatorPosition="bottom">
 
 					<p:column headerText="Código" width="70">
 						<h:outputText value="#{usuario.codigoUsuario}" />
