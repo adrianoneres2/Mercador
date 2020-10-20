@@ -67,11 +67,30 @@ html, body {
 	border: 0px;
 }
 
-.divLogin {
-	position: relative !important;
+#divLogin {
 	top: 40%;
-	border: 0px;
-	color: black;
+	left: 17%;
+	position: relative;
+	border: none;
+}
+
+#divImgFundoLogin {
+	top: 60pt;
+	left: 36%;
+	width: 350px;
+	height: 420px;
+	border: none;
+	position: fixed;
+	background-color: #eeeeec;
+	box-shadow: 10px 10px 18px #888888;
+}
+
+#divLoginInputEmail {
+        height: 30px;
+}
+
+#divLoginInputSenha {
+        height: 30px;
 }
 
 .imgLogin {
@@ -124,11 +143,32 @@ thead{
 	border: none !important;
 }
 
+.myButton {
+	box-shadow:inset -4px 11px 0px -50px #9fb4f2;
+	background-color:#7892c2;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:16px;
+	font-weight:bold;
+	padding:9px 76px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+}
+.myButton:hover {
+	background-color:#476e9e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
 
 tr td{
 	border: 0px;
 }
-
 
 .esquerda {
 	float: left;

@@ -4,40 +4,31 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<div class="divLogin">
-			<h:form id="idFormLogin">
-<!-- 				<h:graphicImage id="idGraphicImage" library="imagens" -->
-<!-- 					name="fundo_login.jpg" width="500px" height="200px" -->
-<!-- 					rendered="#{autenticadorVisao.logado == false}"> -->
-					<p:panelGrid id="idPanelLogin" columns="1"
-						>
-						<p:row>
-							<p:column>
-								<p:outputLabel id="labelEmail" value="E-mail " />
-							</p:column>
-
-							<p:column>
-								<p:inputText id="inputEmail"
-									value="#{autenticadorVisao.usuario.email}" />
-							</p:column>
-						</p:row>
-
-						<p:row>
-							<p:column>
-								<p:outputLabel id="labelSenha" value="Senha " />
-							</p:column>
-							<p:column>
-								<p:inputText id="inputSenha"
-									value="#{autenticadorVisao.usuario.senha}" />
-							</p:column>
-						</p:row>
-						<p:column>
-							<p:commandButton id="buttonEntrar" value="Entrar"
-								action="#{autenticadorVisao.logar}" update="@all" process="@all" />
-						</p:column>
-
-					</p:panelGrid>
-<!-- 				</h:graphicImage> -->
-			</h:form>
-</div>
+	<div id="divImgFundoLogin">
+	<div id="divLogin">
+		<h:form id="idFormLogin">
+			<div id="divLoginInputEmail">
+				<p:outputLabel id="labelEmail" value="E-mail " />
+				<p:inputText id="inputEmail"
+					value="#{autenticadorVisao.usuario.email}" />
+			</div>
+			<div id="divLoginInputSenha">
+				<p:outputLabel id="labelSenha" value="Senha " />
+				<p:inputText id="inputSenha"
+					value="#{autenticadorVisao.usuario.senha}" />
+			</div>
+			<div>
+				<p:commandButton id="buttonEntrar" value="LOGIN"
+					action="#{autenticadorVisao.logar}" update="@all" process="@all"
+					style="width: 240px; margin-top: 20px;"/>
+			</div>
+			
+			<div>
+				<p:commandButton id="buttonEntrar2" value="RECUPERAR"
+					action="#{autenticadorVisao.logar}" update="@all" process="@all"
+					style="width: 240px; margin-top: 20px;"/>
+			</div>
+		</h:form>
+	</div>
+	</div>
 </ui:composition>
