@@ -62,8 +62,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 
 		     /*Quando existe código, trata-se de uma alteração de cadastro que não altera senha*/
-			if (usuario.getCodigoUsuario() == null || usuario.getCodigoUsuario().equals("")){
-				if (usuario.getSenha() == null || usuario.getSenha().equals("")) {
+			if (usuario.getCodigoUsuario() == null || usuario.getCodigoUsuario().equals(null)){
+				if (usuario.getSenha() == null || usuario.getSenha().equals(null)) {
 					
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo senha é obrigatório!"));
 					validador = false;
@@ -80,7 +80,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "Campo e-mail é obrigatório!"));
 				validador = false;
 			} else {
-				if (this.obterUsuarioPorEmail(usuario.getEmail()) != null && (usuario.getCodigoUsuario() == null || usuario.getCodigoUsuario().equals(""))) {
+				if (this.obterUsuarioPorEmail(usuario.getEmail()) != null && (usuario.getCodigoUsuario() == null || usuario.getCodigoUsuario().equals(null))) {
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Warn", "E-mail já cadastrado na base de dados!"));
 					validador = false;
 				}

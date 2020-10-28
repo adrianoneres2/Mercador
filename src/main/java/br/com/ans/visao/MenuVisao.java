@@ -1,9 +1,10 @@
 package br.com.ans.visao;
 
+import static enumerations.FuncionalidadeEnum.APLICACAO;
+
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -39,7 +40,7 @@ public class MenuVisao implements Serializable{
 	
 	public String acessar(Usuario UsuarioLogado, FuncionalidadeEnum funcionalidadeEnum){		
 		if(FuncionalidadeEnum.APLICACAO.equals(funcionalidadeEnum) ){
-		   return funcionalidadeEnum.APLICACAO.getUrl().toString();
+		   return APLICACAO.getUrl().toString();
 		}else{
 			Long codigoFuncionalidade = (long) funcionalidadeEnum.getCodigo();
 			
@@ -74,7 +75,6 @@ public class MenuVisao implements Serializable{
 
 	public void acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum) {
 		setPaginaAtual(acessar(usuarioLogado.getUsuario(), funcionalidadeEnum).concat(".xhtml"));
-		getPaginaAtual();
 	}
 
 	public void aplicacao() {

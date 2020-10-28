@@ -12,7 +12,7 @@ import br.com.ans.service.AutorizacaoService;
 @RequestScoped
 public class AutorizacaoServiceImpl implements AutorizacaoService {
 
-	public void AutorizacaoServiceImpl(){}
+	//public void AutorizacaoServiceImpl(){}
 	
 	@Inject
 	private AutorizacaoDao autorizacaoDao;

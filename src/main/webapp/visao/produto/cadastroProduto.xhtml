@@ -3,10 +3,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"> 
-<!-- 	template="/aplicacao.xhtml"> -->
-
-<!-- 	<ui:define name="conteudoAplicacao"> -->
-
 
 		<h:form id="idFormCadastroProduto">
 			<p:growl id="growlCadastroPruoduto" showDetail="true" escape="true"
@@ -49,7 +45,7 @@
 						<f:selectItems value="#{produtoVisao.listaCategoria.entrySet()}"
 							var="itemCategoria" itemValue="#{itemCategoria.key}"
 							itemLabel="#{itemCategoria.value}" />
-						<f:ajax render="idSelectSubCategoria" event="change"
+						<p:ajax update="idSelectSubCategoria" event="change"
 							listener="#{produtoVisao.carregarListaSubCategoria()}" />
 					</p:selectOneMenu>
 
@@ -69,15 +65,14 @@
 						action="#{produtoVisao.novo()}"
 						update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto" />
 					<p:commandButton type="submit" value="Consultar"
-						action="#{produtoVisao.consultarProduto()}"
-						update="idFormCadastroProduto, growlCadastroPruoduto"
+						actionListener="#{menuVisao.acessarFuncionalidade('CONSULTAPRODUTO')}"
+						update="idFormCadastroProduto, growlCadastroPruoduto, :outputPanelConteudo"
 						process="@this" />
 					<p:commandButton value="Voltar" type="submit"
-						action="#{menuVisao.aplicacao()}"
+						actionListener="#{menuVisao.apresentacao()}"
 						update="idFormCadastroProduto, :outputPanelConteudo" />
 				</f:facet>
 
 			</p:panel>
 		</h:form>
-<!-- 	</ui:define> -->
 </ui:composition>

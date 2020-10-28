@@ -81,8 +81,8 @@
 						action="#{produtoVisao.consultarProdutoPorNome()}"
 						update=":idFormConsultaProduto" />
 					<p:commandButton value="Voltar" type="submit"
-						action="#{usuarioVisao.aplicacao()}"
-						update=":idFormConsultaProduto" />
+						action="#{menuVisao.apresentacao()}"
+						update=":idFormConsultaProduto, :outputPanelConteudo" />
 				</f:facet>
 			</p:panel>
 		</h:form>

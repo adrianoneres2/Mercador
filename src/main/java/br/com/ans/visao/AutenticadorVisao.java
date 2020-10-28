@@ -25,7 +25,7 @@ public class AutenticadorVisao implements Serializable {
 	private Long codigoAuxiliar;
 	
 	
-    private final String APLICACAO = "/aplicacao";
+    //private final String APLICACAO = "/aplicacao";
     private boolean logado = false;
 	
     public AutenticadorVisao(){

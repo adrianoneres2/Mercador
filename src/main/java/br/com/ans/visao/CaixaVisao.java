@@ -8,13 +8,12 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import util.Janela;
 import br.com.ans.model.Caixa;
 import br.com.ans.model.Usuario;
 import br.com.ans.service.AutenticadorService;
 import br.com.ans.service.CaixaService;
-import br.com.ans.service.UsuarioService;
 import enumerations.FuncionalidadeEnum;
+import util.Janela;
 
 //@RequestScoped
 //@SessionScoped
@@ -37,13 +36,13 @@ public class CaixaVisao implements Serializable {
 	@Inject
 	private CaixaService caixaService;
 
-	@Inject
-	private UsuarioService usuarioService;
+	//@Inject
+	//private UsuarioService usuarioService;
 
 	@Inject
 	private AutenticadorService autenticadorService;
 
-	private Usuario usuario;
+	//private Usuario usuario;
 
 	@Inject
 	private MenuVisao menuvisao;

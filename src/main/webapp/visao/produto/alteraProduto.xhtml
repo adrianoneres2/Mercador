@@ -81,7 +81,7 @@
 								               var="itemCategoria" 
 									itemValue="#{itemCategoria.key}"
 									itemLabel="#{itemCategoria.value}"/>
-							<f:ajax render="idSelectSubCategoria" event="change" listener="#{produtoVisao.carregarListaSubCategoria()}"/>
+							<p:ajax update="idSelectSubCategoria" event="change" listener="#{produtoVisao.carregarListaSubCategoria()}"/>
 							</p:selectOneMenu>
 
 						    <h:outputText value="Sub Categoria" id="outPutTextSubCategoria"/>
@@ -96,7 +96,7 @@
 					
 				<f:facet name="footer">
 					<p:commandButton type="submit" value="Enviar" action="#{produtoVisao.alterar()}" update=":idFormAlteraProduto:idPanelAlteraProduto growlAlteraProduto"/>
-					<p:commandButton value="Voltar"    type="submit" action="#{usuarioVisao.aplicacao()}" update="idFormAlteraProduto" />
+					<p:commandButton value="Voltar"    type="submit" action="#{menuVisao.apresentacao()}" update="idFormAlteraProduto" />
 				</f:facet>
 					
 			</p:panel>
