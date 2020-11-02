@@ -5,30 +5,32 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<div id="divImgFundoLogin">
-	<div id="divLogin">
-		<h:form id="idFormLogin">
-			<div id="divLoginInputEmail">
-				<p:outputLabel id="labelEmail" value="E-mail " />
-				<p:inputText id="inputEmail"
-					value="#{autenticadorVisao.usuario.email}" />
-			</div>
-			<div id="divLoginInputSenha">
-				<p:outputLabel id="labelSenha" value="Senha " />
-				<p:inputText id="inputSenha"
-					value="#{autenticadorVisao.usuario.senha}" />
-			</div>
-			<div>
-				<p:commandButton id="buttonEntrar" value="LOGIN"
-					action="#{autenticadorVisao.logar}" update="@all" process="@all"
-					style="width: 240px; margin-top: 20px;"/>
-			</div>
-			
-			<div>
-				<p:commandButton id="buttonEntrar2" value="RECUPERAR"
-					action="#{autenticadorVisao.logar}" update="@all" process="@all"
-					style="width: 240px; margin-top: 20px;"/>
-			</div>
-		</h:form>
-	</div>
+		<div id="divLogin">
+			<h:form id="idFormLogin">
+				<div id="divLoginInputEmail">
+					<p:inputText id="inputEmail"
+						value="#{autenticadorVisao.usuario.email}" 
+						style="width: 230px;"/>
+						<p:watermark for="inputEmail" value="E-mail" />  
+				</div>
+				<div id="divLoginInputSenha">
+					<p:inputText id="inputSenha"
+						value="#{autenticadorVisao.usuario.senha}" 
+						style="width: 230px;"/>
+						<p:watermark for="inputSenha" value="Senha" />
+				</div>
+				<div>
+					<p:commandButton id="buttonEntrar" value="Login"
+						action="#{autenticadorVisao.logar}" update="@all" process="@all"
+						style="width: 240px; margin-top: 2px;" />
+				</div>
+
+				<div>
+					<p:commandButton id="buttonEntrar2" value="Recuperar Senha"
+						action="#{autenticadorVisao.logar}" update="@all" process="@all"
+						style="width: 240px; margin-top: 2px;" />
+				</div>
+			</h:form>
+		</div>
 	</div>
 </ui:composition>

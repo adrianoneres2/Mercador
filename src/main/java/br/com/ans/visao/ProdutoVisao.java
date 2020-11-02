@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -50,21 +49,12 @@ public class ProdutoVisao implements Serializable{
 	@Inject
 	MenuVisao menuVisao;  
 	
+	Boolean inicializarCadastro = false;
+	
 	@PostConstruct
 	public void init(){
 		this.carregarListaCategoria();
-		
-		Produto produtoAlteracao = new Produto();
-		produtoAlteracao = (Produto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("produto");
-		
-		if (produtoAlteracao != null){
-			this.produto = produtoAlteracao;
-			this.categoriaSelecionada    = this.produto.getSubCategoria().getCategoria().getCodigoCategoria();
-			this.subCategoriaSelecionada = this.produto.getSubCategoria().getCodigoSubCategoria();
-			/*Necessário para carregar no componente comboBox a subcategoria com o valor setado acima, funciona como um refresh na página!!!0,.*/
-			this.carregarListaSubCategoria();
-		}
-		
+		this.carregarListaSubCategoria();
 	}
 	
 	public HashMap<Long, String> getListaCategoria() {
@@ -139,6 +129,19 @@ public class ProdutoVisao implements Serializable{
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
+	
+	public Boolean getInicializarCadastro() {
+		return inicializarCadastro;
+	}
+
+	public void setInicializarCadastro(Boolean inicializarCadastro) {
+		if(inicializarCadastro == true) {
+			produto = new Produto();
+			setCategoriaSelecionada(null);
+			setSubCategoriaSelecionada(null);
+		}
+		this.inicializarCadastro = inicializarCadastro;
+	}
 
 	public void carregarListaCategoria(){
 		
@@ -165,7 +168,6 @@ public class ProdutoVisao implements Serializable{
 	}
 	
 	public void novo(){
-		
 		if (this.getSubCategoriaSelecionada() != 0L){
 			for(SubCategoria subcategoria : subCategorias){
 				
@@ -182,18 +184,10 @@ public class ProdutoVisao implements Serializable{
 		
 	}
 	
-	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
-		return menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
-	}
-	
-	public String consultarProduto(){
-		String consulta = acessarFuncionalidade(FuncionalidadeEnum.CONSULTAPRODUTO);
-		
-		if(consulta != null){
+	public void consultarProduto(){		
+		if(menuVisao.acessarFuncionalidade(FuncionalidadeEnum.CONSULTAPRODUTO)){
 			consultarProdutoPorNome();
-			return consulta;
 		}
-	  return null;
 	}
 	
 	public void consultarProdutoPorNome(){
@@ -205,23 +199,20 @@ public class ProdutoVisao implements Serializable{
 			}
 	}
 	
-	public void ativarInativar(Produto produto){ 
-		if(acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARPRODUTO) != null){
+	public void ativarInativar(Produto produto){
+		if(menuVisao.acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARPRODUTO)){
 			produtoService.ativarInativar(produto);
 			this.consultarProdutoPorNome();
 		}		
 	}
 	
-	public String editarProduto(Produto produtoEdicao) {
-		String permissao = acessarFuncionalidade(FuncionalidadeEnum.ALTERAPRODUTO);
-		
-		if(permissao != null){
-			  /*Guarda o objeto usuário na sessão flash.*/
-			  FacesContext.getCurrentInstance().getExternalContext().getFlash().put("produto", produtoEdicao);
-			  return permissao;
-	  }else{
-        return null;
-	  }
+	public void editarProduto(Produto produtoEdicao) {
+		if (menuVisao.acessarFuncionalidade(FuncionalidadeEnum.ALTERAPRODUTO)){
+			this.produto = produtoEdicao;
+			setCategoriaSelecionada(this.produto.getSubCategoria().getCategoria().getCodigoCategoria());
+			setSubCategoriaSelecionada(this.produto.getSubCategoria().getCodigoSubCategoria());
+			this.carregarListaSubCategoria();
+		}
 	}
 	
 	public void alterar() throws Exception {

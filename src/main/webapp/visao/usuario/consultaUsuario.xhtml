@@ -47,14 +47,14 @@
 					<p:column headerText="Ações" width="70">
 
 						<p:commandLink
-							action="#{usuarioVisao.editarUsuario(usuario)}" update=":idFormConsultaUsuario">
+							action="#{usuarioVisao.editarUsuario(usuario)}" update=":idFormConsultaUsuario, :outputPanelConteudo">
 							<p:graphicImage library="imagens" name="editar.png" />
 						</p:commandLink>
 
 						<p:spacer width="20" />
 
 						<p:commandLink action="#{usuarioVisao.ativarInativar(usuario)}"
-							update=":idFormConsultaUsuario">
+							update=":idFormConsultaUsuario, :outputPanelConteudo">
 							<p:graphicImage library="imagens" name="usuario_ativo.png" rendered="#{usuario.situacaoUsuario == 1}"/>
 							<p:graphicImage library="imagens" name="usuario_inativo.png" rendered="#{usuario.situacaoUsuario == 0}" />
 						</p:commandLink>

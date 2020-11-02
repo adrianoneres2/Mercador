@@ -59,8 +59,8 @@
 
 					<p:column headerText="Ações" width="50">
 
-						<p:commandLink action="#{produtoVisao.editarProduto(produto)}"
-							update=":idFormConsultaProduto">
+						<p:commandLink actionListener="#{produtoVisao.editarProduto(produto)}"
+							update=":idFormConsultaProduto, :outputPanelConteudo">
 							<p:graphicImage library="imagens" name="editar.png" />
 						</p:commandLink>
 

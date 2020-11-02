@@ -2,10 +2,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" 
-	template="/aplicacao.xhtml">
+	xmlns:p="http://primefaces.org/ui"> 
+<!-- 	template="/aplicacao.xhtml"> -->
 
-	<ui:define name="conteudoAplicacao">
+<!-- 	<ui:define name="conteudoAplicacao"> -->
 	
 	
 	<script>
@@ -37,12 +37,11 @@
             return v;
 		}
 </script>
-	
 		<h:form id="idFormAlteraProduto">
 			<p:growl id="growlAlteraProduto" showDetail="true" escape="true" closable="true" styleClass="messages"/>
 			<br />
 			
-				<p:panel id="idPanelAlteraProduto" styleClass="divTelaPequena">
+				<p:panel id="idPanelAlteraProduto">
 				
 				<f:facet name="header">
 					<h:outputLabel value="ALTERAÇÃO DE PRODUTO" />
@@ -95,12 +94,12 @@
 					</h:panelGrid>
 					
 				<f:facet name="footer">
-					<p:commandButton type="submit" value="Enviar" action="#{produtoVisao.alterar()}" update=":idFormAlteraProduto:idPanelAlteraProduto growlAlteraProduto"/>
-					<p:commandButton value="Voltar"    type="submit" action="#{menuVisao.apresentacao()}" update="idFormAlteraProduto" />
+					<p:commandButton type="submit" value="Salvar" action="#{produtoVisao.alterar()}" update=":idFormAlteraProduto:idPanelAlteraProduto,  growlAlteraProduto, :outputPanelConteudo"/>
+					<p:commandButton value="Sair"    type="submit" action="#{menuVisao.apresentacao()}" update="idFormAlteraProduto, :outputPanelConteudo" />
 				</f:facet>
 					
 			</p:panel>
 			
 		</h:form>
-	</ui:define>
+<!-- 	</ui:define> -->
 </ui:composition>

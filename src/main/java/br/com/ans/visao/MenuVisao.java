@@ -27,6 +27,8 @@ public class MenuVisao implements Serializable{
 	
 	private String paginaAtual = "/login.xhtml";
 	
+	private Boolean permissao;
+	
 	@PostConstruct
 	public void init() {
 		if(usuarioLogado.getUsuario().getCodigoUsuario() == null) {
@@ -45,8 +47,8 @@ public class MenuVisao implements Serializable{
 			Long codigoFuncionalidade = (long) funcionalidadeEnum.getCodigo();
 			
 			/*Verifica se o usuário passado como parâmetro tem permissão de acesso a funcionalidade solicitada.*/
-			if (perfilFuncionalidadeService.perfilFuncionalidade(UsuarioLogado.getPerfil().getCodigoPerfil(), codigoFuncionalidade)){
-			
+			setPermissao(perfilFuncionalidadeService.perfilFuncionalidade(UsuarioLogado.getPerfil().getCodigoPerfil(), codigoFuncionalidade));
+			if (getPermissao()){
 				/*Se sim, devolve a url solicitada!*/
 			switch(funcionalidadeEnum){
 					case ALTERAUSUARIO          :return FuncionalidadeEnum.ALTERAUSUARIO.getUrl();
@@ -69,12 +71,15 @@ public class MenuVisao implements Serializable{
 				}
 			}
 		}
-		///FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Sem permissão de acesso!"));
-		return null;
+		return "/apresentacao";
 	}
 
-	public void acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum) {
-		setPaginaAtual(acessar(usuarioLogado.getUsuario(), funcionalidadeEnum).concat(".xhtml"));
+	public Boolean acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum) {
+		String url = acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
+		if(url != "") {
+			setPaginaAtual(url.concat(".xhtml"));	
+		}
+		return getPermissao();
 	}
 
 	public void aplicacao() {
@@ -95,6 +100,14 @@ public class MenuVisao implements Serializable{
 
 	public void setPaginaAtual(String paginaAtual) {
 		this.paginaAtual = paginaAtual;
+	}
+
+	public Boolean getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(Boolean permissao) {
+		this.permissao = permissao;
 	}
 	
 }

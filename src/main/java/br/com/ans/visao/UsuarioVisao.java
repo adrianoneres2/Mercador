@@ -61,14 +61,6 @@ public class UsuarioVisao implements Serializable {
 	@PostConstruct
 	public void init() {
 		this.carregarListaPerfis();
-
-		Usuario usuarioAlteracao = new Usuario();
-		usuarioAlteracao = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("usuario");
-
-		if (usuarioAlteracao != null) {
-			this.usuario = usuarioAlteracao;
-			this.setPerfilSelecionado(this.usuario.getPerfil().getCodigoPerfil());
-		}
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -156,14 +148,10 @@ public class UsuarioVisao implements Serializable {
 		this.perfil = perfil;
 	}
 
-	public String consultarUsuario() {
-		menuVisao.acessarFuncionalidade(FuncionalidadeEnum.CONSULTAUSUARIO);
-
-		if (menuVisao.getPaginaAtual() != null) {
+	public void consultarUsuario() {
+		if (menuVisao.acessarFuncionalidade(FuncionalidadeEnum.CONSULTAUSUARIO)) {
 			consultarUsuarioPorNome();
-			return menuVisao.getPaginaAtual();
 		}
-		return null;
 	}
 
 	public void consultarUsuarioPorNome() {
@@ -174,9 +162,8 @@ public class UsuarioVisao implements Serializable {
 		}
 	}
 
-	public String cadastrar() throws Exception {
-		menuVisao.acessarFuncionalidade(FuncionalidadeEnum.CADASTROUSUARIO);
-		if (menuVisao.getPaginaAtual() != null) {
+	public void cadastrar() throws Exception {
+		if (menuVisao.acessarFuncionalidade(FuncionalidadeEnum.CADASTROUSUARIO)) {
 			usuario.setPerfil(getPerfilService().obterPerfilPorCodigo(this.getPerfilSelecionado()));
 
 			if (getUsuarioService().validarCamposCadastro(usuario)) {
@@ -188,29 +175,23 @@ public class UsuarioVisao implements Serializable {
 				usuario = new Usuario();
 				// this.setPerfis(getPerfilService().obterPerfil());
 			}
-			return null;
-		} else {
-			return null;
 		}
 	}
 
 	public void ativarInativar(Usuario usuario) {
-		menuVisao.acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARUSUARIO);
-		if (menuVisao.getPaginaAtual() != null) {
+		if (menuVisao.acessarFuncionalidade(FuncionalidadeEnum.ATIVARINATIVARUSUARIO)) {
 			usuarioService.ativarInativar(usuario);
 			this.consultarUsuarioPorNome();
 		}
 	}
 
-	public String editarUsuario(Usuario usuarioEdicao) {
-		menuVisao.acessarFuncionalidade(FuncionalidadeEnum.ALTERAUSUARIO);
+	public void editarUsuario(Usuario usuarioEdicao) {
 
-		if (menuVisao.getPaginaAtual() != null) {
+		if (menuVisao.acessarFuncionalidade(FuncionalidadeEnum.ALTERAUSUARIO)) {
+			this.usuario = usuarioEdicao;
+			this.setPerfilSelecionado(this.usuario.getPerfil().getCodigoPerfil());
 			/* Guarda o objeto usuário na sessão flash. */
-			FacesContext.getCurrentInstance().getExternalContext().getFlash().put("usuario", usuarioEdicao);
-			return menuVisao.getPaginaAtual();
-		} else {
-			return null;
+			///FacesContext.getCurrentInstance().getExternalContext().getFlash().put("usuario", usuarioEdicao);
 		}
 	}
 

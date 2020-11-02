@@ -45,9 +45,9 @@
 					</p:selectOneMenu>
 				</h:panelGrid>
 				<f:facet name="footer">
-					<p:commandButton value="Enviar" type="submit" action="#{usuarioVisao.cadastrar()}" update=":idFormCadastroUsuario:idPanelUsuario growlCadastroUsuario" />
-					<p:commandButton value="Consultar" type="submit" action="#{usuarioVisao.consultarUsuario()}" update="idFormCadastroUsuario" />
-					<p:commandButton value="Voltar" type="submit" action="#{menuVisao.apresentacao()}" update="idFormCadastroUsuario, :outputPanelConteudo" />
+					<p:commandButton value="Enviar" type="submit" action="#{usuarioVisao.cadastrar()}" update=":idFormCadastroUsuario:idPanelUsuario growlCadastroUsuario, :outputPanelConteudo" />
+					<p:commandButton value="Consultar" type="submit" action="#{usuarioVisao.consultarUsuario()}" update="idFormCadastroUsuario, :outputPanelConteudo" />
+					<p:commandButton value="Sair" type="submit" action="#{menuVisao.apresentacao()}" update=":idFormCadastroUsuario, :outputPanelConteudo" />
 				</f:facet>
 			</p:panel>
 		</h:form>

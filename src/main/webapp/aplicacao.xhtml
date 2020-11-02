@@ -17,6 +17,7 @@
 					<p:menuitem value="Cadastro"
 						action="#{menuVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
 						update="growlMenu, :outputPanelConteudo">
+						<f:setPropertyActionListener value="true" target="#{produtoVisao.inicializarCadastro}" />
 					</p:menuitem>
 
 					<p:menuitem value="Consulta"
