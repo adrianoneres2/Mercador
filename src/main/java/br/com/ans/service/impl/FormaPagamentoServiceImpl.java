@@ -6,6 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import br.com.ans.dao.FormaPagamentoDao;
+import br.com.ans.model.Bandeira;
 import br.com.ans.model.FormaPagamento;
 import br.com.ans.service.FormaPagamentoService;
 
@@ -24,4 +25,12 @@ public class FormaPagamentoServiceImpl implements FormaPagamentoService{
 	public List<FormaPagamento> todas(){
 		return formaPagamentoDao.todas();
 	}
+
+	@Override
+	public List<Bandeira> bandeiras() {
+		return formaPagamentoDao.bandeiras();
+	}
+	
+	
+	
 }

@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.ans.dao.FormaPagamentoDao;
+import br.com.ans.model.Bandeira;
 import br.com.ans.model.FormaPagamento;
 
 @RequestScoped
@@ -32,5 +33,18 @@ public class FormaPagamentoDaoImpl implements FormaPagamentoDao{
 			return null;
 		}
 	}
+
+	@Override
+	public List<Bandeira> bandeiras() {
+		try {
+			TypedQuery<Bandeira> query = entityManager.createQuery("FROM Bandeira", Bandeira.class);
+			return (List<Bandeira>) query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 
 }

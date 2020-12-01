@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tp_forma_pagamento", schema = "loja")
 @NamedQueries(
-		@NamedQuery(name = "FormaPagamento.todas", query = "SELECT fp FROM FormaPagamento fp"))
+@NamedQuery(name = "FormaPagamento.todas", query = "SELECT fp FROM FormaPagamento fp"))
 @Dependent
 public class FormaPagamento implements Serializable{
 	

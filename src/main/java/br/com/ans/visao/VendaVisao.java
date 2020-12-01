@@ -11,6 +11,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.ans.model.Bandeira;
 import br.com.ans.model.Caixa;
 import br.com.ans.model.FormaPagamento;
 import br.com.ans.model.Produto;
@@ -42,10 +43,13 @@ public class VendaVisao implements Serializable {
 	
 	private List<FormaPagamento> formasPagamento;
 	
+	private List<Bandeira> bandeiras;
+	
 	@Inject
 	FormaPagamentoService formaPagamentoService;
 	
 	HashMap<Long,String> listaFormasPagamento;
+	HashMap<Long,String> listaBandeiras;
 	
 	private Venda venda;
 	
@@ -74,6 +78,9 @@ public class VendaVisao implements Serializable {
 		//Inicia objeto de venda e caixa 
 		setVenda(vendaService.buscarVenda(usuarioLogado.getUsuario()));
 		setCaixa(getVenda().getCaixa());
+		
+		carregarListaFormaPagamento();
+		carregarListaBandeira();
 	}
 
 	public Caixa getCaixa() {
@@ -157,6 +164,22 @@ public class VendaVisao implements Serializable {
 	public void setQuantidade(Long quantidade) {
 		this.quantidade = quantidade;
 	}
+	
+	public List<Bandeira> getBandeiras() {
+		return bandeiras;
+	}
+
+	public void setBandeiras(List<Bandeira> bandeiras) {
+		this.bandeiras = bandeiras;
+	}
+	
+	public HashMap<Long, String> getListaBandeiras() {
+		return listaBandeiras;
+	}
+
+	public void setListaBandeiras(HashMap<Long, String> listaBandeiras) {
+		this.listaBandeiras = listaBandeiras;
+	}
 
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		String retorno = menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
@@ -180,6 +203,17 @@ public class VendaVisao implements Serializable {
 			this.setListaFormasPagamento(mapaFormaPagamento);
 	}
 
+	
+	public void carregarListaBandeira(){
+		
+		this.setBandeiras(formaPagamentoService.bandeiras());
+			HashMap<Long, String> mapaBandeira = new HashMap<Long, String>();
+			for (Bandeira bandeira : bandeiras) {
+				mapaBandeira.put(bandeira.getCodigoBandeira(), bandeira.getNomeBandeira());
+			}
+			this.setListaBandeiras(mapaBandeira);
+	}
+	
 	public void adicionarProduto(Produto produto){
 		if(produto != null){
 		  this.produto = produto; 

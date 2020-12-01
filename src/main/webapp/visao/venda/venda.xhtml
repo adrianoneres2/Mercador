@@ -4,121 +4,193 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-		<h:form id="idFormVenda">
-			<p:growl id="growlVenda" showDetail="true" escape="true"
-				closable="true" styleClass="messages" />
-			<br />
-			<p:layout>
-				<p:layoutUnit 
-				  position="west" 
-				  resizable="true" 
-				  minSize="65"
-				  maxSize="800">
-					<p:panel id="idPanelVendaInfo">
-						<p:outputLabel value="Código do Caixa: " />
-						<br />
-						<p:inputText disabled="true"
-							value="#{vendaVisao.caixa.codigoCaixa}" size="10"/>
-						<br />
-						<br />
-						<p:outputLabel value="Código da Venda :" />
-						<br />
-						<p:inputText disabled="true"
-							value="#{vendaVisao.venda.codigoVenda}" size="10"/>
-						<br />
-						<br />
-						<p:outputLabel value="Valor Total: " />
-						<br />
-						<br />
-						<p:inputText value="R$: " disabled="true" size="10"/>
-						<br />
-						<br />
-						<p:outputLabel value="Forma de pagamento: " />
-						<br />
-						<br />
+	<h:form id="idFormVenda">
+		<p:growl id="growlVenda" showDetail="true" escape="true"
+			closable="true" styleClass="messages" />
+		<br />
+		<p:layout>
+			<p:layoutUnit position="west" resizable="true" minSize="65"
+				maxSize="800">
+				<p:panelGrid columns="1" id="idPanelVendaInfo"
+					styleClass="panelSemBorda">
+					<p:outputLabel value="Código do Cliente: " />
+					<p:inputText disabled="true"
+						value="#{vendaVisao.usuarioCliente.nomeUsuario}"
+						style=" width: 111pt;" />
 
-						<!-- 						<p:selectOneMenu id="idSelectSubCategoria" -->
-						<!-- 							value="" required="true"> -->
-						<!-- 							<f:selectItem itemValue="0" itemLabel="Selecione" /> -->
-						<!-- 							<f:selectItems -->
-						<!-- 								value="#{vendaVisao.listaFormasPagamento.entrySet()}" -->
-						<!-- 								var="itemFormasPagamento" itemValue="#{itemFormasPagamento.key}" -->
-						<!-- 								itemLabel="#{itemFormasPagamento.value}" /> -->
-						<!-- 						</p:selectOneMenu> -->
 
+					<p:outputLabel value="Código do Caixa: " />
+					<p:inputText disabled="true"
+						value="#{vendaVisao.caixa.codigoCaixa}" style=" width: 111pt;" />
+
+
+					<p:outputLabel value="Código da Venda :" />
+					<p:inputText disabled="true"
+						value="#{vendaVisao.venda.codigoVenda}" style=" width: 111pt;" />
+
+
+					<p:outputLabel value="Valor Total: " />
+					<p:inputText value="R$: " disabled="true" style=" width: 111pt;" />
+
+				</p:panelGrid>
+
+				<p:panelGrid columns="1" id="idPanelBotoes"
+					styleClass="panelSemBorda">
+					<p:commandButton value="Forma de Pagamento" type="button"
+						style="background: blue !important;  color: white !important; width: 118pt;"
+						onclick="PF('dlgformaPagamento').show();" />
+
+					<p:commandButton value="Cancelar Venda"
+						style="background: #cc0000 !important; color: white !important; width: 118pt;">
+					</p:commandButton>
+
+					<p:commandButton value="Sair"
+						style="background: #cccccc !important; color: black !important; width: 118pt;">
+					</p:commandButton>
+
+				</p:panelGrid>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+				<p:panel id="idPanelVenda">
+					<h:panelGrid id="idPanelGridPrincipalVenda" columns="9">
+
+						<p:outputLabel id="labelVendaProduto" value="Produto" />
 						<br />
-						<br />
-					</p:panel>
-					<p:panel>
-						<p:commandButton value="Finalizar Venda"
-							style="background: green !important;  color: white !important;"></p:commandButton>
-						<br />
-						<p:commandButton value="Cancelar Venda"
-							style="background: #cc0000 !important; color: white !important;"></p:commandButton>
-					</p:panel>
-				</p:layoutUnit>
+						<p:inputText id="idInputCodigoBarras"
+							value="#{vendaVisao.codigoBarras}" label="labelVendaProduto"
+							required="true" requiredMessage="Campo produto obrigarório!" />
 
-				<p:layoutUnit position="center">
-					<p:panel id="idPanelVenda">
-						<h:panelGrid id="idPanelGridPrincipalVenda" columns="9">
+						<p:outputLabel id="labelQuantidadeProduto" value="Quantidade" />
 
-							<p:outputLabel id="labelVendaProduto" value="Produto" />
-							<br />
-							<p:inputText id="idInputCodigoBarras" value="#{vendaVisao.codigoBarras}"
-								label="labelVendaProduto" required="true" requiredMessage="Campo produto obrigarório!" />
+						<p:inputText value="#{vendaVisao.quantidade}"
+							label="labelQuantidadeProduto" required="true"
+							requiredMessage="Campo quantidade obrigarório!" />
 
-							<p:spacer />
+						<p:commandButton id="botaoVendaConsultar" value="Consultar"
+							action="#{vendaVisao.consultarProduto()}"
+							update="dataTableProduto growlVenda" ajax="true" />
 
-							<p:outputLabel id="labelQuantidadeProduto" value="Quantidade" />
-							<br />
-							<p:inputText value="#{vendaVisao.quantidade}" label="labelQuantidadeProduto" required="true" requiredMessage="Campo quantidade obrigarório!"/>
-							<p:spacer />
-							<p:commandButton id="botaoVendaConsultar" value="Consultar"
-								action="#{vendaVisao.consultarProduto()}"
-								update="dataTableProduto growlVenda" ajax="true" />
-
-						</h:panelGrid>
+					</h:panelGrid>
 					<p:spacer />
-					<p:dataTable id="dataTableProduto" 
-					    var="produto"
-						value="#{vendaVisao.produtos}" lazy="true" 
-						paginator="false"
-						scrollable="true" >
+					<p:dataTable id="dataTableProduto" var="produto"
+						value="#{vendaVisao.produtos}" lazy="true" paginator="false"
+						scrollable="true">
 
-						<p:column headerText="Código" >
+						<p:column headerText="Código">
 							<h:outputText value="#{produto.codigoProduto}" />
 						</p:column>
 
-						<p:column headerText="Nome" >
+						<p:column headerText="Nome">
 							<h:outputText value="#{produto.nomeProduto}" />
 						</p:column>
 
-						<p:column headerText="Quantidade" >
-							<h:outputText value="#{produto.quantidadeProduto}"  />
+						<p:column headerText="Quantidade">
+							<h:outputText value="#{produto.quantidadeProduto}" />
 						</p:column>
 
-						<p:column headerText="Valor" >
+						<p:column headerText="Valor">
 							<h:outputText value="#{produto.valorVenda}">
 								<f:convertNumber type="currency" />
 							</h:outputText>
 						</p:column>
 
-						<p:column headerText="Total" >
+						<p:column headerText="Total">
 							<h:outputText value="#{produto.valorTotal}">
 								<f:convertNumber type="currency" />
 							</h:outputText>
 						</p:column>
 
 						<p:column headerText="Ações">
-						<p:commandLink>
-							<p:graphicImage library="imagens" name="excluido.png"/>
-							<p:graphicImage library="imagens" name="excluido.png"/>
-						</p:commandLink>
+							<p:commandLink>
+								<p:graphicImage library="imagens" name="excluido.png" />
+								<p:graphicImage library="imagens" name="excluido.png" />
+							</p:commandLink>
 						</p:column>
 
 					</p:dataTable>
-                  </p:panel>
-				</p:layoutUnit>
-			</p:layout>
-		</h:form>
+				</p:panel>
+			</p:layoutUnit>
+		</p:layout>
+		<p:dialog header="Forma de Pagamento" widgetVar="dlgformaPagamento"
+			modal="false" height="300" width="700" closable="true"
+			draggable="true">			
+			<p:panelGrid id="panelGridModalFormaPagamento" styleClass="panelSemBorda">
+			
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Forma de Pagamento" />
+					</p:column>
+					<p:column>
+						<p:outputLabel value="Bandeira" />
+					</p:column>
+					<p:column>
+						<p:outputLabel value="Valor da parcela" />
+					</p:column>
+				</p:row>
+			    
+				<p:row>
+					<p:column>
+						<p:selectOneMenu id="idSelectFormaPagamento" required="true">
+							<f:selectItem itemValue="0" itemLabel="Selecione" />
+							<f:selectItems
+								value="#{vendaVisao.listaFormasPagamento.entrySet()}"
+								var="itemFormasPagamento" itemValue="#{itemFormasPagamento.key}"
+								itemLabel="#{itemFormasPagamento.value}" />
+						</p:selectOneMenu>
+					</p:column>
+
+					<p:column>
+						<p:selectOneMenu id="idSelectBandeiras" required="true">
+							<f:selectItem itemValue="0" itemLabel="Selecione" />
+							<f:selectItems
+								value="#{vendaVisao.listaBandeiras.entrySet()}"
+								var="itemBandeiras" itemValue="#{itemBandeiras.key}"
+								itemLabel="#{itemBandeiras.value}" />
+						</p:selectOneMenu>
+					</p:column>
+
+					<p:column>
+						<p:inputText id="idInputFormaPagamento2" />
+					</p:column>
+
+					<p:column>
+					<p:commandButton value="+"
+						style="background: green !important;  color: white !important; width: 50pt;">
+					</p:commandButton>
+					</p:column>
+
+				</p:row>
+
+			</p:panelGrid>
+
+			<p:dataTable id="idDataTableFormaPagamento" style="margin-top: 5pt;" rows="10" paginator="10">
+				<p:column headerText="Forma de Pagamento" width="30">
+					<h:outputText value="" />
+				</p:column>
+
+				<p:column headerText="Bandeira" width="30">
+					<h:outputText value="" />
+				</p:column>
+				
+				<p:column headerText="Valor da Parcela" width="30">
+					<h:outputText value="" />
+				</p:column>
+			</p:dataTable>
+
+
+			<p:panel id="idPanelBotaoEncerrar" style="margin-top: 100pt;">
+				<p:commandButton value="Fechar" type="button"
+					style="background: blue !important;  color: white !important;"
+					onclick="PF('dlgformaPagamento').hide();" />
+
+				<p:spacer height="5" />
+
+				<p:commandButton value="Finalizar Venda"
+					style="background: green !important;  color: white !important; width: 118pt;">
+				</p:commandButton>
+			</p:panel>
+
+		</p:dialog>
+	</h:form>
 </ui:composition>
