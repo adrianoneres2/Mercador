@@ -32,7 +32,7 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 		/* Retorna a venda quando a situação for "(2) Em aberto" para um determinado usuário.*/
 		String hql = "select venda from Venda as venda " 
 				+ " where 1=1"
-				+ " and venda.UsuarioCliente.codigoUsuario = :idUsuario "
+				+ " and venda.usuarioCliente.codigoUsuario = :idUsuario"
 				+ " and venda.situacaoVenda = 2 ";
 		try {
 
@@ -50,6 +50,7 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro interno ao tentar recupearar a venda!"));
 			return null;
 		}
 

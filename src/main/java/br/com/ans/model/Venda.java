@@ -1,7 +1,9 @@
 package br.com.ans.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -37,7 +40,7 @@ public class Venda implements EntidadeBase, Serializable  {
 
 	@ManyToOne
 	@JoinColumn(name = "id_usuario_cliente")
-	private Usuario UsuarioCliente;
+	private Usuario usuarioCliente;
 
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_venda")
@@ -51,9 +54,12 @@ public class Venda implements EntidadeBase, Serializable  {
 	@JoinColumn(name = "id_caixa")
 	private Caixa caixa;
 	
+	@OneToMany(mappedBy="venda")
+	private List<ItemVenda> listaItemVenda = new ArrayList<ItemVenda>();
+	
 	@ManyToOne
 	@JoinColumn(name = "id_venda_orcamento")
-	private Venda VendaOrcamento;	
+	private Venda vendaOrcamento;	
 	
 	@Column(name = "dt_venda")
 	private Date dataVenda;
@@ -75,11 +81,11 @@ public class Venda implements EntidadeBase, Serializable  {
 	}
 
 	public Usuario getUsuarioCliente() {
-		return UsuarioCliente;
+		return usuarioCliente;
 	}
 
 	public void setUsuarioCliente(Usuario usuarioCliente) {
-		UsuarioCliente = usuarioCliente;
+		this.usuarioCliente = usuarioCliente;
 	}
 
 	public TipoVenda getTipoVenda() {
@@ -107,11 +113,11 @@ public class Venda implements EntidadeBase, Serializable  {
 	}
 
 	public Venda getVendaOrcamento() {
-		return VendaOrcamento;
+		return vendaOrcamento;
 	}
 
 	public void setVendaOrcamento(Venda vendaOrcamento) {
-		VendaOrcamento = vendaOrcamento;
+		this.vendaOrcamento = vendaOrcamento;
 	}
 
 	public Date getDataVenda() {
@@ -129,28 +135,28 @@ public class Venda implements EntidadeBase, Serializable  {
 	public void setDataVendaFinalizada(Date dataVendaFinalizada) {
 		this.dataVendaFinalizada = dataVendaFinalizada;
 	}
+	
+	public List<ItemVenda> getItemVenda() {
+		return listaItemVenda;
+	}
+
+	public void setItemVenda(List<ItemVenda> itemVenda) {
+		this.listaItemVenda = itemVenda;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((UsuarioCliente == null) ? 0 : UsuarioCliente.hashCode());
-		result = prime * result
-				+ ((VendaOrcamento == null) ? 0 : VendaOrcamento.hashCode());
 		result = prime * result + ((caixa == null) ? 0 : caixa.hashCode());
-		result = prime * result
-				+ ((codigoVenda == null) ? 0 : codigoVenda.hashCode());
-		result = prime * result
-				+ ((dataVenda == null) ? 0 : dataVenda.hashCode());
-		result = prime
-				* result
-				+ ((dataVendaFinalizada == null) ? 0 : dataVendaFinalizada
-						.hashCode());
-		result = prime * result
-				+ ((situacaoVenda == null) ? 0 : situacaoVenda.hashCode());
-		result = prime * result
-				+ ((tipoVenda == null) ? 0 : tipoVenda.hashCode());
+		result = prime * result + ((codigoVenda == null) ? 0 : codigoVenda.hashCode());
+		result = prime * result + ((dataVenda == null) ? 0 : dataVenda.hashCode());
+		result = prime * result + ((dataVendaFinalizada == null) ? 0 : dataVendaFinalizada.hashCode());
+		result = prime * result + ((listaItemVenda == null) ? 0 : listaItemVenda.hashCode());
+		result = prime * result + ((situacaoVenda == null) ? 0 : situacaoVenda.hashCode());
+		result = prime * result + ((tipoVenda == null) ? 0 : tipoVenda.hashCode());
+		result = prime * result + ((usuarioCliente == null) ? 0 : usuarioCliente.hashCode());
+		result = prime * result + ((vendaOrcamento == null) ? 0 : vendaOrcamento.hashCode());
 		return result;
 	}
 
@@ -163,16 +169,6 @@ public class Venda implements EntidadeBase, Serializable  {
 		if (getClass() != obj.getClass())
 			return false;
 		Venda other = (Venda) obj;
-		if (UsuarioCliente == null) {
-			if (other.UsuarioCliente != null)
-				return false;
-		} else if (!UsuarioCliente.equals(other.UsuarioCliente))
-			return false;
-		if (VendaOrcamento == null) {
-			if (other.VendaOrcamento != null)
-				return false;
-		} else if (!VendaOrcamento.equals(other.VendaOrcamento))
-			return false;
 		if (caixa == null) {
 			if (other.caixa != null)
 				return false;
@@ -193,6 +189,11 @@ public class Venda implements EntidadeBase, Serializable  {
 				return false;
 		} else if (!dataVendaFinalizada.equals(other.dataVendaFinalizada))
 			return false;
+		if (listaItemVenda == null) {
+			if (other.listaItemVenda != null)
+				return false;
+		} else if (!listaItemVenda.equals(other.listaItemVenda))
+			return false;
 		if (situacaoVenda == null) {
 			if (other.situacaoVenda != null)
 				return false;
@@ -202,6 +203,16 @@ public class Venda implements EntidadeBase, Serializable  {
 			if (other.tipoVenda != null)
 				return false;
 		} else if (!tipoVenda.equals(other.tipoVenda))
+			return false;
+		if (usuarioCliente == null) {
+			if (other.usuarioCliente != null)
+				return false;
+		} else if (!usuarioCliente.equals(other.usuarioCliente))
+			return false;
+		if (vendaOrcamento == null) {
+			if (other.vendaOrcamento != null)
+				return false;
+		} else if (!vendaOrcamento.equals(other.vendaOrcamento))
 			return false;
 		return true;
 	}

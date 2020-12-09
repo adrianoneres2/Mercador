@@ -159,7 +159,7 @@ thead{
 	border: none !important;
 }
 
-.panelSemBorda tr, .panelSemBorda td { border: none !important; } 
+.panelSemBorda tr, .panelSemBorda td { border: none !important; }  
 
 .myButton {
 	box-shadow:inset -4px 11px 0px -50px #9fb4f2;

@@ -13,7 +13,7 @@
 				maxSize="800">
 				<p:panelGrid columns="1" id="idPanelVendaInfo"
 					styleClass="panelSemBorda">
-					<p:outputLabel value="Código do Cliente: " />
+					<p:outputLabel value="Nome do Cliente: " />
 					<p:inputText disabled="true"
 						value="#{vendaVisao.usuarioCliente.nomeUsuario}"
 						style=" width: 111pt;" />
@@ -28,16 +28,12 @@
 					<p:inputText disabled="true"
 						value="#{vendaVisao.venda.codigoVenda}" style=" width: 111pt;" />
 
-
-					<p:outputLabel value="Valor Total: " />
-					<p:inputText value="R$: " disabled="true" style=" width: 111pt;" />
-
 				</p:panelGrid>
 
 				<p:panelGrid columns="1" id="idPanelBotoes"
 					styleClass="panelSemBorda">
 					<p:commandButton value="Forma de Pagamento" type="button"
-						style="background: blue !important;  color: white !important; width: 118pt;"
+						style="background: green !important;  color: white !important; width: 118pt;"
 						onclick="PF('dlgformaPagamento').show();" />
 
 					<p:commandButton value="Cancelar Venda"
@@ -55,48 +51,67 @@
 				<p:panel id="idPanelVenda">
 					<h:panelGrid id="idPanelGridPrincipalVenda" columns="9">
 
-						<p:outputLabel id="labelVendaProduto" value="Produto" />
-						<br />
-						<p:inputText id="idInputCodigoBarras"
-							value="#{vendaVisao.codigoBarras}" label="labelVendaProduto"
-							required="true" requiredMessage="Campo produto obrigarório!" />
 
-						<p:outputLabel id="labelQuantidadeProduto" value="Quantidade" />
+						<p:row>
+							<p:column>
+								<p:outputLabel id="labelVendaProduto" value="Produto " />
+								<p:inputText id="idInputCodigoBarras"
+									value="#{vendaVisao.codigoBarras}" label="labelVendaProduto"
+									required="true" requiredMessage="Campo produto obrigarório!" />
 
-						<p:inputText value="#{vendaVisao.quantidade}"
-							label="labelQuantidadeProduto" required="true"
-							requiredMessage="Campo quantidade obrigarório!" />
+								<p:outputLabel id="labelQuantidadeProduto" value="Quantidade " style="margin-left: 10pt;" />
 
-						<p:commandButton id="botaoVendaConsultar" value="Consultar"
-							action="#{vendaVisao.consultarProduto()}"
-							update="dataTableProduto growlVenda" ajax="true" />
+								<p:inputText value="#{vendaVisao.quantidade}"
+									label="labelQuantidadeProduto" required="true"
+									requiredMessage="Campo quantidade obrigarório!" />
+
+								<p:commandButton id="botaoVendaConsultar" value="Consultar"
+									action="#{vendaVisao.consultarProduto()}"
+									update="dataTableProduto growlVenda idOutputLabelVendaValorTotal"
+									ajax="true" />
+							</p:column>
+							
+							
+							<p:column>
+									<p:outputLabel id="idOutputLabelVendaValorTotal"
+										value="#{vendaVisao.valorTotal}"
+										style=" width: 111pt; font-size:36px; margin-left: 200px;">
+										<f:convertNumber type="currency" />
+									</p:outputLabel>
+							</p:column>
+						</p:row>
 
 					</h:panelGrid>
+
 					<p:spacer />
-					<p:dataTable id="dataTableProduto" var="produto"
-						value="#{vendaVisao.produtos}" lazy="true" paginator="false"
+					<p:dataTable id="dataTableProduto" var="itemVenda"
+						value="#{vendaVisao.venda.itemVenda}" lazy="true" paginator="false"
 						scrollable="true">
 
+						<p:column headerText="Item">
+							<h:outputText value="#{itemVenda.numeroItem}" />
+						</p:column>
+
 						<p:column headerText="Código">
-							<h:outputText value="#{produto.codigoProduto}" />
+							<h:outputText value="#{itemVenda.produto.codigoProduto}" />
 						</p:column>
 
 						<p:column headerText="Nome">
-							<h:outputText value="#{produto.nomeProduto}" />
+							<h:outputText value="#{itemVenda.produto.nomeProduto}" />
 						</p:column>
 
 						<p:column headerText="Quantidade">
-							<h:outputText value="#{produto.quantidadeProduto}" />
+							<h:outputText value="#{itemVenda.quantidadeItem}" />
 						</p:column>
 
 						<p:column headerText="Valor">
-							<h:outputText value="#{produto.valorVenda}">
+							<h:outputText value="#{itemVenda.valorItem}">
 								<f:convertNumber type="currency" />
 							</h:outputText>
 						</p:column>
 
 						<p:column headerText="Total">
-							<h:outputText value="#{produto.valorTotal}">
+							<h:outputText value="#{itemVenda.valorTotal}">
 								<f:convertNumber type="currency" />
 							</h:outputText>
 						</p:column>
@@ -113,7 +128,7 @@
 			</p:layoutUnit>
 		</p:layout>
 		<p:dialog header="Forma de Pagamento" widgetVar="dlgformaPagamento"
-			modal="false" height="300" width="700" closable="true"
+			modal="false" height="350" width="850" closable="true"
 			draggable="true">			
 			<p:panelGrid id="panelGridModalFormaPagamento" styleClass="panelSemBorda">
 			
@@ -121,9 +136,13 @@
 					<p:column>
 						<p:outputLabel value="Forma de Pagamento" />
 					</p:column>
+					
+					
 					<p:column>
 						<p:outputLabel value="Bandeira" />
 					</p:column>
+					
+					
 					<p:column>
 						<p:outputLabel value="Valor da parcela" />
 					</p:column>
@@ -164,7 +183,11 @@
 
 			</p:panelGrid>
 
-			<p:dataTable id="idDataTableFormaPagamento" style="margin-top: 5pt;" rows="10" paginator="10">
+			<p:dataTable id="idDataTableFormaPagamento" style="margin-top: 5pt;" rows="10" paginator="10" emptyMessage="Nenhuma forma de pagamento foi adicionada.">
+				<p:column headerText="Número da Parcela" width="30">
+					<h:outputText value="" />
+				</p:column>
+
 				<p:column headerText="Forma de Pagamento" width="30">
 					<h:outputText value="" />
 				</p:column>
@@ -176,12 +199,17 @@
 				<p:column headerText="Valor da Parcela" width="30">
 					<h:outputText value="" />
 				</p:column>
+				
+				<p:column headerText="Ações" width="2">
+					<h:outputText value="" />
+				</p:column>
+				
 			</p:dataTable>
 
 
-			<p:panel id="idPanelBotaoEncerrar" style="margin-top: 100pt;">
+			<p:panel id="idPanelBotaoEncerrar">
 				<p:commandButton value="Fechar" type="button"
-					style="background: blue !important;  color: white !important;"
+					style="background: #cccccc !important;  color: black !important;"
 					onclick="PF('dlgformaPagamento').hide();" />
 
 				<p:spacer height="5" />
@@ -190,7 +218,6 @@
 					style="background: green !important;  color: white !important; width: 118pt;">
 				</p:commandButton>
 			</p:panel>
-
 		</p:dialog>
 	</h:form>
 </ui:composition>

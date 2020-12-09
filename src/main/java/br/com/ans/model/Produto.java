@@ -44,7 +44,7 @@ public class Produto implements EntidadeBase, Serializable {
 	private Long quantidadeProduto;
 	
 	@Column(name = "vl_venda", nullable = false)
-	private Float valorVenda;
+	private Double valorVenda;
 	
 	@Column(name = "nu_codigo_barra")
 	private String codigoBarra;
@@ -60,9 +60,6 @@ public class Produto implements EntidadeBase, Serializable {
 	
 	@Transient
 	private String  nomeSituacao;
-	
-	@Transient
-	private Number valorTotal;
 	
 	@Override
 	public Long getId() {
@@ -110,12 +107,12 @@ public class Produto implements EntidadeBase, Serializable {
 	}
 
 
-	public Float getValorVenda() {
+	public Double getValorVenda() {
 		return valorVenda;
 	}
 
 
-	public void setValorVenda(Float valorProduto) {
+	public void setValorVenda(Double valorProduto) {
 		this.valorVenda = valorProduto;
 	}
 
@@ -166,15 +163,6 @@ public class Produto implements EntidadeBase, Serializable {
 			return nomeSituacao = "Ativo";
 		}
 			return nomeSituacao = "Inativo";
-	}
-
-	public Number getValorTotal() {
-		return valorTotal;
-	}
-
-
-	public void setValorTotal(Number valorTotal) {
-		this.valorTotal = valorTotal;
 	}
 
 

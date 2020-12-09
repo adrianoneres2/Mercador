@@ -1,7 +1,6 @@
 package br.com.ans.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
@@ -13,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "ta_item_venda", schema = "loja")
@@ -41,10 +41,16 @@ public class ItemVenda implements EntidadeBase, Serializable {
 	private Long quantidadeItem; 
 	
 	@Column(name = "vl_item")
-	private BigDecimal valorItem;
+	private Double valorItem;
 	
 	@Column(name = "vl_desconto")
-	private BigDecimal valorDesconto;
+	private Double valorDesconto;
+
+	@Column(name = "nr_item")
+	private Long numeroItem = 0L;
+	
+	@Transient
+	private Double valorTotal;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_usuario_autorizacao")
@@ -91,19 +97,19 @@ public class ItemVenda implements EntidadeBase, Serializable {
 		this.quantidadeItem = quantidadeItem;
 	}
 
-	public BigDecimal getValorItem() {
+	public Double getValorItem() {
 		return valorItem;
 	}
 
-	public void setValorItem(BigDecimal valorItem) {
+	public void setValorItem(Double valorItem) {
 		this.valorItem = valorItem;
 	}
 
-	public BigDecimal getValorDesconto() {
+	public Double getValorDesconto() {
 		return valorDesconto;
 	}
 
-	public void setValorDesconto(BigDecimal valorDesconto) {
+	public void setValorDesconto(Double valorDesconto) {
 		this.valorDesconto = valorDesconto;
 	}
 
@@ -116,6 +122,9 @@ public class ItemVenda implements EntidadeBase, Serializable {
 	}
 
 	public Autorizacao getAutorizacao() {
+		if(autorizacao == null) {
+			return new Autorizacao();
+		}
 		return autorizacao;
 	}
 
@@ -123,25 +132,35 @@ public class ItemVenda implements EntidadeBase, Serializable {
 		this.autorizacao = autorizacao;
 	}
 
+	public Double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}	
+	
+	public Long getNumeroItem() {
+		return numeroItem;
+	}
+
+	public void setNumeroItem(Long numeroItem) {
+		this.numeroItem = numeroItem;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((autorizacao == null) ? 0 : autorizacao.hashCode());
-		result = prime * result
-				+ ((codigoItemVenda == null) ? 0 : codigoItemVenda.hashCode());
+		result = prime * result + ((autorizacao == null) ? 0 : autorizacao.hashCode());
+		result = prime * result + ((codigoItemVenda == null) ? 0 : codigoItemVenda.hashCode());
+		result = prime * result + ((numeroItem == null) ? 0 : numeroItem.hashCode());
 		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
-		result = prime * result
-				+ ((quantidadeItem == null) ? 0 : quantidadeItem.hashCode());
-		result = prime
-				* result
-				+ ((usuarioAutorizador == null) ? 0 : usuarioAutorizador
-						.hashCode());
-		result = prime * result
-				+ ((valorDesconto == null) ? 0 : valorDesconto.hashCode());
-		result = prime * result
-				+ ((valorItem == null) ? 0 : valorItem.hashCode());
+		result = prime * result + ((quantidadeItem == null) ? 0 : quantidadeItem.hashCode());
+		result = prime * result + ((usuarioAutorizador == null) ? 0 : usuarioAutorizador.hashCode());
+		result = prime * result + ((valorDesconto == null) ? 0 : valorDesconto.hashCode());
+		result = prime * result + ((valorItem == null) ? 0 : valorItem.hashCode());
+		result = prime * result + ((valorTotal == null) ? 0 : valorTotal.hashCode());
 		result = prime * result + ((venda == null) ? 0 : venda.hashCode());
 		return result;
 	}
@@ -164,6 +183,11 @@ public class ItemVenda implements EntidadeBase, Serializable {
 			if (other.codigoItemVenda != null)
 				return false;
 		} else if (!codigoItemVenda.equals(other.codigoItemVenda))
+			return false;
+		if (numeroItem == null) {
+			if (other.numeroItem != null)
+				return false;
+		} else if (!numeroItem.equals(other.numeroItem))
 			return false;
 		if (produto == null) {
 			if (other.produto != null)
@@ -189,6 +213,11 @@ public class ItemVenda implements EntidadeBase, Serializable {
 			if (other.valorItem != null)
 				return false;
 		} else if (!valorItem.equals(other.valorItem))
+			return false;
+		if (valorTotal == null) {
+			if (other.valorTotal != null)
+				return false;
+		} else if (!valorTotal.equals(other.valorTotal))
 			return false;
 		if (venda == null) {
 			if (other.venda != null)

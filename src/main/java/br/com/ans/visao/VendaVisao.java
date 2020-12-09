@@ -14,6 +14,7 @@ import javax.inject.Named;
 import br.com.ans.model.Bandeira;
 import br.com.ans.model.Caixa;
 import br.com.ans.model.FormaPagamento;
+import br.com.ans.model.ItemVenda;
 import br.com.ans.model.Produto;
 import br.com.ans.model.Usuario;
 import br.com.ans.model.Venda;
@@ -51,6 +52,7 @@ public class VendaVisao implements Serializable {
 	HashMap<Long,String> listaFormasPagamento;
 	HashMap<Long,String> listaBandeiras;
 	
+	@Inject
 	private Venda venda;
 	
     private Produto produto;
@@ -63,9 +65,17 @@ public class VendaVisao implements Serializable {
 	@Inject
 	private ProdutoService produtoService;
 	
+	private ItemVenda itemVenda;
+	
 	private String codigoBarras;
 	
 	private Long quantidade;
+	
+	private Long numeroItem = 0L;
+	
+	private Boolean objetoAtualizado;
+	
+	private Double valorTotal = 0.0;
 	
 	public VendaVisao() {
 	}
@@ -180,6 +190,33 @@ public class VendaVisao implements Serializable {
 	public void setListaBandeiras(HashMap<Long, String> listaBandeiras) {
 		this.listaBandeiras = listaBandeiras;
 	}
+	
+	public ItemVenda getItemVenda() {
+		return itemVenda;
+	}
+
+	public void setItemVenda(ItemVenda itemVenda) {
+		this.itemVenda = itemVenda;
+	}
+	
+	public Double getValorTotal() {
+		/*Soma valor total da venda*/
+		
+		valorTotal = 0.0;
+		
+		Iterator<ItemVenda> iteratorItemVenda = venda.getItemVenda().iterator();
+		
+		while(iteratorItemVenda.hasNext()) {
+			ItemVenda item = iteratorItemVenda.next();
+			/*Soma apenas os não cancelados*/
+			///if(item.getAutorizacao().getCodigoAutorizacao() != 2L) {
+			valorTotal = valorTotal+item.getValorTotal();	
+			///}
+		}
+		return valorTotal;
+	}
+	
+	/* --------------------------------------------------------------------------------------------- */
 
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		String retorno = menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
@@ -191,7 +228,7 @@ public class VendaVisao implements Serializable {
 			return retorno;
 		}
 		return null;
-	}	
+	}
 
 	public void carregarListaFormaPagamento(){
 		
@@ -214,28 +251,45 @@ public class VendaVisao implements Serializable {
 			this.setListaBandeiras(mapaBandeira);
 	}
 	
-	public void adicionarProduto(Produto produto){
+	public void adicionarItemVenda(Produto produto){
 		if(produto != null){
-		  this.produto = produto; 
-		  this.produto.setQuantidadeProduto(this.getQuantidade());	
-		  this.produto.setValorTotal(getQuantidade()*produto.getValorVenda());
-		  
-		  Iterator<Produto> produtoLista = produtos.iterator();
+		  objetoAtualizado = false;
+		  numeroItem++;	
+		  /*Gerar um novo objeto*/	
+		  itemVenda	 = new ItemVenda();
+			
+		  if(itemVenda.getQuantidadeItem() == null ) {
+			  itemVenda.setQuantidadeItem(this.getQuantidade());
+		  }
+			
+		  itemVenda.setNumeroItem(numeroItem);
+		  itemVenda.setValorItem(produto.getValorVenda());
+		  itemVenda.setProduto(produto);
+		  itemVenda.setVenda(this.getVenda());
 
-		  while(produtoLista.hasNext()){
-		              Produto prod = produtoLista.next();
-		              if(prod.getCodigoProduto() == produto.getCodigoProduto()){
-		            	  produto.setQuantidadeProduto(produto.getQuantidadeProduto()+prod.getQuantidadeProduto());
-		            	  produtoLista.remove();
+		  Iterator<ItemVenda> itemVendaIterator = venda.getItemVenda().iterator();
+		  
+		  while(itemVendaIterator.hasNext()){
+		              ItemVenda item = itemVendaIterator.next();
+		              if(item.getProduto().getCodigoProduto().equals(produto.getCodigoProduto())){
+		            	  item.setQuantidadeItem(this.getQuantidade()+item.getQuantidadeItem());
+		            	  //item.setNumeroItem(item.getNumeroItem());
+		            	  item.setValorTotal(item.getQuantidadeItem()*produto.getValorVenda());
+		            	  numeroItem--;
+		            	  objetoAtualizado = true;
+		            	  //itemVendaIterator.remove();
 		              }
 		          }
-		  this.produtos.add(produto);
+		  	if(objetoAtualizado == false){
+			  	itemVenda.setValorTotal(itemVenda.getQuantidadeItem()*produto.getValorVenda());
+			  	this.venda.getItemVenda().add(itemVenda);
+		  	}
 	  }
    }
 
 	public void consultarProduto(){
 		if(getCodigoBarras().equals(null) || getQuantidade() != null){
-			adicionarProduto(this.produtoService.porCodigoBarra(codigoBarras));
+			adicionarItemVenda(this.produtoService.porCodigoBarra(codigoBarras));
 		}
 	}
 	
