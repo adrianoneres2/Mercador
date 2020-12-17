@@ -218,6 +218,10 @@ public class VendaVisao implements Serializable {
 	
 	/* --------------------------------------------------------------------------------------------- */
 
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		String retorno = menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
 		if(retorno == null){
