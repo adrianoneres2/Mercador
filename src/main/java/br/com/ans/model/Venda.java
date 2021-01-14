@@ -31,12 +31,6 @@ public class Venda implements EntidadeBase, Serializable  {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="sq_idvenda")
 	@Column(name ="id_venda", nullable = false)
 	private Long codigoVenda;
-	
-	/*
-	@ManyToOne
-	@JoinColumn(name = "id_forma_pagamento")
-	private FormaPagamento formaPagamento;
-*/
 
 	@ManyToOne
 	@JoinColumn(name = "id_usuario_cliente")
@@ -56,6 +50,9 @@ public class Venda implements EntidadeBase, Serializable  {
 	
 	@OneToMany(mappedBy="venda")
 	private List<ItemVenda> listaItemVenda = new ArrayList<ItemVenda>();
+
+	@OneToMany(mappedBy="venda")
+	private List<VendaFormaPagamento> listaVendaFormaPagamento = new ArrayList<VendaFormaPagamento>();
 	
 	@ManyToOne
 	@JoinColumn(name = "id_venda_orcamento")
@@ -144,6 +141,22 @@ public class Venda implements EntidadeBase, Serializable  {
 		this.listaItemVenda = itemVenda;
 	}
 
+	public List<ItemVenda> getListaItemVenda() {
+		return listaItemVenda;
+	}
+
+	public void setListaItemVenda(List<ItemVenda> listaItemVenda) {
+		this.listaItemVenda = listaItemVenda;
+	}
+
+	public List<VendaFormaPagamento> getListaVendaFormaPagamento() {
+		return listaVendaFormaPagamento;
+	}
+
+	public void setListaVendaFormaPagamento(List<VendaFormaPagamento> listaVendaFormaPagamento) {
+		this.listaVendaFormaPagamento = listaVendaFormaPagamento;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -153,6 +166,7 @@ public class Venda implements EntidadeBase, Serializable  {
 		result = prime * result + ((dataVenda == null) ? 0 : dataVenda.hashCode());
 		result = prime * result + ((dataVendaFinalizada == null) ? 0 : dataVendaFinalizada.hashCode());
 		result = prime * result + ((listaItemVenda == null) ? 0 : listaItemVenda.hashCode());
+		result = prime * result + ((listaVendaFormaPagamento == null) ? 0 : listaVendaFormaPagamento.hashCode());
 		result = prime * result + ((situacaoVenda == null) ? 0 : situacaoVenda.hashCode());
 		result = prime * result + ((tipoVenda == null) ? 0 : tipoVenda.hashCode());
 		result = prime * result + ((usuarioCliente == null) ? 0 : usuarioCliente.hashCode());
@@ -193,6 +207,11 @@ public class Venda implements EntidadeBase, Serializable  {
 			if (other.listaItemVenda != null)
 				return false;
 		} else if (!listaItemVenda.equals(other.listaItemVenda))
+			return false;
+		if (listaVendaFormaPagamento == null) {
+			if (other.listaVendaFormaPagamento != null)
+				return false;
+		} else if (!listaVendaFormaPagamento.equals(other.listaVendaFormaPagamento))
 			return false;
 		if (situacaoVenda == null) {
 			if (other.situacaoVenda != null)

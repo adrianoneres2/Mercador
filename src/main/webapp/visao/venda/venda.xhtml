@@ -18,7 +18,6 @@
 						value="#{vendaVisao.usuarioCliente.nomeUsuario}"
 						style=" width: 111pt;" />
 
-
 					<p:outputLabel value="Código do Caixa: " />
 					<p:inputText disabled="true"
 						value="#{vendaVisao.caixa.codigoCaixa}" style=" width: 111pt;" />
@@ -52,27 +51,41 @@
 				<p:panel id="idPanelVenda">
 					<h:panelGrid id="idPanelGridPrincipalVenda" columns="9">
 
-
 						<p:row>
 							<p:column>
 								<p:outputLabel id="labelVendaProduto" value="Produto " />
-								<p:inputText id="idInputCodigoBarras"
-									value="#{vendaVisao.codigoBarras}" label="labelVendaProduto"
-									required="true" requiredMessage="Campo produto obrigarório!" />
+								<p:focus id="idFocus" for="idInputCodigoBarras" />
+								<p:inputText 
+								    id="idInputCodigoBarras"
+									value="#{vendaVisao.codigoBarras}" 
+									label="labelVendaProduto"
+									required="true" 
+									requiredMessage="Campo produto obrigarório!"/>
 
 								<p:outputLabel id="labelQuantidadeProduto" value="Quantidade " style="margin-left: 10pt;" />
 
-								<p:inputText value="#{vendaVisao.quantidade}"
+								<p:inputText
+								    id="idInputQuantidade" 
+								    value="#{vendaVisao.quantidade}"
 									label="labelQuantidadeProduto" required="true"
 									requiredMessage="Campo quantidade obrigarório!"
 									onfocus="true" 
 									onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;"
 									converterMessage="Digite um número inteiro"/>
 
-								<p:commandButton id="botaoVendaConsultar" value="Consultar"
-									action="#{vendaVisao.consultarProduto()}"
-									update="dataTableProduto growlVenda idOutputLabelVendaValorTotal :idDlgFormaPagamento:idOutputLabelVendaValorTotal2"
-									ajax="true" />
+								<p:commandButton 
+								        id = "botaoVendaConsultar" 
+								     value = "Consultar"
+									action = "#{vendaVisao.consultarProduto()}"
+									update = "dataTableProduto 
+									          growlVenda 
+									          idOutputLabelVendaValorTotal 
+									          :idDlgFormaPagamento:idOutputLabelVendaValorTotal2
+									          idInputCodigoBarras
+									          idInputQuantidade
+									          idFocus"
+									ajax="true"> 
+								</p:commandButton>
 							</p:column>
 							
 							
@@ -137,12 +150,12 @@
 		    header="Forma de Pagamento"
 		    id="idDglFormaPagamento" 
 		    widgetVar="dlgformaPagamento"
-			modal="true" 
+			modal="false" 
 			height="350" 
 			width="850" 
 			draggable="true"
-			resizable="true"
-			appendTo="@(body)">
+			resizable="true">
+            <!-- Usar o appendTo="@(body)" deu certo para a modal econdida mas deu problema nas combos de forma de pagamento que enviavam valores null -->
 			<p:panelGrid id="panelGridModalFormaPagamento" styleClass="panelSemBorda"> 
 				<p:row>
 					<p:column>
@@ -162,17 +175,25 @@
 			    
 				<p:row>
 					<p:column>
-						<p:selectOneMenu id="idSelectFormaPagamento" required="true">
-							<f:selectItem itemValue="0" itemLabel="Selecione" />
+						<p:selectOneMenu 
+						    id="idSelectFormaPagamento" 
+						    value="#{vendaVisao.formaPagamentoSelecionada}">
+							<f:selectItem itemValue="0" itemLabel="Selecione"/>
 							<f:selectItems
 								value="#{vendaVisao.listaFormasPagamento.entrySet()}"
-								var="itemFormasPagamento" itemValue="#{itemFormasPagamento.key}"
+								var="itemFormasPagamento" 
+								itemValue="#{itemFormasPagamento.key}"
 								itemLabel="#{itemFormasPagamento.value}" />
+						<p:ajax id="idAjaxHabilitaPagamentoDinheiro"
+						        event="change" 
+						        process="@this"
+						        update="idSelectBandeiras" />
 						</p:selectOneMenu>
 					</p:column>
 
 					<p:column>
-						<p:selectOneMenu id="idSelectBandeiras" required="true">
+						<p:selectOneMenu id="idSelectBandeiras" 
+						                 disabled="#{vendaVisao.formaPagamentoSelecionada == 1}">
 							<f:selectItem itemValue="0" itemLabel="Selecione" />
 							<f:selectItems
 								value="#{vendaVisao.listaBandeiras.entrySet()}"

@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,6 +17,7 @@ import br.com.ans.model.ItemVenda;
 import br.com.ans.model.Produto;
 import br.com.ans.model.Usuario;
 import br.com.ans.model.Venda;
+import br.com.ans.model.VendaFormaPagamento;
 import br.com.ans.service.FormaPagamentoService;
 import br.com.ans.service.ProdutoService;
 import br.com.ans.service.VendaService;
@@ -26,7 +26,8 @@ import enumerations.FuncionalidadeEnum;
 //@Dependent
 //@SessionScoped
 //@RequestScoped
-@ViewScoped
+//@ViewScoped
+@javax.faces.view.ViewScoped
 @Named
 public class VendaVisao implements Serializable {
 
@@ -48,6 +49,9 @@ public class VendaVisao implements Serializable {
 	
 	@Inject
 	FormaPagamentoService formaPagamentoService;
+	
+	@Inject
+	VendaFormaPagamento vendaFormaPagamento;
 	
 	HashMap<Long,String> listaFormasPagamento;
 	HashMap<Long,String> listaBandeiras;
@@ -74,6 +78,10 @@ public class VendaVisao implements Serializable {
 	private Long numeroItem = 0L;
 	
 	private Boolean objetoAtualizado;
+	
+	private Long formaPagamentoSelecionada = 1L;
+	
+	private Long bandeiraSelecionada = 0L;
 	
 	private Double valorTotal = 0.0;
 	
@@ -198,7 +206,23 @@ public class VendaVisao implements Serializable {
 	public void setItemVenda(ItemVenda itemVenda) {
 		this.itemVenda = itemVenda;
 	}
-	
+
+	public Long getFormaPagamentoSelecionada() {
+		return formaPagamentoSelecionada;
+	}
+
+	public void setFormaPagamentoSelecionada(Long formaPagamentoSelecionada) {
+		this.formaPagamentoSelecionada = formaPagamentoSelecionada;
+	}
+
+	public Long getBandeiraSelecionada() {
+		return bandeiraSelecionada;
+	}
+
+	public void setBandeiraSelecionada(Long bandeiraSelecionada) {
+		this.bandeiraSelecionada = bandeiraSelecionada;
+	}
+
 	public Double getValorTotal() {
 		/*Soma valor total da venda*/
 		
@@ -294,7 +318,17 @@ public class VendaVisao implements Serializable {
 	public void consultarProduto(){
 		if(getCodigoBarras().equals(null) || getQuantidade() != null){
 			adicionarItemVenda(this.produtoService.porCodigoBarra(codigoBarras));
+			/*Limpa dados do formulário*/
+			this.setCodigoBarras(null);
+			this.setQuantidade(null);
 		}
+	}
+	
+	public void adicionaListaVendaFormaPagamento(Double valorParcela) {
+		vendaFormaPagamento = new VendaFormaPagamento();
+		
+		///Criar classes de busca por código para banderia e forma de pagamento 
+		//vendaFormaPagamento.setBandeira(formaPagamentoService.);
 	}
 	
 }

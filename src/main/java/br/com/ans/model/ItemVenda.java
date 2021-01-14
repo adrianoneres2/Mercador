@@ -24,8 +24,8 @@ public class ItemVenda implements EntidadeBase, Serializable {
 	public ItemVenda(){}
 	
 	@Id
-	@SequenceGenerator(name="sq_item_idvenda", sequenceName="loja.sq_item_idvenda", allocationSize = 1, initialValue = 1) /*, schema = "loja"*/
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="sq_item_idvenda")
+	@SequenceGenerator(name="sq_itemidvenda", sequenceName="loja.sq_itemidvenda", allocationSize = 1, initialValue = 1) /*, schema = "loja"*/
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="sq_itemidvenda")
 	@Column(name ="id_item_venda", nullable = false)
 	private Long codigoItemVenda;
 	
