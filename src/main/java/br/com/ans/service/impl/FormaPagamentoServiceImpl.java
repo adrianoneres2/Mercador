@@ -31,6 +31,15 @@ public class FormaPagamentoServiceImpl implements FormaPagamentoService{
 		return formaPagamentoDao.bandeiras();
 	}
 	
+	@Override
+	public FormaPagamento formaPagamentoPorCodigo(Long codigoFormaPagamento){
+		return formaPagamentoDao.formaPagamentoPorCodigo(codigoFormaPagamento);
+	}
 	
+	
+	@Override
+	public Bandeira bandeiraPorCodigo(Long codigoBandeira){
+		return formaPagamentoDao.bandeiraPorCodigo(codigoBandeira);
+	}
 	
 }

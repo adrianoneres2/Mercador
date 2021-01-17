@@ -11,4 +11,8 @@ public interface FormaPagamentoService {
 	
 	public List<Bandeira> bandeiras();
 
+	public FormaPagamento formaPagamentoPorCodigo(Long codigoFormaPagamento);
+
+	public Bandeira bandeiraPorCodigo(Long codigoBandeira);
+
 }

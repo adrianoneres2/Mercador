@@ -73,22 +73,19 @@
 									onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;"
 									converterMessage="Digite um número inteiro"/>
 
-								<p:commandButton 
-								        id = "botaoVendaConsultar" 
-								     value = "Consultar"
-									action = "#{vendaVisao.consultarProduto()}"
-									update = "dataTableProduto 
+								<p:commandButton id="botaoVendaConsultar" value="Consultar"
+									action="#{vendaVisao.consultarProduto()}"
+									update="dataTableProduto 
 									          growlVenda 
 									          idOutputLabelVendaValorTotal 
-									          :idDlgFormaPagamento:idOutputLabelVendaValorTotal2
+									          :idFormDlgFormaPagamento:idInputVendaValorParcela
 									          idInputCodigoBarras
 									          idInputQuantidade
 									          idFocus"
-									ajax="true"> 
+									ajax="true">
 								</p:commandButton>
 							</p:column>
-							
-							
+
 							<p:column>
 									<p:outputLabel id="idOutputLabelVendaValorTotal"
 										value="#{vendaVisao.valorTotal}"
@@ -97,7 +94,6 @@
 									</p:outputLabel>
 							</p:column>
 						</p:row>
-
 					</h:panelGrid>
 
 					<p:spacer />
@@ -145,7 +141,10 @@
 			</p:layoutUnit>
 		</p:layout>
    </h:form>
-   <h:form id="idDlgFormaPagamento">
+   <h:form id="idFormDlgFormaPagamento">
+   		<p:growl id="growlVendaDialogFormaPagamento" showDetail="true" escape="true"
+			closable="true" styleClass="messages" />
+   
 		<p:dialog 
 		    header="Forma de Pagamento"
 		    id="idDglFormaPagamento" 
@@ -193,47 +192,56 @@
 
 					<p:column>
 						<p:selectOneMenu id="idSelectBandeiras" 
-						                 disabled="#{vendaVisao.formaPagamentoSelecionada == 1}">
+						                 disabled="#{vendaVisao.formaPagamentoSelecionada == 1}"
+						                 value="#{vendaVisao.bandeiraSelecionada}">
 							<f:selectItem itemValue="0" itemLabel="Selecione" />
 							<f:selectItems
 								value="#{vendaVisao.listaBandeiras.entrySet()}"
-								var="itemBandeiras" itemValue="#{itemBandeiras.key}"
+								var="itemBandeiras" 
+								itemValue="#{itemBandeiras.key}"
 								itemLabel="#{itemBandeiras.value}" />
 						</p:selectOneMenu>
 					</p:column>
 
 					<p:column>
- 						<p:inputText id="idOutputLabelVendaValorTotal2"
-										value="#{vendaVisao.valorTotal}">
-										<f:convertNumber type="currency" />
-										</p:inputText> 
+ 						<p:inputText id="idInputVendaValorParcela"
+										value="#{vendaVisao.valorParcela}" />
 					</p:column>
 
 					<p:column>
-					<p:commandButton value="+"
-						style="background: green !important;  color: white !important; width: 50pt;" >
-					</p:commandButton>
+						<p:commandButton id="botaoAdicionarFormaPagamento"
+							style="background: green !important;  color: white !important; width: 50pt;"
+							value="+"
+							action="#{vendaVisao.adicionaListaVendaFormaPagamento()}"
+							update="idDataTableFormaPagamento
+							        growlVendaDialogFormaPagamento"
+							process="@form" ajax="true">
+						</p:commandButton>
 					</p:column>
 
 				</p:row>
 
 			</p:panelGrid>
 
-			<p:dataTable id="idDataTableFormaPagamento" style="margin-top: 5pt;" rows="10" paginator="10" emptyMessage="Nenhuma forma de pagamento foi adicionada.">
+			<p:dataTable id="idDataTableFormaPagamento" style="margin-top: 5pt;" rows="10" paginator="10" emptyMessage="Nenhuma forma de pagamento foi adicionada."
+			   var="vendaFormaPagamento"
+			   value="#{vendaVisao.venda.listaVendaFormaPagamento}"
+			   lazy="true"
+			   scrollable="true">
 				<p:column headerText="Número da Parcela" width="30">
-					<h:outputText value="" />
+					<h:outputText value="#{vendaFormaPagamento.numeroParcela}" />
 				</p:column>
 
 				<p:column headerText="Forma de Pagamento" width="30">
-					<h:outputText value="" />
+					<h:outputText value="#{vendaFormaPagamento.formaPagamento.nomeFormaPagamento}" />
 				</p:column>
 
 				<p:column headerText="Bandeira" width="30">
-					<h:outputText value="" />
+					<h:outputText value="#{vendaFormaPagamento.bandeira.nomeBandeira}" />
 				</p:column>
 				
 				<p:column headerText="Valor da Parcela" width="30">
-					<h:outputText value="" />
+					<h:outputText value="#{vendaFormaPagamento.valorParcela}" />
 				</p:column>
 				
 				<p:column headerText="Ações" width="2">

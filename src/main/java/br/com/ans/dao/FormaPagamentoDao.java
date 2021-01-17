@@ -11,4 +11,8 @@ public interface FormaPagamentoDao {
 
 	List<Bandeira> bandeiras();
 
+	FormaPagamento formaPagamentoPorCodigo(Long codigoFormaPagamento);
+
+	Bandeira bandeiraPorCodigo(Long codigoBandeira);
+
 }

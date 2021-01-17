@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -47,6 +49,8 @@ public class VendaVisao implements Serializable {
 	
 	private List<Bandeira> bandeiras;
 	
+	private List<VendaFormaPagamento> vendaFormasPagamento;
+	
 	@Inject
 	FormaPagamentoService formaPagamentoService;
 	
@@ -84,6 +88,8 @@ public class VendaVisao implements Serializable {
 	private Long bandeiraSelecionada = 0L;
 	
 	private Double valorTotal = 0.0;
+	
+	private Double valorParcela = 0.0;
 	
 	public VendaVisao() {
 	}
@@ -222,6 +228,30 @@ public class VendaVisao implements Serializable {
 	public void setBandeiraSelecionada(Long bandeiraSelecionada) {
 		this.bandeiraSelecionada = bandeiraSelecionada;
 	}
+	
+	public Double getValorParcela() {
+		return valorParcela;
+	}
+
+	public void setValorParcela(Double valorParcela) {
+		this.valorParcela = valorParcela;
+	}
+	
+	public List<VendaFormaPagamento> getVendaFormasPagamento() {
+		return vendaFormasPagamento;
+	}
+
+	public void setVendaFormasPagamento(List<VendaFormaPagamento> vendaFormasPagamento) {
+		this.vendaFormasPagamento = vendaFormasPagamento;
+	}
+
+	public VendaFormaPagamento getVendaFormaPagamento() {
+		return vendaFormaPagamento;
+	}
+
+	public void setVendaFormaPagamento(VendaFormaPagamento vendaFormaPagamento) {
+		this.vendaFormaPagamento = vendaFormaPagamento;
+	}
 
 	public Double getValorTotal() {
 		/*Soma valor total da venda*/
@@ -237,6 +267,7 @@ public class VendaVisao implements Serializable {
 			valorTotal = valorTotal+item.getValorTotal();	
 			///}
 		}
+		this.setValorParcela(valorTotal);
 		return valorTotal;
 	}
 	
@@ -311,7 +342,7 @@ public class VendaVisao implements Serializable {
 		  	if(objetoAtualizado == false){
 			  	itemVenda.setValorTotal(itemVenda.getQuantidadeItem()*produto.getValorVenda());
 			  	this.venda.getItemVenda().add(itemVenda);
-		  	}
+		  	}  	
 	  }
    }
 
@@ -324,11 +355,36 @@ public class VendaVisao implements Serializable {
 		}
 	}
 	
-	public void adicionaListaVendaFormaPagamento(Double valorParcela) {
+	public void adicionaListaVendaFormaPagamento(){
 		vendaFormaPagamento = new VendaFormaPagamento();
+		boolean validador = true;
 		
-		///Criar classes de busca por código para banderia e forma de pagamento 
-		//vendaFormaPagamento.setBandeira(formaPagamentoService.);
+		vendaFormaPagamento.setNumeroParcela(1L);
+		vendaFormaPagamento.setFormaPagamento(formaPagamentoService.formaPagamentoPorCodigo(formaPagamentoSelecionada));
+		
+		/*Se a forma de pagamento for dinheiro não recupera bandeira*/
+		if(formaPagamentoSelecionada == 1 ){
+			this.setBandeiraSelecionada(0L);
+		}else {
+			vendaFormaPagamento.setBandeira(formaPagamentoService.bandeiraPorCodigo(bandeiraSelecionada));
+		}
+		vendaFormaPagamento.setVenda(this.getVenda());
+		
+		if(this.getValorParcela() <= 0 ) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info", "Campo valor da parcela é obrigatório!"));
+			validador = false;
+		}else {
+			vendaFormaPagamento.setValorParcela(this.getValorParcela());
+		}
+		
+		if(formaPagamentoSelecionada != 1 && bandeiraSelecionada == 0 ){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info", "Selecione uma bandeira!"));
+			validador = false;
+		}
+		
+		if(validador) {
+			this.venda.getListaVendaFormaPagamento().add(vendaFormaPagamento);
+		}
 	}
 	
 }

@@ -33,7 +33,7 @@ public class FormaPagamentoDaoImpl implements FormaPagamentoDao{
 			return null;
 		}
 	}
-
+	
 	@Override
 	public List<Bandeira> bandeiras() {
 		try {
@@ -45,6 +45,24 @@ public class FormaPagamentoDaoImpl implements FormaPagamentoDao{
 		}
 	}
 	
+	@Override
+	public FormaPagamento formaPagamentoPorCodigo(Long codigoFormaPagamento){
+		try {
+			return entityManager.find(FormaPagamento.class, codigoFormaPagamento);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
-
+	@Override
+	public Bandeira bandeiraPorCodigo(Long codigoBandeira){
+		try {
+			return entityManager.find(Bandeira.class, codigoBandeira);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 }
