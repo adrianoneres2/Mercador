@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -13,7 +14,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.ans.model.Bandeira;
-import br.com.ans.model.Caixa;
 import br.com.ans.model.FormaPagamento;
 import br.com.ans.model.ItemVenda;
 import br.com.ans.model.Produto;
@@ -22,8 +22,10 @@ import br.com.ans.model.Venda;
 import br.com.ans.model.VendaFormaPagamento;
 import br.com.ans.service.FormaPagamentoService;
 import br.com.ans.service.ProdutoService;
+import br.com.ans.service.SituacaoVendaService;
 import br.com.ans.service.VendaService;
 import enumerations.FuncionalidadeEnum;
+import util.Janela;
 
 //@Dependent
 //@SessionScoped
@@ -35,7 +37,7 @@ public class VendaVisao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Caixa caixa;
+	//private Caixa caixa;
 
 	private Usuario usuarioCliente;
 
@@ -91,6 +93,9 @@ public class VendaVisao implements Serializable {
 	
 	private Double valorParcela = 0.0;
 	
+	@Inject
+	private SituacaoVendaService situacaoVendaService;
+	
 	public VendaVisao() {
 	}
 
@@ -100,13 +105,15 @@ public class VendaVisao implements Serializable {
 		produtos = new ArrayList<Produto>();
 		
 		//Inicia objeto de venda e caixa 
-		setVenda(vendaService.buscarVenda(usuarioLogado.getUsuario()));
-		setCaixa(getVenda().getCaixa());
+		//setVenda(vendaService.buscarVenda(usuarioLogado.getUsuario()));
+		//novaVenda();
+		//setCaixa(getVenda().getCaixa());
 		
 		carregarListaFormaPagamento();
 		carregarListaBandeira();
 	}
 
+	/*
 	public Caixa getCaixa() {
 		return caixa;
 	}
@@ -114,7 +121,7 @@ public class VendaVisao implements Serializable {
 	public void setCaixa(Caixa caixa) {
 		this.caixa = caixa;
 	}
-
+*/
 	public Usuario getUsuarioCliente() {
 		return usuarioCliente;
 	}
@@ -277,6 +284,7 @@ public class VendaVisao implements Serializable {
 		this.valorTotal = valorTotal;
 	}
 
+	/*
 	public String acessarFuncionalidade(FuncionalidadeEnum funcionalidadeEnum){
 		String retorno = menuVisao.acessar(usuarioLogado.getUsuario(), funcionalidadeEnum);
 		if(retorno == null){
@@ -288,6 +296,7 @@ public class VendaVisao implements Serializable {
 		}
 		return null;
 	}
+*/
 
 	public void carregarListaFormaPagamento(){
 		
@@ -385,6 +394,25 @@ public class VendaVisao implements Serializable {
 		if(validador) {
 			this.venda.getListaVendaFormaPagamento().add(vendaFormaPagamento);
 		}
+	}
+	
+	public void finalizarVenda() {
+		Venda vendaAtualizada = new Venda(); 
+		vendaAtualizada = vendaService.finalizarVenda(this.getVenda()); 
+		if(vendaAtualizada != null) {
+			this.venda = vendaAtualizada;
+		}
+	}
+	
+	
+	public void novaVenda() {
+		Venda venda = new Venda();
+		venda = (vendaService.buscarVenda(usuarioLogado.getUsuario()));
+		if(venda.getCaixa() != null) {
+			setVenda(venda);
+		}else {
+			menuVisao.apresentacao();
+		}		
 	}
 	
 }

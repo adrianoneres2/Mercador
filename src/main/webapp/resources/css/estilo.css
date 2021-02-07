@@ -21,11 +21,13 @@ html, body {
 	align-items: center;
 }
 
-.box {
+.box_old {
 	width: 300px;
 	height: 300px;
 	background: #fff;
 }
+
+
 
 #divPagina {
 	position: relative;
@@ -84,6 +86,49 @@ html, body {
 	left: 17%;
 	position: relative;
 	border: none;
+}
+
+#divCardTelaInteira{
+	width: 100vw;
+	height:100vh;
+	background: #507701;  
+	display: flex; /*definimos a propriedade display do container como flex. Essa é a configuração que faz com que, de fato, a div utilize o recurso de layout flexível (Flexbox); */
+	flex-direction: row; /*com a propriedade flex-direction, fazemos com que os itens internos sejam dispostos horizontalmente, ou seja, em forma de linha (row); */
+	justify-content: center; /*configuramos a disposição dos elementos internos como centralizados na direção definida na propriedade anterior, ou seja, os itens ficarão no centro da linha (horizontalmente); */
+	align-items: center; /*com a propriedade align-items definida como center, fazemos com que os elementos internos sejam também alinhados na vertical; */
+}
+
+.box {
+  width: 300px;
+  height: 2rem;
+  margin: 1.0em 1em;
+  box-sizing: border-box;
+  border: 1px solid black;
+  display: flex;
+}
+
+
+#divCardPequeno {
+/*
+	left: 50%;
+	top: 50%;
+	*/
+	background: #507701;
+	width: 100px;
+	height: 150px;
+	border: none;
+	color: white;
+	background-color: #729fcf;
+	/*box-shadow: 5px 5px 12px #888888;*/
+	box-shadow: 1px 1px 5px #888888;
+	/*margin-left: 5px;*/
+	margin-top: 5px;
+	margin-right: 5px;
+	display: flex; /*definimos a propriedade display do container como flex. Essa é a configuração que faz com que, de fato, a div utilize o recurso de layout flexível (Flexbox); */
+	flex-direction: row; /*com a propriedade flex-direction, fazemos com que os itens internos sejam dispostos horizontalmente, ou seja, em forma de linha (row); */
+	justify-content: center; /*configuramos a disposição dos elementos internos como centralizados na direção definida na propriedade anterior, ou seja, os itens ficarão no centro da linha (horizontalmente); */
+	align-items: center; /*com a propriedade align-items definida como center, fazemos com que os elementos internos sejam também alinhados na vertical; */
+
 }
 
 #divImgFundoLogin {

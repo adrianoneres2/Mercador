@@ -48,7 +48,8 @@
 				<p:submenu label="Venda">
 					<p:menuitem value="Nova"
 						action="#{menuVisao.acessarFuncionalidade('VENDA')}"
-						update="growlMenu, :outputPanelConteudo" process="@this" />
+						update="growlMenu, :outputPanelConteudo" process="@this" 
+						actionListener="#{vendaVisao.novaVenda()}"/>
 
 					<p:menuitem value="Consultar"
 						action="#{vendaVisao.abrirJanelaFechamentoCaixa()}"

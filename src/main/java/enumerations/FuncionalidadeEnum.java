@@ -17,8 +17,7 @@ public enum FuncionalidadeEnum {
 	ALTERAPRODUTO(13, "/visao/produto/alteraProduto"),
 	EDITARPERMISSAOUSUARIO(14, "/visao/perfil/gerenciarPerfilFuncionalidade"),
 	ABRIRCAIXA(15, "/visao/caixa/aberturaCaixa"),
-	FECHARCAIXA(16, "/visao/caixa/fechamentoCaixa");
-	
+	FECHARCAIXA(16, "/visao/caixa/fechamentoCaixa");	
 
 	private int codigo;
 	private String url;

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ta_venda_forma_pagamento", schema = "loja")
 @Dependent
-public class VendaFormaPagamento implements Serializable{
+public class VendaFormaPagamento implements EntidadeBase, Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -51,6 +51,11 @@ public class VendaFormaPagamento implements Serializable{
 	private Date dataParcela;
 
 	public Long getCodigoVendaFormaPagamento() {
+		return codigoVendaFormaPagamento;
+	}
+	
+	@Override
+	public Long getId() {
 		return codigoVendaFormaPagamento;
 	}
 
