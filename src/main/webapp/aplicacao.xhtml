@@ -5,84 +5,86 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/visao/templates/principal.xhtml">
 
-	<ui:define name="menu">
-		<h:form name="formMenu" id="idFormMenu">
-			<p:growl id="growlMenu" showDetail="true" sticky="true" escape="true" />
-			<p:menu toggleable="true" rendered="#{autenticadorVisao.logado}">
-				<p:submenu label="Principal"
-					action="#{menuVisao.acessarFuncionalidade('APLICACAO')}"
-					update="growlMenu, :outputPanelConteudo" process="@this" />
+<!-- 	<ui:define name="menu"> -->
+<!-- 		<h:form name="formMenu" id="idFormMenu"> -->
+<!-- 			<p:growl id="growlMenu" showDetail="true" sticky="true" escape="true" /> -->
+<!-- 			<p:menu toggleable="true" rendered="#{autenticadorVisao.logado}"> -->
+<!-- 				<p:submenu label="Principal" -->
+<!-- 					action="#{menuVisao.acessarFuncionalidade('APLICACAO')}" -->
+<!-- 					update="growlMenu, :outputPanelConteudo" process="@this" /> -->
 
-				<p:submenu label="Produto">
-					<p:menuitem value="Cadastro"
-						action="#{menuVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
-						update="growlMenu, :outputPanelConteudo">
-						<f:setPropertyActionListener value="true" target="#{produtoVisao.inicializarCadastro}" />
-					</p:menuitem>
+<!-- 				<p:submenu label="Produto"> -->
+<!-- 					<p:menuitem value="Cadastro" -->
+<!-- 						action="#{menuVisao.acessarFuncionalidade('CADASTROPRODUTO')}" -->
+<!-- 						update="growlMenu, :outputPanelConteudo"> -->
+<!-- 						<f:setPropertyActionListener value="true" target="#{produtoVisao.inicializarCadastro}" /> -->
+<!-- 					</p:menuitem> -->
 
-					<p:menuitem value="Consulta"
-						action="#{menuVisao.acessarFuncionalidade('CONSULTAPRODUTO')}"
-						update="growlMenu, :outputPanelConteudo" process="@this" />
-				</p:submenu>
+<!-- 					<p:menuitem value="Consulta" -->
+<!-- 						action="#{menuVisao.acessarFuncionalidade('CONSULTAPRODUTO')}" -->
+<!-- 						update="growlMenu, :outputPanelConteudo" process="@this" /> -->
+<!-- 				</p:submenu> -->
 
-				<p:submenu label="Usuário">
-					<p:menuitem value="Cadastro"
-						action="#{menuVisao.acessarFuncionalidade('CADASTROUSUARIO')}"
-						update="growlMenu, :outputPanelConteudo" process="@this" />
+<!-- 				<p:submenu label="Usuário"> -->
+<!-- 					<p:menuitem value="Cadastro" -->
+<!-- 						action="#{menuVisao.acessarFuncionalidade('CADASTROUSUARIO')}" -->
+<!-- 						update="growlMenu, :outputPanelConteudo" process="@this" /> -->
 
-					<p:menuitem value="Consulta"
-						action="#{menuVisao.acessarFuncionalidade('CONSULTAUSUARIO')}"
-						update="growlMenu, :outputPanelConteudo" process="@this" />
-				</p:submenu>
+<!-- 					<p:menuitem value="Consulta" -->
+<!-- 						action="#{menuVisao.acessarFuncionalidade('CONSULTAUSUARIO')}" -->
+<!-- 						update="growlMenu, :outputPanelConteudo" process="@this" /> -->
+<!-- 				</p:submenu> -->
 
-				<p:submenu label="Caixa">
-					<p:menuitem value="Abertura"
-						action="#{caixaVisao.abrirJanelaAberturaCaixa()}" process="@this"
-						update="growlMenu, :outputPanelConteudo" />
+<!-- 				<p:submenu label="Caixa"> -->
+<!-- 					<p:menuitem value="Abertura" -->
+<!-- 						action="#{caixaVisao.abrirJanelaAberturaCaixa()}" process="@this" -->
+<!-- 						update="growlMenu, :outputPanelConteudo" /> -->
 
-					<p:menuitem value="Fechamento"
-						action="#{caixaVisao.abrirJanelaFechamentoCaixa()}"
-						process="@this" update="growlMenu, :outputPanelConteudo" />
-				</p:submenu>
+<!-- 					<p:menuitem value="Fechamento" -->
+<!-- 						action="#{caixaVisao.abrirJanelaFechamentoCaixa()}" -->
+<!-- 						process="@this" update="growlMenu, :outputPanelConteudo" /> -->
+<!-- 				</p:submenu> -->
 
-				<p:submenu label="Venda">
-					<p:menuitem value="Nova"
-						action="#{menuVisao.acessarFuncionalidade('VENDA')}"
-						update="growlMenu, :outputPanelConteudo" process="@this" 
-						actionListener="#{vendaVisao.novaVenda()}"/>
+<!-- 				<p:submenu label="Venda"> -->
+<!-- 					<p:menuitem value="Nova" -->
+<!-- 						action="#{menuVisao.acessarFuncionalidade('VENDA')}" -->
+<!-- 						update="growlMenu, :outputPanelConteudo" process="@this"  -->
+<!-- 						actionListener="#{vendaVisao.novaVenda()}"/> -->
 
-					<p:menuitem value="Consultar"
-						action="#{vendaVisao.abrirJanelaFechamentoCaixa()}"
-						process="@this" update="growlMenu, :outputPanelConteudo" />
-				</p:submenu>
+<!-- 					<p:menuitem value="Consultar" -->
+<!-- 						action="#{vendaVisao.abrirJanelaFechamentoCaixa()}" -->
+<!-- 						process="@this" update="growlMenu, :outputPanelConteudo" /> -->
+<!-- 				</p:submenu> -->
 
-				<p:submenu label="Configurações">
-					<p:menuitem value="Perfil"
-						action="#{menuVisao.acessarFuncionalidade('GERENCIARPERFIL')}"
-						update="growlMenu, :outputPanelConteudo" process="@this" />
+<!-- 				<p:submenu label="Configurações"> -->
+<!-- 					<p:menuitem value="Perfil" -->
+<!-- 						action="#{menuVisao.acessarFuncionalidade('GERENCIARPERFIL')}" -->
+<!-- 						update="growlMenu, :outputPanelConteudo" process="@this" /> -->
 
-					<p:menuitem value="Categoria"
-						action="#{menuVisao.acessarFuncionalidade('GERENCIARPERFIL')}"
-						update="growlMenu, :outputPanelConteudo" process="@this" />
-				</p:submenu>
-			</p:menu>
-			<!-- 			</p:panel> -->
-			<p:commandButton value="Ajuda" action="#{autenticadorVisao.sair}"
-				update="growlMenu, :outputPanelConteudo" 
-				rendered="#{autenticadorVisao.logado}"/>
+<!-- 					<p:menuitem value="Categoria" -->
+<!-- 						action="#{menuVisao.acessarFuncionalidade('GERENCIARPERFIL')}" -->
+<!-- 						update="growlMenu, :outputPanelConteudo" process="@this" /> -->
+<!-- 				</p:submenu> -->
+<!-- 			</p:menu> -->
+			
+<!-- 			<p:commandButton value="Ajuda" action="#{autenticadorVisao.sair}" -->
+<!-- 				update="growlMenu, :outputPanelConteudo"  -->
+<!-- 				rendered="#{autenticadorVisao.logado}"/> -->
 
-			<p:commandButton value="Sair" action="#{autenticadorVisao.sair}"
-				update="growlMenu, :outputPanelConteudo, :idFormMenu, :idPerfilUsuario" 
-				rendered="#{autenticadorVisao.logado}"/>
-		</h:form>
-	</ui:define>
+<!-- 			<p:commandButton value="Sair" action="#{autenticadorVisao.sair}" -->
+<!-- 				update="growlMenu, :outputPanelConteudo, :idFormMenu, :idPerfilUsuario"  -->
+<!-- 				rendered="#{autenticadorVisao.logado}"/> -->
+<!-- 		</h:form> -->
+<!-- 	</ui:define> -->
 
 	<ui:define name="conteudo">
-		<h:panelGrid columns="1" width="100%" >
+	   <div id= "divCardTelaInteira">
+<!-- 		<h:panelGrid columns="1" width="100%" > -->
 			<p:outputPanel id="outputPanelConteudo">
 				<ui:include page="#{menuVisao.getPaginaAtual()}" />
 			</p:outputPanel>
-		</h:panelGrid>
+<!-- 		</h:panelGrid> -->
+	   </div>	
 	</ui:define>
 
 </ui:composition>

@@ -3,23 +3,37 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	<h:form id="idPerfilUsuario">
-		<div id="divPerfilUsuario">
-			<p:outputPanel id="idPerfilUsuario"
-				rendered="#{autenticadorVisao.logado}"
-				style="margin-left: 28pt;">
-				<h:graphicImage name="usuario.png" library="imagens" />
-				<p:spacer width="4px" />
-				<br/>
+	<h:form id="idFormPerfilUsuario">
+		<div id="divBarraNavegacao">
+			<p:outputPanel id="idPainelPerfilUsuario"
+				rendered="#{autenticadorVisao.logado}" style="margin-left: 5pt;">
+				<h:graphicImage name="/menu/Home-58.png" library="imagens" />
+				<h:graphicImage name="/menu/Customer-58.png" library="imagens" />
+					
 				<p:outputLabel id="idLabelUsuarioLogado"
 					value="#{autenticadorVisao.usuario.nomeUsuario}"
 					style="font-size: 12px !important;" />
-<!-- 				<p:outputLabel value=" - " /> -->
-				<br/>
+
 				<p:outputLabel id="idLabelUsuarioPerfil"
 					value="#{autenticadorVisao.usuario.getPerfil().getNomePerfil()}"
 					style="font-size: 12px !important;" />
 			</p:outputPanel>
+
+			<div id="divUsuarioAutenticado">
+				<p:commandLink  
+				    action="#{autenticadorVisao.sair}"
+					update=":outputPanelConteudo"
+					rendered="#{autenticadorVisao.logado}" >
+					<h:graphicImage name="/menu/Headphone-Mike-58.png" library="imagens" />
+				</p:commandLink>
+			</div>
+			<div id="divOerfilAutenticado">
+				<p:commandLink action="#{autenticadorVisao.sair}"
+					update=":outputPanelConteudo, :idFormPerfilUsuario idPainelPerfilUsuario"
+					rendered="#{autenticadorVisao.logado}" >
+					<h:graphicImage name="/menu/Media-Start-58.png" library="imagens" />
+					</p:commandLink>
+			</div>
 		</div>
 	</h:form>
 </ui:composition>

@@ -4,24 +4,64 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<div id="divCardTelaInteira">
+	<div id="divCardContainer">
 		<div id="box">
-			<div id="divCardPequeno">teste</div>
-			<div id="divCardPequeno">teste</div>
-			<div id="divCardPequeno">teste</div>
-			<div id="divCardPequeno">teste</div>
-			<div id="divCardPequeno">teste</div>
-		</div>
-			
-		<div id="box">
-			<div id="divCardPequeno">teste</div>
-			<div id="divCardPequeno">teste</div>
-			<div id="divCardPequeno">teste</div>
-			<div id="divCardPequeno">teste</div>
-			<div id="divCardPequeno">teste</div>
+			<div id="divCardPequeno" style="background-color: #EA2027">
+<!-- 				<p:commandButton value="Consulta" -->
+<!-- 					action="#{menuVisao.acessarFuncionalidade('CONSULTAPRODUTO')}" -->
+<!-- 					update=":outputPanelConteudo" process="@this" style="color:white"> -->
+<!-- 				</p:commandButton> -->
+
+				<p:commandLink
+					action="#{menuVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
+					update=":outputPanelConteudo" style="color:white">
+					<p:graphicImage name="/menu/Market-58.png" library="imagens" />
+					<f:setPropertyActionListener value="true"
+						target="#{produtoVisao.inicializarCadastro}" />
+				</p:commandLink>
+
+			</div>
+			<div id="divCardPequeno" style="background-color: #006266">
+				<p:commandLink
+						action="#{menuVisao.acessarFuncionalidade('VENDA')}"
+						update=":outputPanelConteudo" process="@this" 
+						actionListener="#{vendaVisao.novaVenda()}">
+
+					<p:graphicImage name="/menu/Basket-58.png" library="imagens" />
+				</p:commandLink>				
+			</div>
+			<div id="divCardPequeno" style="background-color: #1B1464">
+				<p:commandLink
+					action="#{menuVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
+					update=":outputPanelConteudo" style="color:white">
+					<p:graphicImage name="/menu/Gear-58.png" library="imagens" />
+				</p:commandLink>
+			</div>
+			<div id="divCardPequeno" style="background-color: #5758BB">
+				<p:commandLink
+					action="#{menuVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
+					update=":outputPanelConteudo" style="color:white">
+					<p:graphicImage name="/menu/Messages-58.png" library="imagens" />
+				</p:commandLink>
+			</div>
+			<div id="divCardPequeno" style="background-color: #6F1E51">
+				<p:commandLink
+					action="#{menuVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
+					update=":outputPanelConteudo" style="color:white">
+					<p:graphicImage name="/menu/People-58.png" library="imagens" />
+				</p:commandLink>
+            </div>
 		</div>
 
+		<div id="box">
+			<div id="divCardPequeno" style="background-color: #EE5A24">teste6</div>
+			<div id="divCardPequeno" style="background-color: #009432">teste7</div>
+			<div id="divCardPequeno" style="background-color: #FFC312">teste8</div>
+			<div id="divCardPequeno" style="background-color: #0652DD">teste9</div>
+			<div id="divCardPequeno" style="background-color: #9980FA">teste10</div>
+		</div>
 	</div>
+
 
 
 </ui:composition>
