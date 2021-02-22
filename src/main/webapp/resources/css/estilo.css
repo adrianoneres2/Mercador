@@ -10,6 +10,15 @@ html, body {
 	margin: 0px;
 }
 
+a:link 
+{ 
+ text-decoration:none; 
+} 
+
+a:hover
+{ 
+ color: black !important;
+} 
 
 .container {
 	width: 100%;
@@ -45,11 +54,60 @@ html, body {
 
 #divBarraNavegacao {
 	width: 100vw;
+	height: 35pt;
 	background-color: #000000;
 	display: flex; /*definimos a propriedade display do container como flex. Essa é a configuração que faz com que, de fato, a div utilize o recurso de layout flexível (Flexbox); */
 	flex-direction: row; /*com a propriedade flex-direction, fazemos com que os itens internos sejam dispostos horizontalmente, ou seja, em forma de linha (row); */
+	justify-content: center; /*configuramos a disposição dos elementos internos como centralizados na direção definida na propriedade anterior, ou seja, os itens ficarão no centro da linha (horizontalmente); */
 	align-items: center; /*com a propriedade align-items definida como center, fazemos com que os elementos internos sejam também alinhados na vertical; */
-	color: white;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+#divUsuarioAutenticado{
+	display: inline-block;
+}
+
+#divBarraTopoLogin{
+	width: 392px;
+	height: 40px;
+	background: white; 
+	display: inline-block;
+	position:absolute; /*Em conjunto com o right*/ 
+	margin-top: -485px;
+	color: red;
+	display: flex; /*definimos a propriedade display do container como flex. Essa é a configuração que faz com que, de fato, a div utilize o recurso de layout flexível (Flexbox); */
+	flex-direction: row; /*com a propriedade flex-direction, fazemos com que os itens internos sejam dispostos horizontalmente, ou seja, em forma de linha (row); */
+	justify-content: center; /*configuramos a disposição dos elementos internos como centralizados na direção definida na propriedade anterior, ou seja, os itens ficarão no centro da linha (horizontalmente); */
+	align-items: center; /*com a propriedade align-items definida como center, fazemos com que os elementos internos sejam também alinhados na vertical; */
+}
+
+#divBarraInferiorLogin{
+	width: 392px;
+	height: 40px;
+	background: white; 
+	display: inline-block;
+	position:absolute; /*Em conjunto com o right*/ 
+	margin-top: 485px;
+	color: red;
+	display: flex; /*definimos a propriedade display do container como flex. Essa é a configuração que faz com que, de fato, a div utilize o recurso de layout flexível (Flexbox); */
+	flex-direction: row; /*com a propriedade flex-direction, fazemos com que os itens internos sejam dispostos horizontalmente, ou seja, em forma de linha (row); */
+	justify-content: center; /*configuramos a disposição dos elementos internos como centralizados na direção definida na propriedade anterior, ou seja, os itens ficarão no centro da linha (horizontalmente); */
+	align-items: center; /*com a propriedade align-items definida como center, fazemos com que os elementos internos sejam também alinhados na vertical; */
+}
+
+#divLeft{
+	display: inline-block;
+	position:absolute; /*Em conjunto com o right*/
+	left:0; /*Posiciona a div no canto direito da tela*/ 
+	top:0; 
+}
+
+#divRight{
+	display: inline-block;
+	position:absolute; /*Em conjunto com o right*/ 
+	right:0; /*Posiciona a div no canto direito da tela*/
+	top: 0;
 }
 
 #divBanner {
@@ -90,12 +148,14 @@ html, body {
 	border: 0px;
 }
 
+/*
 #divLogin {
 	top: 40%;
 	left: 17%;
 	position: relative;
 	border: none;
 }
+*/
 
 #divCardTelaInteira{
 	width: 99vw;
@@ -110,6 +170,75 @@ html, body {
 	display: inline-block; /*Posiciona os DIVS(objetos) internos um embaixo do outro como se fosse um quebra de linnha para divs*/
 	margin-top: 180px;
 }
+
+.calssNovaLinha{
+	margin-top: 5px; 
+	
+}
+
+/*
+.ui-commandLink.ui-widget:hover{
+	color: black;
+}
+*/
+
+/*
+.ui-button .ui-button-text{
+ border: 0;
+ background: none;
+ box-shadow: none;
+ border-radius: 0px;
+}
+*/
+
+.classItemHorizontalMenuProduto{
+	width: 100%;
+    height: 25px;
+	background: #f51616;
+	margin-top: 2px;
+	color: white;
+	
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+.classItemHorizontalMenuProduto:hover{
+	background: #fce94f; 
+	color: black;
+}
+
+.classItemHorizontalMenuVenda{
+	width: 100%;
+    height: 25px;
+	background: #0C5558;
+	margin-top: 2px;
+	color: white;
+	
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+.classItemHorizontalMenuVenda:hover{
+	background: #fce94f; 
+	color: black;
+}
+
+.classItemHorizontalMenuUsuario{
+	width: 100%;
+    height: 25px;
+	background: #560f3c;
+	margin-top: 2px;
+	color: white;
+	
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+.classItemHorizontalMenuUsuario:hover{
+	background: #fce94f; 
+	color: black;
+}
+
 
 #divCardPequeno {
 /*
@@ -127,11 +256,6 @@ html, body {
 	/*margin-left: 5px;*/
 	/*margin-top: 5px;*/
 	/*margin-right: 5px;*/
-	display: flex; /*definimos a propriedade display do container como flex. Essa é a configuração que faz com que, de fato, a div utilize o recurso de layout flexível (Flexbox); */
-	flex-direction: row; /*com a propriedade flex-direction, fazemos com que os itens internos sejam dispostos horizontalmente, ou seja, em forma de linha (row); */
-	justify-content: center; /*configuramos a disposição dos elementos internos como centralizados na direção definida na propriedade anterior, ou seja, os itens ficarão no centro da linha (horizontalmente); */
-	align-items: center; /*com a propriedade align-items definida como center, fazemos com que os elementos internos sejam também alinhados na vertical; */
-
 }
 
 #box {
@@ -149,19 +273,23 @@ html, body {
 }
 
 
-#divImgFundoLogin {
-    /*left:45%;*/
-    /*top:50%;*/
-    /*margin-left:-175px;*/ /* Metade do valor da Largura */
-    /*margin-top:-200px;*/ /* Metade da valor da Altura */
-    background:#507701;
-	width: 500pt;
-	height: 500pt;
+#divBoxLogin {
+	/*left:45%;*/
+	/*top:50%;*/
+	/*margin-left:-175px;*/ /* Metade do valor da Largura */
+	margin-top:200px; /* Metade da valor da Altura */
+	width: 300pt;
+	height: 400pt;
 	/*position:absolute;*/
-	border: none;
 	color: white;
-	background-color: #729fcf;
+	background-color: #1B1464;
 	box-shadow: 5px 5px 12px #888888;
+
+	display: flex; /*definimos a propriedade display do container como flex. Essa é a configuração que faz com que, de fato, a div utilize o recurso de layout flexível (Flexbox); */
+	flex-direction: row; /*com a propriedade flex-direction, fazemos com que os itens internos sejam dispostos horizontalmente, ou seja, em forma de linha (row); */
+	justify-content: center; /*configuramos a disposição dos elementos internos como centralizados na direção definida na propriedade anterior, ou seja, os itens ficarão no centro da linha (horizontalmente); */
+	align-items: center; /*com a propriedade align-items definida como center, fazemos com que os elementos internos sejam também alinhados na vertical; */
+
 }
 
 #divLoginInputEmail {

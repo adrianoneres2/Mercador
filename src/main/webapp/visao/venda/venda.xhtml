@@ -45,9 +45,14 @@
 						style="background: #cc0000 !important; color: white !important; width: 118pt;"
 						disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"/>
 
-					<p:commandButton value="Sair"
-						style="background: #cccccc !important; color: black !important; width: 118pt;">
-					</p:commandButton>
+					<p:commandButton value="Sair" 
+					   id="idBtSairVenda"
+					    style="background: #cccccc !important; color: black !important; width: 118pt;"
+						action="#{menuVisao.apresentacao()}"
+						update=":outputPanelConteudo" 
+						immediate="true"
+						disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 2}"
+						/>
 
 				</p:panelGrid>
 			</p:layoutUnit>
@@ -263,7 +268,8 @@
 					          :idFormVenda:idBtCancelarVenda
 					          idBtFinalizarVenda
 					          idBtAdicionarFormaPagamento
-					          :idFormVenda:btVendaConsultar"
+					          :idFormVenda:btVendaConsultar
+					          :idFormVenda:idBtSairVenda"
 				    disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
 					process="@this"
 					style="background: green !important;  color: white !important; width: 118pt;">
