@@ -93,6 +93,8 @@ public class VendaVisao implements Serializable {
 	
 	private Double valorParcela = 0.0;
 	
+	private Double valorTotalParcela = 0.0;
+	
 	@Inject
 	private SituacaoVendaService situacaoVendaService;
 	
@@ -239,11 +241,19 @@ public class VendaVisao implements Serializable {
 	public Double getValorParcela() {
 		return valorParcela;
 	}
-
+	
 	public void setValorParcela(Double valorParcela) {
 		this.valorParcela = valorParcela;
 	}
 	
+	public Double getValorTotalParcela() {
+		return valorTotalParcela;
+	}
+
+	public void setValorTotalParcela(Double valorTotalParcela) {
+		this.valorTotalParcela = valorTotalParcela;
+	}
+
 	public List<VendaFormaPagamento> getVendaFormasPagamento() {
 		return vendaFormasPagamento;
 	}
@@ -261,9 +271,14 @@ public class VendaVisao implements Serializable {
 	}
 
 	public Double getValorTotal() {
+		return valorTotal;
+	}
+	
+	
+	public Double calcularValorTotalItem() {
 		/*Soma valor total da venda*/
 		
-		valorTotal = 0.0;
+		Double valor = 0.0;
 		
 		Iterator<ItemVenda> iteratorItemVenda = venda.getItemVenda().iterator();
 		
@@ -271,12 +286,32 @@ public class VendaVisao implements Serializable {
 			ItemVenda item = iteratorItemVenda.next();
 			/*Soma apenas os não cancelados*/
 			///if(item.getAutorizacao().getCodigoAutorizacao() != 2L) {
-			valorTotal = valorTotal+item.getValorTotal();	
+			valor = valor+item.getValorTotal();	
 			///}
 		}
-		this.setValorParcela(valorTotal);
-		return valorTotal;
+		this.setValorTotal(valor);
+		this.setValorParcela(valor);
+		return valor;
 	}
+	
+	public Double calcularValorTotalParcelaAdicionada() {
+		/*Soma valor total das parcelas da venda*/
+		Double valor = 0.0;
+		
+		Iterator<VendaFormaPagamento> listaVendaFormaPagamentoIterator = venda.getListaVendaFormaPagamento().iterator();
+		
+		while(listaVendaFormaPagamentoIterator.hasNext()) {
+			VendaFormaPagamento item = listaVendaFormaPagamentoIterator.next();
+			valor = valor+item.getValorParcela();
+		}
+		if(valor > 0) {
+			this.setValorTotalParcela(valor);
+		}else {
+			this.setValorTotalParcela(getValorParcela());
+		}
+		return getValorTotalParcela();
+	}
+
 	
 	/* --------------------------------------------------------------------------------------------- */
 
@@ -356,8 +391,10 @@ public class VendaVisao implements Serializable {
    }
 
 	public void consultarProduto(){
-		if(getCodigoBarras().equals(null) || getQuantidade() != null){
+		if(!getCodigoBarras().equals(null) || getQuantidade() != null){
 			adicionarItemVenda(this.produtoService.porCodigoBarra(codigoBarras));
+			/*Atualizar o valor total*/
+			calcularValorTotalItem();
 			/*Limpa dados do formulário*/
 			this.setCodigoBarras(null);
 			this.setQuantidade(null);
@@ -397,10 +434,15 @@ public class VendaVisao implements Serializable {
 	}
 	
 	public void finalizarVenda() {
-		Venda vendaAtualizada = new Venda(); 
-		vendaAtualizada = vendaService.finalizarVenda(this.getVenda()); 
-		if(vendaAtualizada != null) {
-			this.venda = vendaAtualizada;
+		Venda vendaAtualizada = new Venda();
+		
+		if(calcularValorTotalParcelaAdicionada().equals(getValorTotal())) {
+			vendaAtualizada = vendaService.finalizarVenda(this.getVenda());
+			if (vendaAtualizada != null) {
+				this.venda = vendaAtualizada;
+			}
+		}else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info", "Valor total da parcela diferente do valor total da venda!"));
 		}
 	}
 	

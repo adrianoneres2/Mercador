@@ -4,9 +4,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<h:form id="idFormPerfilUsuario">
-		<p:outputPanel id="idPainelPerfilUsuario"
-			rendered="#{autenticadorVisao.logado}" style="margin-left: 5pt;">
-			<div id="divBarraNavegacao">
+			<p:outputPanel id="idPainelPerfilUsuario"
+				rendered="#{autenticadorVisao.logado}" styleClass="divBarraNavegacao">
+
 				<div id="divLeft">
 					<h:graphicImage name="/menu/Home-40.png" library="imagens" />
 				</div>
@@ -29,7 +29,6 @@
 						<h:graphicImage name="/menu/Media-Start-40.png" library="imagens" />
 					</p:commandLink>
 				</div>
-			</div>
-		</p:outputPanel>
+			</p:outputPanel>
 	</h:form>
 </ui:composition>

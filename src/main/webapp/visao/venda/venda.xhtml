@@ -33,7 +33,7 @@
 				<p:panelGrid columns="1" id="idPanelBotoes"
 					styleClass="panelSemBorda">
 					<p:commandButton id="idBtFormaPagamento" value="Forma de Pagamento" type="button"
-						style="background: green !important;  color: white !important; width: 118pt;"
+						styleClass="btFlatVerde"
 						onclick="PF('dlgformaPagamento').show();"
 						update="panelGridModalFormaPagamento
 						        :idFormDlgFormaPagamento:idGrowlVendaDialogFormaPagamento" 
@@ -42,12 +42,12 @@
 
 					<p:commandButton value="Cancelar Venda"
 					  id="idBtCancelarVenda"
-						style="background: #cc0000 !important; color: white !important; width: 118pt;"
+						styleClass="btFlatVermelho"
 						disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"/>
 
 					<p:commandButton value="Sair" 
 					   id="idBtSairVenda"
-					    style="background: #cccccc !important; color: black !important; width: 118pt;"
+					    styleClass="btFlatVermelho"
 						action="#{menuVisao.apresentacao()}"
 						update=":outputPanelConteudo" 
 						immediate="true"
@@ -92,7 +92,9 @@
 									          idFocus
 									          idBtFormaPagamento"
 									disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
-									ajax="true">
+									ajax="true"
+									styleClass="btFlatAzul"
+									style="margin-left: 10px;">
 								</p:commandButton>
 							</p:column>
 
@@ -209,7 +211,7 @@
 
 					<p:column>
 						<p:commandButton id="idBtAdicionarFormaPagamento"
-							style="background: green !important;  color: white !important; width: 50pt;"
+							styleClass="btFlatVerde"
 							value="+"
 							action="#{vendaVisao.adicionaListaVendaFormaPagamento()}"
 							update="idDataTableFormaPagamento
@@ -255,8 +257,8 @@
 
 			<p:panel id="idPanelBotaoEncerrar">
 				<p:commandButton value="Fechar" type="button"
-					style="background: #cccccc !important;  color: black !important;"
-					onclick="PF('dlgformaPagamento').hide();" />
+					onclick="PF('dlgformaPagamento').hide();" 
+					styleClass="btFlatVermelho"/>
 
 				<p:spacer height="5" />
 
@@ -272,7 +274,7 @@
 					          :idFormVenda:idBtSairVenda"
 				    disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
 					process="@this"
-					style="background: green !important;  color: white !important; width: 118pt;">
+					styleClass="btFlatVerde">
 				</p:commandButton>
 			</p:panel>
 		</p:dialog>

@@ -1,6 +1,5 @@
 html, body {
 	/*background-color: #ffffff;*/
-	height: 100%;
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
@@ -10,24 +9,40 @@ html, body {
 	margin: 0px;
 }
 
-a:link 
-{ 
+/*
+@font-face {
+  font-family: "Teko-Medium";
+  src: url("../fonts/Teko/Teko-Medium.ttf");
+}
+
+@font-face {
+  font-family: "DotGothic16-Regular";
+  src: url("../fonts/Teko/DotGothic16-Regular.ttf");
+}
+*/
+
+input{
+  color: black;
+}
+
+a:link { 
  text-decoration:none; 
 } 
 
-a:hover
-{ 
+a:hover{ 
  color: black !important;
 } 
 
 .container {
 	width: 100%;
 	height: 100%;
+	/*
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
 	justify-content: center;
-	/*align-items: center;*/
+	align-items: center;
+	*/
 }
 
 .box_old {
@@ -52,10 +67,10 @@ a:hover
 	/*background-color: #e3e3e3;*/
 }
 
-#divBarraNavegacao {
-	width: 100vw;
+.divBarraNavegacao {
+	width: 100%;
 	height: 35pt;
-	background-color: #000000;
+	background-color: #cc0000;
 	display: flex; /*definimos a propriedade display do container como flex. Essa é a configuração que faz com que, de fato, a div utilize o recurso de layout flexível (Flexbox); */
 	flex-direction: row; /*com a propriedade flex-direction, fazemos com que os itens internos sejam dispostos horizontalmente, ou seja, em forma de linha (row); */
 	justify-content: center; /*configuramos a disposição dos elementos internos como centralizados na direção definida na propriedade anterior, ou seja, os itens ficarão no centro da linha (horizontalmente); */
@@ -71,11 +86,11 @@ a:hover
 #divBarraTopoLogin{
 	width: 392px;
 	height: 40px;
-	background: white; 
+	/*background: white;*/ 
 	display: inline-block;
 	position:absolute; /*Em conjunto com o right*/ 
 	margin-top: -485px;
-	color: red;
+	color: white;
 	display: flex; /*definimos a propriedade display do container como flex. Essa é a configuração que faz com que, de fato, a div utilize o recurso de layout flexível (Flexbox); */
 	flex-direction: row; /*com a propriedade flex-direction, fazemos com que os itens internos sejam dispostos horizontalmente, ou seja, em forma de linha (row); */
 	justify-content: center; /*configuramos a disposição dos elementos internos como centralizados na direção definida na propriedade anterior, ou seja, os itens ficarão no centro da linha (horizontalmente); */
@@ -99,8 +114,9 @@ a:hover
 #divLeft{
 	display: inline-block;
 	position:absolute; /*Em conjunto com o right*/
-	left:0; /*Posiciona a div no canto direito da tela*/ 
+	left:0; /*Posiciona a div no canto esquerdo da tela*/ 
 	top:0; 
+	margin-left: 10px;
 }
 
 #divRight{
@@ -108,6 +124,7 @@ a:hover
 	position:absolute; /*Em conjunto com o right*/ 
 	right:0; /*Posiciona a div no canto direito da tela*/
 	top: 0;
+	margin-right: 10px;
 }
 
 #divBanner {
@@ -201,6 +218,7 @@ a:hover
   	display: flex;
   	align-items: center;
   	justify-content: center;
+  	font-weight: bold;
 }
 .classItemHorizontalMenuProduto:hover{
 	background: #fce94f; 
@@ -217,6 +235,7 @@ a:hover
   	display: flex;
   	align-items: center;
   	justify-content: center;
+  	font-weight: bold;
 }
 .classItemHorizontalMenuVenda:hover{
 	background: #fce94f; 
@@ -233,6 +252,7 @@ a:hover
   	display: flex;
   	align-items: center;
   	justify-content: center;
+  	font-weight: bold;
 }
 .classItemHorizontalMenuUsuario:hover{
 	background: #fce94f; 
@@ -241,21 +261,12 @@ a:hover
 
 
 #divCardPequeno {
-/*
-	left: 50%;
-	top: 50%;
-	*/
 	background: #507701;
 	width: 200px;
 	height: 250px;
 	border: none;
 	color: white;
-	/*background-color: #729fcf;*/
-	/*box-shadow: 5px 5px 12px #888888;*/
-	/*box-shadow: 1px 1px 5px #888888;*/
-	/*margin-left: 5px;*/
-	/*margin-top: 5px;*/
-	/*margin-right: 5px;*/
+	margin-left:0px;
 }
 
 #box {
@@ -372,8 +383,49 @@ thead{
 	position:relative;
 	top:1px;
 }
-
-
+/*  ---FLAT BOTÃO VERDE ------------------- */
+.btFlatVerde{
+	background: green !important;  
+	color: white !important;
+	width: 118pt;
+}
+.btFlatVerde:hover{
+	background: #fce94f !important; 
+	color: black  !important;  
+}
+.btFlatVerde:disabled{
+	background: #888a85!important; 
+	color: white  !important;  
+}
+/*  ---FLAT BOTÃO VERMELHO ------------------- */
+.btFlatVermelho{
+	background: #cc0000 !important;  
+	color: white !important;
+	width: 118pt;
+}
+.btFlatVermelho:hover{
+	background: #fce94f !important; 
+	color: black  !important;  
+}
+.btFlatVermelho:disabled{
+	background: #888a85!important; 
+	color: white  !important;  
+}
+/*  ---FLAT BOTÃO AZUL ------------------- */
+.btFlatAzul{
+	background: #729fcf! important;  
+	color: white !important;
+	width: 118pt;
+}
+.btFlatAzul:hover{
+	background: #fce94f !important; 
+	color: black  !important;  
+}
+.btFlatAzul:disabled{
+	background: #888a85!important; 
+	color: white  !important;  
+}
+/*  --------------------------------------- */
 
 tr td{
 	border: 0px;

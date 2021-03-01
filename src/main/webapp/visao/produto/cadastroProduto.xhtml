@@ -63,14 +63,17 @@
 				<f:facet name="footer">
 					<p:commandButton type="submit" value="Cadastrar"
 						action="#{produtoVisao.novo()}"
-						update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto" />
+						update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto" 
+						styleClass="btFlatVerde"/>
 					<p:commandButton type="submit" value="Consultar"
 						actionListener="#{menuVisao.acessarFuncionalidade('CONSULTAPRODUTO')}"
 						update="idFormCadastroProduto, growlCadastroPruoduto, :outputPanelConteudo"
-						process="@this" />
+						process="@this" 
+						styleClass="btFlatAzul"/>
 					<p:commandButton value="Voltar" type="submit"
 						actionListener="#{menuVisao.apresentacao()}"
-						update="idFormCadastroProduto, :outputPanelConteudo" />
+						update="idFormCadastroProduto, :outputPanelConteudo" 
+						styleClass="btFlatVermelho"/>
 				</f:facet>
 
 			</p:panel>

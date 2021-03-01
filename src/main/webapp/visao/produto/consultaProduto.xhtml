@@ -79,10 +79,12 @@
 				<f:facet name="footer">
 					<p:commandButton value="Consultar"
 						action="#{produtoVisao.consultarProdutoPorNome()}"
-						update=":idFormConsultaProduto" />
+						update=":idFormConsultaProduto" 
+						styleClass="btFlatAzul"/>
 					<p:commandButton value="Voltar" type="submit"
 						action="#{menuVisao.apresentacao()}"
-						update=":idFormConsultaProduto, :outputPanelConteudo" />
+						update=":idFormConsultaProduto, :outputPanelConteudo" 
+						styleClass="btFlatVermelho"/> 
 				</f:facet>
 			</p:panel>
 		</h:form>

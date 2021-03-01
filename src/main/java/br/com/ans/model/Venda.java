@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_venda", schema = "loja")
@@ -62,7 +63,7 @@ public class Venda implements EntidadeBase, Serializable  {
 	private Date dataVenda;
 
 	@Column(name = "dt_venda_finalizada")
-	private Date dataVendaFinalizada;
+	private Date dataVendaFinalizada; 
 	
 	@Override
 	public Long getId() {

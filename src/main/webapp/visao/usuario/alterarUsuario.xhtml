@@ -49,10 +49,12 @@
 				<f:facet name="footer">
 					<p:commandButton type="submit" value="Enviar"
 						action="#{usuarioVisao.alterar()}"
-						update=":idFormAlterarUsuario:idPanelAlterarUsuario growlAlterarUsuario" />
+						update=":idFormAlterarUsuario:idPanelAlterarUsuario growlAlterarUsuario" 
+						styleClass="btFlatVerde"/>
 					<p:commandButton type="submit" value="Sair"
 						action="#{menuVisao.apresentacao()}" 
-						update=":outputPanelConteudo"/>
+						update=":outputPanelConteudo"
+						styleClass="btFlatVermelho"/>
 				</f:facet>
 			</p:panel>
 		</h:form>

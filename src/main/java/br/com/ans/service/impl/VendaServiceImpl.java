@@ -2,6 +2,7 @@ package br.com.ans.service.impl;
 
 
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -33,6 +34,8 @@ public class VendaServiceImpl implements VendaService {
 	private VendaDao vendaDao;
 	
 	private Venda venda;
+	
+	private Double valorTotalParcela = 0.0;
 	
 	@Override
 	public Venda buscarVenda(Usuario usuarioLogado) {
@@ -77,11 +80,14 @@ public class VendaServiceImpl implements VendaService {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "Venda já finalizada!"));
 			return null;			
 		}
+		
 		/*Muda status da venda para finalizada*/
 		venda.setSituacaoVenda(situacaoVendaService.porCodigo(1L));
 		/*Seta data de finalização*/
 		venda.setDataVendaFinalizada(new Date());
 		return vendaDao.finalizarVenda(venda);
+		
+		
 	}
 
 }
