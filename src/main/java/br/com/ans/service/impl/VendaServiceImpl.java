@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import br.com.ans.dao.VendaDao;
+import br.com.ans.model.ItemVenda;
 import br.com.ans.model.Usuario;
 import br.com.ans.model.Venda;
 import br.com.ans.model.VendaFormaPagamento;
@@ -85,9 +86,13 @@ public class VendaServiceImpl implements VendaService {
 		venda.setSituacaoVenda(situacaoVendaService.porCodigo(1L));
 		/*Seta data de finalização*/
 		venda.setDataVendaFinalizada(new Date());
-		return vendaDao.finalizarVenda(venda);
-		
-		
+		return vendaDao.finalizarVenda(venda);	
 	}
+	
+	@Override
+	public ItemVenda adicionarItemVenda(ItemVenda itemVenda){
+		return vendaDao.adicionarItemVenda(itemVenda);
+	}
+	
 
 }

@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.ans.dao.VendaDao;
 import br.com.ans.model.Bandeira;
 import br.com.ans.model.FormaPagamento;
 import br.com.ans.model.ItemVenda;
@@ -275,9 +276,8 @@ public class VendaVisao implements Serializable {
 	}
 	
 	
-	public Double calcularValorTotalItem() {
+	public void calcularValorTotalVenda() {
 		/*Soma valor total da venda*/
-		
 		Double valor = 0.0;
 		
 		Iterator<ItemVenda> iteratorItemVenda = venda.getItemVenda().iterator();
@@ -291,7 +291,6 @@ public class VendaVisao implements Serializable {
 		}
 		this.setValorTotal(valor);
 		this.setValorParcela(valor);
-		return valor;
 	}
 	
 	public Double calcularValorTotalParcelaAdicionada() {
@@ -358,17 +357,6 @@ public class VendaVisao implements Serializable {
 		if(produto != null){
 		  objetoAtualizado = false;
 		  numeroItem++;	
-		  /*Gerar um novo objeto*/	
-		  itemVenda	 = new ItemVenda();
-			
-		  if(itemVenda.getQuantidadeItem() == null ) {
-			  itemVenda.setQuantidadeItem(this.getQuantidade());
-		  }
-			
-		  itemVenda.setNumeroItem(numeroItem);
-		  itemVenda.setValorItem(produto.getValorVenda());
-		  itemVenda.setProduto(produto);
-		  itemVenda.setVenda(this.getVenda());
 
 		  Iterator<ItemVenda> itemVendaIterator = venda.getItemVenda().iterator();
 		  
@@ -380,21 +368,37 @@ public class VendaVisao implements Serializable {
 		            	  item.setValorTotal(item.getQuantidadeItem()*produto.getValorVenda());
 		            	  numeroItem--;
 		            	  objetoAtualizado = true;
-		            	  //itemVendaIterator.remove();
+		      		  	/*Atualiza o item modificado*/
+		      		  	setItemVenda(vendaService.adicionarItemVenda(item));
 		              }
 		          }
+		   /*Se não foi atualizado insere como novo item*/
 		  	if(objetoAtualizado == false){
+				  /*Gerar um novo objeto*/	
+				  itemVenda	 = new ItemVenda();
+					
+				  if(itemVenda.getQuantidadeItem() == null ) {
+					  itemVenda.setQuantidadeItem(this.getQuantidade());
+				  }
+					
+				  itemVenda.setNumeroItem(numeroItem);
+				  itemVenda.setValorItem(produto.getValorVenda());
+				  itemVenda.setProduto(produto);
+				  itemVenda.setVenda(this.getVenda());
+		  		
 			  	itemVenda.setValorTotal(itemVenda.getQuantidadeItem()*produto.getValorVenda());
 			  	this.venda.getItemVenda().add(itemVenda);
-		  	}  	
+			  	/*Insere um novo item*/
+			  	setItemVenda(vendaService.adicionarItemVenda(itemVenda));
+		  	}
+			/*Atualizar o valor total*/
+			calcularValorTotalVenda();
 	  }
    }
 
 	public void consultarProduto(){
 		if(!getCodigoBarras().equals(null) || getQuantidade() != null){
 			adicionarItemVenda(this.produtoService.porCodigoBarra(codigoBarras));
-			/*Atualizar o valor total*/
-			calcularValorTotalItem();
 			/*Limpa dados do formulário*/
 			this.setCodigoBarras(null);
 			this.setQuantidade(null);
@@ -454,7 +458,9 @@ public class VendaVisao implements Serializable {
 			setVenda(venda);
 		}else {
 			menuVisao.apresentacao();
-		}		
+		}
+		/*Atualizar o valor total atual*/
+		calcularValorTotalVenda();
 	}
 	
 }

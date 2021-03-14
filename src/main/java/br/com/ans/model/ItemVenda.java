@@ -133,7 +133,7 @@ public class ItemVenda implements EntidadeBase, Serializable {
 	}
 
 	public Double getValorTotal() {
-		return valorTotal;
+		return getQuantidadeItem()*getValorItem();
 	}
 
 	public void setValorTotal(Double valorTotal) {

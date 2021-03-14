@@ -9,13 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.ans.dao.VendaDao;
-import br.com.ans.model.FormaPagamento;
 import br.com.ans.model.ItemVenda;
-import br.com.ans.model.SituacaoVenda;
 import br.com.ans.model.Usuario;
 import br.com.ans.model.Venda;
 import br.com.ans.model.VendaFormaPagamento;
-import br.com.ans.service.SituacaoVendaService;
 
 @RequestScoped
 public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
@@ -83,22 +80,37 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 		}
 		return venda;
 	}
+
+	@Override
+	public ItemVenda adicionarItemVenda(ItemVenda itemVenda){
+		entityManager.getTransaction().begin();	
+		try {
+			/* Persiste itens da venda */
+			//itemVenda = buscaItemVendaPorProduto(itemVenda);
+			if(itemVenda.getCodigoItemVenda() == null) {
+				entityManager.persist(itemVenda);
+			}else {
+				entityManager.merge(itemVenda);
+			}
+			
+			entityManager.getTransaction().commit();
+				
+			} catch (Exception e) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao tentar atualizar o item!"));
+				//entityManager.getTransaction().rollback();
+				e.printStackTrace();
+				return null;
+			}
+		return itemVenda;
+	}
 	
 	@Override
 	public Venda finalizarVenda(Venda venda) {
 
 		entityManager.getTransaction().begin();
 
-		try {
-			/* Persiste itens da venda */
-			for (ItemVenda itemVenda : venda.getListaItemVenda()) {
-				if (itemVenda.getId() == null) {
-					entityManager.persist(itemVenda);
-				} else {
-					itemVenda = entityManager.merge(itemVenda);
-				}
-			}
-
+		try {	
 			/* Persiste formas de pagamento */
 			for (VendaFormaPagamento vendaFormaPagamento : venda.getListaVendaFormaPagamento()) {
 				if (vendaFormaPagamento.getId() == null) {
@@ -121,6 +133,61 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 			return null;
 		}
 		return venda;
+	}
+
+	@Override
+	public ItemVenda buscaItemVendaPorVenda(Venda venda) {
+	
+		/* Retorna a venda quando a situação for "(2) Em aberto" para um determinado usuário.*/
+		String hql = "select itemVenda from ItemVenda as itemVenda " 
+				+ " where 1=1"
+				+ " and itemVenda.venda.codigoVenda = :codigoVenda";
+		try {
+
+			Query query = entityManager.createQuery(hql);
+			query.setParameter("codigoVenda", venda.getCodigoVenda());
+
+			if (!query.getResultList().isEmpty()) {
+				ItemVenda itemVenda = (ItemVenda) query.getResultList().get(0);
+				return itemVenda;
+			} else {
+				return null;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro interno ao tentar recupearar o item do produto!"));
+			return null;
+		}
+	}
+
+	@Override
+	public ItemVenda buscaItemVendaPorProduto(ItemVenda produtoItemVenda) {
+	
+		/* Retorna a venda quando a situação for "(2) Em aberto" para um determinado usuário.*/
+		String hql = "select itemVenda from ItemVenda as itemVenda " 
+				+ " where 1=1"
+				+ " and itemVenda.venda.codigoVenda = :codigoVenda"
+		        + " and itemVenda.produto.codigoProduto = :codigoProduto"
+		        + " order by itemVenda.venda.codigoVenda, itemVenda.codigoItemVenda ";
+		try {
+
+			Query query = entityManager.createQuery(hql);
+			query.setParameter("codigoVenda", produtoItemVenda.getVenda().getCodigoVenda());
+			query.setParameter("codigoProduto", produtoItemVenda.getProduto().getCodigoProduto());
+
+			if (!query.getResultList().isEmpty()) {
+				ItemVenda itemVenda = (ItemVenda) query.getResultList().get(0);
+				return itemVenda;
+			} else {
+				return produtoItemVenda;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro interno ao tentar recupearar o item do produto!"));
+			return null;
+		}
 	}
 	
 }

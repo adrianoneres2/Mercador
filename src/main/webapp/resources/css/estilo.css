@@ -328,6 +328,10 @@ a:hover{
 	height: 100%; /* hack para IE6 que trata height como min-height */
 }
 
+#divGridItemVenda {
+	width: 100%;
+}
+
 #divMensagens {
 	position: absolute;
 	top: 50%;

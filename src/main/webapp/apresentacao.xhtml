@@ -95,11 +95,19 @@
 							</p:commandLink>
 
 							<p:commandLink
+							    value="Alterar Senha"
+								action="#{menuVisao.acessarFuncionalidade('GERENCIARPERFIL')}"
+								update=":outputPanelConteudo idFormMenu" style="color:white"
+								styleClass="classItemHorizontalMenuUsuario">
+							</p:commandLink>
+
+							<p:commandLink
 							    value="Gerenciar Perfil"
 								action="#{menuVisao.acessarFuncionalidade('GERENCIARPERFIL')}"
 								update=":outputPanelConteudo idFormMenu" style="color:white"
 								styleClass="classItemHorizontalMenuUsuario">
 							</p:commandLink>
+							
 					</div>
 				</div>
 			</div>

@@ -59,7 +59,7 @@
 
 			<p:layoutUnit position="center">
 				<p:panel id="idPanelVenda">
-					<h:panelGrid id="idPanelGridPrincipalVenda" columns="9">
+					<h:panelGrid id="idPanelGridPrincipalVenda" columns="8">
 
 						<p:row>
 							<p:column>
@@ -109,9 +109,10 @@
 					</h:panelGrid>
 
 					<p:spacer />
+					<div id = "divGridItemVenda">
 					<p:dataTable id="dataTableProduto" var="itemVenda"
 						value="#{vendaVisao.venda.itemVenda}" lazy="true"
-						paginator="false" scrollable="true">
+						paginator="false">
 
 						<p:column headerText="Item">
 							<h:outputText value="#{itemVenda.numeroItem}" />
@@ -149,6 +150,7 @@
 						</p:column>
 
 					</p:dataTable>
+					</div>
 				</p:panel>
 			</p:layoutUnit>
 		</p:layout>

@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.ans.model.EntidadeBase;
+import br.com.ans.model.ItemVenda;
 
 public class GenericoDaoImpl<T extends EntidadeBase>{
 	  /**
@@ -77,5 +78,5 @@ public class GenericoDaoImpl<T extends EntidadeBase>{
 	     // entityManager.close();
 	    }
 	    return t;
-	  }  
+	  }
 }
