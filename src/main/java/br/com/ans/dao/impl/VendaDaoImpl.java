@@ -82,11 +82,10 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 	}
 
 	@Override
-	public ItemVenda adicionarItemVenda(ItemVenda itemVenda){
+	public ItemVenda atualizarItemVenda(ItemVenda itemVenda){
 		entityManager.getTransaction().begin();	
 		try {
-			/* Persiste itens da venda */
-			//itemVenda = buscaItemVendaPorProduto(itemVenda);
+			/* Persiste itenm da venda */
 			if(itemVenda.getCodigoItemVenda() == null) {
 				entityManager.persist(itemVenda);
 			}else {
@@ -97,8 +96,8 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 				
 			} catch (Exception e) {
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao tentar atualizar o item!"));
-				//entityManager.getTransaction().rollback();
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao tentar inserir ou  atualizar o item!"));
+				entityManager.getTransaction().rollback();
 				e.printStackTrace();
 				return null;
 			}
@@ -133,32 +132,6 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 			return null;
 		}
 		return venda;
-	}
-
-	@Override
-	public ItemVenda buscaItemVendaPorVenda(Venda venda) {
-	
-		/* Retorna a venda quando a situação for "(2) Em aberto" para um determinado usuário.*/
-		String hql = "select itemVenda from ItemVenda as itemVenda " 
-				+ " where 1=1"
-				+ " and itemVenda.venda.codigoVenda = :codigoVenda";
-		try {
-
-			Query query = entityManager.createQuery(hql);
-			query.setParameter("codigoVenda", venda.getCodigoVenda());
-
-			if (!query.getResultList().isEmpty()) {
-				ItemVenda itemVenda = (ItemVenda) query.getResultList().get(0);
-				return itemVenda;
-			} else {
-				return null;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro interno ao tentar recupearar o item do produto!"));
-			return null;
-		}
 	}
 
 	@Override

@@ -20,39 +20,34 @@
 
 					<p:outputLabel value="Código do Caixa: " />
 					<p:inputText disabled="true"
-						value="#{vendaVisao.venda.caixa.codigoCaixa}" style=" width: 111pt;" />
+						value="#{vendaVisao.venda.caixa.codigoCaixa}"
+						style=" width: 111pt;" />
 
 
 					<p:outputLabel value="Código da Venda :" />
-					<p:inputText disabled="true"
-					    id="idCodigoVenda"
+					<p:inputText disabled="true" id="idCodigoVenda"
 						value="#{vendaVisao.venda.codigoVenda}" style=" width: 111pt;" />
 
 				</p:panelGrid>
 
 				<p:panelGrid columns="1" id="idPanelBotoes"
 					styleClass="panelSemBorda">
-					<p:commandButton id="idBtFormaPagamento" value="Forma de Pagamento" type="button"
-						styleClass="btFlatVerde"
+					<p:commandButton id="idBtFormaPagamento" value="Forma de Pagamento"
+						type="button" styleClass="btFlatVerde"
 						onclick="PF('dlgformaPagamento').show();"
 						update="panelGridModalFormaPagamento
-						        :idFormDlgFormaPagamento:idGrowlVendaDialogFormaPagamento" 
+						        :idFormDlgFormaPagamento:idGrowlVendaDialogFormaPagamento"
 						disabled="#{vendaVisao.valorTotal eq 0 || vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
-						process="@this"/>
+						process="@this" />
 
-					<p:commandButton value="Cancelar Venda"
-					  id="idBtCancelarVenda"
+					<p:commandButton value="Cancelar Venda" id="idBtCancelarVenda"
 						styleClass="btFlatVermelho"
-						disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"/>
+						disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}" />
 
-					<p:commandButton value="Sair" 
-					   id="idBtSairVenda"
-					    styleClass="btFlatVermelho"
-						action="#{menuVisao.apresentacao()}"
-						update=":outputPanelConteudo" 
-						immediate="true"
-						disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 2}"
-						/>
+					<p:commandButton value="Sair" id="idBtSairVenda"
+						styleClass="btFlatVermelho" action="#{menuVisao.apresentacao()}"
+						update=":outputPanelConteudo" immediate="true"
+						disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 2}" />
 
 				</p:panelGrid>
 			</p:layoutUnit>
@@ -67,8 +62,8 @@
 								<p:focus id="idFocus" for="idInputCodigoBarras" />
 								<p:inputText id="idInputCodigoBarras"
 									value="#{vendaVisao.codigoBarras}" label="labelVendaProduto"
-									required="true" requiredMessage="Campo produto obrigarório!" 
-									maxlength="500"/>
+									required="true" requiredMessage="Campo produto obrigarório!"
+									maxlength="500" />
 
 								<p:outputLabel id="labelQuantidadeProduto" value="Quantidade "
 									style="margin-left: 10pt;" />
@@ -78,8 +73,7 @@
 									required="true" requiredMessage="Campo quantidade obrigarório!"
 									onfocus="true"
 									onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;"
-									converterMessage="Digite um número inteiro" 
-									maxlength="4"/>
+									converterMessage="Digite um número inteiro" maxlength="4" />
 
 								<p:commandButton id="btVendaConsultar" value="Consultar"
 									action="#{vendaVisao.consultarProduto()}"
@@ -92,9 +86,7 @@
 									          idFocus
 									          idBtFormaPagamento"
 									disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
-									ajax="true"
-									styleClass="btFlatAzul"
-									style="margin-left: 10px;">
+									ajax="true" styleClass="btFlatAzul" style="margin-left: 10px;">
 								</p:commandButton>
 							</p:column>
 
@@ -109,47 +101,58 @@
 					</h:panelGrid>
 
 					<p:spacer />
-					<div id = "divGridItemVenda">
-					<p:dataTable id="dataTableProduto" var="itemVenda"
-						value="#{vendaVisao.venda.itemVenda}" lazy="true"
-						paginator="false">
+					<div id="divGridItemVenda">
+						<p:dataTable id="dataTableProduto" var="itemVenda"
+							value="#{vendaVisao.venda.itemVenda}" lazy="true"
+							paginator="false">
 
-						<p:column headerText="Item">
-							<h:outputText value="#{itemVenda.numeroItem}" />
-						</p:column>
+							<p:column headerText="Item">
+								<h:outputText value="#{itemVenda.numeroItem}" />
+							</p:column>
 
-						<p:column headerText="Código">
-							<h:outputText value="#{itemVenda.produto.codigoProduto}" />
-						</p:column>
+							<p:column headerText="Código">
+								<h:outputText value="#{itemVenda.produto.codigoProduto}" />
+							</p:column>
 
-						<p:column headerText="Nome">
-							<h:outputText value="#{itemVenda.produto.nomeProduto}" />
-						</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{itemVenda.produto.nomeProduto}" />
+							</p:column>
 
-						<p:column headerText="Quantidade">
-							<h:outputText value="#{itemVenda.quantidadeItem}" />
-						</p:column>
+							<p:column headerText="Quantidade">
+								<h:outputText value="#{itemVenda.quantidadeItem}" />
+							</p:column>
 
-						<p:column headerText="Valor">
-							<h:outputText value="#{itemVenda.valorItem}">
-								<f:convertNumber type="currency" />
-							</h:outputText>
-						</p:column>
+							<p:column headerText="Valor">
+								<h:outputText value="#{itemVenda.valorItem}">
+									<f:convertNumber type="currency" />
+								</h:outputText>
+							</p:column>
 
-						<p:column headerText="Total">
-							<h:outputText value="#{itemVenda.valorTotal}">
-								<f:convertNumber type="currency" />
-							</h:outputText>
-						</p:column>
+							<p:column headerText="Total">
+								<h:outputText value="#{itemVenda.valorTotal}">
+									<f:convertNumber type="currency" />
+								</h:outputText>
+							</p:column>
 
-						<p:column headerText="Ações">
-							<p:commandLink>
-								<p:graphicImage library="imagens" name="excluido.png" />
-								<p:graphicImage library="imagens" name="excluido.png" />
-							</p:commandLink>
-						</p:column>
+							<p:column headerText="Ações">
+								<p:commandLink action="#{vendaVisao.abrirJanelaAutorizacao()}"
+									process="@this">
+									<p:graphicImage library="imagens" name="excluir.png"
+										alt="Excluir item" />
+								</p:commandLink>
 
-					</p:dataTable>
+								<p:commandLink style="margin-left: 8pt;">
+									<p:graphicImage library="imagens" name="editar.png"
+										alt="Alterar quantidade" />
+								</p:commandLink>
+
+								<p:commandLink style="margin-left: 8pt;">
+									<p:graphicImage library="imagens" name="money.png"
+										alt="Desconto" />
+								</p:commandLink>
+							</p:column>
+
+						</p:dataTable>
 					</div>
 				</p:panel>
 			</p:layoutUnit>
@@ -160,7 +163,7 @@
 			escape="true" closable="true" styleClass="messages" />
 
 		<p:dialog header="Forma de Pagamento" id="idDglFormaPagamento"
-			widgetVar="dlgformaPagamento" modal="false" height="350" width="850"
+			widgetVar="dlgformaPagamento" modal="false" height="350" width="999"
 			draggable="true" resizable="true">
 			<!-- Usar o appendTo="@(body)" deu certo para a modal escondida mas deu problema nas combos de forma de pagamento que enviavam valores null -->
 			<p:panelGrid id="panelGridModalFormaPagamento"
@@ -213,14 +216,21 @@
 
 					<p:column>
 						<p:commandButton id="idBtAdicionarFormaPagamento"
-							styleClass="btFlatVerde"
-							value="+"
+							styleClass="btFlatVerde" value="+"
 							action="#{vendaVisao.adicionaListaVendaFormaPagamento()}"
 							update="idDataTableFormaPagamento
-							        idGrowlVendaDialogFormaPagamento"
+							        idGrowlVendaDialogFormaPagamento
+							        idLabelConfereValorParcela"
 							disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
 							process="@form" ajax="true">
 						</p:commandButton>
+					</p:column>
+
+					<p:column>
+						<!-- 					    <h:outputLabel value="#{vendaVisao.getConfereValorParcela() eq 0 ?'Ainda restam: ':'Ultrapassou em: ' }" id="idLabelTextoConfereValorParcela"  style="color: red; size: 30pt"/> -->
+						<h:outputLabel
+							value="#{vendaVisao.getStringConfereValorParcela()}"
+							id="idLabelConfereValorParcela" style="color: red; size: 30pt" />
 					</p:column>
 
 				</p:row>
@@ -251,7 +261,12 @@
 				</p:column>
 
 				<p:column headerText="Ações" width="2">
-					<h:outputText value="" />
+					<p:commandLink
+						actionListener="#{vendaVisao.removeVendaFormaPagamentoLista(vendaFormaPagamento)}"
+						update="idDataTableFormaPagamento
+					          :idFormDlgFormaPagamento:idLabelConfereValorParcela">
+						<p:graphicImage library="imagens" name="excluido.png" />
+					</p:commandLink>
 				</p:column>
 
 			</p:dataTable>
@@ -259,24 +274,23 @@
 
 			<p:panel id="idPanelBotaoEncerrar">
 				<p:commandButton value="Fechar" type="button"
-					onclick="PF('dlgformaPagamento').hide();" 
-					styleClass="btFlatVermelho"/>
+					onclick="PF('dlgformaPagamento').hide();"
+					styleClass="btFlatVermelho" />
 
 				<p:spacer height="5" />
 
-				<p:commandButton value="Finalizar Venda"
-				    id="idBtFinalizarVenda"
+				<p:commandButton value="Finalizar Venda" id="idBtFinalizarVenda"
 					action="#{vendaVisao.finalizarVenda()}"
-					update = "idGrowlVendaDialogFormaPagamento
+					update="idGrowlVendaDialogFormaPagamento
 					          :idFormVenda:idBtFormaPagamento
 					          :idFormVenda:idBtCancelarVenda
 					          idBtFinalizarVenda
 					          idBtAdicionarFormaPagamento
 					          :idFormVenda:btVendaConsultar
-					          :idFormVenda:idBtSairVenda"
-				    disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
-					process="@this"
-					styleClass="btFlatVerde">
+					          :idFormVenda:idBtSairVenda
+					          idLabelConfereValorParcela"
+					disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
+					process="@this" styleClass="btFlatVerde">
 				</p:commandButton>
 			</p:panel>
 		</p:dialog>

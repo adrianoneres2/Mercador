@@ -10,4 +10,5 @@ public interface VendaService {
 	public Venda atualizar(Venda venda);
 	public Venda finalizarVenda(Venda venda);
 	public ItemVenda adicionarItemVenda(ItemVenda itemVenda);
+	public ItemVenda cancelarItemVenda(ItemVenda itemVenda);
 }

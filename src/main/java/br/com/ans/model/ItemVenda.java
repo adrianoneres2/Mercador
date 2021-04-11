@@ -57,8 +57,8 @@ public class ItemVenda implements EntidadeBase, Serializable {
 	private Usuario usuarioAutorizador;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_autorizacao")
-	private Autorizacao autorizacao;
+	@JoinColumn(name = "id_situacao_item")
+	private SituacaoItem situacaoItem;
 
 	@Override
 	public Long getId() {
@@ -121,17 +121,6 @@ public class ItemVenda implements EntidadeBase, Serializable {
 		this.usuarioAutorizador = usuarioAutorizador;
 	}
 
-	public Autorizacao getAutorizacao() {
-		if(autorizacao == null) {
-			return new Autorizacao();
-		}
-		return autorizacao;
-	}
-
-	public void setAutorizacao(Autorizacao autorizacao) {
-		this.autorizacao = autorizacao;
-	}
-
 	public Double getValorTotal() {
 		return getQuantidadeItem()*getValorItem();
 	}
@@ -147,16 +136,25 @@ public class ItemVenda implements EntidadeBase, Serializable {
 	public void setNumeroItem(Long numeroItem) {
 		this.numeroItem = numeroItem;
 	}
+	
+
+	public SituacaoItem getSituacaoItem() {
+		return situacaoItem;
+	}
+
+	public void setSituacaoItem(SituacaoItem situacaoItem) {
+		this.situacaoItem = situacaoItem;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((autorizacao == null) ? 0 : autorizacao.hashCode());
 		result = prime * result + ((codigoItemVenda == null) ? 0 : codigoItemVenda.hashCode());
 		result = prime * result + ((numeroItem == null) ? 0 : numeroItem.hashCode());
 		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
 		result = prime * result + ((quantidadeItem == null) ? 0 : quantidadeItem.hashCode());
+		result = prime * result + ((situacaoItem == null) ? 0 : situacaoItem.hashCode());
 		result = prime * result + ((usuarioAutorizador == null) ? 0 : usuarioAutorizador.hashCode());
 		result = prime * result + ((valorDesconto == null) ? 0 : valorDesconto.hashCode());
 		result = prime * result + ((valorItem == null) ? 0 : valorItem.hashCode());
@@ -174,11 +172,6 @@ public class ItemVenda implements EntidadeBase, Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemVenda other = (ItemVenda) obj;
-		if (autorizacao == null) {
-			if (other.autorizacao != null)
-				return false;
-		} else if (!autorizacao.equals(other.autorizacao))
-			return false;
 		if (codigoItemVenda == null) {
 			if (other.codigoItemVenda != null)
 				return false;
@@ -198,6 +191,11 @@ public class ItemVenda implements EntidadeBase, Serializable {
 			if (other.quantidadeItem != null)
 				return false;
 		} else if (!quantidadeItem.equals(other.quantidadeItem))
+			return false;
+		if (situacaoItem == null) {
+			if (other.situacaoItem != null)
+				return false;
+		} else if (!situacaoItem.equals(other.situacaoItem))
 			return false;
 		if (usuarioAutorizador == null) {
 			if (other.usuarioAutorizador != null)
@@ -226,4 +224,5 @@ public class ItemVenda implements EntidadeBase, Serializable {
 			return false;
 		return true;
 	}
+	
 }

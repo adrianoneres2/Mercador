@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/visao/templates/modal.xhtml">
+
+	<ui:define name="conteudoModal">
+		<h:form id="idFormAutorizacao">
+  		<p:growl id="growlAutorizacao" showDetail="true" escape="true" closable="true" />
+			<p:panel id="idPanelAutorizacao">
+				<h:outputLabel value="Informe o usuário e senha para autorização." />
+				<h:panelGrid id="idPanelGridAutorizacao" border="0" columns="3"
+					cellpadding="1" cellspacing="1">
+					<br />
+					<p:column>
+						<p:outputLabel id="labelEmail" value="E-mail " />
+					</p:column>
+					<p:column>
+						<p:inputText id="inputEmailAutorizacao"
+							value="#{caixaVisao.usuarioAutorizador.email}" />
+					</p:column>
+					<br />
+					<p:column>
+						<p:outputLabel id="labelSenha" value="Senha " />
+					</p:column>
+					<p:column>
+						<p:inputText id="inputSenha"
+							value="#{caixaVisao.usuarioAutorizador.senha}" />
+					</p:column>
+				</h:panelGrid>
+				<f:facet name="footer">
+					<p:commandButton value="Autorizar" type="submit"
+						action="#{caixaVisao.abrirCaixa()}"
+						update=":idFormAutorizacao:idPanelAutorizacao growlAutorizacao" 
+						styleClass="btFlatVerde"/>
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

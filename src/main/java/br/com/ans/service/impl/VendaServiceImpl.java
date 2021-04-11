@@ -2,7 +2,6 @@ package br.com.ans.service.impl;
 
 
 import java.util.Date;
-import java.util.Iterator;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -11,9 +10,9 @@ import javax.inject.Inject;
 
 import br.com.ans.dao.VendaDao;
 import br.com.ans.model.ItemVenda;
+import br.com.ans.model.SituacaoItem;
 import br.com.ans.model.Usuario;
 import br.com.ans.model.Venda;
-import br.com.ans.model.VendaFormaPagamento;
 import br.com.ans.service.CaixaService;
 import br.com.ans.service.SituacaoVendaService;
 import br.com.ans.service.TipoVendaService;
@@ -36,8 +35,6 @@ public class VendaServiceImpl implements VendaService {
 	
 	private Venda venda;
 	
-	private Double valorTotalParcela = 0.0;
-	
 	@Override
 	public Venda buscarVenda(Usuario usuarioLogado) {
 		venda = vendaDao.buscarVenda(usuarioLogado);
@@ -58,6 +55,7 @@ public class VendaServiceImpl implements VendaService {
 	
 	@Override
 	public Venda atualizar(Venda venda) {
+		/*Atualiza venda. Por exemplo: Concluído,  Cancelado etc...*/
 		return vendaDao.atualizar(venda);
 	}
 	
@@ -91,8 +89,16 @@ public class VendaServiceImpl implements VendaService {
 	
 	@Override
 	public ItemVenda adicionarItemVenda(ItemVenda itemVenda){
-		return vendaDao.adicionarItemVenda(itemVenda);
+		return vendaDao.atualizarItemVenda(itemVenda);
 	}
-	
+
+	@Override
+	public ItemVenda cancelarItemVenda(ItemVenda itemVenda) {
+		SituacaoItem situacaoItem = new SituacaoItem();
+		/*Seta situação como cancelado*/
+		situacaoItem.setCodigoSituacaoItem(2L);
+		itemVenda.setSituacaoItem(situacaoItem);
+		return vendaDao.atualizarItemVenda(itemVenda);
+	}
 
 }

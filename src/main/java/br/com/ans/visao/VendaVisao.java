@@ -1,11 +1,11 @@
 package br.com.ans.visao;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -13,7 +13,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.ans.dao.VendaDao;
 import br.com.ans.model.Bandeira;
 import br.com.ans.model.FormaPagamento;
 import br.com.ans.model.ItemVenda;
@@ -437,6 +436,10 @@ public class VendaVisao implements Serializable {
 		}
 	}
 	
+	public void removeVendaFormaPagamentoLista(VendaFormaPagamento vendaFormaPagamento){
+		this.venda.getListaVendaFormaPagamento().remove(vendaFormaPagamento);
+	}
+	
 	public void finalizarVenda() {
 		Venda vendaAtualizada = new Venda();
 		
@@ -444,12 +447,34 @@ public class VendaVisao implements Serializable {
 			vendaAtualizada = vendaService.finalizarVenda(this.getVenda());
 			if (vendaAtualizada != null) {
 				this.venda = vendaAtualizada;
+				setValorParcela(0.0);
+				setValorTotalParcela(0.0);
 			}
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info", "Valor total da parcela diferente do valor total da venda!"));
 		}
+	}		
+	
+	public Double getConfereValorParcela() {
+		if(getValorTotalParcela().equals(0.0) || getValorTotalParcela().equals(getValorTotal())) {
+			return getValorTotalParcela();
+		}
+		//DecimalFormat df = new DecimalFormat("###########.##");
+		//return Double.valueOf(df.format(getValorTotal()-getValorTotalParcela()));
+		return getValorTotal()-getValorTotalParcela();
 	}
 	
+	public String getStringConfereValorParcela() {
+		Double valorParcela = getConfereValorParcela();
+		if(valorParcela < 0) {
+			return "Ultrapassou o valor em R$ "+(valorParcela*(-1));
+		}
+		
+		if(valorParcela > 0){
+			return "Ainda faltam R$ "+valorParcela;
+		}
+		return null;
+	}
 	
 	public void novaVenda() {
 		Venda venda = new Venda();
@@ -461,6 +486,11 @@ public class VendaVisao implements Serializable {
 		}
 		/*Atualizar o valor total atual*/
 		calcularValorTotalVenda();
+	}
+	
+	public void abrirJanelaAutorizacao() {
+		Janela janela = new Janela();
+		janela.abrirJanela2(true, true, true, 400, 200, FuncionalidadeEnum.ABRIRCAIXA.getUrl());
 	}
 	
 }
