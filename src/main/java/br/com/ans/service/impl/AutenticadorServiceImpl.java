@@ -19,7 +19,7 @@ public class AutenticadorServiceImpl implements AutenticadorService {
 	public Usuario validarLogin(Usuario usuario) {
 		
 		if (usuario == null){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Parâmetros inválidos!."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Informar todos os dados obrigatórios!."));
 			return null;
 		}
 			if(!usuario.getEmail().trim().isEmpty() && !usuario.getSenha().trim().isEmpty()){
@@ -46,5 +46,13 @@ public class AutenticadorServiceImpl implements AutenticadorService {
 	public Usuario logar(String email, String senha){
 		//UsuarioDao usuarioDao = new UsuarioDao();
 		return autenticadorDao.validarUsuarioLogin(email, senha);
+	}
+	
+	@Override
+	public Boolean autorizar(Usuario usuarioAutirizador) {
+		if (validarLogin(usuarioAutirizador)!= null) {
+			return true;
+		}
+		return false;
 	}
 }

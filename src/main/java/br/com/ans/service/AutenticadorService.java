@@ -6,4 +6,5 @@ public interface AutenticadorService {
 
 	public Usuario logar(String email, String senha);
 	public Usuario validarLogin(Usuario usuario);
+	Boolean autorizar(Usuario usuarioAutirizador);
 }

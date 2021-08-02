@@ -13,10 +13,12 @@ import br.com.ans.model.ItemVenda;
 import br.com.ans.model.SituacaoItem;
 import br.com.ans.model.Usuario;
 import br.com.ans.model.Venda;
+import br.com.ans.service.AutenticadorService;
 import br.com.ans.service.CaixaService;
 import br.com.ans.service.SituacaoVendaService;
 import br.com.ans.service.TipoVendaService;
 import br.com.ans.service.VendaService;
+import enumerations.FuncionalidadeEnum;
 
 @RequestScoped
 public class VendaServiceImpl implements VendaService {
@@ -24,6 +26,12 @@ public class VendaServiceImpl implements VendaService {
 	@Inject
 	private SituacaoVendaService situacaoVendaService;
 
+	@Inject
+	private AutenticadorService autenticadorService;
+	
+	@Inject
+	private PerfilFuncionalidadeServiceImpl perfilFuncionalidadeServiceImpl;
+	
 	@Inject
 	private CaixaService caixaService;
 	
@@ -93,12 +101,16 @@ public class VendaServiceImpl implements VendaService {
 	}
 
 	@Override
-	public ItemVenda cancelarItemVenda(ItemVenda itemVenda) {
+	public ItemVenda cancelarItemVenda(ItemVenda itemVenda, Usuario usuarioAutorizador) {
 		SituacaoItem situacaoItem = new SituacaoItem();
-		/*Seta situação como cancelado*/
-		situacaoItem.setCodigoSituacaoItem(2L);
-		itemVenda.setSituacaoItem(situacaoItem);
-		return vendaDao.atualizarItemVenda(itemVenda);
+		/*Valida se o usuário consegue autenticar e se tem perfil para excluir item da venda*/
+		if(autenticadorService.autorizar(usuarioAutorizador) && perfilFuncionalidadeServiceImpl.perfilFuncionalidade(usuarioAutorizador.getPerfil().getCodigoPerfil(), (long) FuncionalidadeEnum.EXCLUIRITEMVENDA.getCodigo())){
+			/*Seta situação como cancelado*/
+			situacaoItem.setCodigoSituacaoItem(2L);
+			itemVenda.setSituacaoItem(situacaoItem);
+			return vendaDao.atualizarItemVenda(itemVenda);
+		}
+		return null;
 	}
 
 }

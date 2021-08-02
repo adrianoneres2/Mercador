@@ -1,7 +1,6 @@
 package br.com.ans.visao;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,6 +39,8 @@ public class VendaVisao implements Serializable {
 	//private Caixa caixa;
 
 	private Usuario usuarioCliente;
+	
+	private Usuario usuarioAutorizador;
 
 	@Inject
 	MenuVisao menuVisao;
@@ -274,7 +275,14 @@ public class VendaVisao implements Serializable {
 		return valorTotal;
 	}
 	
-	
+	public Usuario getUsuarioAutorizador() {
+		return usuarioAutorizador;
+	}
+
+	public void setUsuarioAutorizador(Usuario usuarioAutorizador) {
+		this.usuarioAutorizador = usuarioAutorizador;
+	}
+
 	public void calcularValorTotalVenda() {
 		/*Soma valor total da venda*/
 		Double valor = 0.0;
@@ -491,6 +499,10 @@ public class VendaVisao implements Serializable {
 	public void abrirJanelaAutorizacao() {
 		Janela janela = new Janela();
 		janela.abrirJanela2(true, true, true, 400, 200, FuncionalidadeEnum.ABRIRCAIXA.getUrl());
+	}
+	
+	public void removeItemVenda(ItemVenda itemVenda){
+		vendaService.cancelarItemVenda(itemVenda, usuarioAutorizador);
 	}
 	
 }

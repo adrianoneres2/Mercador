@@ -88,6 +88,8 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 			/* Persiste itenm da venda */
 			if(itemVenda.getCodigoItemVenda() == null) {
 				entityManager.persist(itemVenda);
+			}else if(itemVenda.getCodigoItemVenda() != null && itemVenda.getSituacaoItem().getCodigoSituacaoItem() == 2L){
+				entityManager.remove(itemVenda);
 			}else {
 				entityManager.merge(itemVenda);
 			}

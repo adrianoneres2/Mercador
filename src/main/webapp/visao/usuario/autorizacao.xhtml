@@ -18,7 +18,7 @@
 					</p:column>
 					<p:column>
 						<p:inputText id="inputEmailAutorizacao"
-							value="#{caixaVisao.usuarioAutorizador.email}" />
+							value="#{vendaVisao.usuarioAutorizador.email}" />
 					</p:column>
 					<br />
 					<p:column>
@@ -26,12 +26,12 @@
 					</p:column>
 					<p:column>
 						<p:inputText id="inputSenha"
-							value="#{caixaVisao.usuarioAutorizador.senha}" />
+							value="#{vendaVisao.usuarioAutorizador.senha}" />
 					</p:column>
 				</h:panelGrid>
 				<f:facet name="footer">
 					<p:commandButton value="Autorizar" type="submit"
-						action="#{caixaVisao.abrirCaixa()}"
+						action="#{vendaVisao.abrirCaixa()}"
 						update=":idFormAutorizacao:idPanelAutorizacao growlAutorizacao" 
 						styleClass="btFlatVerde"/>
 				</f:facet>
