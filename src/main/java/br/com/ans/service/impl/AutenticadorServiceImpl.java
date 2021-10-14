@@ -6,6 +6,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import br.com.ans.dao.AutenticadorDao;
+import br.com.ans.model.Funcionalidade;
 import br.com.ans.model.Usuario;
 import br.com.ans.service.AutenticadorService;
 
@@ -14,6 +15,9 @@ public class AutenticadorServiceImpl implements AutenticadorService {
 	
 	@Inject
 	private AutenticadorDao  autenticadorDao;
+
+	@Inject
+	private PerfilFuncionalidadeServiceImpl perfilFuncionalidadeServiceImpl;
 	
 	@Override
 	public Usuario validarLogin(Usuario usuario) {
@@ -37,7 +41,7 @@ public class AutenticadorServiceImpl implements AutenticadorService {
 						return null;
 				}
 			}else{
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Parâmetros inválidos!."));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Informe todos os campos!."));
 				return null;
 			}
 		}
@@ -49,8 +53,11 @@ public class AutenticadorServiceImpl implements AutenticadorService {
 	}
 	
 	@Override
-	public Boolean autorizar(Usuario usuarioAutirizador) {
-		if (validarLogin(usuarioAutirizador)!= null) {
+	public Boolean autorizar(Usuario usuarioAutorizador, Long codigoFuncionalidade) {
+		/*Valida a existência e retorna o usuário logado com sucesso caso exista*/
+		usuarioAutorizador = validarLogin(usuarioAutorizador);
+		
+		if(usuarioAutorizador != null && perfilFuncionalidadeServiceImpl.perfilFuncionalidade(usuarioAutorizador.getPerfil().getCodigoPerfil(), codigoFuncionalidade)) {
 			return true;
 		}
 		return false;

@@ -1,6 +1,8 @@
 package br.com.ans.dao.impl;
 
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -32,10 +34,12 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 		//String hql = "from Venda v where 1=1";
 		
 		/* Retorna a venda quando a situação for "(2) Em aberto" para um determinado usuário.*/
-		String hql = "select venda from Venda as venda " 
-				+ " where 1=1"
-				+ " and venda.usuarioCliente.codigoUsuario = :idUsuario"
-				+ " and venda.situacaoVenda = 2 ";
+		String hql = "SELECT venda FROM Venda AS venda"
+			//	+ " LEFT JOIN ItemVenda AS itemVenda ON itemVenda.venda.codigoVenda = venda.codigoVenda"
+			//	+ " INNER JOIN SituacaoItem AS situacaoItem ON situacaoItem.codigoSituacaoItem = itemVenda.situacaoItem.codigoSituacaoItem AND situacaoItem.codigoSituacaoItem = 1"
+				+ " WHERE 1=1"
+				+ " AND venda.usuarioCliente.codigoUsuario = :idUsuario"
+				+ " AND venda.situacaoVenda = 2 ";
 		try {
 
 			Long idUsuario = usuarioLogado.getCodigoUsuario();
@@ -45,6 +49,7 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 
 			if (!query.getResultList().isEmpty()) {
 				Venda venda = (Venda) query.getResultList().get(0);
+				///ItemVenda itemVenda = (ItemVenda)  query.getResultList().get(1);
 				return venda;
 			} else {
 				return null;
@@ -88,8 +93,8 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 			/* Persiste itenm da venda */
 			if(itemVenda.getCodigoItemVenda() == null) {
 				entityManager.persist(itemVenda);
-			}else if(itemVenda.getCodigoItemVenda() != null && itemVenda.getSituacaoItem().getCodigoSituacaoItem() == 2L){
-				entityManager.remove(itemVenda);
+			//}else if(itemVenda.getSituacaoItem().getCodigoSituacaoItem() == 2L){
+			///	entityManager.remove(itemVenda);
 			}else {
 				entityManager.merge(itemVenda);
 			}
@@ -139,7 +144,6 @@ public class VendaDaoImpl extends GenericoDaoImpl<Venda> implements VendaDao {
 	@Override
 	public ItemVenda buscaItemVendaPorProduto(ItemVenda produtoItemVenda) {
 	
-		/* Retorna a venda quando a situação for "(2) Em aberto" para um determinado usuário.*/
 		String hql = "select itemVenda from ItemVenda as itemVenda " 
 				+ " where 1=1"
 				+ " and itemVenda.venda.codigoVenda = :codigoVenda"

@@ -18,7 +18,7 @@ public enum FuncionalidadeEnum {
 	EDITARPERMISSAOUSUARIO(14, "/visao/perfil/gerenciarPerfilFuncionalidade"),
 	ABRIRCAIXA(15, "/visao/caixa/aberturaCaixa"),
 	FECHARCAIXA(16, "/visao/caixa/fechamentoCaixa"),
-	EXCLUIRITEMVENDA(17, "");
+	CANCELARITEMVENDA(17, "/visao/venda/cancelarItemVenda");
 
 	private int codigo;
 	private String url;

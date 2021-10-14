@@ -1,7 +1,9 @@
 package br.com.ans.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -30,9 +32,6 @@ public class VendaServiceImpl implements VendaService {
 	private AutenticadorService autenticadorService;
 	
 	@Inject
-	private PerfilFuncionalidadeServiceImpl perfilFuncionalidadeServiceImpl;
-	
-	@Inject
 	private CaixaService caixaService;
 	
 	@Inject
@@ -42,6 +41,8 @@ public class VendaServiceImpl implements VendaService {
 	private VendaDao vendaDao;
 	
 	private Venda venda;
+	
+	private List<ItemVenda> itemVendaAtivos = new ArrayList<ItemVenda>();
 	
 	@Override
 	public Venda buscarVenda(Usuario usuarioLogado) {
@@ -58,6 +59,15 @@ public class VendaServiceImpl implements VendaService {
 				return vendaDao.novaVenda(venda);
 			}
 		}
+		
+		/*Retorna apenas o itens ativos da venda*/
+		for(ItemVenda item : venda.getListaItemVenda()) {
+			if(item.getSituacaoItem().getCodigoSituacaoItem().equals(1L)) {
+				itemVendaAtivos.add(item);
+			}
+		}
+		
+		venda.setListaItemVenda(itemVendaAtivos);
 		return venda;
 	}
 	
@@ -102,9 +112,9 @@ public class VendaServiceImpl implements VendaService {
 
 	@Override
 	public ItemVenda cancelarItemVenda(ItemVenda itemVenda, Usuario usuarioAutorizador) {
-		SituacaoItem situacaoItem = new SituacaoItem();
 		/*Valida se o usuário consegue autenticar e se tem perfil para excluir item da venda*/
-		if(autenticadorService.autorizar(usuarioAutorizador) && perfilFuncionalidadeServiceImpl.perfilFuncionalidade(usuarioAutorizador.getPerfil().getCodigoPerfil(), (long) FuncionalidadeEnum.EXCLUIRITEMVENDA.getCodigo())){
+		if(autenticadorService.autorizar(usuarioAutorizador, (long) FuncionalidadeEnum.CANCELARITEMVENDA.getCodigo())){
+			SituacaoItem situacaoItem = new SituacaoItem();
 			/*Seta situação como cancelado*/
 			situacaoItem.setCodigoSituacaoItem(2L);
 			itemVenda.setSituacaoItem(situacaoItem);

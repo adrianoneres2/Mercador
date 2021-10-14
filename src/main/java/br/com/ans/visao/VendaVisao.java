@@ -16,12 +16,12 @@ import br.com.ans.model.Bandeira;
 import br.com.ans.model.FormaPagamento;
 import br.com.ans.model.ItemVenda;
 import br.com.ans.model.Produto;
+import br.com.ans.model.SituacaoItem;
 import br.com.ans.model.Usuario;
 import br.com.ans.model.Venda;
 import br.com.ans.model.VendaFormaPagamento;
 import br.com.ans.service.FormaPagamentoService;
 import br.com.ans.service.ProdutoService;
-import br.com.ans.service.SituacaoVendaService;
 import br.com.ans.service.VendaService;
 import enumerations.FuncionalidadeEnum;
 import util.Janela;
@@ -40,6 +40,7 @@ public class VendaVisao implements Serializable {
 
 	private Usuario usuarioCliente;
 	
+	@Inject
 	private Usuario usuarioAutorizador;
 
 	@Inject
@@ -96,8 +97,7 @@ public class VendaVisao implements Serializable {
 	
 	private Double valorTotalParcela = 0.0;
 	
-	@Inject
-	private SituacaoVendaService situacaoVendaService;
+	private ItemVenda itemVendaCancelar;
 	
 	public VendaVisao() {
 	}
@@ -283,6 +283,14 @@ public class VendaVisao implements Serializable {
 		this.usuarioAutorizador = usuarioAutorizador;
 	}
 
+	public ItemVenda getItemVendaCancelar() {
+		return itemVendaCancelar;
+	}
+
+	public void setItemVendaCancelar(ItemVenda itemVendaCancelar) {
+		this.itemVendaCancelar = itemVendaCancelar;
+	}
+
 	public void calcularValorTotalVenda() {
 		/*Soma valor total da venda*/
 		Double valor = 0.0;
@@ -366,6 +374,7 @@ public class VendaVisao implements Serializable {
 		  numeroItem++;	
 
 		  Iterator<ItemVenda> itemVendaIterator = venda.getItemVenda().iterator();
+		  SituacaoItem situacaoItem = new SituacaoItem();
 		  
 		  while(itemVendaIterator.hasNext()){
 		              ItemVenda item = itemVendaIterator.next();
@@ -375,6 +384,11 @@ public class VendaVisao implements Serializable {
 		            	  item.setValorTotal(item.getQuantidadeItem()*produto.getValorVenda());
 		            	  numeroItem--;
 		            	  objetoAtualizado = true;
+		            	
+		            	/*Item Ativo*/  
+		                situacaoItem.setCodigoSituacaoItem(1L);
+		                item.setSituacaoItem(situacaoItem);
+		                
 		      		  	/*Atualiza o item modificado*/
 		      		  	setItemVenda(vendaService.adicionarItemVenda(item));
 		              }
@@ -395,6 +409,11 @@ public class VendaVisao implements Serializable {
 		  		
 			  	itemVenda.setValorTotal(itemVenda.getQuantidadeItem()*produto.getValorVenda());
 			  	this.venda.getItemVenda().add(itemVenda);
+			  	
+            	/*Item Ativo*/  
+                situacaoItem.setCodigoSituacaoItem(1L);
+                itemVenda.setSituacaoItem(situacaoItem);
+			  	
 			  	/*Insere um novo item*/
 			  	setItemVenda(vendaService.adicionarItemVenda(itemVenda));
 		  	}
@@ -498,11 +517,12 @@ public class VendaVisao implements Serializable {
 	
 	public void abrirJanelaAutorizacao() {
 		Janela janela = new Janela();
-		janela.abrirJanela2(true, true, true, 400, 200, FuncionalidadeEnum.ABRIRCAIXA.getUrl());
+		janela.abrirJanela2(true, true, true, 210, 200, FuncionalidadeEnum.CANCELARITEMVENDA.getUrl());
 	}
 	
-	public void removeItemVenda(ItemVenda itemVenda){
-		vendaService.cancelarItemVenda(itemVenda, usuarioAutorizador);
+	public void cancelarItemVenda(){
+		venda.getListaItemVenda().remove(vendaService.cancelarItemVenda(getItemVendaCancelar(), usuarioAutorizador));
+		calcularValorTotalVenda();
 	}
 	
 }

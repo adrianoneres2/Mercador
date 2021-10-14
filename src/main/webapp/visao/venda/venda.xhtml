@@ -135,10 +135,12 @@
 							</p:column>
 
 							<p:column headerText="Ações">
-								<p:commandLink action="#{vendaVisao.abrirJanelaAutorizacao()}"
-									process="@this">
+								<p:commandLink 
+									process="@this"
+									onclick="PF('dlgCancelaItemVenda').show()">
+									<f:setPropertyActionListener value="#{itemVenda}" target="#{vendaVisao.itemVendaCancelar}" />
 									<p:graphicImage library="imagens" name="excluir.png"
-										alt="Excluir item" />
+										alt="Excluir item" />	
 								</p:commandLink>
 
 								<p:commandLink style="margin-left: 8pt;">
@@ -151,13 +153,13 @@
 										alt="Desconto" />
 								</p:commandLink>
 							</p:column>
-
 						</p:dataTable>
 					</div>
 				</p:panel>
 			</p:layoutUnit>
 		</p:layout>
 	</h:form>
+	
 	<h:form id="idFormDlgFormaPagamento">
 		<p:growl id="idGrowlVendaDialogFormaPagamento" showDetail="true"
 			escape="true" closable="true" styleClass="messages" />
@@ -292,6 +294,46 @@
 					disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
 					process="@this" styleClass="btFlatVerde">
 				</p:commandButton>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+	
+
+	<h:form id="idFormDlgCancelamentoItem">
+		<p:growl id="idGrowlVendaDlgCancelamentoItem" showDetail="true"
+			escape="true" closable="true" styleClass="messages" />
+		<p:dialog header="Autorização." widgetVar="dlgCancelaItemVenda" minHeight="500" width="400"
+			showEffect="fade" modal="true">
+			<p:panel id="idPanelCancelarItem">
+				<h:outputLabel value="Informe o usuário e senha para autorização." />
+				<h:panelGrid id="idPanelGridCancelarItem" border="0" columns="3"
+					cellpadding="1" cellspacing="1">
+					<br />
+					<p:column>
+						<p:outputLabel id="labelEmail" value="E-mail " />
+					</p:column>
+					<p:column>
+						<p:inputText id="inputEmailCancelarItem"
+							value="#{vendaVisao.usuarioAutorizador.email}" />
+					</p:column>
+					<br />
+					<p:column>
+						<p:outputLabel id="labelSenha" value="Senha " />
+					</p:column>
+					<p:column>
+						<p:inputText id="inputSenha"
+							value="#{vendaVisao.usuarioAutorizador.senha}" />
+					</p:column>
+				</h:panelGrid>
+				<f:facet name="footer">
+					<p:commandButton value="Autorizar" type="submit"
+						action="#{vendaVisao.cancelarItemVenda()}"
+						update=":idFormDlgCancelamentoItem:idPanelCancelarItem
+						        idGrowlVendaDlgCancelamentoItem 
+						        :idFormVenda"
+						styleClass="btFlatVerde" 
+						/>
+				</f:facet>
 			</p:panel>
 		</p:dialog>
 	</h:form>
