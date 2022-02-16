@@ -378,6 +378,7 @@ public class VendaVisao implements Serializable {
 		  
 		  while(itemVendaIterator.hasNext()){
 		              ItemVenda item = itemVendaIterator.next();
+		              /*Verifica se o Item(Produto) está na lista*/
 		              if(item.getProduto().getCodigoProduto().equals(produto.getCodigoProduto())){
 		            	  item.setQuantidadeItem(this.getQuantidade()+item.getQuantidadeItem());
 		            	  //item.setNumeroItem(item.getNumeroItem());
@@ -506,7 +507,7 @@ public class VendaVisao implements Serializable {
 	public void novaVenda() {
 		Venda venda = new Venda();
 		venda = (vendaService.buscarVenda(usuarioLogado.getUsuario()));
-		if(venda.getCaixa() != null) {
+		if(venda.getCodigoVenda() != null) {
 			setVenda(venda);
 		}else {
 			menuVisao.apresentacao();

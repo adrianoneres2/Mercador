@@ -9,8 +9,7 @@
 			closable="true" styleClass="messages" />
 		<br />
 		<p:layout>
-			<p:layoutUnit position="west" resizable="true" minSize="65"
-				maxSize="800">
+			<p:layoutUnit position="west" resizable="true" minSize="65" maxSize="800">
 				<p:panelGrid columns="1" id="idPanelVendaInfo"
 					styleClass="panelSemBorda">
 					<p:outputLabel value="Nome do Cliente: " />
@@ -21,8 +20,7 @@
 					<p:outputLabel value="Código do Caixa: " />
 					<p:inputText disabled="true"
 						value="#{vendaVisao.venda.caixa.codigoCaixa}"
-						style=" width: 111pt;" />
-
+						style="width: 111pt;" />
 
 					<p:outputLabel value="Código da Venda :" />
 					<p:inputText disabled="true" id="idCodigoVenda"
@@ -106,11 +104,11 @@
 							value="#{vendaVisao.venda.itemVenda}" lazy="true"
 							paginator="false">
 
-							<p:column headerText="Item">
+							<p:column headerText="Item" width="30">
 								<h:outputText value="#{itemVenda.numeroItem}" />
 							</p:column>
 
-							<p:column headerText="Código">
+							<p:column headerText="Código" width="60">
 								<h:outputText value="#{itemVenda.produto.codigoProduto}" />
 							</p:column>
 
@@ -118,23 +116,23 @@
 								<h:outputText value="#{itemVenda.produto.nomeProduto}" />
 							</p:column>
 
-							<p:column headerText="Quantidade">
+							<p:column headerText="Quantidade" width="60">
 								<h:outputText value="#{itemVenda.quantidadeItem}" />
 							</p:column>
 
-							<p:column headerText="Valor">
+							<p:column headerText="Valor" width="60">
 								<h:outputText value="#{itemVenda.valorItem}">
 									<f:convertNumber type="currency" />
 								</h:outputText>
 							</p:column>
 
-							<p:column headerText="Total">
+							<p:column headerText="Total" width="60">
 								<h:outputText value="#{itemVenda.valorTotal}">
 									<f:convertNumber type="currency" />
 								</h:outputText>
 							</p:column>
 
-							<p:column headerText="Ações">
+							<p:column headerText="Ações" width="100">
 								<p:commandLink 
 									process="@this"
 									onclick="PF('dlgCancelaItemVenda').show()">

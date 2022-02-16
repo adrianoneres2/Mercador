@@ -7,40 +7,14 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Loja virtual</title>
-	<!-- 	<ui:insert name="head" /> -->
+	<title>Mercador Virtual</title>
 	<h:outputStylesheet library="css" name="estilo.css" />
 </h:head>
-<h:body>
+  <h:body>
 	<div class="container">
-		<!-- 	<p:growl id="growl" showDetail="true" sticky="true" escape="true" /> -->
-		<!-- 	<p:layout fullPage="true">  -->
-		<!-- 		<p:layoutUnit position="north" size="0" -->
-		<!-- 			header="Soux-Consultoria em informática."  -->
-		<!-- 			resizable="false" -->
-		<!-- 			closable="false"  -->
-		<!-- 			collapsible="false" -->
-		<!-- 			visible="false"> -->
-		<!-- 		</p:layoutUnit> -->
-		<!-- 		<p:layoutUnit position="north"  -->
-		<!-- 		    resizable="false"  -->
-		<!-- 			minSize="50"  -->
-		<!-- 			maxSize="50"> -->
 		<ui:include page="/perfilUsuario.xhtml" />
-		<!-- 			<ui:insert name="menu" /> -->
-		<!-- 		</p:layoutUnit> -->
-<!-- 		<center> -->
-			<!-- 			<p:layoutUnit position="center"> -->
-			<!-- 				<ui:include page="/login.xhtml" /> -->
-			<ui:insert name="conteudo" />
-			<ui:insert name="conteudoModal" />
-			<!-- 			</p:layoutUnit> -->
-<!-- 		</center> -->
-		<!-- 		<p:layoutUnit position="south" size="0" -->
-		<!-- 			header="Soux - Consultoria em informática.  -  Contato: (61)99992-0909" -->
-		<!-- 			resizable="false" closable="false" collapsible="false"> -->
-		<!-- 		</p:layoutUnit> -->
-		<!-- 	</p:layout> -->
+		<ui:insert name="conteudo" />
+		<ui:insert name="conteudoModal" />
 	</div>
-</h:body>
+  </h:body>
 </html>

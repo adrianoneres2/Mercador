@@ -4,31 +4,91 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<h:form id="idFormPerfilUsuario">
-			<p:outputPanel id="idPainelPerfilUsuario"
-				rendered="#{autenticadorVisao.logado}" styleClass="divBarraNavegacao">
+		<p:outputPanel id="idPainelPerfilUsuario"
+			rendered="#{autenticadorVisao.logado}" styleClass="divBarraNavegacao">
 
-				<div id="divLeft">
+			<div id="idLeft" class="divLeft">
+				<p:commandLink action="#{menuVisao.apresentacao()}"
+					update=":outputPanelConteudo, idFormPerfilUsuario idPainelPerfilUsuario">
 					<h:graphicImage name="/menu/Home-40.png" library="imagens" />
+				</p:commandLink>
+			</div>
+
+			<div id="divUsuarioAutenticado">
+				<p:menubar>
+					<p:submenu label="Usuário">
+						<p:menuitem value="Cadastrar"
+							action="#{menuVisao.acessarFuncionalidade('CADASTROUSUARIO')}"
+							update=":outputPanelConteudo idPainelPerfilUsuario"
+							process="@this" />
+						<p:menuitem value="Consultar"
+							action="#{menuVisao.acessarFuncionalidade('CONSULTAUSUARIO')}"
+							update=":outputPanelConteudo idPainelPerfilUsuario" />
+						<p:submenu label="Perfil">
+							<p:menuitem value="Manter perfil"
+								action="#{menuVisao.acessarFuncionalidade('GERENCIARPERFIL')}"
+								update=":outputPanelConteudo idPainelPerfilUsuario" />
+						</p:submenu>
+					</p:submenu>
+
+					<p:submenu label="Produto">
+						<p:menuitem value="Cadastrar"
+							action="#{menuVisao.acessarFuncionalidade('CADASTROPRODUTO')}"
+							update=":outputPanelConteudo idPainelPerfilUsuario"
+							process="@this">
+							<f:setPropertyActionListener value="true"
+								target="#{produtoVisao.inicializarCadastro}" />
+						</p:menuitem>
+						<p:menuitem value="Consultar"
+							action="#{menuVisao.acessarFuncionalidade('CONSULTAPRODUTO')}"
+							update=":outputPanelConteudo idPainelPerfilUsuario" />
+					</p:submenu>
+
+					<p:submenu label="Vendas">
+						<p:menuitem value="Nova"
+							action="#{menuVisao.acessarFuncionalidade('VENDA')}"
+							update=":outputPanelConteudo idPainelPerfilUsuario"
+							process="@this" actionListener="#{vendaVisao.novaVenda()}" />
+						<p:menuitem value="Consultar" />
+						<p:menuitem value="Relatório" />
+					</p:submenu>
+
+					<p:submenu label="Caixa">
+						<p:menuitem value="Abrir"
+							update=":outputPanelConteudo idPainelPerfilUsuario"
+							action="#{caixaVisao.abrirJanelaAberturaCaixa()}" process="@this" />
+						<p:menuitem value="Fechar"
+							update=":outputPanelConteudo idPainelPerfilUsuario"
+							action="#{caixaVisao.abrirJanelaFechamentoCaixa()}"
+							process="@this" />
+					</p:submenu>
+
+					<p:submenu label="Sobre">
+						<p:menuitem value="Sistema" />
+						<p:menuitem value="Contatos" />
+					</p:submenu>
+
+				</p:menubar>
+			</div>
+
+			<div class="divRight" id="idUsuarioPerfil">
+				<div id="divIdBlocoPerfilUsuario">
+					<div id="idNomeUsuario">
+						<p:outputLabel id="idLabelUsuarioLogado"
+							value="#{autenticadorVisao.usuario.nomeUsuario}"
+							style="font-size: 8pt" />
+					</div>
+					<div id="idPerfil">
+						<p:outputLabel id="idLabelUsuarioPerfil"
+							value="#{autenticadorVisao.usuario.getPerfil().getNomePerfil()}"
+							style="font-size: 8pt" />
+					</div>
 				</div>
-
-				<div id="divUsuarioAutenticado">
-					<p:outputLabel id="idLabelUsuarioLogado"
-						value="#{autenticadorVisao.usuario.nomeUsuario}"
-						style="font-size: 15px !important;" />
-
-					<p:spacer width="5" />
-
-					<p:outputLabel id="idLabelUsuarioPerfil"
-						value="- #{autenticadorVisao.usuario.getPerfil().getNomePerfil()}"
-						style="font-size: 15px !important;" />
-				</div>
-
-				<div id="divRight">
-					<p:commandLink action="#{autenticadorVisao.sair}"
-						update=":outputPanelConteudo, idFormPerfilUsuario idPainelPerfilUsuario">
-						<h:graphicImage name="/menu/Media-Start-40.png" library="imagens" />
-					</p:commandLink>
-				</div>
-			</p:outputPanel>
+				<p:commandLink action="#{autenticadorVisao.sair}"
+					update=":outputPanelConteudo, idFormPerfilUsuario idPainelPerfilUsuario">
+					<h:graphicImage name="/menu/Media-Start-40.png" library="imagens" />
+				</p:commandLink>
+			</div>
+		</p:outputPanel>
 	</h:form>
 </ui:composition>
