@@ -1,6 +1,7 @@
 package br.com.ans.visao;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -98,6 +99,8 @@ public class VendaVisao implements Serializable {
 	private Double valorTotalParcela = 0.0;
 	
 	private ItemVenda itemVendaCancelar;
+	
+	private static final DecimalFormat df = new DecimalFormat("0.00");
 	
 	public VendaVisao() {
 	}
@@ -471,7 +474,7 @@ public class VendaVisao implements Serializable {
 	public void finalizarVenda() {
 		Venda vendaAtualizada = new Venda();
 		
-		if(calcularValorTotalParcelaAdicionada().equals(getValorTotal())) {
+		if(df.format(calcularValorTotalParcelaAdicionada()).equals(df.format(getValorTotal()))) {
 			vendaAtualizada = vendaService.finalizarVenda(this.getVenda());
 			if (vendaAtualizada != null) {
 				this.venda = vendaAtualizada;
@@ -487,19 +490,17 @@ public class VendaVisao implements Serializable {
 		if(getValorTotalParcela().equals(0.0) || getValorTotalParcela().equals(getValorTotal())) {
 			return getValorTotalParcela();
 		}
-		//DecimalFormat df = new DecimalFormat("###########.##");
-		//return Double.valueOf(df.format(getValorTotal()-getValorTotalParcela()));
 		return getValorTotal()-getValorTotalParcela();
 	}
 	
 	public String getStringConfereValorParcela() {
 		Double valorParcela = getConfereValorParcela();
 		if(valorParcela < 0) {
-			return "Ultrapassou o valor em R$ "+(valorParcela*(-1));
+			return "Ultrapassou o valor em R$ "+df.format(valorParcela*(-1));
 		}
 		
 		if(valorParcela > 0){
-			return "Ainda faltam R$ "+valorParcela;
+			return "Ainda faltam R$ "+df.format(valorParcela);
 		}
 		return null;
 	}

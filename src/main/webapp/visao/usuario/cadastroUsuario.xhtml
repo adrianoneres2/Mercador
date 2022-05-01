@@ -3,14 +3,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui" >
-<!-- 	template="/aplicacao.xhtml"> -->
-
-<!-- 	<ui:define name="conteudoAplicacao"> -->
 
 		<h:form id="idFormCadastroUsuario">
 			<p:growl id="growlCadastroUsuario" showDetail="true" escape="true"
 				closable="true" />
-			<br />
 			<p:panel id="idPanelUsuario">
 
 				<f:facet name="header">
@@ -45,11 +41,10 @@
 					</p:selectOneMenu>
 				</h:panelGrid>
 				<f:facet name="footer">
-					<p:commandButton value="Enviar" type="submit" action="#{usuarioVisao.cadastrar()}" update=":idFormCadastroUsuario:idPanelUsuario growlCadastroUsuario, :outputPanelConteudo" styleClass="btFlatVerde" />
-					<p:commandButton value="Consultar" type="submit" action="#{usuarioVisao.consultarUsuario()}" update="idFormCadastroUsuario, :outputPanelConteudo"  styleClass="btFlatAzul"/>
-					<p:commandButton value="Sair" type="submit" action="#{menuVisao.apresentacao()}" update=":idFormCadastroUsuario, :outputPanelConteudo" styleClass="btFlatVermelho"/>
+					<p:commandButton value="Enviar" type="submit" action="#{usuarioVisao.cadastrar()}" update=":idFormCadastroUsuario:idPanelUsuario growlCadastroUsuario, :outputPanelConteudo" />
+					<p:commandButton value="Consultar" type="submit" action="#{usuarioVisao.consultarUsuario()}" update="idFormCadastroUsuario, :outputPanelConteudo" />
+					<p:commandButton value="Sair" type="submit" action="#{menuVisao.apresentacao()}" update=":idFormCadastroUsuario, :outputPanelConteudo"/>
 				</f:facet>
 			</p:panel>
 		</h:form>
-<!-- 	</ui:define> -->
 </ui:composition>

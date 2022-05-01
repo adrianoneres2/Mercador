@@ -6,12 +6,10 @@
 
 	<h:form id="idFormVenda">
 		<p:growl id="idGrowlVenda" showDetail="true" escape="true"
-			closable="true" styleClass="messages" />
-		<br />
+			closable="true" />
 		<p:layout>
 			<p:layoutUnit position="west" resizable="true" minSize="65" maxSize="800">
-				<p:panelGrid columns="1" id="idPanelVendaInfo"
-					styleClass="panelSemBorda">
+				<p:panelGrid columns="1" id="idPanelVendaInfo">
 					<p:outputLabel value="Nome do Cliente: " />
 					<p:inputText disabled="true"
 						value="#{vendaVisao.usuarioCliente.nomeUsuario}"
@@ -28,10 +26,9 @@
 
 				</p:panelGrid>
 
-				<p:panelGrid columns="1" id="idPanelBotoes"
-					styleClass="panelSemBorda">
+				<p:panelGrid columns="1" id="idPanelBotoes">
 					<p:commandButton id="idBtFormaPagamento" value="Forma de Pagamento"
-						type="button" styleClass="btFlatVerde"
+						type="button"
 						onclick="PF('dlgformaPagamento').show();"
 						update="panelGridModalFormaPagamento
 						        :idFormDlgFormaPagamento:idGrowlVendaDialogFormaPagamento"
@@ -39,11 +36,10 @@
 						process="@this" />
 
 					<p:commandButton value="Cancelar Venda" id="idBtCancelarVenda"
-						styleClass="btFlatVermelho"
 						disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}" />
 
 					<p:commandButton value="Sair" id="idBtSairVenda"
-						styleClass="btFlatVermelho" action="#{menuVisao.apresentacao()}"
+						action="#{menuVisao.apresentacao()}"
 						update=":outputPanelConteudo" immediate="true"
 						disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 2}" />
 
@@ -84,7 +80,7 @@
 									          idFocus
 									          idBtFormaPagamento"
 									disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
-									ajax="true" styleClass="btFlatAzul" style="margin-left: 10px;">
+									ajax="true" style="margin-left: 10px;">
 								</p:commandButton>
 							</p:column>
 
@@ -112,7 +108,7 @@
 								<h:outputText value="#{itemVenda.produto.codigoProduto}" />
 							</p:column>
 
-							<p:column headerText="Nome">
+							<p:column headerText="Nome" width="120">
 								<h:outputText value="#{itemVenda.produto.nomeProduto}" />
 							</p:column>
 
@@ -134,19 +130,24 @@
 
 							<p:column headerText="Ações" width="100">
 								<p:commandLink 
+									id="idCommandLinkExcluir"
 									process="@this"
-									onclick="PF('dlgCancelaItemVenda').show()">
+									onclick="PF('dlgCancelaItemVenda').show()"
+									disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}">
 									<f:setPropertyActionListener value="#{itemVenda}" target="#{vendaVisao.itemVendaCancelar}" />
 									<p:graphicImage library="imagens" name="excluir.png"
-										alt="Excluir item" />	
+										alt="Excluir item" />
+											
 								</p:commandLink>
 
-								<p:commandLink style="margin-left: 8pt;">
+								<p:commandLink style="margin-left: 8pt;"
+								               disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}">
 									<p:graphicImage library="imagens" name="editar.png"
 										alt="Alterar quantidade" />
 								</p:commandLink>
 
-								<p:commandLink style="margin-left: 8pt;">
+								<p:commandLink style="margin-left: 8pt;"
+								               disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}">
 									<p:graphicImage library="imagens" name="money.png"
 										alt="Desconto" />
 								</p:commandLink>
@@ -160,14 +161,13 @@
 	
 	<h:form id="idFormDlgFormaPagamento">
 		<p:growl id="idGrowlVendaDialogFormaPagamento" showDetail="true"
-			escape="true" closable="true" styleClass="messages" />
+			escape="true" closable="true" />
 
 		<p:dialog header="Forma de Pagamento" id="idDglFormaPagamento"
 			widgetVar="dlgformaPagamento" modal="false" height="350" width="999"
 			draggable="true" resizable="true">
 			<!-- Usar o appendTo="@(body)" deu certo para a modal escondida mas deu problema nas combos de forma de pagamento que enviavam valores null -->
-			<p:panelGrid id="panelGridModalFormaPagamento"
-				styleClass="panelSemBorda">
+			<p:panelGrid id="panelGridModalFormaPagamento">
 				<p:row>
 					<p:column>
 						<p:outputLabel value="Forma de Pagamento" />
@@ -211,12 +211,14 @@
 
 					<p:column>
 						<p:inputText id="idInputVendaValorParcela"
-							value="#{vendaVisao.valorParcela}" />
+							value="#{vendaVisao.valorParcela}">
+							 <f:convertNumber pattern = "#.00" />
+						</p:inputText>
 					</p:column>
 
 					<p:column>
 						<p:commandButton id="idBtAdicionarFormaPagamento"
-							styleClass="btFlatVerde" value="+"
+							value="+"
 							action="#{vendaVisao.adicionaListaVendaFormaPagamento()}"
 							update="idDataTableFormaPagamento
 							        idGrowlVendaDialogFormaPagamento
@@ -264,7 +266,8 @@
 					<p:commandLink
 						actionListener="#{vendaVisao.removeVendaFormaPagamentoLista(vendaFormaPagamento)}"
 						update="idDataTableFormaPagamento
-					          :idFormDlgFormaPagamento:idLabelConfereValorParcela">
+					           :idFormDlgFormaPagamento:idLabelConfereValorParcela"
+					    disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}">
 						<p:graphicImage library="imagens" name="excluido.png" />
 					</p:commandLink>
 				</p:column>
@@ -274,8 +277,7 @@
 
 			<p:panel id="idPanelBotaoEncerrar">
 				<p:commandButton value="Fechar" type="button"
-					onclick="PF('dlgformaPagamento').hide();"
-					styleClass="btFlatVermelho" />
+					onclick="PF('dlgformaPagamento').hide();" />
 
 				<p:spacer height="5" />
 
@@ -288,9 +290,11 @@
 					          idBtAdicionarFormaPagamento
 					          :idFormVenda:btVendaConsultar
 					          :idFormVenda:idBtSairVenda
-					          idLabelConfereValorParcela"
+					          idLabelConfereValorParcela
+					          :idFormVenda:dataTableProduto
+					          :idFormDlgFormaPagamento:idDataTableFormaPagamento"
 					disabled="#{vendaVisao.venda.situacaoVenda.codigoSituacaoVenda eq 1}"
-					process="@this" styleClass="btFlatVerde">
+					process="@this">
 				</p:commandButton>
 			</p:panel>
 		</p:dialog>
@@ -299,7 +303,7 @@
 
 	<h:form id="idFormDlgCancelamentoItem">
 		<p:growl id="idGrowlVendaDlgCancelamentoItem" showDetail="true"
-			escape="true" closable="true" styleClass="messages" />
+			escape="true" closable="true" />
 		<p:dialog header="Autorização." widgetVar="dlgCancelaItemVenda" minHeight="500" width="400"
 			showEffect="fade" modal="true">
 			<p:panel id="idPanelCancelarItem">
@@ -328,8 +332,7 @@
 						action="#{vendaVisao.cancelarItemVenda()}"
 						update=":idFormDlgCancelamentoItem:idPanelCancelarItem
 						        idGrowlVendaDlgCancelamentoItem 
-						        :idFormVenda"
-						styleClass="btFlatVerde" 
+						        :idFormVenda" 
 						/>
 				</f:facet>
 			</p:panel>

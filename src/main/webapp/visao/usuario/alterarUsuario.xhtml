@@ -3,16 +3,11 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"> 
-<!-- 	template="/aplicacao.xhtml"> -->
-
-<!-- 	<ui:define name="conteudoAplicacao"> -->
-<!-- 		<br /> -->
 		<h:form id="idFormAlterarUsuario">
 			<p:growl id="growlAlterarUsuario" showDetail="true" escape="true"
-				closable="true" styleClass="messages" />
-			<br />
+				closable="true"/>
 
-			<p:panel id="idPanelAlterarUsuario" styleClass="divTelaPequena">
+			<p:panel id="idPanelAlterarUsuario">
 
 				<f:facet name="header">
 					<h:outputLabel value="ALTERAÇÃO DE USUÁRIO" />
@@ -49,14 +44,11 @@
 				<f:facet name="footer">
 					<p:commandButton type="submit" value="Enviar"
 						action="#{usuarioVisao.alterar()}"
-						update=":idFormAlterarUsuario:idPanelAlterarUsuario growlAlterarUsuario" 
-						styleClass="btFlatVerde"/>
+						update=":idFormAlterarUsuario:idPanelAlterarUsuario growlAlterarUsuario" />
 					<p:commandButton type="submit" value="Sair"
 						action="#{menuVisao.apresentacao()}" 
-						update=":outputPanelConteudo"
-						styleClass="btFlatVermelho"/>
+						update=":outputPanelConteudo"/>
 				</f:facet>
 			</p:panel>
 		</h:form>
-<!-- 	</ui:define> -->
 </ui:composition>

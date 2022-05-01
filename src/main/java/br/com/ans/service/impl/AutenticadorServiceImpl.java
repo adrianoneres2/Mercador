@@ -6,7 +6,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import br.com.ans.dao.AutenticadorDao;
-import br.com.ans.model.Funcionalidade;
 import br.com.ans.model.Usuario;
 import br.com.ans.service.AutenticadorService;
 

@@ -47,6 +47,7 @@ public class VendaServiceImpl implements VendaService {
 	@Override
 	public Venda buscarVenda(Usuario usuarioLogado) {
 		venda = vendaDao.buscarVenda(usuarioLogado);
+		Long numeroItem = 0L;
 		
 		if(venda == null){
 			venda = new Venda();
@@ -63,6 +64,8 @@ public class VendaServiceImpl implements VendaService {
 		/*Retorna apenas o itens ativos da venda*/
 		for(ItemVenda item : venda.getListaItemVenda()) {
 			if(item.getSituacaoItem().getCodigoSituacaoItem().equals(1L)) {
+				
+				item.setNumeroItem(numeroItem++);
 				itemVendaAtivos.add(item);
 			}
 		}

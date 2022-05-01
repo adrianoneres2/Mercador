@@ -1,7 +1,6 @@
 package br.com.ans.dao;
 
 import br.com.ans.model.ItemVenda;
-import br.com.ans.model.Produto;
 import br.com.ans.model.Usuario;
 import br.com.ans.model.Venda;
 

@@ -3,10 +3,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"> 
-<!-- 	template="/aplicacao.xhtml"> -->
-
-<!-- 	<ui:define name="conteudoAplicacao"> -->
-	
 	
 	<script>
             function mascara(o, f) {
@@ -38,8 +34,7 @@
 		}
 </script>
 		<h:form id="idFormAlteraProduto">
-			<p:growl id="growlAlteraProduto" showDetail="true" escape="true" closable="true" styleClass="messages"/>
-			<br />
+			<p:growl id="growlAlteraProduto" showDetail="true" escape="true" closable="true"/>
 			
 				<p:panel id="idPanelAlteraProduto">
 				
@@ -94,12 +89,11 @@
 					</h:panelGrid>
 					
 				<f:facet name="footer">
-					<p:commandButton type="submit" value="Salvar" action="#{produtoVisao.alterar()}" update=":idFormAlteraProduto:idPanelAlteraProduto,  growlAlteraProduto, :outputPanelConteudo" styleClass="btFlatVerde"/>
-					<p:commandButton value="Sair"    type="submit" action="#{menuVisao.apresentacao()}" update="idFormAlteraProduto, :outputPanelConteudo" styleClass="btFlatVermelho"/>
+					<p:commandButton type="submit" value="Salvar" action="#{produtoVisao.alterar()}" update=":idFormAlteraProduto:idPanelAlteraProduto,  growlAlteraProduto, :outputPanelConteudo" />
+					<p:commandButton value="Sair"    type="submit" action="#{menuVisao.apresentacao()}" update="idFormAlteraProduto, :outputPanelConteudo" />
 				</f:facet>
 					
 			</p:panel>
 			
 		</h:form>
-<!-- 	</ui:define> -->
 </ui:composition>

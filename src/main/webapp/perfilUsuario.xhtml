@@ -3,6 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+	
 	<h:form id="idFormPerfilUsuario">
 		<p:outputPanel id="idPainelPerfilUsuario"
 			rendered="#{autenticadorVisao.logado}" styleClass="divBarraNavegacao">
@@ -10,7 +11,7 @@
 			<div id="idLeft" class="divLeft">
 				<p:commandLink action="#{menuVisao.apresentacao()}"
 					update=":outputPanelConteudo, idFormPerfilUsuario idPainelPerfilUsuario">
-					<h:graphicImage name="/menu/Home-40.png" library="imagens" />
+					<h:graphicImage name="/menu/home_38x38.png" library="imagens" />
 				</p:commandLink>
 			</div>
 
@@ -86,7 +87,7 @@
 				</div>
 				<p:commandLink action="#{autenticadorVisao.sair}"
 					update=":outputPanelConteudo, idFormPerfilUsuario idPainelPerfilUsuario">
-					<h:graphicImage name="/menu/Media-Start-40.png" library="imagens" />
+					<h:graphicImage name="/menu/shutdown_38x38.png" library="imagens" />
 				</p:commandLink>
 			</div>
 		</p:outputPanel>

@@ -6,7 +6,7 @@
 
 		<h:form id="idFormCadastroProduto">
 			<p:growl id="growlCadastroPruoduto" showDetail="true" escape="true"
-				closable="true" styleClass="messages" />
+				closable="true"/>
 			<p:panel id="idPanelCadastroProduto" >
 				<f:facet name="header">
 					<h:outputLabel value="CADASTRO DE PRODUTO" />
@@ -63,17 +63,14 @@
 				<f:facet name="footer">
 					<p:commandButton type="submit" value="Cadastrar"
 						action="#{produtoVisao.novo()}"
-						update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto" 
-						styleClass="btFlatVerde"/>
+						update=":idFormCadastroProduto:idPanelCadastroProduto growlCadastroPruoduto" />
 					<p:commandButton type="submit" value="Consultar"
 						actionListener="#{menuVisao.acessarFuncionalidade('CONSULTAPRODUTO')}"
 						update="idFormCadastroProduto, growlCadastroPruoduto, :outputPanelConteudo"
-						process="@this" 
-						styleClass="btFlatAzul"/>
+						process="@this" />
 					<p:commandButton value="Voltar" type="submit"
 						actionListener="#{menuVisao.apresentacao()}"
-						update="idFormCadastroProduto, :outputPanelConteudo" 
-						styleClass="btFlatVermelho"/>
+						update="idFormCadastroProduto, :outputPanelConteudo" />
 				</f:facet>
 
 			</p:panel>

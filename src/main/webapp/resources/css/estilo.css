@@ -1,5 +1,19 @@
+.container {
+	margin-top: -8px;
+	margin-left: -8px;
+	margin-right: -8px;
+	background: #e9e9e9;
+	/*
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	*/
+}
+
 .ui-widget .ui-widget {
-  font-size: 0.8em;
+	font-size: 0.8em;
 }
 
 .ui-widget-content {
@@ -13,7 +27,7 @@
 	display: inline-block;
 	position:absolute; /*Em conjunto com o right*/
 	left:0; /*Posiciona a div no canto esquerdo da tela*/ 
-	top:0; 
+	top:1; 
 	margin-left: 10px;
 }
 
@@ -21,19 +35,24 @@
 	display: inline-block;
 	position:absolute; /*Em conjunto com o right*/ 
 	right: 0; /*Posiciona a div no canto direito da tela*/
-	top: 0;
+	top: 1;
 	margin-right: 10px;
 }
 
 .divBarraNavegacao {
 	width: 100%;
-	height: 30pt;
-	background-color: #cc0000;
+	height: 32pt;
+	/*
+	margin-top: -8px;
+	margin-left: -8px;
+	margin-right: -10px;
+	*/
+	/*background-color: #fbe6e6;*/
 	display: flex; /*definimos a propriedade display do container como flex. Essa é a configuração que faz com que, de fato, a div utilize o recurso de layout flexível (Flexbox); */
 	flex-direction: row; /*com a propriedade flex-direction, fazemos com que os itens internos sejam dispostos horizontalmente, ou seja, em forma de linha (row); */
 	justify-content: center; /*configuramos a disposição dos elementos internos como centralizados na direção definida na propriedade anterior, ou seja, os itens ficarão no centro da linha (horizontalmente); */
 	align-items: center; /*com a propriedade align-items definida como center, fazemos com que os elementos internos sejam também alinhados na vertical; */
-	color: #ffffff;
+	/*color: #ffffff;*/
 	font-weight: bold;
 }
 #divIdBlocoPerfilUsuario{
